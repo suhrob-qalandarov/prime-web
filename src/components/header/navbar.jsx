@@ -16,7 +16,7 @@ const Navbar = () => {
     const location = useLocation()
 
     const isLoggedIn = Boolean(localStorage.getItem("prime-token"))
-    const topPosition = location.pathname === "/" ? "top-10" : "top-5"
+    const topPosition = isScrolled ? "top-5" : location.pathname === "/" ? "top-10" : "top-5"
 
     useEffect(() => {
         const handleScroll = () => {
@@ -28,11 +28,8 @@ const Navbar = () => {
     }, [])
 
     const getBackgroundColor = () => {
-        if (isScrolled) {
-            return "#f8f9fb"
-        }
         if (location.pathname === "/") {
-            return "transparent"
+            return isScrolled ? "#f8f9fb" : "transparent"
         }
         return "#f8f9fb"
     }
