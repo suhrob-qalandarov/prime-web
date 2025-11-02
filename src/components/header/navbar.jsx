@@ -58,10 +58,16 @@ const Navbar = () => {
         <>
             <Stack className="bg-transparent w-full">
                 <div
-                    className={`fixed ${topPosition} left-0 right-0 z-[999] transition-all duration-300 w-full`}
-                    style={{ backgroundColor: getBackgroundColor() }}
+                    className={`fixed ${topPosition} left-0 right-0 z-[999] transition-all duration-300 w-full bg-[#f8f9fb] lg:bg-transparent`}
+                    style={{
+                        backgroundColor:
+                            location.pathname === "/" && !isScrolled
+                                ? window.innerWidth >= 1024
+                                    ? "transparent"
+                                    : "#f8f9fb"
+                                : "#f8f9fb",
+                    }}
                 >
-                    <div className="fixed z-[999] w-full" style={{ backgroundColor: getBackgroundColor() }}></div>
                     <div className="px-6 lg:px-[200px]">
                         <div className="flex items-center justify-between h-16">
                             <div className="lg:hidden cursor-pointer p-2.5 z-[1000]" onClick={toggleSidebar}>
@@ -174,8 +180,6 @@ const Navbar = () => {
                                     <path d="M230.92,212c-15.23-26.33-38.7-45.21-66.09-54.16a72,72,0,1,0-73.66,0C63.78,166.78,40.31,185.66,25.08,212a8,8,0,1,0,13.85,8c18.84-32.56,52.14-52,89.07-52s70.23,19.44,89.07,52a8,8,0,1,0,13.85-8ZM72,96a56,56,0,1,1,56,56A56.06,56.06,0,0,1,72,96Z"></path>
                                 </svg>
                             </Link>
-                            <SearchModal isOpen={modal === "search"} onClose={() => setModal(null)} />
-                            <CartModal isOpen={modal === "cart"} onClose={() => setModal(null)} />
                         </div>
                     </div>
                 </div>
@@ -191,6 +195,7 @@ const Navbar = () => {
                 onProfileClick={handleProfileClick}
             />
             <CartModal isOpen={modal === "cart"} onClose={() => setModal(null)} />
+            <SearchModal isOpen={modal === "search"} onClose={() => setModal(null)} />
         </>
     )
 }
