@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link, NavLink, useNavigate, useLocation } from "react-router-dom";
 import { Stack } from "@mui/material";
 import BottomNavbar from "./bottom/bottom-navbar";
 import CartModal from "../modals/cart-modal";
@@ -11,9 +11,31 @@ const Navbar = () => {
     const [cartCount, setCartCount] = useState(0)
     const [modal, setModal] = useState(null)
     const [sidebarOpen, setSidebarOpen] = useState(false)
+    const [isScrolled, setIsScrolled] = useState(false)
     const navigate = useNavigate()
+    const location = useLocation()
 
     const isLoggedIn = Boolean(localStorage.getItem("prime-token"))
+    const topPosition = location.pathname === "/" ? "top-10" : "top-5"
+
+    useEffect(() => {
+        const handleScroll = () => {
+            setIsScrolled(window.scrollY > 0)
+        }
+
+        window.addEventListener("scroll", handleScroll)
+        return () => window.removeEventListener("scroll", handleScroll)
+    }, [])
+
+    const getBackgroundColor = () => {
+        if (isScrolled) {
+            return "#f8f9fb"
+        }
+        if (location.pathname === "/") {
+            return "transparent"
+        }
+        return "#f8f9fb"
+    }
 
     const handleCartClick = () => {
         setModal("cart")
@@ -37,8 +59,12 @@ const Navbar = () => {
 
     return (
         <>
-            <Stack className="bg-[#f8f9fb] w-full">
-                <div className="fixed top-5 left-0 right-0 z-[999] transition-all duration-300 w-full bg-[#f8f9fb]">
+            <Stack className="bg-transparent w-full">
+                <div
+                    className={`fixed ${topPosition} left-0 right-0 z-[999] transition-all duration-300 w-full`}
+                    style={{ backgroundColor: getBackgroundColor() }}
+                >
+                    <div className="fixed z-[999] w-full" style={{ backgroundColor: getBackgroundColor() }}></div>
                     <div className="px-6 lg:px-[200px]">
                         <div className="flex items-center justify-between h-16">
                             <div className="lg:hidden cursor-pointer p-2.5 z-[1000]" onClick={toggleSidebar}>
