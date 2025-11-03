@@ -29,7 +29,7 @@ const Home = () => {
                                 <img
                                     src={cat.image || "/placeholder.svg"}
                                     alt={cat.name}
-                                    className={`w-full h-full md:h-[380px] object-cover block transition-transform duration-300 relative group-hover:scale-105 ${
+                                    className={`w-full h-full md:h-[400px] object-cover block transition-transform duration-300 relative group-hover:scale-105 ${
                                         cat.side === "top"
                                             ? "object-top"
                                             : cat.side === "bottom"
@@ -38,7 +38,7 @@ const Home = () => {
                                     }`}
                                 />
                                 <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
-                                    <h3 className="text-amber-50 uppercase text-lg md:text-xl font-sans lg:text-2xl font-medium text-center transition-colors duration-300 group-hover:text-[#8b1538] px-4">
+                                    <h3 className="text-[var(--light-color)] uppercase text-lg md:text-xl font-sans text-center transition-colors duration-300 group-hover:text-[#8b1538] px-4">
                                         {cat.name}
                                     </h3>
                                 </div>
