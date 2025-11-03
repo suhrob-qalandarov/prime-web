@@ -26,10 +26,12 @@ const HeaderTop = () => {
     }
 
     return (
-        <div className="fixed z-[999] w-full" style={{ backgroundColor: getBackgroundColor() }}>
+        <div className="fixed z-[999] bg-[#f8f9fb] w-full" >
             <Box className="w-full overflow-hidden">
                 <div className="whitespace-nowrap text-red-500 text-sm font-semibold animate-marquee">
-                    {Array(20).fill("SAYT HOZIRDA TEST REJIMIDA ISHLAYAPTI!  •  XATOLIK HAQIDA SUPPORTGA YOZING!").join(" • ")}
+                    {Array(20)
+                        .fill("Beta-test rejimida ishlamoqda")
+                        .join("\u00A0\u00A0\u00A0•\u00A0\u00A0\u00A0")}
                 </div>
             </Box>
         </div>
