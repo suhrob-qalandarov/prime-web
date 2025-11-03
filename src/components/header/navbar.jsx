@@ -16,7 +16,10 @@ const Navbar = () => {
     const location = useLocation()
 
     const isLoggedIn = Boolean(localStorage.getItem("prime-token"))
-    const topPosition = isScrolled ? "top-5" : location.pathname === "/" ? "top-10" : "top-5"
+    const topPosition =
+        window.innerWidth >= 1024
+            ? (isScrolled ? "top-5" : location.pathname === "/" ? "top-10" : "top-5")
+            : "top-5";
 
     useEffect(() => {
         const handleScroll = () => {
