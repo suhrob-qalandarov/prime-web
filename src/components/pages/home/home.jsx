@@ -19,12 +19,12 @@ const Home = () => {
                             />
                         </Link>
                     </Box>
-                    <Box className="grid grid-cols-1 md:grid-cols-4 gap-0">
+                    <Box className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-0">
                         {spotlights.map((cat, index) => (
                             <Link
                                 key={index}
                                 to={"/catalog?" + cat.url}
-                                className="group block relative overflow-hidden cursor-pointer aspect-square"
+                                className="group block relative overflow-hidden cursor-pointer aspect-square md:aspect-auto"
                             >
                                 <img
                                     src={cat.image || "/placeholder.svg"}
@@ -37,8 +37,8 @@ const Home = () => {
                                                 : "object-center"
                                     }`}
                                 />
-                                <div className="absolute inset-0 flex items-center justify-center z-0">
-                                    <h3 className="text-amber-50 uppercase text-lg md:text-xl font-sans m-0 font-medium text-center transition-colors duration-300 group-hover:text-[#8b1538]">
+                                <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
+                                    <h3 className="text-amber-50 uppercase text-lg md:text-xl font-sans lg:text-2xl font-medium text-center transition-colors duration-300 group-hover:text-[#8b1538] px-4">
                                         {cat.name}
                                     </h3>
                                 </div>
