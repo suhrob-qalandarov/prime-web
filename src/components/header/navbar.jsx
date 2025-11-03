@@ -27,13 +27,6 @@ const Navbar = () => {
         return () => window.removeEventListener("scroll", handleScroll)
     }, [])
 
-    const getBackgroundColor = () => {
-        if (location.pathname === "/") {
-            return isScrolled ? "#f8f9fb" : "transparent"
-        }
-        return "#f8f9fb"
-    }
-
     const handleCartClick = () => {
         setModal("cart")
     }
@@ -61,11 +54,8 @@ const Navbar = () => {
                     className={`fixed ${topPosition} left-0 right-0 z-[999] transition-all duration-300 w-full bg-[#f8f9fb] lg:bg-transparent`}
                     style={{
                         backgroundColor:
-                            location.pathname === "/" && !isScrolled
-                                ? window.innerWidth >= 1024
-                                    ? "transparent"
-                                    : "#f8f9fb"
-                                : "#f8f9fb",
+                            location.pathname === "/" && !isScrolled && window.innerWidth >= 1024
+                                ? "transparent" : "#f8f9fb",
                     }}
                 >
                     <div className="px-6 lg:px-[200px]">
