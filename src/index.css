@@ -102,4 +102,24 @@ body {
     .container-custom {
         @apply px-[200px];
     }
+
+    /* Spotlight images - make them full width (w-full) instead of w-1/2 */
+    .spotlight-grid {
+        @apply grid grid-cols-1 md:grid-cols-2 gap-4 w-full;
+    }
+
+    .spotlight-image {
+        @apply w-full h-auto object-cover rounded-lg;
+    }
+}
+
+/* Mobile content padding - account for navbar height so content doesn't overlap */
+@media (max-width: 1023px) {
+    body {
+        padding-top: 64px;
+    }
+
+    main {
+        margin-top: 0;
+    }
 }
