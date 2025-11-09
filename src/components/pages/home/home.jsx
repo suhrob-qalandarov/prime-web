@@ -266,34 +266,38 @@ const Home = () => {
                                                 </span>
                                             )}
 
-                                            <div
-                                                className="home-marquee-container"
-                                            >
-                                                {[0, 1].map((track) => (
-                                                    <div
-                                                        key={track}
-                                                        className={`home-marquee-track ${track === 1 ? "home-marquee-track--delayed" : ""}`}
-                                                    >
-                                                        {Array.from({ length: 4 }).map((_, idx) => (
-                                                            <div key={idx} className="home-marquee-item">
-                                                                <span className="home-marquee-text">
-                                                                    Qaynoq chegirma {product.marqueeDiscount}%
-                                                                </span>
-                                                                <svg
-                                                                    xmlns="http://www.w3.org/2000/svg"
-                                                                    width="16"
-                                                                    height="16"
-                                                                    viewBox="0 0 256 256"
-                                                                    fill="currentColor"
-                                                                    className="home-marquee-icon"
-                                                                >
-                                                                    <path d="M213.85,125.46l-112,120a8,8,0,0,1-13.69-7l14.66-73.33L45.19,143.49a8,8,0,0,1-3-13l112-120a8,8,0,0,1,13.69,7L153.18,90.9l57.63,21.61a8,8,0,0,1,3,12.95Z"></path>
-                                                                </svg>
+                                            {product.badge === "SALE" && (
+                                                <div className="home-marquee-container">
+                                                    <div className="home-marquee-content">
+                                                        {[0, 1].map((track) => (
+                                                            <div
+                                                                key={track}
+                                                                className={`home-marquee-track ${
+                                                                    track === 1 ? "home-marquee-track--delayed" : ""
+                                                                }`}
+                                                            >
+                                                                {Array.from({ length: 4 }).map((_, idx) => (
+                                                                    <div key={idx} className="home-marquee-item">
+                                                                        <span className="home-marquee-text">
+                                                                            Qaynoq chegirma {product.marqueeDiscount}%
+                                                                        </span>
+                                                                        <svg
+                                                                            xmlns="http://www.w3.org/2000/svg"
+                                                                            width="16"
+                                                                            height="16"
+                                                                            viewBox="0 0 256 256"
+                                                                            fill="currentColor"
+                                                                            className="home-marquee-icon"
+                                                                        >
+                                                                            <path d="M213.85,125.46l-112,120a8,8,0,0,1-13.69-7l14.66-73.33L45.19,143.49a8,8,0,0,1-3-13l112-120a8,8,0,0,1,13.69,7L153.18,90.9l57.63,21.61a8,8,0,0,1,3,12.95Z"></path>
+                                                                        </svg>
+                                                                    </div>
+                                                                ))}
                                                             </div>
                                                         ))}
                                                     </div>
-                                                ))}
-                                            </div>
+                                                </div>
+                                            )}
                                         </div>
                                         <div className="pt-4">
                                             <h3 className="text-base font-semibold text-[#121212]">{product.name}</h3>
