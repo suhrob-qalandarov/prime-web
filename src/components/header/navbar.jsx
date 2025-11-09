@@ -19,7 +19,7 @@ const Navbar = () => {
     const topPosition =
         window.innerWidth >= 1024
             ? (isScrolled ? "top-5" : location.pathname === "/" ? "top-10" : "top-5")
-            : "top-5";
+            : "top-0";
 
     useEffect(() => {
         const handleScroll = () => {
