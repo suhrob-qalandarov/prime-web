@@ -74,7 +74,7 @@ const Profile = () => {
             }
             setLoading(false)
         });
-    }, [isLogin, setSearchParams])
+    }, [isLogin, isUpdate, navigate, setSearchParams])
 
     const handleCloseSnackbar = () => {
         setOpenSnackbar(false)
