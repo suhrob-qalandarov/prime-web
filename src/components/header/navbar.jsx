@@ -7,7 +7,6 @@ import SearchModal from "../modals/search-modal";
 import { links } from "../../constants";
 
 const Navbar = () => {
-    const [cartCount, setCartCount] = useState(0)
     const [modal, setModal] = useState(null)
     const [sidebarOpen, setSidebarOpen] = useState(false)
     const [isScrolled, setIsScrolled] = useState(false)
@@ -201,7 +200,7 @@ const Navbar = () => {
             <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
 
             <BottomNavbar
-                cartCount={cartCount}
+                cartCount={0}
                 onCartClick={handleCartClick}
                 onCategoriesClick={handleCategoriesClick}
                 onSearchClick={handleSearchClick}
