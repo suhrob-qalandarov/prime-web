@@ -10,7 +10,7 @@
 
 .home-marquee-content {
     width: 100%;
-    padding: 32px 0 6px;
+    padding: 26px 0 3px;
     background: rgba(0, 0, 0, 0.2);
     backdrop-filter: blur(4px);
     mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 10' preserveAspectRatio='none'><path d='M0 4 Q 10 2.8 20 4 T 40 4 T 60 4 T 80 4 T 100 4 L 100 10 L 0 10 Z' fill='white'/></svg>");
@@ -46,7 +46,7 @@
 }
 
 .home-marquee-text {
-    font-size: 0.75rem;
+    font-size: 0.8rem;
     font-weight: 600;
     letter-spacing: 0.08em;
 }
