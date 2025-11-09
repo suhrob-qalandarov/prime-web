@@ -7,7 +7,6 @@ import { Link } from "react-router-dom"
 import { useState, useEffect } from "react"
 
 const CartModal = ({ isOpen, onClose }) => {
-    const cartItems = JSON.parse(localStorage.getItem("cartItems") || "[]")
     const [screenSize, setScreenSize] = useState("desktop")
 
     useEffect(() => {
