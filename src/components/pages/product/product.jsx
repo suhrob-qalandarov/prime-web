@@ -10,7 +10,6 @@ const Product = ({ selectedCategory }) => {
     const navigate = useNavigate()
     const [products, setProducts] = useState([])
     const [page, setPage] = useState(1)
-    const [hoveredProductId, setHoveredProductId] = useState(null)
     const [quickViewOpen, setQuickViewOpen] = useState(false)
     const [selectedProductId, setSelectedProductId] = useState(null)
     const itemsPerPage = 20
@@ -145,8 +144,6 @@ const Product = ({ selectedCategory }) => {
                             return (
                                 <Box
                                     key={product.id}
-                                    onMouseEnter={() => setHoveredProductId(product.id)}
-                                    onMouseLeave={() => setHoveredProductId(null)}
                                     sx={{
                                         position: "relative",
                                         cursor: "pointer",
