@@ -1,6 +1,13 @@
 import { useState } from "react"
 
-const BottomNavbar = ({ cartCount = 0, onCartClick, onCategoriesClick, onSearchClick, onProfileClick }) => {
+const BottomNavbar = ({
+    cartCount = 0,
+    onCartClick,
+    onCategoriesClick,
+    onSearchClick,
+    onProfileClick,
+    isHidden = false,
+}) => {
     const [activeItem, setActiveItem] = useState("")
     const isLoggedIn = Boolean(localStorage.getItem("prime-token"))
     const iconClass = "w-5 h-5 text-[var(--burgundy-dark)]"
@@ -13,7 +20,7 @@ const BottomNavbar = ({ cartCount = 0, onCartClick, onCategoriesClick, onSearchC
     }
 
     return (
-        <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-[#8b1538] px-3 z-[1025] lg:hidden h-16">
+        <div className={`fixed bottom-0 left-0 right-0 bg-white border-t border-[#8b1538] px-3 z-[1025] lg:hidden h-16 transform transition-transform duration-300 ${isHidden ? "translate-y-full" : "translate-y-0"}`}>
             <div className="flex items-stretch w-full">
                 <div className="flex-1 flex justify-start">
                     <div
