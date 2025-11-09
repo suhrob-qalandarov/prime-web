@@ -17,40 +17,40 @@ const mockProductsByTab = {
             name: "Shim QADAM",
             price: 348000,
             oldPrice: 520000,
-            discount: 33,
+            discount: 0,
             image: "/images/spotlights/shim.jpeg",
             badge: "HOT",
-            marqueeDiscount: 33,
+            marqueeDiscount: 0,
         },
         {
             id: "best-2",
             name: "Shalvar OD",
             price: 328000,
             oldPrice: 470000,
-            discount: 30,
+            discount: 0,
             image: "/images/spotlights/shim2.jpeg",
             badge: "HOT",
-            marqueeDiscount: 30,
+            marqueeDiscount: 0,
         },
         {
             id: "best-3",
             name: "Kurtka Velvet",
             price: 308000,
             oldPrice: 420000,
-            discount: 26,
+            discount: 0,
             image: "/images/spotlights/shoes2.jpeg",
             badge: "HOT",
-            marqueeDiscount: 26,
+            marqueeDiscount: 0,
         },
         {
             id: "best-4",
             name: "Keng Shalvar \"Yulduz Bo'l\"",
             price: 260000,
             oldPrice: 315000,
-            discount: 17,
+            discount: 0,
             image: "/images/spotlights/cover-sh.jpeg",
             badge: "HOT",
-            marqueeDiscount: 17,
+            marqueeDiscount: 0,
         },
     ],
     sale: [
@@ -81,20 +81,20 @@ const mockProductsByTab = {
             name: "Kargo Shortik",
             price: 289000,
             oldPrice: 346000,
-            discount: 16,
+            discount: 0,
             image: "/images/spotlights/shim4.jpeg",
             badge: "NEW",
-            marqueeDiscount: 16,
+            marqueeDiscount: 0,
         },
         {
             id: "new-2",
             name: "Kurtka Classic",
             price: 301000,
             oldPrice: 350000,
-            discount: 14,
+            discount: 0,
             image: "/images/spotlights/shim6.jpeg",
             badge: "NEW",
-            marqueeDiscount: 14,
+            marqueeDiscount: 0,
         },
     ],
 }
@@ -260,7 +260,7 @@ const Home = () => {
                                                 alt={product.name}
                                                 className="w-full h-[390px] object-cover"
                                             />
-                                            {product.badge && (
+                                            {product.badge && product.badge !== "SALE" && (
                                                 <span className="absolute top-4 left-4 bg-[#ff4d4f] text-white text-xs font-semibold px-3 py-1 rounded-full">
                                                     {product.badge}
                                                 </span>
@@ -269,32 +269,25 @@ const Home = () => {
                                             {product.badge === "SALE" && (
                                                 <div className="home-marquee-container">
                                                     <div className="home-marquee-content">
-                                                        {[0, 1].map((track) => (
-                                                            <div
-                                                                key={track}
-                                                                className={`home-marquee-track ${
-                                                                    track === 1 ? "home-marquee-track--delayed" : ""
-                                                                }`}
-                                                            >
-                                                                {Array.from({ length: 4 }).map((_, idx) => (
-                                                                    <div key={idx} className="home-marquee-item">
-                                                                        <span className="home-marquee-text">
-                                                                            Qaynoq chegirma {product.marqueeDiscount}%
-                                                                        </span>
-                                                                        <svg
-                                                                            xmlns="http://www.w3.org/2000/svg"
-                                                                            width="16"
-                                                                            height="16"
-                                                                            viewBox="0 0 256 256"
-                                                                            fill="currentColor"
-                                                                            className="home-marquee-icon"
-                                                                        >
-                                                                            <path d="M213.85,125.46l-112,120a8,8,0,0,1-13.69-7l14.66-73.33L45.19,143.49a8,8,0,0,1-3-13l112-120a8,8,0,0,1,13.69,7L153.18,90.9l57.63,21.61a8,8,0,0,1,3,12.95Z"></path>
-                                                                        </svg>
-                                                                    </div>
-                                                                ))}
-                                                            </div>
-                                                        ))}
+                                                        <div className="home-marquee-track">
+                                                            {Array.from({ length: 5 }).map((_, idx) => (
+                                                                <div key={idx} className="home-marquee-item">
+                                                                    <span className="home-marquee-text">
+                                                                        Qaynoq chegirma {product.marqueeDiscount}%
+                                                                    </span>
+                                                                    <svg
+                                                                        xmlns="http://www.w3.org/2000/svg"
+                                                                        width="16"
+                                                                        height="16"
+                                                                        viewBox="0 0 256 256"
+                                                                        fill="currentColor"
+                                                                        className="home-marquee-icon"
+                                                                    >
+                                                                        <path d="M213.85,125.46l-112,120a8,8,0,0,1-13.69-7l14.66-73.33L45.19,143.49a8,8,0,0,1-3-13l112-120a8,8,0,0,1,13.69,7L153.18,90.9l57.63,21.61a8,8,0,0,1,3,12.95Z"></path>
+                                                                    </svg>
+                                                                </div>
+                                                            ))}
+                                                        </div>
                                                     </div>
                                                 </div>
                                             )}
