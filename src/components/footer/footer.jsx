@@ -3,7 +3,7 @@ import { payments } from "../../constants"
 
 export default function Footer() {
     return (
-        <footer className="bg-transparent py-16 px-4 md:px-8 lg:px-12">
+        <footer className="bg-[#f8f9fb] py-16 px-4 md:px-8 lg:px-12">
             <div className="max-w-7xl mx-auto">
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16">
                     {/* Logo Section */}
@@ -112,9 +112,9 @@ export default function Footer() {
 
                         {/* Payment Methods - hidden on mobile, shown on md and up */}
                         <div className="hidden md:flex items-center justify-end gap-2">
-              <span className="text-sm opacity-80" style={{ color: "rgba(160,27,71,0.8)" }}>
-                To'lov turlari:
-              </span>
+                            <span className="text-sm opacity-80" style={{ color: "rgba(160,27,71,0.8)" }}>
+                                To'lov turlari:
+                            </span>
                             <div className="flex gap-2">
                                 {payments.map((payment) => (
                                     <img
