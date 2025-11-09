@@ -1,6 +1,5 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link, NavLink, useNavigate, useLocation } from "react-router-dom";
-import { Stack } from "@mui/material";
 import BottomNavbar from "./bottom/bottom-navbar";
 import CartModal from "../modals/cart-modal";
 import Sidebar from "./sidebar/sidebar";
@@ -12,23 +11,52 @@ const Navbar = () => {
     const [modal, setModal] = useState(null)
     const [sidebarOpen, setSidebarOpen] = useState(false)
     const [isScrolled, setIsScrolled] = useState(false)
+    const [isMobile, setIsMobile] = useState(window.innerWidth < 1024)
+    const [isNavHidden, setIsNavHidden] = useState(false)
+    const lastScrollYRef = useRef(window.scrollY)
     const navigate = useNavigate()
     const location = useLocation()
 
     const isLoggedIn = Boolean(localStorage.getItem("prime-token"))
     const topPosition =
-        window.innerWidth >= 1024
-            ? (isScrolled ? "top-5" : location.pathname === "/" ? "top-10" : "top-5")
-            : "top-0";
+        isMobile
+            ? "top-0"
+            : (isScrolled ? "top-0" : location.pathname === "/" ? "top-10" : "top-0")
+
+    useEffect(() => {
+        const handleResize = () => {
+            const mobile = window.innerWidth < 1024
+            setIsMobile(mobile)
+            if (!mobile) {
+                setIsNavHidden(false)
+            }
+        }
+
+        window.addEventListener("resize", handleResize)
+        return () => window.removeEventListener("resize", handleResize)
+    }, [])
 
     useEffect(() => {
         const handleScroll = () => {
-            setIsScrolled(window.scrollY > 0)
+            const currentScrollY = window.scrollY
+            setIsScrolled(currentScrollY > 0)
+
+            if (isMobile) {
+                if (currentScrollY > lastScrollYRef.current && currentScrollY > 80) {
+                    setIsNavHidden(true)
+                } else {
+                    setIsNavHidden(false)
+                }
+            } else {
+                setIsNavHidden(false)
+            }
+
+            lastScrollYRef.current = currentScrollY
         }
 
         window.addEventListener("scroll", handleScroll)
         return () => window.removeEventListener("scroll", handleScroll)
-    }, [])
+    }, [isMobile])
 
     const handleCartClick = () => {
         setModal("cart")
@@ -52,17 +80,11 @@ const Navbar = () => {
 
     return (
         <>
-            <Stack className="bg-transparent w-full">
-                <div
-                    className={`fixed ${topPosition} left-0 right-0 z-[999] transition-all duration-300 w-full bg-[#f8f9fb] lg:bg-transparent`}
-                    style={{
-                        backgroundColor:
-                            location.pathname === "/" && !isScrolled && window.innerWidth >= 1024
-                                ? "transparent" : "#f8f9fb",
-                    }}
-                >
-                    <div className="px-6 lg:px-[200px]">
-                        <div className="flex items-center justify-between h-16">
+            <div
+                className={`fixed ${topPosition} left-0 right-0 z-[999] transition-all duration-300 w-full transform ${isMobile && isNavHidden ? "-translate-y-full" : "translate-y-0"} ${!isMobile && location.pathname === "/" && !isScrolled ? "bg-transparent" : "bg-[#f8f9fb]"}`}
+            >
+                <div className="px-6 lg:px-[200px]">
+                    <div className="flex items-center justify-between h-16">
                             <div className="lg:hidden cursor-pointer p-2.5 z-[1000]" onClick={toggleSidebar}>
                                 <div className="flex flex-col gap-1">
                                     <span className="w-[25px] h-[3px] bg-[#8b1538] rounded-sm transition-all duration-300"></span>
@@ -176,8 +198,6 @@ const Navbar = () => {
                         </div>
                     </div>
                 </div>
-            </Stack>
-
             <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
 
             <BottomNavbar
@@ -186,6 +206,7 @@ const Navbar = () => {
                 onCategoriesClick={handleCategoriesClick}
                 onSearchClick={handleSearchClick}
                 onProfileClick={handleProfileClick}
+                isHidden={isMobile ? isNavHidden : false}
             />
             <CartModal isOpen={modal === "cart"} onClose={() => setModal(null)} />
             <SearchModal isOpen={modal === "search"} onClose={() => setModal(null)} />
