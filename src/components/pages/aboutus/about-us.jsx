@@ -209,14 +209,18 @@ const AboutUs = () => {
                         <div className="col-lg-4 col-md-6">
                             <div className="team-member">
                                 <div className="member-image">
-                                    <img src="/images/hero-image.png" alt="Team Member" className="member-img" />
+                                    <img src="/images/" alt="Team Member" className="member-img" />
                                 </div>
                                 <div className="member-info">
                                     <h4 className="member-name">Asilbek Karimov</h4>
                                     <p className="member-position">Asoschisi va Bosh direktor</p>
                                     <div className="member-social">
-                                        <a href="#"><i className="fab fa-telegram-plane"></i></a>
-                                        <a href="#"><i className="fab fa-instagram"></i></a>
+                                        <a href="https://t.me/prime77" target="_blank" rel="noopener noreferrer">
+                                            <i className="fab fa-telegram-plane"></i>
+                                        </a>
+                                        <a href="https://www.instagram.com/prime77" target="_blank" rel="noopener noreferrer">
+                                            <i className="fab fa-instagram"></i>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -224,14 +228,18 @@ const AboutUs = () => {
                         <div className="col-lg-4 col-md-6">
                             <div className="team-member">
                                 <div className="member-image">
-                                    <img src="/images/hero-image.jpeg" alt="Team Member" className="member-img" />
+                                    <img src="/images/" alt="Team Member" className="member-img" />
                                 </div>
                                 <div className="member-info">
                                     <h4 className="member-name">Sardor Umarov</h4>
                                     <p className="member-position">Dizayner</p>
                                     <div className="member-social">
-                                        <a href="#"><i className="fab fa-telegram-plane"></i></a>
-                                        <a href="#"><i className="fab fa-instagram"></i></a>
+                                        <a href="https://t.me/prime77" target="_blank" rel="noopener noreferrer">
+                                            <i className="fab fa-telegram-plane"></i>
+                                        </a>
+                                        <a href="https://www.instagram.com/prime77" target="_blank" rel="noopener noreferrer">
+                                            <i className="fab fa-instagram"></i>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -239,14 +247,18 @@ const AboutUs = () => {
                         <div className="col-lg-4 col-md-6">
                             <div className="team-member">
                                 <div className="member-image">
-                                    <img src="/images/outfit-hero.jpeg" alt="Team Member" className="member-img" />
+                                    <img src="/images/" alt="Team Member" className="member-img" />
                                 </div>
                                 <div className="member-info">
                                     <h4 className="member-name">Dilshod Rahimov</h4>
                                     <p className="member-position">Marketing menejeri</p>
                                     <div className="member-social">
-                                        <a href="#"><i className="fab fa-telegram-plane"></i></a>
-                                        <a href="#"><i className="fab fa-instagram"></i></a>
+                                        <a href="https://t.me/prime77" target="_blank" rel="noopener noreferrer">
+                                            <i className="fab fa-telegram-plane"></i>
+                                        </a>
+                                        <a href="https://www.instagram.com/prime77" target="_blank" rel="noopener noreferrer">
+                                            <i className="fab fa-instagram"></i>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
