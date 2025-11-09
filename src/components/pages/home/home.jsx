@@ -1,7 +1,7 @@
 import { spotlights } from "../../../constants"
 import { Box, Stack } from "@mui/material"
 import { Link } from "react-router-dom"
-import { useMemo, useState } from "react"
+import { useMemo, useState, useRef, useCallback, useLayoutEffect } from "react"
 import "./home.css"
 
 const mockTabs = [
@@ -101,8 +101,35 @@ const mockProductsByTab = {
 
 const Home = () => {
     const [activeTab, setActiveTab] = useState("best")
+    const tabListRef = useRef(null)
+    const tabRefs = useRef([])
+    const [indicatorStyle, setIndicatorStyle] = useState({ width: 0, left: 0 })
 
     const activeProducts = useMemo(() => mockProductsByTab[activeTab] || [], [activeTab])
+
+    const updateIndicator = useCallback(() => {
+        const currentIndex = mockTabs.findIndex((tab) => tab.id === activeTab)
+        const listEl = tabListRef.current
+        const currentEl = tabRefs.current[currentIndex]
+
+        if (listEl && currentEl) {
+            const listRect = listEl.getBoundingClientRect()
+            const tabRect = currentEl.getBoundingClientRect()
+            setIndicatorStyle({
+                width: tabRect.width,
+                left: tabRect.left - listRect.left,
+            })
+        }
+    }, [activeTab])
+
+    useLayoutEffect(() => {
+        updateIndicator()
+    }, [updateIndicator])
+
+    useLayoutEffect(() => {
+        window.addEventListener("resize", updateIndicator)
+        return () => window.removeEventListener("resize", updateIndicator)
+    }, [updateIndicator])
 
     return (
         <div>
@@ -159,25 +186,33 @@ const Home = () => {
                 <div className="w-full px-6 lg:px-[200px] mt-12 md:mt-16">
                     <Stack className="gap-8">
                         <Box className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
-                            <Box className="inline-flex bg-[#f5f5f5] rounded-3xl p-1 mx-auto lg:mx-0">
-                                {mockTabs.map((tab) => (
+                            <div
+                                ref={tabListRef}
+                                className="home-tab-list mx-auto lg:mx-0"
+                            >
+                                <div
+                                    className="home-tab-highlight"
+                                    style={{
+                                        width: indicatorStyle.width,
+                                        transform: `translateX(${indicatorStyle.left}px)`,
+                                    }}
+                                />
+                                {mockTabs.map((tab, index) => (
                                     <button
                                         key={tab.id}
                                         onClick={() => setActiveTab(tab.id)}
-                                        className={`px-4 py-3 rounded-3xl text-2xl font-bold transition-all duration-200 ${
-                                            activeTab === tab.id
-                                                ? "bg-[#f8f9fb] shadow-sm text-[var(--burgundy-dark)]"
-                                                : "text-[#7a7a7a]"
-                                        }`}
-                                        sx={{
-                                            fontFamily: "'Noto Sans', sans-serif",
+                                        ref={(el) => {
+                                            tabRefs.current[index] = el
                                         }}
+                                        className={`tab-item relative cursor-pointer transition-colors duration-300 capitalize ${
+                                            activeTab === tab.id ? "text-[var(--burgundy-dark)]" : "text-[#7a7a7a] hover:text-[var(--burgundy-dark)]"
+                                        }`}
                                         type="button"
                                     >
-                                        {tab.label}
+                                        <span className="relative z-[1] tab-item-text">{tab.label}</span>
                                     </button>
                                 ))}
-                            </Box>
+                            </div>
                         </Box>
 
                         <div className="relative">
