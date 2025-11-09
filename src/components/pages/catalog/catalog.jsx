@@ -15,34 +15,33 @@ const Catalog = () => {
     const [categoriesData, setCategoriesData] = useState([])
     const [searchParams] = useSearchParams()
     const navigate = useNavigate()
-    const [isFetching, setFetching] = useState(false)
 
     const theme = useTheme()
     const isMobile = useMediaQuery(theme.breakpoints.down("sm"))
 
     const param = [...searchParams.keys()][0]
-    const [selectedSpotlight, setSelectedSpotlight] = useState(spotlights.find((cat) => cat.url === param) || null)
+    const selectedSpotlight = spotlights.find((cat) => cat.url === param) || null
 
     const categoryParam = searchParams.get("category")
     const [selectedCategory, setSelectedCategory] = useState(categoryParam ? Number.parseInt(categoryParam) : null)
 
     useEffect(() => {
-        fetchCategories().then((r) => setFetching(false))
-    }, [selectedSpotlight])
-
-    const fetchCategories = async () => {
-        try {
-            let data
-            if (selectedSpotlight) {
-                data = await CategoryService.getCategoriesBySpotlightName(selectedSpotlight.name)
-            } else {
-                data = await CategoryService.getCategories()
+        const fetchCategories = async () => {
+            try {
+                let data
+                if (selectedSpotlight) {
+                    data = await CategoryService.getCategoriesBySpotlightName(selectedSpotlight.name)
+                } else {
+                    data = await CategoryService.getCategories()
+                }
+                setCategoriesData(data)
+            } catch (error) {
+                console.error("Error fetching categories:", error)
             }
-            setCategoriesData(data)
-        } catch (error) {
-            console.error("Error fetching categories:", error)
         }
-    }
+
+        fetchCategories()
+    }, [selectedSpotlight])
 
     const handleCategorySelect = (categoryId) => {
         setSelectedCategory(categoryId)
