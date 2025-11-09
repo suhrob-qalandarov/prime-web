@@ -1,5 +1,5 @@
 import { Box, Card, CardContent, Typography, Button, Stack } from "@mui/material"
-import {useState, useEffect, useImperativeHandle, forwardRef} from "react"
+import {useState, useEffect, useImperativeHandle, forwardRef, useCallback} from "react"
 import OrderService from "../../service/order"
 import "./user-order.css"
 
@@ -11,43 +11,8 @@ const UserOrder = forwardRef(({ user }, ref) => {
     })
     const [activeStatus, setActiveStatus] = useState("pending")
     const [loading, setLoading] = useState(true)
-    const [isFetching, setFetching] = useState(false)
 
-    useEffect(() => {
-        const fetchedOrdersDate = localStorage.getItem("fetched-orders-date")
-        const userOrdersData = localStorage.getItem("prime-user-orders")
-
-        try {
-            const now = Date.now()
-            const threeHours = 3 * 60 * 60 * 1000
-
-            if (userOrdersData && fetchedOrdersDate) {
-                const parsedOrders = JSON.parse(userOrdersData) || "{}"
-                const lastFetched = parseInt(fetchedOrdersDate, 10)
-
-                if (now - lastFetched > threeHours) {
-                    // 3 soatdan oshgan -> yangidan olib kelamiz
-                    fetchOrders().then(() => setFetching(true))
-                } else {
-                    // Cached data yangicha -> localStorage dan olamiz
-                    setOrders(parsedOrders)
-                }
-            } else {
-                // Umuman ma'lumot yo'q -> API'dan olish
-                if (!isFetching) {
-                    fetchOrders().then(() => setFetching(true))
-                }
-            }
-        } catch (e) {
-            console.error("Error parsing orders:", e)
-        } finally {
-            setLoading(false)
-        }
-    }, [isFetching, setFetching])
-
-
-
-    const fetchOrders = async () => {
+    const fetchOrders = useCallback(async () => {
         try {
             setLoading(true)
             if (user && user.id) {
@@ -57,13 +22,45 @@ const UserOrder = forwardRef(({ user }, ref) => {
                 localStorage.setItem("fetched-orders-date", Date.now().toString())
             } else {
                 console.error("User not found in localStorage");
+                setLoading(false)
             }
         } catch (error) {
             console.error("Error fetching orders:", error)
         } finally {
             setLoading(false)
         }
-    }
+    }, [user])
+
+    useEffect(() => {
+        const fetchedOrdersDate = localStorage.getItem("fetched-orders-date")
+        const userOrdersData = localStorage.getItem("prime-user-orders")
+
+        const hydrateOrders = async () => {
+            try {
+                const now = Date.now()
+                const threeHours = 3 * 60 * 60 * 1000
+
+                if (userOrdersData && fetchedOrdersDate) {
+                    const parsedOrders = JSON.parse(userOrdersData) || "{}"
+                    const lastFetched = parseInt(fetchedOrdersDate, 10)
+
+                    if (now - lastFetched > threeHours) {
+                        await fetchOrders()
+                    } else {
+                        setOrders(parsedOrders)
+                        setLoading(false)
+                    }
+                } else {
+                    await fetchOrders()
+                }
+            } catch (e) {
+                console.error("Error parsing orders:", e)
+                setLoading(false)
+            }
+        }
+
+        hydrateOrders()
+    }, [fetchOrders])
 
     useImperativeHandle(ref, () => ({
         fetchOrders,
