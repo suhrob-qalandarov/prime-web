@@ -5,7 +5,7 @@ import { Link } from "react-router-dom"
 const Home = () => {
     return (
         <div>
-            <Stack className="p-0 mt-[18px]">
+            <Stack className="p-0 mt-0">
                 <Stack className="w-full px-0">
                     <Box className="w-full flex flex-wrap gap-0 relative">
                         <Link
