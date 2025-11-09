@@ -1,21 +1,15 @@
-import { useState } from "react"
-
 const BottomNavbar = ({
     cartCount = 0,
     onCartClick,
     onCategoriesClick,
     onSearchClick,
-    onProfileClick,
     isHidden = false,
 }) => {
-    const [activeItem, setActiveItem] = useState("")
-    const isLoggedIn = Boolean(localStorage.getItem("prime-token"))
     const iconClass = "w-5 h-5 text-[var(--burgundy-dark)]"
     const itemClass =
         "flex flex-col items-center justify-between h-full py-2 px-4 text-[var(--burgundy-dark)] transition-all duration-300"
 
     const handleItemClick = (itemName, callback) => {
-        setActiveItem(itemName)
         if (callback) callback()
     }
 
