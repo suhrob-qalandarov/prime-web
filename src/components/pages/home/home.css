@@ -1,0 +1,132 @@
+.home-marquee-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding-top: 26px;
+    padding-bottom: 4px;
+    background: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(4px);
+    mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 10' preserveAspectRatio='none'><path d='M0 6 Q 10 4.8 20 6 T 40 6 T 60 6 T 80 6 T 100 6 L 100 10 L 0 10 Z' fill='white'/></svg>");
+    -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 10' preserveAspectRatio='none'><path d='M0 6 Q 10 4.8 20 6 T 40 6 T 60 6 T 80 6 T 100 6 L 100 10 L 0 10 Z' fill='white'/></svg>");
+    mask-size: 100% 100%;
+    -webkit-mask-size: 100% 100%;
+    overflow: hidden;
+}
+
+.home-marquee-track {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    min-width: 100%;
+    animation: home-marquee 9s linear infinite;
+}
+
+.home-marquee-track--delayed {
+    animation-delay: 4.5s;
+}
+
+.home-marquee-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+    text-transform: uppercase;
+    font-family: "Noto Sans", sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #ffffff;
+    padding: 0 10px;
+    white-space: nowrap;
+}
+
+.home-marquee-text {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+}
+
+.home-marquee-icon {
+    color: #ff4d4f;
+}
+
+@keyframes home-marquee {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+.home-benefits .heading6 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #121212;
+}
+
+.home-benefits .caption1 {
+    font-size: 0.875rem;
+    color: #5c5c5c;
+    line-height: 1.6;
+    max-width: 260px;
+}
+
+.home-benefits i {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #121212;
+}
+
+.home-benefits i svg {
+    width: 1em;
+    height: 1em;
+}
+
+.home-tab-list {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 6px;
+    border-radius: 9999px;
+    background: #f5f5f5;
+}
+
+.home-tab-highlight {
+    position: absolute;
+    top: 6px;
+    left: 0;
+    height: calc(100% - 12px);
+    background: #f8f9fb;
+    border-radius: 9999px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    transition:
+        transform 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+        width 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none;
+}
+
+.tab-item {
+    position: relative;
+    padding: 0.75rem 1.5rem;
+    font-family: "Noto Sans", sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-transform: capitalize;
+    z-index: 1;
+}
+
+.tab-item-text {
+    position: relative;
+    z-index: 1;
+}
+
+@media (max-width: 768px) {
+    .tab-item {
+        font-size: 1rem;
+        padding: 0.6rem 1.2rem;
+    }
+}
+
