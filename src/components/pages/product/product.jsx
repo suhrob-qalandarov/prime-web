@@ -10,42 +10,29 @@ const Product = ({ selectedCategory }) => {
     const navigate = useNavigate()
     const [products, setProducts] = useState([])
     const [page, setPage] = useState(1)
-    const [totalPages, setTotalPages] = useState(0)
     const [hoveredProductId, setHoveredProductId] = useState(null)
     const [quickViewOpen, setQuickViewOpen] = useState(false)
     const [selectedProductId, setSelectedProductId] = useState(null)
     const itemsPerPage = 20
 
     useEffect(() => {
-        if (selectedCategory) {
-            fetchProductsByCategory()
+        const fetchProducts = async () => {
+            try {
+                if (selectedCategory) {
+                    const data = await ProductService.getProductsByCategoryId(selectedCategory, 12)
+                    setProducts(data.content)
+                } else {
+                    const data = await ProductService.getProducts(20)
+                    setProducts(data.content)
+                }
+                setPage(1)
+            } catch (error) {
+                console.error("Error fetching products:", error)
+            }
         }
-        if (!selectedCategory) {
-            fetchProducts()
-        }
+
+        fetchProducts()
     }, [selectedCategory])
-
-    const fetchProductsByCategory = async () => {
-        try {
-            const data = await ProductService.getProductsByCategoryId(selectedCategory, 12)
-            setProducts(data.content)
-            setTotalPages(data.totalPages)
-            setPage(1)
-        } catch (error) {
-            console.error("Error fetching products:", error)
-        }
-    }
-
-    const fetchProducts = async () => {
-        try {
-            const data = await ProductService.getProducts(20)
-            setProducts(data.content)
-            setTotalPages(data.totalPages)
-            setPage(1)
-        } catch (error) {
-            console.error("Error fetching products:", error)
-        }
-    }
 
     const startIndex = (page - 1) * itemsPerPage
     const endIndex = startIndex + itemsPerPage
@@ -155,8 +142,6 @@ const Product = ({ selectedCategory }) => {
                             const hasDiscount = product.status === "SALE" && product.discount > 0
                             const discountedPrice = calculateDiscountedPrice(product.price, product.discount)
                             const mainImage = product.attachmentKeys?.[0] || ""
-                            const isHovered = hoveredProductId === product.id
-
                             return (
                                 <Box
                                     key={product.id}
