@@ -231,11 +231,11 @@
 
 @media (min-width: 1024px) {
     .product-card-image {
-        min-height: 390px;
+        min-height: 410px;
     }
 
     .product-card-img {
-        height: 390px;
+        height: 410px;
     }
 }
 
