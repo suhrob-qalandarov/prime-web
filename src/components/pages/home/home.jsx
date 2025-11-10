@@ -1,7 +1,8 @@
 import { spotlights } from "../../../constants"
 import { Box, Stack } from "@mui/material"
 import { Link } from "react-router-dom"
-import { useMemo, useState, useRef, useCallback, useLayoutEffect } from "react"
+import { useMemo, useState, useRef, useCallback, useLayoutEffect, useEffect } from "react"
+import ProductSkeleton from "../../common/ProductSkeleton"
 import "./home.css"
 
 const mockTabs = [
@@ -52,6 +53,26 @@ const mockProductsByTab = {
             badge: "HOT",
             marqueeDiscount: 0,
         },
+        {
+            id: "best-5",
+            name: "Plashovka (Simple.Club)",
+            price: 301000,
+            oldPrice: 350000,
+            discount: 0,
+            image: "/images/spotlights/shim6.jpeg",
+            badge: "HOT",
+            marqueeDiscount: 0,
+        },
+        {
+            id: "best-6",
+            name: "Kurtka Ayıq",
+            price: 336000,
+            oldPrice: 420000,
+            discount: 0,
+            image: "/images/spotlights/cover3.webp",
+            badge: "HOT",
+            marqueeDiscount: 0,
+        },
     ],
     sale: [
         {
@@ -73,6 +94,26 @@ const mockProductsByTab = {
             image: "/images/spotlights/shim3.jpeg",
             badge: "SALE",
             marqueeDiscount: 35,
+        },
+        {
+            id: "sale-3",
+            name: "Jordan Low Sky",
+            price: 265000,
+            oldPrice: 330000,
+            discount: 20,
+            image: "/images/spotlights/shoes5.jpeg",
+            badge: "SALE",
+            marqueeDiscount: 20,
+        },
+        {
+            id: "sale-4",
+            name: "Hoodie Classic",
+            price: 228000,
+            oldPrice: 285000,
+            discount: 20,
+            image: "/images/spotlights/shim9.jpeg",
+            badge: "SALE",
+            marqueeDiscount: 20,
         },
     ],
     new: [
@@ -96,6 +137,36 @@ const mockProductsByTab = {
             badge: "NEW",
             marqueeDiscount: 0,
         },
+        {
+            id: "new-3",
+            name: "Loose Fit T-shirt",
+            price: 165000,
+            oldPrice: 0,
+            discount: 0,
+            image: "/images/spotlights/shim2.jpeg",
+            badge: "NEW",
+            marqueeDiscount: 0,
+        },
+        {
+            id: "new-4",
+            name: "Sneakers Cloud",
+            price: 275000,
+            oldPrice: 0,
+            discount: 0,
+            image: "/images/spotlights/shoes5.jpeg",
+            badge: "NEW",
+            marqueeDiscount: 0,
+        },
+        {
+            id: "new-5",
+            name: "Sneakers Cloud",
+            price: 275000,
+            oldPrice: 0,
+            discount: 0,
+            image: "/images/spotlights/shoes6.jpeg",
+            badge: "NEW",
+            marqueeDiscount: 0,
+        },
     ],
 }
 
@@ -104,8 +175,23 @@ const Home = () => {
     const tabListRef = useRef(null)
     const tabRefs = useRef([])
     const [indicatorStyle, setIndicatorStyle] = useState({ width: 0, left: 0 })
+    const [itemsPerView, setItemsPerView] = useState(() => (typeof window !== "undefined" && window.innerWidth < 1024 ? 2 : 4))
+    const [currentIndex, setCurrentIndex] = useState(0)
 
     const activeProducts = useMemo(() => mockProductsByTab[activeTab] || [], [activeTab])
+    const showArrows = activeProducts.length > itemsPerView
+    const totalPages = useMemo(() => {
+        if (!activeProducts.length) return 1
+        return Math.ceil(activeProducts.length / itemsPerView)
+    }, [activeProducts.length, itemsPerView])
+    const visibleProducts = useMemo(() => {
+        if (!activeProducts.length) return []
+        const count = Math.min(itemsPerView, activeProducts.length)
+        return Array.from({ length: count }).map((_, idx) => {
+            const absoluteIndex = (currentIndex * itemsPerView + idx) % activeProducts.length
+            return activeProducts[absoluteIndex]
+        })
+    }, [activeProducts, currentIndex, itemsPerView])
 
     const updateIndicator = useCallback(() => {
         const currentIndex = mockTabs.findIndex((tab) => tab.id === activeTab)
@@ -130,6 +216,40 @@ const Home = () => {
         window.addEventListener("resize", updateIndicator)
         return () => window.removeEventListener("resize", updateIndicator)
     }, [updateIndicator])
+
+    useEffect(() => {
+        const syncItemsPerView = () => {
+            if (window.innerWidth < 1024) {
+                setItemsPerView(2)
+            } else {
+                setItemsPerView(4)
+            }
+        }
+
+        syncItemsPerView()
+        window.addEventListener("resize", syncItemsPerView)
+        return () => window.removeEventListener("resize", syncItemsPerView)
+    }, [])
+
+    useEffect(() => {
+        setCurrentIndex(0)
+    }, [activeTab, itemsPerView])
+
+    const handlePrev = () => {
+        setCurrentIndex((prev) => {
+            if (!showArrows) return 0
+            const nextIndex = (prev - 1 + totalPages) % totalPages
+            return nextIndex
+        })
+    }
+
+    const handleNext = () => {
+        setCurrentIndex((prev) => {
+            if (!showArrows) return 0
+            const nextIndex = (prev + 1) % totalPages
+            return nextIndex
+        })
+    }
 
     return (
         <div>
@@ -216,109 +336,125 @@ const Home = () => {
                         </Box>
 
                         <div className="relative">
-                            <button
-                                type="button"
-                                className="absolute left-[-20px] top-1/2 -translate-y-1/2 z-20 w-10 h-10 flex items-center justify-center bg-white border border-[#e0e0e0] rounded-full shadow-sm hover:bg-[#121212] hover:text-white transition-colors duration-200"
-                            >
-                                <span className="sr-only">Prev</span>
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" className="w-4 h-4">
-                                    <path
-                                        d="M15 18l-6-6 6-6"
-                                        stroke="currentColor"
-                                        strokeWidth="1.8"
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                    />
-                                </svg>
-                            </button>
-
-                            <button
-                                type="button"
-                                className="absolute right-[-20px] top-1/2 -translate-y-1/2 z-20 w-10 h-10 flex items-center justify-center bg-white border border-[#e0e0e0] rounded-full shadow-sm hover:bg-[#121212] hover:text-white transition-colors duration-200"
-                            >
-                                <span className="sr-only">Next</span>
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" className="w-4 h-4">
-                                    <path
-                                        d="M9 6l6 6-6 6"
-                                        stroke="currentColor"
-                                        strokeWidth="1.8"
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                    />
-                                </svg>
-                            </button>
-
-                            <Box className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                                {activeProducts.map((product) => (
-                                    <Box
-                                        key={product.id}
-                                        className="flex flex-col"
+                            {showArrows && (
+                                <>
+                                    <button
+                                        type="button"
+                                        className="carousel-arrow left"
+                                        onClick={handlePrev}
                                     >
-                                        <div className="relative rounded-[24px] overflow-hidden bg-[#f5f5f5]">
-                                            <img
-                                                src={product.image}
-                                                alt={product.name}
-                                                className="w-full h-[390px] object-cover"
+                                        <span className="sr-only">Prev</span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" className="w-4 h-4">
+                                            <path
+                                                d="M15 18l-6-6 6-6"
+                                                stroke="currentColor"
+                                                strokeWidth="1.8"
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
                                             />
-                                            {product.badge && product.badge !== "SALE" && (
-                                                <span
-                                                    className={`absolute top-4 left-4 text-xs font-semibold px-3 py-1 rounded-full ${
-                                                        product.badge === "NEW"
-                                                            ? "home-new-badge"
-                                                            : "bg-[#ff4d4f] text-white"
-                                                    }`}
-                                                >
-                                                    {product.badge}
-                                                </span>
-                                            )}
+                                        </svg>
+                                    </button>
+                                    <button
+                                        type="button"
+                                        className="carousel-arrow right"
+                                        onClick={handleNext}
+                                    >
+                                        <span className="sr-only">Next</span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" className="w-4 h-4">
+                                            <path
+                                                d="M9 6l6 6-6 6"
+                                                stroke="currentColor"
+                                                strokeWidth="1.8"
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                            />
+                                        </svg>
+                                    </button>
+                                </>
+                            )}
 
-                                            {product.badge === "SALE" && (
-                                                <div className="home-marquee-container">
-                                                    <div className="home-marquee-content">
-                                                        <div className="home-marquee-track">
-                                                            {Array.from({ length: 5 }).map((_, idx) => (
-                                                                <div key={idx} className="home-marquee-item">
-                                                                    <span className="home-marquee-text">
-                                                                        Qaynoq chegirma {product.marqueeDiscount}%
-                                                                    </span>
-                                                                    <svg
-                                                                        xmlns="http://www.w3.org/2000/svg"
-                                                                        width="16"
-                                                                        height="16"
-                                                                        viewBox="0 0 256 256"
-                                                                        fill="currentColor"
-                                                                        className="home-marquee-icon"
-                                                                    >
-                                                                        <path d="M213.85,125.46l-112,120a8,8,0,0,1-13.69-7l14.66-73.33L45.19,143.49a8,8,0,0,1-3-13l112-120a8,8,0,0,1,13.69,7L153.18,90.9l57.63,21.61a8,8,0,0,1,3,12.95Z"></path>
-                                                                    </svg>
-                                                                </div>
-                                                            ))}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            )}
-                                        </div>
-                                        <div className="pt-4">
-                                            <h3 className="text-base font-semibold text-[#121212]">{product.name}</h3>
-                                            <div className="flex items-center gap-2 text-sm text-[#525252] mt-1">
-                                                <span className="font-semibold text-[#121212]">
-                                                    {product.price.toLocaleString("uz-UZ")} So'm
-                                                </span>
-                                                {product.oldPrice && (
-                                                    <span className="line-through text-[#9c9c9c]">
-                                                        {product.oldPrice.toLocaleString("uz-UZ")} So'm
-                                                    </span>
-                                                )}
-                                                {product.discount && (
-                                                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full bg-lime-200 text-xs font-semibold text-[#121212]">
-                                                        -{product.discount}%
-                                                    </span>
-                                                )}
-                                            </div>
-                                        </div>
-                                    </Box>
-                                ))}
-                            </Box>
+                            <div className="carousel-viewport">
+                                <div
+                                    className="carousel-track"
+                                    style={{
+                                        width: "100%",
+                                        "--items-per-view": `${visibleProducts.length || itemsPerView}`,
+                                    }}
+                                >
+                                    {visibleProducts.length
+                                        ? visibleProducts.map((product) => (
+                                              <Box key={product.id} className="carousel-item flex flex-col">
+                                                 <div className="relative rounded-[24px] overflow-hidden bg-[#f5f5f5]">
+                                                     <img
+                                                         src={product.image}
+                                                         alt={product.name}
+                                                         className="w-full h-[390px] object-cover"
+                                                     />
+                                                     {product.badge && product.badge !== "SALE" && (
+                                                         <span
+                                                             className={`absolute top-4 left-4 text-xs font-semibold px-3 py-1 rounded-full ${
+                                                                 product.badge === "NEW"
+                                                                     ? "home-new-badge"
+                                                                     : "bg-[#ff4d4f] text-white"
+                                                             }`}
+                                                         >
+                                                             {product.badge}
+                                                         </span>
+                                                     )}
+
+                                                     {product.badge === "SALE" && (
+                                                         <div className="home-marquee-container">
+                                                             <div className="home-marquee-content">
+                                                                 <div className="home-marquee-track">
+                                                                     {Array.from({ length: 5 }).map((_, idx) => (
+                                                                         <div key={idx} className="home-marquee-item">
+                                                                             <span className="home-marquee-text">
+                                                                                 Qaynoq chegirma {product.marqueeDiscount}%
+                                                                             </span>
+                                                                             <svg
+                                                                                 xmlns="http://www.w3.org/2000/svg"
+                                                                                 width="16"
+                                                                                 height="16"
+                                                                                 viewBox="0 0 256 256"
+                                                                                 fill="currentColor"
+                                                                                 className="home-marquee-icon"
+                                                                             >
+                                                                                 <path d="M213.85,125.46l-112,120a8,8,0,0,1-13.69-7l14.66-73.33L45.19,143.49a8,8,0,0,1-3-13l112-120a8,8,0,0,1,13.69,7L153.18,90.9l57.63,21.61a8,8,0,0,1,3,12.95Z"></path>
+                                                                             </svg>
+                                                                         </div>
+                                                                     ))}
+                                                                 </div>
+                                                             </div>
+                                                         </div>
+                                                     )}
+                                                 </div>
+                                                 <div className="pt-4">
+                                                     <h3 className="text-base font-semibold text-[#121212]">{product.name}</h3>
+                                                     <div className="flex items-center gap-2 text-sm text-[#525252] mt-1">
+                                                         <span className="font-semibold text-[#121212]">
+                                                             {product.price.toLocaleString("uz-UZ")} So'm
+                                                         </span>
+                                                         {product.oldPrice && (
+                                                             <span className="line-through text-[#9c9c9c]">
+                                                                 {product.oldPrice.toLocaleString("uz-UZ")} So'm
+                                                             </span>
+                                                         )}
+                                                         {product.discount && (
+                                                             <span className="inline-flex items-center px-2.5 py-0.5 rounded-full bg-lime-200 text-xs font-semibold text-[#121212]">
+                                                                 -{product.discount}%
+                                                             </span>
+                                                         )}
+                                                     </div>
+                                                 </div>
+                                              </Box>
+                                          ))
+                                        : Array.from({ length: itemsPerView }).map((_, idx) => (
+                                              <Box key={`skeleton-${idx}`} className="carousel-item flex flex-col">
+                                                  <ProductSkeleton />
+                                              </Box>
+                                          ))}
+                                </div>
+                            </div>
                         </div>
                     </Stack>
                 </div>
