@@ -20,7 +20,7 @@ const mockProductsByTab = {
             price: 348000,
             oldPrice: 520000,
             discount: 0,
-            image: "",
+            image: "/images/spotlights/pants-cover.jpg",
             badge: "HOT",
             marqueeDiscount: 0,
         },
@@ -216,7 +216,7 @@ const Home = () => {
                                 alt="catalog"
                                 containerClassName="w-full h-[410px] md:h-[580px]"
                                 imgClassName="w-full h-full object-cover object-top block"
-                                delay={1000}
+                                delay={600}
                             />
                             <div
                                 className="absolute top-1/2 left-1/2 md:left-[300px] transform -translate-x-1/2 -translate-y-1/2 md:-translate-x-0 z-10 pointer-events-none text-center md:text-left"
@@ -246,7 +246,7 @@ const Home = () => {
                                                 ? "object-bottom"
                                                 : "object-center"
                                     }`}
-                                    delay={1200}
+                                    delay={700}
                                 />
                                 <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
                                     <h3 className="text-[var(--light-color)] uppercase text-[26px] md:text-xl font-sans text-center transition-colors duration-300 group-hover:text-[#8b1538] px-4">
