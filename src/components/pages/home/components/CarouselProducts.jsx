@@ -4,7 +4,13 @@ import ProductCard from "../../../common/ProductCard"
 import ProductSkeleton from "../../../common/ProductSkeleton"
 
 const useItemsPerView = () => {
-    const getItemsPerView = () => (window.innerWidth < 768 ? 2 : 4)
+    const getItemsPerView = () => {
+        const width = window.innerWidth
+        if (width < 640) return 2
+        if (width < 1024) return 3
+        return 4
+    }
+
     const [itemsPerView, setItemsPerView] = useState(getItemsPerView)
 
     useEffect(() => {
@@ -72,17 +78,18 @@ const CarouselProducts = ({ products = [], isLoading = false }) => {
 
             <Box
                 key={animationKey}
-                className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 carousel-fade"
+                className="carousel-grid carousel-fade"
+                sx={{ "--columns": itemsPerView }}
             >
-                {isLoading
+                {isLoading && !products.length
                     ? Array.from({ length: itemsPerView }).map((_, idx) => (
                           <Box key={`skeleton-${idx}`} className="flex flex-col">
                               <ProductSkeleton />
                           </Box>
                       ))
-                    : visibleProducts.map((product) => (
-                          <Box key={product.id} className="flex flex-col">
-                              <ProductCard product={product} />
+                    : visibleProducts.map((product, idx) => (
+                          <Box key={product?.id ?? `product-${idx}`} className="flex flex-col">
+                              <ProductCard product={product} isLoading={isLoading && !product} />
                           </Box>
                       ))}
             </Box>

@@ -2,7 +2,7 @@ import { useState } from "react"
 import { Box } from "@mui/material"
 import ProductSkeleton from "./ProductSkeleton"
 
-const ProductCard = ({ product, isLoading }) => {
+const ProductCard = ({ product }) => {
     const [imageLoaded, setImageLoaded] = useState(false)
 
     if (!product) {
@@ -16,7 +16,7 @@ const ProductCard = ({ product, isLoading }) => {
     return (
         <Box className="flex flex-col">
             <div className="relative rounded-[24px] overflow-hidden bg-[#f5f5f5]" style={{ minHeight: "380px" }}>
-                {(isLoading || !imageLoaded) && <ProductSkeleton overlay />}
+                {!imageLoaded && <ProductSkeleton overlay />}
                 <img
                     src={product.image}
                     alt={product.name}
