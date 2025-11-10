@@ -58,7 +58,7 @@ const CarouselProducts = ({ products = [], isLoading = false }) => {
     }
 
     return (
-        <div className="relative">
+        <div className="relative -ml-3">
             {showArrows && (
                 <>
                     <button type="button" className="carousel-arrow left" onClick={handlePrev}>
