@@ -1,8 +1,9 @@
 import { spotlights } from "../../../constants"
 import { Box, Stack } from "@mui/material"
 import { Link } from "react-router-dom"
-import { useMemo, useState, useRef, useCallback, useLayoutEffect } from "react"
+import { useMemo, useState, useRef, useCallback, useLayoutEffect, useEffect } from "react"
 import CarouselProducts from "./components/CarouselProducts"
+import ImageWithSkeleton from "../../common/ImageWithSkeleton"
 import "./home.css"
 
 const mockTabs = [
@@ -210,10 +211,12 @@ const Home = () => {
                             to={"/catalog"}
                             className="w-full block overflow-hidden relative mb-0 cursor-pointer rounded-none"
                         >
-                            <img
-                                src={"/images/spotlights/cover3.webp"}
-                                alt={"catalog"}
-                                className="w-full h-[410px] md:h-[580px] object-cover object-top block"
+                            <ImageWithSkeleton
+                                src="/images/spotlights/cover3.webp"
+                                alt="catalog"
+                                containerClassName="w-full h-[410px] md:h-[580px]"
+                                imgClassName="w-full h-full object-cover object-top block"
+                                delay={1000}
                             />
                             <div
                                 className="absolute top-1/2 left-1/2 md:left-[300px] transform -translate-x-1/2 -translate-y-1/2 md:-translate-x-0 z-10 pointer-events-none text-center md:text-left"
@@ -232,16 +235,18 @@ const Home = () => {
                                 to={"/catalog?" + cat.url}
                                 className="group block relative overflow-hidden cursor-pointer aspect-square md:aspect-auto"
                             >
-                                <img
+                                <ImageWithSkeleton
                                     src={cat.image || "/placeholder.svg"}
                                     alt={cat.name}
-                                    className={`w-full h-full md:h-[400px] object-cover block transition-transform duration-300 relative group-hover:scale-105 ${
+                                    containerClassName="spotlight-image-wrapper"
+                                    imgClassName={`w-full h-full md:h-[400px] object-cover block transition-transform duration-300 ${
                                         cat.side === "top"
                                             ? "object-top"
                                             : cat.side === "bottom"
                                                 ? "object-bottom"
                                                 : "object-center"
                                     }`}
+                                    delay={1200}
                                 />
                                 <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
                                     <h3 className="text-[var(--light-color)] uppercase text-[26px] md:text-xl font-sans text-center transition-colors duration-300 group-hover:text-[#8b1538] px-4">
