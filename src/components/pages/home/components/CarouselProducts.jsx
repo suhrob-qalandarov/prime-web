@@ -83,13 +83,13 @@ const CarouselProducts = ({ products = [], isLoading = false }) => {
             >
                 {isLoading && !products.length
                     ? Array.from({ length: itemsPerView }).map((_, idx) => (
-                          <Box key={`skeleton-${idx}`} className="flex flex-col">
+                          <Box key={`skeleton-${idx}`} className="carousel-card">
                               <ProductSkeleton />
                           </Box>
                       ))
                     : visibleProducts.map((product, idx) => (
-                          <Box key={product?.id ?? `product-${idx}`} className="flex flex-col">
-                              <ProductCard product={product} isLoading={isLoading && !product} />
+                          <Box key={product?.id ?? `product-${idx}`} className="carousel-card">
+                              <ProductCard product={product} />
                           </Box>
                       ))}
             </Box>

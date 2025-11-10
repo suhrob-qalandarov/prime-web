@@ -144,7 +144,6 @@
     display: grid;
     grid-template-columns: repeat(var(--columns, 2), minmax(0, 1fr));
     gap: 1.5rem;
-    padding: 0 0.75rem;
 }
 
 .carousel-arrow {
@@ -209,7 +208,7 @@
 
 .product-card-image {
     min-height: 260px;
-    min-width: 200px;
+    min-width: 195px;
     border-radius: 24px;
     overflow: hidden;
 }
@@ -237,6 +236,13 @@
 
     .product-card-img {
         height: 390px;
+    }
+}
+
+@media (max-width: 639px) {
+    .carousel-grid {
+        padding-left: 0.0010rem;
+        padding-right: 0.0010rem;
     }
 }
 
