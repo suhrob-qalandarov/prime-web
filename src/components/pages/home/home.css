@@ -144,6 +144,7 @@
     display: grid;
     grid-template-columns: repeat(var(--columns, 2), minmax(0, 1fr));
     gap: 1.5rem;
+    padding: 0 0.75rem;
 }
 
 .carousel-arrow {
@@ -203,6 +204,39 @@
     to {
         opacity: 1;
         transform: translateX(0);
+    }
+}
+
+.product-card-image {
+    min-height: 260px;
+    min-width: 200px;
+    border-radius: 24px;
+    overflow: hidden;
+}
+
+.product-card-img {
+    width: 100%;
+    height: 260px;
+    object-fit: cover;
+}
+
+@media (min-width: 640px) {
+    .product-card-image {
+        min-height: 320px;
+    }
+
+    .product-card-img {
+        height: 320px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .product-card-image {
+        min-height: 390px;
+    }
+
+    .product-card-img {
+        height: 390px;
     }
 }
 

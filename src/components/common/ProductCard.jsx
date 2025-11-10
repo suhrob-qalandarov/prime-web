@@ -15,12 +15,14 @@ const ProductCard = ({ product }) => {
 
     return (
         <Box className="flex flex-col">
-            <div className="relative rounded-[24px] overflow-hidden bg-[#f5f5f5]" style={{ minHeight: "380px" }}>
+            <div
+                className="relative rounded-[24px] overflow-hidden bg-[#f5f5f5] product-card-image"
+            >
                 {!imageLoaded && <ProductSkeleton overlay />}
                 <img
                     src={product.image}
                     alt={product.name}
-                    className={`w-full h-[400px] object-cover transition-opacity duration-700 ${
+                    className={`product-card-img transition-opacity duration-700 ${
                         imageLoaded ? "opacity-100" : "opacity-0"
                     }`}
                     onLoad={() => setImageLoaded(true)}
