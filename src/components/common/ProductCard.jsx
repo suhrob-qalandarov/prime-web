@@ -62,10 +62,10 @@ const ProductCard = ({ product }) => {
                 )}
             </div>
             <div className="pt-4 min-h-[72px] transition-opacity duration-500" style={{ opacity: imageLoaded ? 1 : 0 }}>
-                <h3 className="text-base font-semibold text-[#121212] line-clamp-2">{product.name}</h3>
-                <div className="flex items-center gap-2 text-sm text-[#525252] mt-1">
+                <h3 className="text-sm sm:text-base font-semibold text-[#121212] line-clamp-2">{product.name}</h3>
+                <div className="flex items-center gap-2 text-xs sm:text-sm text-[#525252] mt-1">
                     <span className="font-semibold text-[#121212]">{product.price.toLocaleString("fr-FR")} So'm</span>
-                    {product.oldPrice && (
+                    {product.discount && product.oldPrice && (
                         <span className="line-through text-[#9c9c9c]">{product.oldPrice.toLocaleString("fr-FR")} So'm</span>
                     )}
                     {product.discount && (
