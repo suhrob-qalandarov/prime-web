@@ -1,9 +1,24 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Box } from "@mui/material"
+import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined"
 import ProductSkeleton from "./ProductSkeleton"
+import ImageWithSkeleton from "./ImageWithSkeleton"
 
 const ProductCard = ({ product }) => {
     const [imageLoaded, setImageLoaded] = useState(false)
+    const [isDesktop, setIsDesktop] = useState(() => (typeof window !== "undefined" ? window.innerWidth >= 1024 : false))
+    const [hovered, setHovered] = useState(false)
+    const images = product?.images?.length ? product.images : [product?.image].filter(Boolean)
+
+    useEffect(() => {
+        const updateMatch = () => setIsDesktop(window.innerWidth >= 1024)
+        window.addEventListener("resize", updateMatch)
+        return () => window.removeEventListener("resize", updateMatch)
+    }, [])
+
+    useEffect(() => {
+        setImageLoaded(false)
+    }, [images.length])
 
     if (!product) {
         return (
@@ -13,20 +28,25 @@ const ProductCard = ({ product }) => {
         )
     }
 
+    const isQuickViewVisible = imageLoaded && (isDesktop ? hovered : true)
+
     return (
-        <Box className="flex flex-col">
-            <div
-                className="relative rounded-[24px] overflow-hidden bg-[#f5f5f5] product-card-image"
-            >
+        <Box
+            className="flex flex-col product-card"
+            onMouseEnter={() => setHovered(true)}
+            onMouseLeave={() => setHovered(false)}
+        >
+            <div className="relative rounded-[24px] overflow-hidden bg-[#f5f5f5] product-card-image">
                 {!imageLoaded && <ProductSkeleton overlay />}
-                <img
-                    src={product.image}
+                <ImageWithSkeleton
+                    src={images[0]}
                     alt={product.name}
-                    className={`product-card-img transition-opacity duration-700 ${
-                        imageLoaded ? "opacity-100" : "opacity-0"
-                    }`}
+                    containerClassName="w-full h-full"
+                    imgClassName="product-card-img"
+                    delay={0}
                     onLoad={() => setImageLoaded(true)}
                 />
+
                 {product.badge && product.badge !== "SALE" && imageLoaded && (
                     <span
                         className={`absolute top-4 left-4 text-xs font-semibold px-3 py-1 rounded-full ${
@@ -60,16 +80,31 @@ const ProductCard = ({ product }) => {
                         </div>
                     </div>
                 )}
+
+                <button
+                    className={`quick-view-btn ${isDesktop ? "desktop" : "mobile"} ${isQuickViewVisible ? "quick-view-btn--visible" : ""}`}
+                    type="button"
+                >
+                    {isDesktop ? "QUICK VIEW" : <VisibilityOutlinedIcon fontSize="small" />}
+                </button>
             </div>
-            <div className="pt-4 min-h-[72px] transition-opacity duration-500" style={{ opacity: imageLoaded ? 1 : 0 }}>
-                <h3 className="text-sm sm:text-base font-semibold text-[#121212] line-clamp-2">{product.name}</h3>
-                <div className="flex items-center gap-2 text-xs sm:text-sm text-[#525252] mt-1">
-                    <span className="font-semibold text-[#121212]">{product.price.toLocaleString("fr-FR")} So'm</span>
+
+            <div className="pt-2 transition-opacity duration-500" style={{ opacity: imageLoaded ? 1 : 0 }}>
+                <div className="product-name text-sm sm:text-base font-semibold text-[#121212] line-clamp-2">
+                    {product.name}
+                </div>
+
+                <div className="price-row flex items-center gap-2 text-xs sm:text-sm text-[#525252] mt-1">
+                    <span className="font-semibold text-[#121212] text-sm sm:text-base lg:text-sm">
+                        {product.price.toLocaleString("fr-FR", { style: "currency", currency: "UZS", maximumFractionDigits: 0 }).replace("UZS", "So'm")}
+                    </span>
                     {product.discount && product.oldPrice && (
-                        <span className="line-through text-[#9c9c9c]">{product.oldPrice.toLocaleString("fr-FR")} So'm</span>
+                        <span className="line-through text-[#9c9c9c] text-xs sm:text-sm">
+                            {product.oldPrice.toLocaleString("fr-FR", { style: "currency", currency: "UZS", maximumFractionDigits: 0 }).replace("UZS", "So'm")}
+                        </span>
                     )}
                     {product.discount && (
-                        <span className="inline-flex items-center px-2.5 py-0.5 rounded-full bg-lime-200 text-xs font-semibold text-[#121212]">
+                        <span className="inline-flex items-center px-2.5 py-0.5 rounded-full bg-lime-200 text-xs font-semibold text-[#121212] mt-1 lg:mt-0">
                             -{product.discount}%
                         </span>
                     )}
