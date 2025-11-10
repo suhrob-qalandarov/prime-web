@@ -1,7 +1,7 @@
 import { spotlights } from "../../../constants"
 import { Box, Stack } from "@mui/material"
 import { Link } from "react-router-dom"
-import { useMemo, useState, useRef, useCallback, useLayoutEffect, useEffect } from "react"
+import { useMemo, useState, useRef, useCallback, useLayoutEffect } from "react"
 import CarouselProducts from "./components/CarouselProducts"
 import "./home.css"
 
