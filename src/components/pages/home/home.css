@@ -265,5 +265,14 @@
         padding-left: 0;
         padding-right: 0;
     }
+
+    .product-card-image {
+        min-height: 220px;
+        min-width: 160px;
+    }
+
+    .product-card-img {
+        height: 220px;
+    }
 }
 
