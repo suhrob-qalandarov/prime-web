@@ -18,42 +18,50 @@ const useItemsPerView = () => {
 
 const CarouselProducts = ({ products = [], isLoading = false }) => {
     const itemsPerView = useItemsPerView()
-    const [page, setPage] = useState(0)
+    const totalItems = products.length
+    const [index, setIndex] = useState(0)
+    const [animationKey, setAnimationKey] = useState(0)
 
     useEffect(() => {
-        setPage(0)
-    }, [products.length, itemsPerView])
+        setIndex(0)
+        setAnimationKey((prev) => prev + 1)
+    }, [totalItems, itemsPerView])
 
-    const pages = useMemo(() => {
-        if (!products.length) return [[]]
-        const result = []
-        for (let i = 0; i < products.length; i += itemsPerView) {
-            result.push(products.slice(i, i + itemsPerView))
+    const showArrows = totalItems > itemsPerView
+
+    const visibleProducts = useMemo(() => {
+        if (!totalItems) {
+            return []
         }
-        return result
-    }, [products, itemsPerView])
+        return Array.from({ length: itemsPerView }).map((_, idx) => {
+            const absoluteIndex = (index + idx) % totalItems
+            return products[absoluteIndex]
+        })
+    }, [products, index, itemsPerView, totalItems])
 
-    const nextPage = () => {
-        setPage((prev) => (prev + 1) % pages.length)
+    const handleNext = () => {
+        if (!totalItems) return
+        setIndex((prev) => (prev + 1) % totalItems)
+        setAnimationKey((prev) => prev + 1)
     }
 
-    const prevPage = () => {
-        setPage((prev) => (prev - 1 + pages.length) % pages.length)
+    const handlePrev = () => {
+        if (!totalItems) return
+        setIndex((prev) => (prev - 1 + totalItems) % totalItems)
+        setAnimationKey((prev) => prev + 1)
     }
-
-    const displayProducts = pages[page] || []
 
     return (
         <div className="relative">
-            {pages.length > 1 && (
+            {showArrows && (
                 <>
-                    <button type="button" className="carousel-arrow left" onClick={prevPage}>
+                    <button type="button" className="carousel-arrow left" onClick={handlePrev}>
                         <span className="sr-only">Prev</span>
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" className="w-4 h-4">
                             <path d="M15 18l-6-6 6-6" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
                         </svg>
                     </button>
-                    <button type="button" className="carousel-arrow right" onClick={nextPage}>
+                    <button type="button" className="carousel-arrow right" onClick={handleNext}>
                         <span className="sr-only">Next</span>
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" className="w-4 h-4">
                             <path d="M9 6l6 6-6 6" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
@@ -62,12 +70,21 @@ const CarouselProducts = ({ products = [], isLoading = false }) => {
                 </>
             )}
 
-            <Box className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 transition-transform ease-out duration-500">
-                {(isLoading ? Array.from({ length: itemsPerView }) : displayProducts).map((product, idx) => (
-                    <Box key={product?.id ?? `product-${idx}`} className="flex flex-col">
-                        {product ? <ProductCard product={product} isLoading={isLoading} /> : <ProductSkeleton />}
-                    </Box>
-                ))}
+            <Box
+                key={animationKey}
+                className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 carousel-fade"
+            >
+                {isLoading
+                    ? Array.from({ length: itemsPerView }).map((_, idx) => (
+                          <Box key={`skeleton-${idx}`} className="flex flex-col">
+                              <ProductSkeleton />
+                          </Box>
+                      ))
+                    : visibleProducts.map((product) => (
+                          <Box key={product.id} className="flex flex-col">
+                              <ProductCard product={product} />
+                          </Box>
+                      ))}
             </Box>
         </div>
     )

@@ -15,12 +15,12 @@ const ProductCard = ({ product, isLoading }) => {
 
     return (
         <Box className="flex flex-col">
-            <div className="relative rounded-[24px] overflow-hidden bg-[#f5f5f5]" style={{ minHeight: "390px" }}>
+            <div className="relative rounded-[24px] overflow-hidden bg-[#f5f5f5]" style={{ minHeight: "380px" }}>
                 {(isLoading || !imageLoaded) && <ProductSkeleton overlay />}
                 <img
                     src={product.image}
                     alt={product.name}
-                    className={`w-full h-[390px] object-cover transition-opacity duration-700 ${
+                    className={`w-full h-[440px] object-cover transition-opacity duration-700 ${
                         imageLoaded ? "opacity-100" : "opacity-0"
                     }`}
                     onLoad={() => setImageLoaded(true)}
@@ -62,9 +62,9 @@ const ProductCard = ({ product, isLoading }) => {
             <div className="pt-4 min-h-[72px] transition-opacity duration-500" style={{ opacity: imageLoaded ? 1 : 0 }}>
                 <h3 className="text-base font-semibold text-[#121212] line-clamp-2">{product.name}</h3>
                 <div className="flex items-center gap-2 text-sm text-[#525252] mt-1">
-                    <span className="font-semibold text-[#121212]">{product.price.toLocaleString("uz-UZ")} So'm</span>
+                    <span className="font-semibold text-[#121212]">{product.price.toLocaleString("fr-FR")} So'm</span>
                     {product.oldPrice && (
-                        <span className="line-through text-[#9c9c9c]">{product.oldPrice.toLocaleString("uz-UZ")} So'm</span>
+                        <span className="line-through text-[#9c9c9c]">{product.oldPrice.toLocaleString("fr-FR")} So'm</span>
                     )}
                     {product.discount && (
                         <span className="inline-flex items-center px-2.5 py-0.5 rounded-full bg-lime-200 text-xs font-semibold text-[#121212]">
