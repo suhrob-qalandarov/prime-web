@@ -64,6 +64,11 @@
     }
 }
 
+.home-new-badge {
+    background-color: rgba(189, 236, 118, 0.87);
+    color: black;
+}
+
 .home-benefits .heading6 {
     font-size: 1.125rem;
     font-weight: 600;

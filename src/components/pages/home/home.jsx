@@ -261,7 +261,13 @@ const Home = () => {
                                                 className="w-full h-[390px] object-cover"
                                             />
                                             {product.badge && product.badge !== "SALE" && (
-                                                <span className="absolute top-4 left-4 bg-[#ff4d4f] text-white text-xs font-semibold px-3 py-1 rounded-full">
+                                                <span
+                                                    className={`absolute top-4 left-4 text-xs font-semibold px-3 py-1 rounded-full ${
+                                                        product.badge === "NEW"
+                                                            ? "home-new-badge"
+                                                            : "bg-[#ff4d4f] text-white"
+                                                    }`}
+                                                >
                                                     {product.badge}
                                                 </span>
                                             )}
