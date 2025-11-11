@@ -94,7 +94,7 @@ const ProductCard = ({ product }) => {
 
             <div className="pt-2 transition-opacity duration-500" style={{ opacity: imageLoaded ? 1 : 0 }}>
                 <div className="flex flex-wrap items-end gap-x-2 gap-y-1 w-full">
-                    <div className="product-name text-[0.85rem] sm:text-base font-medium sm:font-semibold text-[#121212] leading-tight line-clamp-2 flex-1 min-w-0">
+                    <div className="product-name text-[0.85rem] sm:text-base font-medium text-[#121212] leading-tight line-clamp-2 flex-1 min-w-0">
                         {product.name}
                     </div>
                     {product.brand && (
@@ -104,15 +104,17 @@ const ProductCard = ({ product }) => {
                     )}
                 </div>
 
-                <div className="price-row flex items-center gap-2 text-xs sm:text-sm text-[#525252] mt-1">
-                    <span className="font-semibold text-[#121212] text-sm sm:text-base lg:text-sm">{formatPrice(product.price)}</span>
-                    {product.discount > 0 && product.oldPrice && (
-                        <span className="line-through text-[#9c9c9c] text-xs sm:text-sm">
-                            {formatPrice(product.oldPrice)}
-                        </span>
-                    )}
+                <div className="price-row flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2 text-xs sm:text-sm text-[#525252] mt-1">
+                    <div className="flex items-baseline gap-2">
+                        <span className="font-semibold text-[#121212] text-sm sm:text-base lg:text-sm">{formatPrice(product.price)}</span>
+                        {product.discount > 0 && product.oldPrice && (
+                            <span className="line-through text-[#9c9c9c] text-xs sm:text-sm">
+                                {formatPrice(product.oldPrice)}
+                            </span>
+                        )}
+                    </div>
                     {product.discount > 0 && (
-                        <span className="inline-flex items-center px-2.5 py-0.5 rounded-full bg-lime-200 text-xs font-semibold text-[#121212] mt-1 lg:mt-0">
+                        <span className="inline-flex items-center px-2 py-0.5 rounded-full bg-lime-200 text-xs font-semibold text-[#121212] sm:mt-0 w-fit">
                             -{product.discount}%
                         </span>
                     )}
