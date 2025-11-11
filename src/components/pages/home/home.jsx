@@ -17,6 +17,7 @@ const mockProductsByTab = {
         {
             id: "best-1",
             name: "Shim QADAM",
+            brand: "POLO",
             price: 348000,
             oldPrice: 520000,
             discount: 0,
@@ -32,6 +33,7 @@ const mockProductsByTab = {
         {
             id: "best-2",
             name: "Shalvar OD",
+            brand: "UrbanFlex",
             price: 328000,
             oldPrice: 470000,
             discount: 0,
@@ -47,6 +49,7 @@ const mockProductsByTab = {
         {
             id: "best-3",
             name: "Kurtka Velvet",
+            brand: "NordicWave",
             price: 308000,
             oldPrice: 420000,
             discount: 0,
@@ -62,6 +65,7 @@ const mockProductsByTab = {
         {
             id: "best-4",
             name: "Keng Shalvar \"Yulduz Bo'l\"",
+            brand: "Starline",
             price: 260000,
             oldPrice: 315000,
             discount: 0,
@@ -77,6 +81,7 @@ const mockProductsByTab = {
         {
             id: "best-5",
             name: "Plashovka (Simple.Club)",
+            brand: "Simple Club",
             price: 301000,
             oldPrice: 350000,
             discount: 0,
@@ -92,6 +97,7 @@ const mockProductsByTab = {
         {
             id: "best-6",
             name: "Kurtka Ayıq",
+            brand: "PolarBear",
             price: 336000,
             oldPrice: 420000,
             discount: 0,
@@ -109,6 +115,7 @@ const mockProductsByTab = {
         {
             id: "sale-1",
             name: "Sweatshirt 15/15",
+            brand: "PrimeWear",
             price: 240000,
             oldPrice: 300000,
             discount: 20,
@@ -124,6 +131,7 @@ const mockProductsByTab = {
         {
             id: "sale-2",
             name: "Simple Club",
+            brand: "Simple Club",
             price: 191750,
             oldPrice: 295000,
             discount: 35,
@@ -139,6 +147,7 @@ const mockProductsByTab = {
         {
             id: "sale-3",
             name: "Jordan Low Sky",
+            brand: "AirBold",
             price: 265000,
             oldPrice: 330000,
             discount: 20,
@@ -154,6 +163,7 @@ const mockProductsByTab = {
         {
             id: "sale-4",
             name: "Hoodie Classic",
+            brand: "UrbanFlex",
             price: 228000,
             oldPrice: 285000,
             discount: 20,
@@ -171,6 +181,7 @@ const mockProductsByTab = {
         {
             id: "new-1",
             name: "Kargo Shortik",
+            brand: "PrimeWear",
             price: 289000,
             oldPrice: 346000,
             discount: 0,
@@ -186,6 +197,7 @@ const mockProductsByTab = {
         {
             id: "new-2",
             name: "Kurtka Classic",
+            brand: "NordicWave",
             price: 301000,
             oldPrice: 350000,
             discount: 0,
@@ -201,6 +213,7 @@ const mockProductsByTab = {
         {
             id: "new-3",
             name: "Loose Fit T-shirt",
+            brand: "CottonEase",
             price: 165000,
             oldPrice: 0,
             discount: 0,
@@ -216,6 +229,7 @@ const mockProductsByTab = {
         {
             id: "new-4",
             name: "Sneakers Cloud",
+            brand: "CloudStep",
             price: 275000,
             oldPrice: 0,
             discount: 0,
@@ -231,6 +245,7 @@ const mockProductsByTab = {
         {
             id: "new-5",
             name: "Sneakers Cloud",
+            brand: "CloudStep",
             price: 275000,
             oldPrice: 0,
             discount: 0,
