@@ -330,12 +330,12 @@
 }
 
 .quick-view-btn.mobile {
-    top: 16px;
-    right: 16px;
-    width: 36px;
-    height: 36px;
+    top: 14px;
+    right: 14px;
+    width: 32px;
+    height: 32px;
     padding: 0;
-    border-radius: 50%;
+    border-radius: 12px;
     transform: translateY(-10px);
 }
 
@@ -345,6 +345,20 @@
 }
 
 .quick-view-btn.mobile svg {
-    font-size: 1.1rem;
+    font-size: 1rem;
+}
+
+@media (max-width: 640px) {
+    .quick-view-btn.mobile {
+        top: 12px;
+        right: 12px;
+        width: 28px;
+        height: 28px;
+        border-radius: 10px;
+    }
+
+    .quick-view-btn.mobile svg {
+        font-size: 0.95rem;
+    }
 }
 
