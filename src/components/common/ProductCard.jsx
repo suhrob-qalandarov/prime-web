@@ -30,6 +30,9 @@ const ProductCard = ({ product }) => {
 
     const isQuickViewVisible = imageLoaded && (isDesktop ? hovered : true)
 
+    const formatPrice = (value) =>
+        `${new Intl.NumberFormat("fr-FR", { minimumFractionDigits: 0, maximumFractionDigits: 0 }).format(value)} So'm`
+
     return (
         <Box
             className="flex flex-col product-card"
@@ -102,15 +105,13 @@ const ProductCard = ({ product }) => {
                 </div>
 
                 <div className="price-row flex items-center gap-2 text-xs sm:text-sm text-[#525252] mt-1">
-                    <span className="font-semibold text-[#121212] text-sm sm:text-base lg:text-sm">
-                        {product.price.toLocaleString("fr-FR", { style: "currency", currency: "UZS", maximumFractionDigits: 0 }).replace("UZS", "So'm")}
-                    </span>
-                    {product.discount && product.oldPrice && (
+                    <span className="font-semibold text-[#121212] text-sm sm:text-base lg:text-sm">{formatPrice(product.price)}</span>
+                    {product.discount > 0 && product.oldPrice && (
                         <span className="line-through text-[#9c9c9c] text-xs sm:text-sm">
-                            {product.oldPrice.toLocaleString("fr-FR", { style: "currency", currency: "UZS", maximumFractionDigits: 0 }).replace("UZS", "So'm")}
+                            {formatPrice(product.oldPrice)}
                         </span>
                     )}
-                    {product.discount && (
+                    {product.discount > 0 && (
                         <span className="inline-flex items-center px-2.5 py-0.5 rounded-full bg-lime-200 text-xs font-semibold text-[#121212] mt-1 lg:mt-0">
                             -{product.discount}%
                         </span>
