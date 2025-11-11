@@ -90,8 +90,15 @@ const ProductCard = ({ product }) => {
             </div>
 
             <div className="pt-2 transition-opacity duration-500" style={{ opacity: imageLoaded ? 1 : 0 }}>
-                <div className="product-name text-sm sm:text-base font-semibold text-[#121212] line-clamp-2">
-                    {product.name}
+                <div className="flex flex-wrap items-start gap-2">
+                    <div className="product-name text-sm sm:text-base font-semibold text-[#121212] line-clamp-2 flex-1 min-w-0">
+                        {product.name}
+                    </div>
+                    {product.brand && (
+                        <span className="text-[0.68rem] font-semibold uppercase tracking-[0.08em] text-[#999999] whitespace-nowrap font-['Noto_Sans'] self-start">
+                            {product.brand}
+                        </span>
+                    )}
                 </div>
 
                 <div className="price-row flex items-center gap-2 text-xs sm:text-sm text-[#525252] mt-1">
