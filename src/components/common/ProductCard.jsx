@@ -98,7 +98,7 @@ const ProductCard = ({ product }) => {
                         {product.name}
                     </div>
                     {product.brand && (
-                        <span className="text-[0.68rem] font-medium sm:font-semibold uppercase tracking-[0.08em] text-[#121212] whitespace-nowrap font-['Noto_Sans'] ml-auto self-end text-right">
+                        <span className="text-[0.68rem] font-medium sm:font-semibold uppercase tracking-[0.08em] text-[#121212] whitespace-nowrap font-['Noto_Sans'] w-full sm:w-auto mt-1 sm:mt-0 text-left sm:text-right ml-0 sm:ml-auto self-start sm:self-end">
                             {product.brand}
                         </span>
                     )}
