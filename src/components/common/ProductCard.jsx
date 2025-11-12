@@ -39,7 +39,7 @@ const ProductCard = ({ product }) => {
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => setHovered(false)}
         >
-            <div className="relative rounded-[24px] overflow-hidden bg-[#f5f5f5] product-card-image">
+            <div className="relative rounded-[14px] overflow-hidden bg-[#f5f5f5] product-card-image">
                 {!imageLoaded && <ProductSkeleton overlay />}
                 <ImageWithSkeleton
                     src={images[0]}

@@ -222,7 +222,6 @@
 .product-card-image {
     min-height: 260px;
     min-width: 195px;
-    border-radius: 24px;
     overflow: hidden;
 }
 
