@@ -90,7 +90,7 @@ const ProductGrid = ({ selectedCategory }) => {
     }
 
     return (
-        <div className="w-full px-[5px] sm:px-6 lg:px-[200px] py-6 md:py-10">
+        <div className="w-full px-6 lg:px-[200px] py-6 md:py-10">
             <QuickViewModal
                 isOpen={quickViewOpen}
                 onClose={() => setQuickViewOpen(false)}
@@ -99,17 +99,14 @@ const ProductGrid = ({ selectedCategory }) => {
             />
 
             {loading ? (
-                <div className="grid gap-[5px] sm:gap-6 md:gap-8" style={{ gridTemplateColumns: 'repeat(2, minmax(180px, 1fr))' }}>
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 sm:gap-6 md:gap-8">
                     {Array.from({ length: 8 }).map((_, idx) => (
                         <ProductSkeleton key={idx} />
                     ))}
                 </div>
             ) : products.length > 0 ? (
                 <>
-                    <div 
-                        className="grid gap-[5px] sm:grid-cols-3 md:grid-cols-4 sm:gap-6 md:gap-8" 
-                        style={{ gridTemplateColumns: 'repeat(2, minmax(180px, 1fr))' }}
-                    >
+                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 sm:gap-6 md:gap-8">
                         {paginatedProducts.map((product) => (
                             <div
                                 key={product.id}
