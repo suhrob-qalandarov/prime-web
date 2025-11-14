@@ -80,6 +80,7 @@ const ProductFilters = ({
             ? selectedColors.filter(c => c !== color)
             : [...selectedColors, color]
         onColorChange(newColors)
+        setFilterOpen(false)
     }
 
     const toggleSize = (size) => {
@@ -87,6 +88,12 @@ const ProductFilters = ({
             ? selectedSizes.filter(s => s !== size)
             : [...selectedSizes, size]
         onSizeChange(newSizes)
+        setFilterOpen(false)
+    }
+
+    const handleStatusChange = (status) => {
+        onStatusChange(selectedStatus === status ? null : status)
+        setFilterOpen(false)
     }
 
     return (
@@ -166,12 +173,10 @@ const ProductFilters = ({
                                     <Chip
                                         key={status}
                                         label={status}
-                                        onClick={() => onStatusChange(
-                                            selectedStatus === status ? null : status
-                                        )}
+                                        onClick={() => handleStatusChange(status)}
                                         sx={{
                                             backgroundColor: "var(--light-color)",
-                                            color: selectedStatus === status ? "#0033aa" : "#333",
+                                            color: "#333",
                                             border: `1px solid ${selectedStatus === status ? "#000" : "#ddd"}`,
                                             fontWeight: 500,
                                             fontSize: "14px",
@@ -305,6 +310,7 @@ const ProductFilters = ({
                                     onDelete={() => onStatusChange(null)}
                                     sx={{
                                         backgroundColor: "var(--light-color)",
+                                        color: "#333",
                                         border: "1px solid #000",
                                         fontWeight: 500,
                                         fontSize: "12px",
@@ -329,6 +335,7 @@ const ProductFilters = ({
                                     }}
                                     sx={{
                                         backgroundColor: "var(--light-color)",
+                                        color: "#333",
                                         border: "1px solid #000",
                                         fontWeight: 500,
                                         fontSize: "12px",
@@ -353,6 +360,7 @@ const ProductFilters = ({
                                     }}
                                     sx={{
                                         backgroundColor: "var(--light-color)",
+                                        color: "#333",
                                         border: "1px solid #000",
                                         fontWeight: 500,
                                         fontSize: "12px",
@@ -431,9 +439,7 @@ const ProductFilters = ({
                                         <Chip
                                             key={status}
                                             label={status}
-                                            onClick={() => onStatusChange(
-                                                selectedStatus === status ? null : status
-                                            )}
+                                            onClick={() => handleStatusChange(status)}
                                             sx={{
                                                 backgroundColor: "var(--light-color)",
                                                 color: "#333",
