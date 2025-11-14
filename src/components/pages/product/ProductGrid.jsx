@@ -51,6 +51,7 @@ const ProductGrid = ({ selectedCategory }) => {
                     id: product.id,
                     name: product.name,
                     brand: product.brand,
+                    color: product.color,
                     price: displayPrice,
                     oldPrice: displayOldPrice,
                     discount: product.discount || 0,
