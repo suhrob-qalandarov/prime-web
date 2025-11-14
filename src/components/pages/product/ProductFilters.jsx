@@ -327,56 +327,6 @@ const ProductFilters = ({
                         },
                     }}
                 >
-                    {isMobile ? (
-                        <>
-                            {/* Mobile: Status Pills inside dropdown */}
-                            <Box sx={{ mb: 3 }}>
-                                <Box
-                                    sx={{
-                                        fontSize: "16px",
-                                        fontWeight: 600,
-                                        mb: 2,
-                                        fontFamily: "Noto Sans, sans-serif",
-                                    }}
-                                >
-                                    Status
-                                </Box>
-                                <Box
-                                    sx={{
-                                        display: "flex",
-                                        flexWrap: "wrap",
-                                        gap: 1,
-                                    }}
-                                >
-                                    {["Sale", "New", "Hot"].map((status) => (
-                                        <Chip
-                                            key={status}
-                                            label={status}
-                                            onClick={() => handleStatusChange(status)}
-                                            sx={{
-                                                backgroundColor: "var(--light-color)",
-                                                color: "#333",
-                                                border: `1px solid ${selectedStatus === status ? "#000" : "#ddd"}`,
-                                                fontWeight: 500,
-                                                fontSize: "13px",
-                                                height: "32px",
-                                                "&:hover": {
-                                                    backgroundColor: "var(--light-color)",
-                                                    border: "1px solid #000",
-                                                },
-                                                "&:active": {
-                                                    border: "1px solid #000",
-                                                },
-                                                cursor: "pointer",
-                                                transition: "all 0.2s",
-                                            }}
-                                        />
-                                    ))}
-                                </Box>
-                            </Box>
-                        </>
-                    ) : null}
-
                     <Box
                         sx={{
                             display: isMobile ? "block" : "grid",
