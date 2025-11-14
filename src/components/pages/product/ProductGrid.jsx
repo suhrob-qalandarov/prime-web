@@ -8,7 +8,7 @@ import { mockProducts } from "../../../mock/products"
 const ProductGrid = ({ selectedCategory }) => {
     const navigate = useNavigate()
     const [products, setProducts] = useState([])
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(true)
     const [page, setPage] = useState(1)
     const [quickViewOpen, setQuickViewOpen] = useState(false)
     const [selectedProductId, setSelectedProductId] = useState(null)

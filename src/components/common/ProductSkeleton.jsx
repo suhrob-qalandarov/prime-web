@@ -1,7 +1,7 @@
 import { Box } from "@mui/material"
 
 const ProductSkeleton = ({ aspectRatio = "133%", overlay = false }) => {
-    const content = (
+    const spinnerContent = (
         <svg
             width="120"
             height="120"
@@ -44,26 +44,63 @@ const ProductSkeleton = ({ aspectRatio = "133%", overlay = false }) => {
                     background: "linear-gradient(135deg, #f3f4f6, #e5e7eb)",
                 }}
             >
-                {content}
+                {spinnerContent}
             </Box>
         )
     }
 
+    // Full product card skeleton that matches ProductCard structure exactly
     return (
-        <Box className="w-full" sx={{ position: "relative", overflow: "hidden" }}>
+        <Box className="flex flex-col product-card w-full">
+            {/* Image container skeleton - matches product-card-image exactly */}
             <Box
+                className="relative rounded-[14px] overflow-hidden bg-[#f5f5f5] product-card-image"
                 sx={{
-                    position: "relative",
-                    width: "100%",
-                    paddingTop: aspectRatio,
-                    background: "linear-gradient(135deg, #f3f4f6, #e5e7eb)",
-                    borderRadius: "24px",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
                 }}
             >
-                {content}
+                {spinnerContent}
+            </Box>
+
+            {/* Text content skeleton - matches ProductCard text area */}
+            <Box className="pt-2 w-full">
+                {/* Name and brand skeleton */}
+                <Box className="flex flex-wrap items-end gap-x-2 gap-y-1 w-full mb-1">
+                    <Box
+                        sx={{
+                            height: { xs: "32px", sm: "40px" },
+                            width: "70%",
+                            backgroundColor: "#e5e7eb",
+                            borderRadius: "4px",
+                            animation: "pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+                        }}
+                    />
+                    <Box
+                        sx={{
+                            height: { xs: "14px", sm: "16px" },
+                            width: "25%",
+                            backgroundColor: "#e5e7eb",
+                            borderRadius: "4px",
+                            animation: "pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+                            marginLeft: "auto",
+                        }}
+                    />
+                </Box>
+
+                {/* Price skeleton */}
+                <Box className="flex items-baseline gap-2 mt-1">
+                    <Box
+                        sx={{
+                            height: { xs: "16px", sm: "20px" },
+                            width: "100px",
+                            backgroundColor: "#e5e7eb",
+                            borderRadius: "4px",
+                            animation: "pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+                        }}
+                    />
+                </Box>
             </Box>
         </Box>
     )
