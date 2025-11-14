@@ -6,10 +6,10 @@ import { useTheme } from "@mui/material/styles"
 
 import CategoriesList from "./categories-list"
 import SpotlightList from "./spotlight-list"
-import Product from "../product/product"
 
 import { spotlights } from "../../../constants"
 import CategoryService from "../../../service/catalog"
+import ProductGrid from "../product/ProductGrid";
 
 const Catalog = () => {
     const [categoriesData, setCategoriesData] = useState([])
@@ -142,7 +142,7 @@ const Catalog = () => {
                     )}
                 </Container>
             </Stack>
-            <Product selectedCategory={selectedCategory} />
+            <ProductGrid selectedCategory={selectedCategory} />
         </Stack>
     )
 }
