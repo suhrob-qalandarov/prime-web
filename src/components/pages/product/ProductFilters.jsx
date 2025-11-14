@@ -305,7 +305,6 @@ const ProductFilters = ({
                                     onDelete={() => onStatusChange(null)}
                                     sx={{
                                         backgroundColor: "var(--light-color)",
-                                        color: "#0033aa",
                                         border: "1px solid #000",
                                         fontWeight: 500,
                                         fontSize: "12px",
@@ -330,7 +329,6 @@ const ProductFilters = ({
                                     }}
                                     sx={{
                                         backgroundColor: "var(--light-color)",
-                                        color: "#0033aa",
                                         border: "1px solid #000",
                                         fontWeight: 500,
                                         fontSize: "12px",
@@ -355,7 +353,6 @@ const ProductFilters = ({
                                     }}
                                     sx={{
                                         backgroundColor: "var(--light-color)",
-                                        color: "#0033aa",
                                         border: "1px solid #000",
                                         fontWeight: 500,
                                         fontSize: "12px",
@@ -439,7 +436,7 @@ const ProductFilters = ({
                                             )}
                                             sx={{
                                                 backgroundColor: "var(--light-color)",
-                                                color: selectedStatus === status ? "#0033aa" : "#333",
+                                                color: "#333",
                                                 border: `1px solid ${selectedStatus === status ? "#000" : "#ddd"}`,
                                                 fontWeight: 500,
                                                 fontSize: "13px",
@@ -491,7 +488,7 @@ const ProductFilters = ({
                                         onClick={() => toggleColor(color)}
                                         sx={{
                                             backgroundColor: "var(--light-color)",
-                                            color: selectedColors.includes(color) ? "#0033aa" : "#333",
+                                            color: "#333",
                                             border: `1px solid ${selectedColors.includes(color) ? "#000" : "#ddd"}`,
                                             fontWeight: 500,
                                             fontSize: "13px",
@@ -534,7 +531,7 @@ const ProductFilters = ({
                                         onClick={() => toggleSize(size)}
                                         sx={{
                                             backgroundColor: "var(--light-color)",
-                                            color: selectedSizes.includes(size) ? "#0033aa" : "#333",
+                                            color: "#333",
                                             border: `1px solid ${selectedSizes.includes(size) ? "#000" : "#ddd"}`,
                                             fontWeight: 500,
                                             fontSize: "13px",
