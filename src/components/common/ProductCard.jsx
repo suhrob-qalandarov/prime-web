@@ -4,7 +4,7 @@ import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined"
 import ProductSkeleton from "./ProductSkeleton"
 import ImageWithSkeleton from "./ImageWithSkeleton"
 
-const ProductCard = ({ product }) => {
+const ProductCard = ({ product, onQuickView }) => {
     const [imageLoaded, setImageLoaded] = useState(false)
     const [isDesktop, setIsDesktop] = useState(() => (typeof window !== "undefined" ? window.innerWidth >= 1024 : false))
     const [hovered, setHovered] = useState(false)
@@ -87,6 +87,12 @@ const ProductCard = ({ product }) => {
                 <button
                     className={`quick-view-btn ${isDesktop ? "desktop" : "mobile"} ${isQuickViewVisible ? "quick-view-btn--visible" : ""}`}
                     type="button"
+                    onClick={(e) => {
+                        e.stopPropagation()
+                        if (onQuickView && product?.id) {
+                            onQuickView(product.id)
+                        }
+                    }}
                 >
                     {isDesktop ? "QUICK VIEW" : <VisibilityOutlinedIcon fontSize="small" />}
                 </button>
