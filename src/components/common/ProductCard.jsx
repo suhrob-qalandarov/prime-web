@@ -121,15 +121,15 @@ const ProductCard = ({ product, onQuickView }) => {
 
                 <div className="price-row flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2 text-xs sm:text-sm text-[#525252] mt-1">
                     <div className="flex items-baseline gap-2">
-                        <span className="font-semibold text-[#121212] text-sm sm:text-base lg:text-sm">{formatPrice(product.price)}</span>
+                        <span className="font-semibold font-['Noto_Sans'] text-[#121212] text-xs sm:text-base lg:text-sm">{formatPrice(product.price)}</span>
                         {product.discount > 0 && product.oldPrice && (
-                            <span className="line-through text-[#9c9c9c] text-xs sm:text-sm">
+                            <span className="line-through text-[#666666] text-xs sm:text-sm font-['Noto_Sans']">
                                 {formatPrice(product.oldPrice)}
                             </span>
                         )}
                     </div>
                     {product.discount > 0 && (
-                        <span className="inline-flex items-center px-2 py-0.5 rounded-full bg-lime-200 text-xs font-semibold text-[#121212] sm:mt-0 w-fit">
+                        <span className="inline-flex items-center px-2.5 py-1 sm:px-5 sm:py-2.5 md:px-3 md:py-2 rounded-full bg-lime-300 text-xs sm:text-sm font-semibold text-[#121212] sm:mt-0 w-fit font-['Noto_Sans']">
                             -{product.discount}%
                         </span>
                     )}
