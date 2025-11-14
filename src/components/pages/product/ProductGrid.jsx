@@ -1,8 +1,9 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useMemo } from "react"
 import { useNavigate } from "react-router-dom"
 import ProductCard from "../../common/ProductCard"
 import ProductSkeleton from "../../common/ProductSkeleton"
 import QuickViewModal from "./modal/quick-view"
+import ProductFilters from "./ProductFilters"
 import { mockProducts } from "../../../mock/products"
 
 const ProductGrid = ({ selectedCategory }) => {
@@ -12,6 +13,13 @@ const ProductGrid = ({ selectedCategory }) => {
     const [page, setPage] = useState(1)
     const [quickViewOpen, setQuickViewOpen] = useState(false)
     const [selectedProductId, setSelectedProductId] = useState(null)
+    
+    // Filter states
+    const [selectedStatus, setSelectedStatus] = useState(null)
+    const [selectedSort, setSelectedSort] = useState("default")
+    const [selectedColors, setSelectedColors] = useState([])
+    const [selectedSizes, setSelectedSizes] = useState([])
+    
     const itemsPerPage = 20
 
     useEffect(() => {
@@ -71,10 +79,48 @@ const ProductGrid = ({ selectedCategory }) => {
         return () => clearTimeout(timer)
     }, [selectedCategory])
 
+    // Filter and sort products
+    const filteredProducts = useMemo(() => {
+        let filtered = [...products]
+
+        // Filter by status
+        if (selectedStatus) {
+            filtered = filtered.filter(product => {
+                if (selectedStatus === "Sale") return product.discount > 0
+                if (selectedStatus === "New") return product.badge === "NEW"
+                if (selectedStatus === "Hot") return product.badge === "HOT" || product.status === "HOT"
+                return true
+            })
+        }
+
+        // Filter by colors
+        if (selectedColors.length > 0) {
+            filtered = filtered.filter(product => 
+                product.color && selectedColors.includes(product.color)
+            )
+        }
+
+        // Sort products
+        if (selectedSort === "discount") {
+            filtered.sort((a, b) => (b.discount || 0) - (a.discount || 0))
+        } else if (selectedSort === "price-low") {
+            filtered.sort((a, b) => a.price - b.price)
+        } else if (selectedSort === "price-high") {
+            filtered.sort((a, b) => b.price - a.price)
+        }
+
+        return filtered
+    }, [products, selectedStatus, selectedSort, selectedColors, selectedSizes])
+
+    // Reset page when filters change
+    useEffect(() => {
+        setPage(1)
+    }, [selectedStatus, selectedSort, selectedColors, selectedSizes])
+
     const startIndex = (page - 1) * itemsPerPage
     const endIndex = startIndex + itemsPerPage
-    const paginatedProducts = products.slice(startIndex, endIndex)
-    const totalPages = Math.ceil(products.length / itemsPerPage)
+    const paginatedProducts = filteredProducts.slice(startIndex, endIndex)
+    const totalPages = Math.ceil(filteredProducts.length / itemsPerPage)
 
     const handlePageChange = (newPage) => {
         setPage(newPage)
@@ -99,13 +145,28 @@ const ProductGrid = ({ selectedCategory }) => {
                 products={products.map(p => p.originalProduct).filter(Boolean)}
             />
 
+            {/* Filters Section */}
+            {!loading && (
+                <ProductFilters
+                    totalProducts={filteredProducts.length}
+                    selectedStatus={selectedStatus}
+                    onStatusChange={setSelectedStatus}
+                    selectedSort={selectedSort}
+                    onSortChange={setSelectedSort}
+                    selectedColors={selectedColors}
+                    onColorChange={setSelectedColors}
+                    selectedSizes={selectedSizes}
+                    onSizeChange={setSelectedSizes}
+                />
+            )}
+
             {loading ? (
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 sm:gap-6 md:gap-8">
                     {Array.from({ length: 8 }).map((_, idx) => (
                         <ProductSkeleton key={idx} />
                     ))}
                 </div>
-            ) : products.length > 0 ? (
+            ) : filteredProducts.length > 0 ? (
                 <>
                     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 sm:gap-6 md:gap-8">
                         {paginatedProducts.map((product) => (
