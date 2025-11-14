@@ -102,104 +102,130 @@ const ProductFilters = ({
             <Box
                 sx={{
                     display: "flex",
-                    flexDirection: isMobile ? "column" : "row",
-                    alignItems: isMobile ? "flex-start" : "center",
-                    justifyContent: "space-between",
-                    gap: isMobile ? 2 : 2,
+                    flexDirection: "row",
+                    alignItems: "center",
+                    gap: 2,
                     mb: filterOpen ? (isMobile ? 2 : 0) : 0,
                 }}
             >
-                {/* Left side - Filterlar button and status pills */}
-                <Box sx={{ display: "flex", alignItems: "center", gap: 2, flexWrap: "wrap" }}>
+                {/* Left side - Filterlar button */}
+                <Box sx={{ display: "flex", alignItems: "center" }}>
                     {isMobile ? (
-                        <Box sx={{ width: "100%" }}>
-                            <button
-                                onClick={() => setFilterOpen(!filterOpen)}
-                                style={{
-                                    display: "flex",
-                                    alignItems: "center",
-                                    justifyContent: "space-between",
-                                    width: "100%",
-                                    padding: "12px 16px",
-                                    backgroundColor: "transparent",
-                                    border: "none",
-                                    borderRadius: "8px",
-                                    cursor: "pointer",
-                                    fontFamily: "Noto Sans, sans-serif",
-                                    fontSize: "16px",
-                                    fontWeight: 500,
-                                    color: "#333",
-                                }}
-                            >
-                                <Box sx={{ display: "flex", alignItems: "center", gap: "8px" }}>
-                                    <FilterIcon />
-                                    Filterlar
-                                </Box>
-                                <ExpandMoreIcon
-                                    sx={{
-                                        fontSize: "24px",
-                                        transform: filterOpen ? "rotate(180deg)" : "rotate(0deg)",
-                                        transition: "transform 0.3s ease",
-                                    }}
-                                />
-                            </button>
-                        </Box>
-                    ) : (
-                        <>
-                            <button
-                                onClick={() => setFilterOpen(!filterOpen)}
-                                style={{
-                                    display: "flex",
-                                    alignItems: "center",
-                                    gap: "8px",
-                                    padding: "10px 16px",
-                                    backgroundColor: "transparent",
-                                    border: "none",
-                                    borderRadius: "8px",
-                                    cursor: "pointer",
-                                    fontFamily: "Noto Sans, sans-serif",
-                                    fontSize: "16px",
-                                    fontWeight: 500,
-                                    color: "#333",
-                                }}
-                            >
+                        <button
+                            onClick={() => setFilterOpen(!filterOpen)}
+                            style={{
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "space-between",
+                                padding: "12px 16px",
+                                backgroundColor: "transparent",
+                                border: "none",
+                                borderRadius: "8px",
+                                cursor: "pointer",
+                                fontFamily: "Noto Sans, sans-serif",
+                                fontSize: "16px",
+                                fontWeight: 500,
+                                color: "#333",
+                            }}
+                        >
+                            <Box sx={{ display: "flex", alignItems: "center", gap: "8px" }}>
                                 <FilterIcon />
                                 Filterlar
-                            </button>
-
-                            {/* Status Pills - Right side of filter button */}
-                            <Box sx={{ display: "flex", gap: 1, flexWrap: "wrap" }}>
-                                {["Sale", "New", "Hot"].map((status) => (
-                                    <Chip
-                                        key={status}
-                                        label={status}
-                                        onClick={() => handleStatusChange(status)}
-                                        sx={{
-                                            backgroundColor: "var(--light-color)",
-                                            color: "#333",
-                                            border: `1px solid ${selectedStatus === status ? "#000" : "#ddd"}`,
-                                            fontWeight: 500,
-                                            fontSize: "14px",
-                                            height: "32px",
-                                            "&:hover": {
-                                                backgroundColor: "var(--light-color)",
-                                                border: "1px solid #000",
-                                            },
-                                            cursor: "pointer",
-                                            transition: "all 0.2s",
-                                        }}
-                                    />
-                                ))}
                             </Box>
-                        </>
+                            <ExpandMoreIcon
+                                sx={{
+                                    fontSize: "24px",
+                                    transform: filterOpen ? "rotate(180deg)" : "rotate(0deg)",
+                                    transition: "transform 0.3s ease",
+                                }}
+                            />
+                        </button>
+                    ) : (
+                        <button
+                            onClick={() => setFilterOpen(!filterOpen)}
+                            style={{
+                                display: "flex",
+                                alignItems: "center",
+                                gap: "8px",
+                                padding: "10px 16px",
+                                backgroundColor: "transparent",
+                                border: "none",
+                                borderRadius: "8px",
+                                cursor: "pointer",
+                                fontFamily: "Noto Sans, sans-serif",
+                                fontSize: "16px",
+                                fontWeight: 500,
+                                color: "#333",
+                            }}
+                        >
+                            <FilterIcon />
+                            Filterlar
+                        </button>
                     )}
                 </Box>
 
-                {/* Right side - Sort dropdown */}
-                <Box sx={{ width: isMobile ? "100%" : "auto" }}>
+                {/* Left side - Status pills (tags) after Filterlar button */}
+                <Box sx={{ display: "flex", alignItems: "center", gap: 1, flexWrap: "wrap" }}>
+                    {["Sale", "New", "Hot"].map((status) => (
+                        <Chip
+                            key={status}
+                            label={status}
+                            onClick={() => handleStatusChange(status)}
+                            sx={{
+                                backgroundColor: "var(--light-color)",
+                                color: "#333",
+                                border: `1px solid ${selectedStatus === status ? "#000" : "#ddd"}`,
+                                fontWeight: 500,
+                                fontSize: isMobile ? "13px" : "14px",
+                                height: isMobile ? "28px" : "32px",
+                                "&:hover": {
+                                    backgroundColor: "var(--light-color)",
+                                    border: "1px solid #000",
+                                },
+                                "&:active": {
+                                    border: "1px solid #000",
+                                },
+                                cursor: "pointer",
+                                transition: "all 0.2s",
+                            }}
+                        />
+                    ))}
+                </Box>
+
+            </Box>
+
+            {/* Products count - Separate row below filter button */}
+            <Box 
+                sx={{ 
+                    display: "flex", 
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    gap: 3,
+                    mt: 2,
+                    mb: filterOpen ? 2 : 0,
+                    position: "relative",
+                    zIndex: 1,
+                }}
+            >
+                <Box
+                    sx={{
+                        fontSize: isMobile ? "13px" : "14px",
+                        color: "#666",
+                        fontFamily: "Noto Sans, sans-serif",
+                    }}
+                >
+                    {totalProducts > 0 ? (
+                        <>Mahsulotlar topildi: {totalProducts}</>
+                    ) : (
+                        <>Tanlangan mezonlar bo'yicha mahsulotlar topilmadi</>
+                    )}
+                </Box>
+
+                {/* Sort dropdown - Right side */}
+                <Box sx={{ display: "flex", alignItems: "center" }}>
                     <FormControl
                         sx={{
-                            width: isMobile ? "100%" : 180,
+                            width: isMobile ? "120px" : 180,
                             backgroundColor: "#fff",
                             borderRadius: "8px",
                             "& .MuiOutlinedInput-root": {
@@ -226,10 +252,10 @@ const ProductFilters = ({
                             onClose={() => setSortOpen(false)}
                             IconComponent={ChevronDownIcon}
                             sx={{
-                                fontSize: isMobile ? "14px" : "16px",
+                                fontSize: isMobile ? "13px" : "16px",
                                 fontFamily: "Noto Sans, sans-serif",
                                 "& .MuiSelect-select": {
-                                    padding: isMobile ? "10px 32px 10px 14px" : "12px 36px 12px 16px",
+                                    padding: isMobile ? "8px 28px 8px 12px" : "12px 36px 12px 16px",
                                 },
                                 "& .MuiSelect-icon": {
                                     right: "8px",
@@ -265,119 +291,6 @@ const ProductFilters = ({
                         </Select>
                     </FormControl>
                 </Box>
-            </Box>
-
-            {/* Products count - Separate row below filter button */}
-            <Box 
-                sx={{ 
-                    display: "flex", 
-                    alignItems: "center", 
-                    gap: 3,
-                    mt: 2,
-                    mb: filterOpen ? 2 : 0,
-                    position: "relative",
-                    zIndex: 1,
-                }}
-            >
-                <Box
-                    sx={{
-                        fontSize: isMobile ? "13px" : "14px",
-                        color: "#666",
-                        fontFamily: "Noto Sans, sans-serif",
-                    }}
-                >
-                    {totalProducts > 0 ? (
-                        <>Mahsulotlar topildi: {totalProducts}</>
-                    ) : (
-                        <>Tanlangan mezonlar bo'yicha mahsulotlar topilmadi</>
-                    )}
-                </Box>
-                {(selectedStatus || selectedColors.length > 0 || selectedSizes.length > 0) && (
-                    <>
-                        <Box sx={{ display: "flex", alignItems: "center" }}>
-                            <Box 
-                                sx={{ 
-                                    width: "1px", 
-                                    height: "16px", 
-                                    backgroundColor: "#ddd" 
-                                }}
-                            />
-                        </Box>
-                        <Box sx={{ display: "flex", alignItems: "center", gap: 1, flexWrap: "wrap" }}>
-                            {selectedStatus && (
-                                <Chip
-                                    label={selectedStatus}
-                                    onDelete={() => onStatusChange(null)}
-                                    sx={{
-                                        backgroundColor: "var(--light-color)",
-                                        color: "#333",
-                                        border: "1px solid #000",
-                                        fontWeight: 500,
-                                        fontSize: "12px",
-                                        height: "28px",
-                                        "& .MuiChip-deleteIcon": {
-                                            color: "#666",
-                                            fontSize: "16px",
-                                            "&:hover": {
-                                                color: "#000",
-                                            },
-                                        },
-                                    }}
-                                />
-                            )}
-                            {selectedColors.map((color) => (
-                                <Chip
-                                    key={color}
-                                    label={color}
-                                    onDelete={() => {
-                                        const newColors = selectedColors.filter(c => c !== color)
-                                        onColorChange(newColors)
-                                    }}
-                                    sx={{
-                                        backgroundColor: "var(--light-color)",
-                                        color: "#333",
-                                        border: "1px solid #000",
-                                        fontWeight: 500,
-                                        fontSize: "12px",
-                                        height: "28px",
-                                        "& .MuiChip-deleteIcon": {
-                                            color: "#666",
-                                            fontSize: "16px",
-                                            "&:hover": {
-                                                color: "#000",
-                                            },
-                                        },
-                                    }}
-                                />
-                            ))}
-                            {selectedSizes.map((size) => (
-                                <Chip
-                                    key={size}
-                                    label={size}
-                                    onDelete={() => {
-                                        const newSizes = selectedSizes.filter(s => s !== size)
-                                        onSizeChange(newSizes)
-                                    }}
-                                    sx={{
-                                        backgroundColor: "var(--light-color)",
-                                        color: "#333",
-                                        border: "1px solid #000",
-                                        fontWeight: 500,
-                                        fontSize: "12px",
-                                        height: "28px",
-                                        "& .MuiChip-deleteIcon": {
-                                            color: "#666",
-                                            fontSize: "16px",
-                                            "&:hover": {
-                                                color: "#000",
-                                            },
-                                        },
-                                    }}
-                                />
-                            ))}
-                        </Box>
-                    </>
-                )}
             </Box>
 
             {/* Filter Dropdown */}
@@ -451,6 +364,9 @@ const ProductFilters = ({
                                                     backgroundColor: "var(--light-color)",
                                                     border: "1px solid #000",
                                                 },
+                                                "&:active": {
+                                                    border: "1px solid #000",
+                                                },
                                                 cursor: "pointer",
                                                 transition: "all 0.2s",
                                             }}
@@ -503,6 +419,9 @@ const ProductFilters = ({
                                                 backgroundColor: "var(--light-color)",
                                                 border: "1px solid #000",
                                             },
+                                            "&:active": {
+                                                border: "1px solid #000",
+                                            },
                                             cursor: "pointer",
                                             transition: "all 0.2s",
                                         }}
@@ -544,6 +463,9 @@ const ProductFilters = ({
                                             height: "32px",
                                             "&:hover": {
                                                 backgroundColor: "var(--light-color)",
+                                                border: "1px solid #000",
+                                            },
+                                            "&:active": {
                                                 border: "1px solid #000",
                                             },
                                             cursor: "pointer",
