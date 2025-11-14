@@ -90,7 +90,7 @@ const ProductGrid = ({ selectedCategory }) => {
     }
 
     return (
-        <div className="w-full px-2.5 md:px-[120px] py-6 md:py-10">
+        <div className="w-full px-6 lg:px-[200px] py-6 md:py-10">
             <QuickViewModal
                 isOpen={quickViewOpen}
                 onClose={() => setQuickViewOpen(false)}
