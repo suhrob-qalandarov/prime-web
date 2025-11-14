@@ -18,6 +18,12 @@ const QuickViewModal = ({ isOpen, onClose, productId, products }) => {
     if (!product) return null
 
     const mainImage = product.attachmentKeys?.[0] || ""
+    // Handle both local paths (starting with "/") and API paths
+    const imageSrc = mainImage?.startsWith("/") 
+        ? mainImage 
+        : mainImage 
+            ? `${urls.apiBaseUrl}/v1/attachment/${mainImage}` 
+            : "/placeholder.svg?height=500&width=375"
     const hasDiscount = product.status === "SALE" && product.discount > 0
     const discountedPrice = hasDiscount ? Math.round(product.price * (1 - product.discount / 100)) : product.price
 
@@ -84,7 +90,7 @@ const QuickViewModal = ({ isOpen, onClose, productId, products }) => {
                     >
                         <Box
                             component="img"
-                            src={`${urls.apiBaseUrl}/v1/attachment/${mainImage}` || "/placeholder.svg?height=500&width=375"}
+                            src={imageSrc}
                             alt={product.name}
                             sx={{
                                 position: "absolute",
