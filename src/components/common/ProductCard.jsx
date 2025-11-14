@@ -101,7 +101,7 @@ const ProductCard = ({ product, onQuickView }) => {
             <div className="pt-2 transition-opacity duration-500" style={{ opacity: imageLoaded ? 1 : 0 }}>
                 <div className="flex flex-wrap items-end gap-x-2 gap-y-1 w-full">
                     <div className="flex items-center gap-1.5 flex-1 min-w-0">
-                        <div className="product-name text-[0.85rem] sm:text-base font-medium text-[var(--burgundy-dark)] leading-tight line-clamp-2 flex-1 min-w-0">
+                        <div className="product-name text-[0.85rem] sm:text-base font-semibold text-[var(--burgundy-dark)] leading-tight line-clamp-2 flex-1 min-w-0">
                             {product.name}
                         </div>
                         {product.color && (
@@ -113,19 +113,22 @@ const ProductCard = ({ product, onQuickView }) => {
                         )}
                     </div>
                     {product.brand && (
-                        <span className="text-[0.68rem] font-medium sm:font-semibold uppercase tracking-[0.08em] text-[#121212] whitespace-nowrap font-['Noto_Sans'] w-full sm:w-auto mt-1 sm:mt-0 text-left sm:text-right ml-0 sm:ml-auto self-start sm:self-end">
+                        <span className="sm:text-[0.68rem] text-[0.60rem] font-semibold uppercase tracking-[0.08em] text-[#121212] whitespace-nowrap font-['Noto_Sans'] w-full sm:w-auto mt-0 text-left sm:text-right ml-0 sm:ml-auto self-start sm:self-end">
                             {product.brand}
                         </span>
                     )}
                 </div>
 
-                <div className="price-row flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2 text-xs sm:text-sm text-[#525252] mt-1">
+                <div className="price-row flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2.5 text-xs sm:text-sm text-[#525252] mt-1">
                     <div className="flex items-baseline gap-2">
-                        <span className="font-semibold font-['Noto_Sans'] text-[#121212] text-xs sm:text-base lg:text-sm">{formatPrice(product.price)}</span>
+                        <span className="font-medium font-['Noto_Sans'] text-[#121212] text-xs sm:text-base lg:text-l tracking-wide">{formatPrice(product.price)}</span>
                         {product.discount > 0 && product.oldPrice && (
-                            <span className="line-through text-[#666666] text-xs sm:text-sm font-['Noto_Sans']">
-                                {formatPrice(product.oldPrice)}
-                            </span>
+                            <>
+                                <span className="line-through text-[#666666] l:text-l font-['Noto_Sans'] tracking-wide">
+                                    {formatPrice(product.oldPrice)}
+                                </span>
+                                <span className="hidden sm:inline-block w-2.5"></span>
+                            </>
                         )}
                     </div>
                     {product.discount > 0 && (
