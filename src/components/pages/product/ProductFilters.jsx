@@ -274,9 +274,6 @@ const ProductFilters = ({
                     zIndex: 1,
                 }}
             >
-                <div className="list flex items-center gap-3">
-                    <div className="w-px h-4 bg-line"></div>
-                </div>
                 <Box
                     sx={{
                         fontSize: isMobile ? "13px" : "14px",
@@ -290,6 +287,92 @@ const ProductFilters = ({
                         <>Tanlangan mezonlar bo'yicha mahsulotlar topilmadi</>
                     )}
                 </Box>
+                {(selectedStatus || selectedColors.length > 0 || selectedSizes.length > 0) && (
+                    <>
+                        <Box sx={{ display: "flex", alignItems: "center" }}>
+                            <Box 
+                                sx={{ 
+                                    width: "1px", 
+                                    height: "16px", 
+                                    backgroundColor: "#ddd" 
+                                }}
+                            />
+                        </Box>
+                        <Box sx={{ display: "flex", alignItems: "center", gap: 1, flexWrap: "wrap" }}>
+                            {selectedStatus && (
+                                <Chip
+                                    label={selectedStatus}
+                                    onDelete={() => onStatusChange(null)}
+                                    sx={{
+                                        backgroundColor: "var(--light-color)",
+                                        color: "#0033aa",
+                                        border: "1px solid #000",
+                                        fontWeight: 500,
+                                        fontSize: "12px",
+                                        height: "28px",
+                                        "& .MuiChip-deleteIcon": {
+                                            color: "#666",
+                                            fontSize: "16px",
+                                            "&:hover": {
+                                                color: "#000",
+                                            },
+                                        },
+                                    }}
+                                />
+                            )}
+                            {selectedColors.map((color) => (
+                                <Chip
+                                    key={color}
+                                    label={color}
+                                    onDelete={() => {
+                                        const newColors = selectedColors.filter(c => c !== color)
+                                        onColorChange(newColors)
+                                    }}
+                                    sx={{
+                                        backgroundColor: "var(--light-color)",
+                                        color: "#0033aa",
+                                        border: "1px solid #000",
+                                        fontWeight: 500,
+                                        fontSize: "12px",
+                                        height: "28px",
+                                        "& .MuiChip-deleteIcon": {
+                                            color: "#666",
+                                            fontSize: "16px",
+                                            "&:hover": {
+                                                color: "#000",
+                                            },
+                                        },
+                                    }}
+                                />
+                            ))}
+                            {selectedSizes.map((size) => (
+                                <Chip
+                                    key={size}
+                                    label={size}
+                                    onDelete={() => {
+                                        const newSizes = selectedSizes.filter(s => s !== size)
+                                        onSizeChange(newSizes)
+                                    }}
+                                    sx={{
+                                        backgroundColor: "var(--light-color)",
+                                        color: "#0033aa",
+                                        border: "1px solid #000",
+                                        fontWeight: 500,
+                                        fontSize: "12px",
+                                        height: "28px",
+                                        "& .MuiChip-deleteIcon": {
+                                            color: "#666",
+                                            fontSize: "16px",
+                                            "&:hover": {
+                                                color: "#000",
+                                            },
+                                        },
+                                    }}
+                                />
+                            ))}
+                        </Box>
+                    </>
+                )}
             </Box>
 
             {/* Filter Dropdown */}
