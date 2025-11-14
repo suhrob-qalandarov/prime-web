@@ -54,7 +54,6 @@ const Catalog = () => {
             <Stack
                 sx={{
                     backgroundColor: "#f0f0f0",
-                    marginTop: "64px",
                     width: "100%",
                     minHeight: "200px",
                     paddingBottom: "8px",
@@ -63,15 +62,15 @@ const Catalog = () => {
                 <Container>
                     <Stack
                         sx={{
-                            marginTop: "10",
+                            marginTop: { xs: "35px", sm: "45px" },
                             textAlign: "center",
                         }}
                     >
                         <Box
                             sx={{
                                 fontFamily: "Noto Sans, sans-serif",
-                                fontSize: "2.5rem",
-                                fontWeight: "700",
+                                fontSize: { xs: "1.35rem", sm: "2.5rem" },
+                                fontWeight: { xs: "600", sm: "700" },
                                 color: "#6b0f2a",
                                 marginBottom: "0px",
                                 textTransform: "none",
@@ -83,18 +82,31 @@ const Catalog = () => {
                         <Box
                             sx={{
                                 fontFamily: "Noto Sans, sans-serif",
-                                fontSize: "1.1rem",
+                                fontSize: { xs: "0.85rem", sm: "1.1rem" },
                                 fontWeight: "300",
                                 color: "#6b0f2a",
                                 marginBottom: "8px",
                                 letterSpacing: "1px",
                                 marginTop: "10px",
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                gap: "6px",
                             }}
                         >
-                            <Link to="/" className="breadcrumb-link">
+                            <Link to="/" className="breadcrumb-link" style={{ textDecoration: "none", color: "#6b0f2a" }}>
                                 Asosiy
                             </Link>
-                            <span className="breadcrumb-separator">/</span>
+                            <svg 
+                                xmlns="http://www.w3.org/2000/svg" 
+                                width="14" 
+                                height="14" 
+                                fill="var(--burgundy-dark)" 
+                                viewBox="0 0 256 256"
+                                style={{ flexShrink: 0 }}
+                            >
+                                <path d="M181.66,133.66l-80,80a8,8,0,0,1-11.32-11.32L164.69,128,90.34,53.66a8,8,0,0,1,11.32-11.32l80,80A8,8,0,0,1,181.66,133.66Z"></path>
+                            </svg>
                             <span className="breadcrumb-current">{selectedSpotlight ? selectedSpotlight.name : "Katalog"}</span>
                         </Box>
                     </Stack>
@@ -102,19 +114,22 @@ const Catalog = () => {
                         <Box
                             sx={{
                                 display: "flex",
-                                gap: 2,
+                                flexWrap: "nowrap",
+                                marginTop: { xs: "26px", sm: "30px" },
                                 marginBottom: "16px",
                                 paddingBottom: "10px",
+                                overflowX: "hidden",
+                                gap: "2px",
                             }}
                         >
-                            <Box sx={{ flex: 1 }}>
+                            <Box sx={{ flex: "1 1 0", minWidth: 0 }}>
                                 <SpotlightList
                                     spotlights={spotlights}
                                     spotlight={selectedSpotlight}
                                     isMobile={isMobile}
                                 />
                             </Box>
-                            <Box sx={{ flex: 1 }}>
+                            <Box sx={{ flex: "1 1 0", minWidth: 0 }}>
                                 <CategoriesList
                                     categories={categoriesData}
                                     onCategorySelect={handleCategorySelect}
