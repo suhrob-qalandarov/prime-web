@@ -363,11 +363,24 @@ const QuickViewModal = ({ isOpen, onClose, productId, products }) => {
                             }}
                         />
 
-                        <Box>
-                            <Typography sx={{ fontSize: "14px", fontWeight: 600, fontFamily: "Noto Sans", mb: 0 }}>
-                                Rang: <span style={{ fontWeight: 400 }}>{product.color}</span>
-                            </Typography>
-                        </Box>
+                        {/* Color Display */}
+                        {product.color && (
+                            <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                                <Typography sx={{ fontSize: "14px", fontWeight: 600, fontFamily: "Noto Sans", mb: 0 }}>
+                                    Rang:
+                                </Typography>
+                                <Box
+                                    sx={{
+                                        width: "24px",
+                                        height: "24px",
+                                        borderRadius: "50%",
+                                        backgroundColor: product.color,
+                                        border: "1px solid #e0e0e0",
+                                        flexShrink: 0,
+                                    }}
+                                />
+                            </Box>
+                        )}
 
                         {/* Size Selection */}
                         {availableSizes.length > 0 && (
