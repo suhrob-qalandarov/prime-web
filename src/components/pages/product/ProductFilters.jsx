@@ -487,7 +487,7 @@ const ProductFilters = ({
             </Box>
 
             {/* No products message - Below products count */}
-            {totalProducts === 0 && (
+            {totalProducts === 0 && (selectedStatus || selectedColors.length > 0 || selectedSizes.length > 0) && (
                 <Box
                     sx={{
                         fontSize: isMobile ? "13px" : "14px",

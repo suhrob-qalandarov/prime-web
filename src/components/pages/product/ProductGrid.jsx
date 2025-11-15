@@ -146,19 +146,17 @@ const ProductGrid = ({ selectedCategory }) => {
             />
 
             {/* Filters Section */}
-            {!loading && (
-                <ProductFilters
-                    totalProducts={filteredProducts.length}
-                    selectedStatus={selectedStatus}
-                    onStatusChange={setSelectedStatus}
-                    selectedSort={selectedSort}
-                    onSortChange={setSelectedSort}
-                    selectedColors={selectedColors}
-                    onColorChange={setSelectedColors}
-                    selectedSizes={selectedSizes}
-                    onSizeChange={setSelectedSizes}
-                />
-            )}
+            <ProductFilters
+                totalProducts={loading ? 0 : filteredProducts.length}
+                selectedStatus={selectedStatus}
+                onStatusChange={setSelectedStatus}
+                selectedSort={selectedSort}
+                onSortChange={setSelectedSort}
+                selectedColors={selectedColors}
+                onColorChange={setSelectedColors}
+                selectedSizes={selectedSizes}
+                onSizeChange={setSelectedSizes}
+            />
 
             {loading ? (
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 sm:gap-6 md:gap-8">
