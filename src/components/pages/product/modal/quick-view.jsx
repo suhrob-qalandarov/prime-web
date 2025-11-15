@@ -39,6 +39,12 @@ const PlusIcon = () => (
     </svg>
 )
 
+const CopyIcon = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor" viewBox="0 0 256 256">
+        <path d="M216,32H88a8,8,0,0,0-8,8V80H40a8,8,0,0,0-8,8V216a8,8,0,0,0,8,8H168a8,8,0,0,0,8-8V176h40a8,8,0,0,0,8-8V40A8,8,0,0,0,216,32Zm-8,128H176V88a8,8,0,0,0-8-8H96V48H208Z"></path>
+    </svg>
+)
+
 const QuickViewModal = ({ isOpen, onClose, productId, products }) => {
     const [product, setProduct] = useState(null)
     const [selectedSize, setSelectedSize] = useState(null)
@@ -527,28 +533,42 @@ const QuickViewModal = ({ isOpen, onClose, productId, products }) => {
                         )}
 
                         {/* Additional Actions */}
-                        <Box sx={{ display: "flex", flexDirection: "column", gap: 0.5, mt: 1 }}>
-                            <Button
-                                variant="text"
-                                fullWidth
-                                sx={{
-                                    color: "#666",
-                                    fontSize: "13px",
-                                    fontFamily: "Noto Sans",
-                                    textTransform: "none",
-                                    justifyContent: "flex-start",
-                                    textAlign: "left",
-                                    px: 0,
-                                    minWidth: "auto",
-                                    "&:hover": {
-                                        backgroundColor: "transparent",
-                                        textDecoration: "underline",
-                                    },
-                                }}
-                                onClick={handleCopyLink}
-                            >
-                                Kiyim havolasini nusxala!
-                            </Button>
+                        <Box sx={{ display: "flex", flexDirection: "column", gap: 0.5, mt: 0 }}>
+                            <Box sx={{ display: "flex", alignItems: "center", flexWrap: "wrap", gap: { xs: 8, lg: 20 }, gapY: 1 }}>
+                                <Box sx={{ display: "flex", alignItems: "center", gap: 1.5 }}>
+                                    <Box
+                                        onClick={handleCopyLink}
+                                        sx={{
+                                            width: { xs: "40px", md: "48px" },
+                                            height: { xs: "40px", md: "48px" },
+                                            display: "flex",
+                                            alignItems: "center",
+                                            justifyContent: "center",
+                                            border: "1px solid #e0e0e0",
+                                            borderRadius: "12px",
+                                            cursor: "pointer",
+                                            transition: "all 0.3s ease",
+                                            "&:hover": {
+                                                backgroundColor: "#000",
+                                                color: "#fff",
+                                            },
+                                        }}
+                                    >
+                                        <CopyIcon />
+                                    </Box>
+                                    <Typography
+                                        sx={{
+                                            fontFamily: "Noto Sans",
+                                            fontSize: "14px",
+                                            letterSpacing: "0.5px",
+                                            fontWeight: 700,
+                                            color: "#1a1a1a",
+                                        }}
+                                    >
+                                        Kiyim havolasini nusxala!
+                                    </Typography>
+                                </Box>
+                            </Box>
                             <Button
                                 variant="text"
                                 fullWidth
