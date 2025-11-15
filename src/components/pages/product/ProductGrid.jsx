@@ -50,7 +50,7 @@ const ProductGrid = ({ selectedCategory }) => {
                     description: product.description
                         ? product.description
                         : `${product.name} - ${product.brand} mahsuloti. Yuqori sifatli materialdan tayyorlangan.`,
-                    productSizes: [
+                    productSizes: product.sizes ? product.sizes : [
                         { size: "S", amount: 10 },
                         { size: "M", amount: 15 },
                         { size: "L", amount: 12 },
