@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react"
-import { useSearchParams, useNavigate, Link } from "react-router-dom"
+import { useSearchParams, useNavigate } from "react-router-dom"
 
 import { Stack, Container, Box, useMediaQuery } from "@mui/material"
 import { useTheme } from "@mui/material/styles"
 
 import CategoriesList from "./categories-list"
 import SpotlightList from "./spotlight-list"
+import PageHeader from "../../common/PageHeader"
 
 import { spotlights } from "../../../constants"
 import CategoryService from "../../../service/catalog"
@@ -49,67 +50,28 @@ const Catalog = () => {
         navigate(`?${spotlightParam}${categoryId ? `&category=${categoryId}` : ""}`)
     }
 
+    const pageTitle = selectedSpotlight ? selectedSpotlight.name : "Katalog"
+
     return (
         <Stack>
             <Stack
                 sx={{
                     backgroundColor: "#f0f0f0",
                     width: "100%",
-                    minHeight: "200px",
                     paddingBottom: "8px",
-                    paddingTop: { xs: "30px", sm: "96px", md: "96px", lg: "96px" },
                 }}
             >
                 <Container>
-                    <Stack
-                        sx={{
-                            textAlign: "center",
-                        }}
-                    >
-                        <Box
-                            sx={{
-                                fontFamily: "Noto Sans, sans-serif",
-                                fontSize: { xs: "1.35rem", sm: "2.5rem" },
-                                fontWeight: { xs: "600", sm: "700" },
-                                color: "#6b0f2a",
-                                marginBottom: "0px",
-                                textTransform: "none",
-                                letterSpacing: "1px",
-                            }}
-                        >
-                            {selectedSpotlight ? selectedSpotlight.name : "Katalog"}
-                        </Box>
-                        <Box
-                            sx={{
-                                fontFamily: "Noto Sans, sans-serif",
-                                fontSize: { xs: "0.85rem", sm: "1.1rem" },
-                                fontWeight: "300",
-                                color: "#6b0f2a",
-                                marginBottom: "8px",
-                                letterSpacing: "1px",
-                                marginTop: "10px",
-                                display: "flex",
-                                alignItems: "center",
-                                justifyContent: "center",
-                                gap: "6px",
-                            }}
-                        >
-                            <Link to="/" className="breadcrumb-link" style={{ textDecoration: "none", color: "#6b0f2a" }}>
-                                Asosiy
-                            </Link>
-                            <svg 
-                                xmlns="http://www.w3.org/2000/svg" 
-                                width="14" 
-                                height="14" 
-                                fill="var(--burgundy-dark)" 
-                                viewBox="0 0 256 256"
-                                style={{ flexShrink: 0 }}
-                            >
-                                <path d="M181.66,133.66l-80,80a8,8,0,0,1-11.32-11.32L164.69,128,90.34,53.66a8,8,0,0,1,11.32-11.32l80,80A8,8,0,0,1,181.66,133.66Z"></path>
-                            </svg>
-                            <span className="breadcrumb-current">{selectedSpotlight ? selectedSpotlight.name : "Katalog"}</span>
-                        </Box>
-                    </Stack>
+                    <PageHeader 
+                        title={pageTitle}
+                        breadcrumbItems={[
+                            { label: "Asosiy", to: "/" },
+                            { label: pageTitle, to: null }
+                        ]}
+                        showContainer={false}
+                        minHeight="100px"
+                        breadcrumbMarginBottom="0"
+                    />
                     {isMobile ? (
                         <Box
                             sx={{

@@ -1,25 +1,15 @@
 
 import './contact.css'
-import {Container, Stack} from "@mui/material";
+import { Stack } from "@mui/material";
+import PageHeader from "../../common/PageHeader";
 
 const Contact = () => {
     return (
         <Stack className="contact-page">
-            <Stack className="page-header">
-                <Container>
-                    <div className="page-header-content">
-                        <h1 className="page-title">Biz bilan bog'lanish</h1>
-                        <nav className="breadcrumb-nav">
-                            <a href="/" className="breadcrumb-link">Asosiy</a>
-                            <span className="breadcrumb-separator">/</span>
-                            <span className="breadcrumb-current">Kontaktlar</span>
-                        </nav>
-                    </div>
-                </Container>
-            </Stack>
+            <PageHeader title="Kontaktlar" />
 
             <Stack className="contact-info-section">
-                <Container>
+                <div className="container-custom">
                     <div className="row g-4">
                         <div className="col-lg-4 col-md-6">
                             <div className="contact-section">
@@ -55,7 +45,7 @@ const Contact = () => {
                             </div>
                         </div>
                     </div>
-                </Container>
+                </div>
             </Stack>
         </Stack>
     );
