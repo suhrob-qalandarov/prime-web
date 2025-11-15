@@ -277,6 +277,9 @@ export const mockProducts = [
         id: "1",
         name: "Shim QADAM",
         brand: "POLO",
+        description: "Uslub va qulaylikni birlashtirgan zamonaviy velvet shim! Ushbu oversize shim yuqori sifatli velvet " +
+            "(kordroy) matodan tikilgan bo‘lib, teriga yoqimli, bardoshli va zamonaviy ko‘rinishga ega. Har kuni kiyish " +
+            "uchun ideal, keng bichimi har qanday tana tuzilmasiga mos tushadi va erkin harakatlanish imkonini beradi.",
         category: "Shimlar",
         color: "#2563eb",
         price: 348000,
@@ -426,10 +429,17 @@ export const mockProducts = [
         id: "9",
         name: "Jordan Low Sky",
         brand: "AirBold",
+        description: "Jordan Low Sky - zamonaviy dizayn va qulaylikni birlashtirgan yuqori sifatli krassovkalar. Ushbu krassovkalar yuqori sifatli materialdan tayyorlangan bo'lib, kun davomida qulay kiyish uchun mo'ljallangan. Sport uslubi va ko'p qavatli poyabzal texnologiyasi bilan jihozlangan, har qanday kundalik yurish va yengil jismoniy faoliyat uchun ideal.",
         category: "Krassovkalar",
+        color: "#fafafa",
         price: 265000,
         oldPrice: 330000,
         discount: 20,
+        sizes: [
+            { size: "39", amount: 9 },
+            { size: "42", amount: 4 },
+            { size: "43", amount: 7 }
+        ],
         image: "/images/spotlights/shoes5.jpeg",
         images: [
             "/images/spotlights/shoes5.jpeg",
