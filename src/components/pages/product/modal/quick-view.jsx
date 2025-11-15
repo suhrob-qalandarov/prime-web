@@ -149,6 +149,7 @@ const QuickViewModal = ({ isOpen, onClose, productId, products }) => {
                         pl: { xs: 2, md: 3 },
                         pt: { xs: 2, md: 3 },
                         pb: { xs: 2, md: 3 },
+                        pr: { xs: 2, md: 0 },
                         flex: 1,
                         minHeight: 0,
                         overflow: "hidden",
