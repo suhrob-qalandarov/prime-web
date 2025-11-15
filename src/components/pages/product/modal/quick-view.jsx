@@ -313,7 +313,7 @@ const QuickViewModal = ({ isOpen, onClose, productId, products }) => {
                             </Typography>
                             {hasDiscount && (
                                 <>
-                                    <Box sx={{ display: "flex", alignItems: "center", mx: 1 }}>
+                                    <Box sx={{ display: "flex", alignItems: "center", mx: 0 }}>
                                         <SeparatorIcon sx={{ color: "#636262" }} />
                                     </Box>
                                     <Typography
