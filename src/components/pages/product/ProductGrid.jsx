@@ -42,6 +42,7 @@ const ProductGrid = ({ selectedCategory }) => {
                     name: product.name,
                     brand: product.brand,
                     categoryName: product.category,
+                    color: product.color,
                     price: originalPrice,
                     discount: product.discount || 0,
                     status: product.status,
