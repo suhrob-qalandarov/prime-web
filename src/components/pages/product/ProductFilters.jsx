@@ -23,23 +23,6 @@ const FilterIcon = () => (
     </svg>
 )
 
-const ChevronDownIcon = () => (
-    <svg 
-        xmlns="http://www.w3.org/2000/svg" 
-        width="24" 
-        height="24" 
-        viewBox="0 0 24 24" 
-        fill="none" 
-        stroke="currentColor" 
-        strokeWidth="2" 
-        strokeLinecap="round" 
-        strokeLinejoin="round"
-        style={{ height: "16px", width: "16px" }}
-    >
-        <path d="m6 9 6 6 6-6"></path>
-    </svg>
-)
-
 const ProductFilters = ({ 
     totalProducts, 
     selectedStatus, 
@@ -225,19 +208,21 @@ const ProductFilters = ({
                 <Box sx={{ display: "flex", alignItems: "center" }}>
                     <FormControl
                         sx={{
-                            width: isMobile ? "120px" : 180,
+                            minWidth: isMobile ? "150px" : "220px",
+                            width: "auto",
                             backgroundColor: "#fff",
                             borderRadius: "8px",
                             "& .MuiOutlinedInput-root": {
                                 borderRadius: "8px",
+                                height: isMobile ? "36px" : "40px",
                                 "& fieldset": {
                                     borderColor: "#ddd",
                                 },
                                 "&:hover fieldset": {
-                                    borderColor: "#bbb",
+                                    borderColor: "#ddd",
                                 },
                                 "&.Mui-focused fieldset": {
-                                    borderColor: "#333",
+                                    borderColor: "#ddd",
                                 },
                             },
                         }}
@@ -250,15 +235,18 @@ const ProductFilters = ({
                             }}
                             onOpen={() => setSortOpen(true)}
                             onClose={() => setSortOpen(false)}
-                            IconComponent={ChevronDownIcon}
+                            displayEmpty
                             sx={{
                                 fontSize: isMobile ? "13px" : "16px",
                                 fontFamily: "Noto Sans, sans-serif",
+                                height: isMobile ? "36px" : "40px",
                                 "& .MuiSelect-select": {
-                                    padding: isMobile ? "8px 28px 8px 12px" : "12px 36px 12px 16px",
+                                    padding: isMobile ? "6px 12px" : "8px 16px",
+                                    minWidth: "auto",
+                                    width: "auto",
                                 },
                                 "& .MuiSelect-icon": {
-                                    right: "8px",
+                                    display: "none",
                                 },
                             }}
                             MenuProps={{
@@ -284,7 +272,6 @@ const ProductFilters = ({
                         >
                             {sortOptions.map((option) => (
                                 <MenuItem key={option.value} value={option.value}>
-                                    {option.value === selectedSort && "✓ "}
                                     {option.label}
                                 </MenuItem>
                             ))}
