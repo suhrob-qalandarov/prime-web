@@ -209,6 +209,83 @@ const ProductFilters = ({
                     ))}
                 </Box>
 
+                {/* Sort dropdown - Desktop only, Right side */}
+                {!isMobile && (
+                    <Box sx={{ display: "flex", alignItems: "center", marginLeft: "auto" }}>
+                        <FormControl
+                            sx={{
+                                minWidth: "220px",
+                                width: "auto",
+                                backgroundColor: "#fff",
+                                borderRadius: "8px",
+                                "& .MuiOutlinedInput-root": {
+                                    borderRadius: "8px",
+                                    height: "40px",
+                                    "& fieldset": {
+                                        borderColor: "#ddd",
+                                    },
+                                    "&:hover fieldset": {
+                                        borderColor: "#ddd",
+                                    },
+                                    "&.Mui-focused fieldset": {
+                                        borderColor: "#ddd",
+                                    },
+                                },
+                            }}
+                        >
+                            <Select
+                                value={selectedSort}
+                                onChange={(e) => {
+                                    onSortChange(e.target.value)
+                                    setSortOpen(false)
+                                }}
+                                onOpen={() => setSortOpen(true)}
+                                onClose={() => setSortOpen(false)}
+                                displayEmpty
+                                sx={{
+                                    fontSize: "16px",
+                                    fontFamily: "Noto Sans, sans-serif",
+                                    height: "40px",
+                                    "& .MuiSelect-select": {
+                                        padding: "8px 16px",
+                                        minWidth: "auto",
+                                        width: "auto",
+                                    },
+                                    "& .MuiSelect-icon": {
+                                        display: "none",
+                                    },
+                                }}
+                                MenuProps={{
+                                    PaperProps: {
+                                        sx: {
+                                            borderRadius: "8px",
+                                            marginTop: "4px",
+                                            boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
+                                            "& .MuiMenuItem-root": {
+                                                fontFamily: "Noto Sans, sans-serif",
+                                                fontSize: "14px",
+                                                padding: "10px 16px",
+                                                "&.Mui-selected": {
+                                                    backgroundColor: "#f5f5f5",
+                                                    "&:hover": {
+                                                        backgroundColor: "#eee",
+                                                    },
+                                                },
+                                            },
+                                        },
+                                    },
+                                }}
+                            >
+                                {sortOptions.map((option) => (
+                                    <MenuItem key={option.value} value={option.value}>
+                                        {option.label}
+                                    </MenuItem>
+                                ))}
+                            </Select>
+                        </FormControl>
+                    </Box>
+                )}
+
             </Box>
 
             {/* Products count - Separate row below filter button */}
@@ -330,80 +407,82 @@ const ProductFilters = ({
                         )}
                     </Box>
 
-                    {/* Sort dropdown - Right side */}
-                    <Box sx={{ display: "flex", alignItems: "center" }}>
-                    <FormControl
-                        sx={{
-                            minWidth: isMobile ? "150px" : "220px",
-                            width: "auto",
-                            backgroundColor: "#fff",
-                            borderRadius: "8px",
-                            "& .MuiOutlinedInput-root": {
-                                borderRadius: "8px",
-                                height: isMobile ? "36px" : "40px",
-                                "& fieldset": {
-                                    borderColor: "#ddd",
-                                },
-                                "&:hover fieldset": {
-                                    borderColor: "#ddd",
-                                },
-                                "&.Mui-focused fieldset": {
-                                    borderColor: "#ddd",
-                                },
-                            },
-                        }}
-                    >
-                        <Select
-                            value={selectedSort}
-                            onChange={(e) => {
-                                onSortChange(e.target.value)
-                                setSortOpen(false)
-                            }}
-                            onOpen={() => setSortOpen(true)}
-                            onClose={() => setSortOpen(false)}
-                            displayEmpty
-                            sx={{
-                                fontSize: isMobile ? "13px" : "16px",
-                                fontFamily: "Noto Sans, sans-serif",
-                                height: isMobile ? "36px" : "40px",
-                                "& .MuiSelect-select": {
-                                    padding: isMobile ? "6px 12px" : "8px 16px",
-                                    minWidth: "auto",
+                    {/* Sort dropdown - Mobile only, Right side */}
+                    {isMobile && (
+                        <Box sx={{ display: "flex", alignItems: "center" }}>
+                            <FormControl
+                                sx={{
+                                    minWidth: "150px",
                                     width: "auto",
-                                },
-                                "& .MuiSelect-icon": {
-                                    display: "none",
-                                },
-                            }}
-                            MenuProps={{
-                                PaperProps: {
-                                    sx: {
+                                    backgroundColor: "#fff",
+                                    borderRadius: "8px",
+                                    "& .MuiOutlinedInput-root": {
                                         borderRadius: "8px",
-                                        marginTop: "4px",
-                                        boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
-                                        "& .MuiMenuItem-root": {
-                                            fontFamily: "Noto Sans, sans-serif",
-                                            fontSize: "14px",
-                                            padding: "10px 16px",
-                                            "&.Mui-selected": {
-                                                backgroundColor: "#f5f5f5",
-                                                "&:hover": {
-                                                    backgroundColor: "#eee",
+                                        height: "36px",
+                                        "& fieldset": {
+                                            borderColor: "#ddd",
+                                        },
+                                        "&:hover fieldset": {
+                                            borderColor: "#ddd",
+                                        },
+                                        "&.Mui-focused fieldset": {
+                                            borderColor: "#ddd",
+                                        },
+                                    },
+                                }}
+                            >
+                                <Select
+                                    value={selectedSort}
+                                    onChange={(e) => {
+                                        onSortChange(e.target.value)
+                                        setSortOpen(false)
+                                    }}
+                                    onOpen={() => setSortOpen(true)}
+                                    onClose={() => setSortOpen(false)}
+                                    displayEmpty
+                                    sx={{
+                                        fontSize: "13px",
+                                        fontFamily: "Noto Sans, sans-serif",
+                                        height: "36px",
+                                        "& .MuiSelect-select": {
+                                            padding: "6px 12px",
+                                            minWidth: "auto",
+                                            width: "auto",
+                                        },
+                                        "& .MuiSelect-icon": {
+                                            display: "none",
+                                        },
+                                    }}
+                                    MenuProps={{
+                                        PaperProps: {
+                                            sx: {
+                                                borderRadius: "8px",
+                                                marginTop: "4px",
+                                                boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
+                                                "& .MuiMenuItem-root": {
+                                                    fontFamily: "Noto Sans, sans-serif",
+                                                    fontSize: "14px",
+                                                    padding: "10px 16px",
+                                                    "&.Mui-selected": {
+                                                        backgroundColor: "#f5f5f5",
+                                                        "&:hover": {
+                                                            backgroundColor: "#eee",
+                                                        },
+                                                    },
                                                 },
                                             },
                                         },
-                                    },
-                                },
-                            }}
-                        >
-                            {sortOptions.map((option) => (
-                                <MenuItem key={option.value} value={option.value}>
-                                    {option.label}
-                                </MenuItem>
-                            ))}
-                        </Select>
-                    </FormControl>
-                    </Box>
+                                    }}
+                                >
+                                    {sortOptions.map((option) => (
+                                        <MenuItem key={option.value} value={option.value}>
+                                            {option.label}
+                                        </MenuItem>
+                                    ))}
+                                </Select>
+                            </FormControl>
+                        </Box>
+                    )}
                 </Box>
             </Box>
 
