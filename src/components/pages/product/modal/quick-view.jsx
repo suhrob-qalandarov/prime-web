@@ -61,6 +61,12 @@ const QuickViewModal = ({ isOpen, onClose, productId, products }) => {
     const [product, setProduct] = useState(null)
     const [selectedSize, setSelectedSize] = useState(null)
     const [quantity, setQuantity] = useState(1)
+    const [currentSlideIndex, setCurrentSlideIndex] = useState(0)
+    const [touchStart, setTouchStart] = useState(null)
+    const [touchEnd, setTouchEnd] = useState(null)
+
+    // Minimum swipe distance (in pixels)
+    const minSwipeDistance = 50
 
     useEffect(() => {
         if (productId && products) {
@@ -74,8 +80,38 @@ const QuickViewModal = ({ isOpen, onClose, productId, products }) => {
                 }
             }
             setQuantity(1)
+            setCurrentSlideIndex(0) // Reset slide index when product changes
         }
     }, [productId, products])
+
+    const onTouchStartHandler = (e) => {
+        setTouchEnd(null)
+        setTouchStart(e.targetTouches[0].clientX)
+    }
+
+    const onTouchMoveHandler = (e) => {
+        setTouchEnd(e.targetTouches[0].clientX)
+    }
+
+    const onTouchEndHandler = () => {
+        if (!touchStart || !touchEnd) return
+
+        const distance = touchStart - touchEnd
+        const isLeftSwipe = distance > minSwipeDistance
+        const isRightSwipe = distance < -minSwipeDistance
+
+        if (isLeftSwipe) {
+            // Swipe left - go to next slide
+            const totalSlides = Math.max(1, (product?.attachmentKeys || []).length - 1)
+            setCurrentSlideIndex((prev) => Math.min(prev + 1, totalSlides - 1))
+        } else if (isRightSwipe) {
+            // Swipe right - go to previous slide
+            setCurrentSlideIndex((prev) => Math.max(prev - 1, 0))
+        }
+
+        setTouchStart(null)
+        setTouchEnd(null)
+    }
 
     if (!product) return null
 
@@ -222,79 +258,131 @@ const QuickViewModal = ({ isOpen, onClose, productId, products }) => {
                                 p: 2,
                             }}
                         >
-                            {/* Mobile: Images - Horizontal */}
-                            <Box
-                                sx={{
-                                    display: "flex",
-                                    flexDirection: "row",
-                                    gap: 1,
-                                    overflowX: "auto",
-                                    overflowY: "hidden",
-                                    width: "100%",
-                                    scrollbarWidth: "none",
-                                    msOverflowStyle: "none",
-                                    "&::-webkit-scrollbar": {
-                                        display: "none",
-                                    },
-                                    WebkitOverflowScrolling: "touch",
-                                }}
-                            >
-                                {allImages.length > 0 ? (
-                                    allImages.map((imageKey, index) => (
-                                        <Box
-                                            key={index}
-                                            sx={{
-                                                position: "relative",
-                                                width: "calc(50% - 4px)",
-                                                minWidth: "calc(50% - 4px)",
-                                                paddingTop: "66.67%",
-                                                overflow: "hidden",
-                                                borderRadius: "18px",
-                                                backgroundColor: "#f5f5f5",
-                                                flexShrink: 0,
-                                            }}
-                                        >
-                                            <Box
-                                                component="img"
-                                                src={getImageUrl(imageKey)}
-                                                alt={`${product.name} - ${index + 1}`}
-                                                sx={{
-                                                    position: "absolute",
-                                                    top: 0,
-                                                    left: 0,
-                                                    width: "100%",
-                                                    height: "100%",
-                                                    objectFit: "cover",
-                                                }}
-                                            />
-                                        </Box>
-                                    ))
-                                ) : (
+                            {/* Mobile: Images - Horizontal Carousel */}
+                            <Box sx={{ position: "relative", width: "100%" }}>
+                                <Box
+                                    onTouchStart={onTouchStartHandler}
+                                    onTouchMove={onTouchMoveHandler}
+                                    onTouchEnd={onTouchEndHandler}
+                                    sx={{
+                                        display: "flex",
+                                        flexDirection: "row",
+                                        gap: 1,
+                                        overflow: "hidden",
+                                        width: "100%",
+                                        position: "relative",
+                                        touchAction: "pan-x pan-y",
+                                    }}
+                                >
                                     <Box
                                         sx={{
-                                            position: "relative",
-                                            width: "100%",
-                                            paddingTop: "133.33%",
-                                            overflow: "hidden",
-                                            borderRadius: "12px",
-                                            backgroundColor: "#f5f5f5",
+                                            display: "flex",
+                                            flexDirection: "row",
+                                            gap: 1,
+                                            transform: `translateX(-${currentSlideIndex * 50}%)`,
+                                            transition: "transform 0.3s ease-in-out",
+                                            width: `${allImages.length * 50 + (allImages.length - 1) * 2}%`,
                                         }}
                                     >
-                                        <Box
-                                            component="img"
-                                            src="/placeholder.svg?height=500&width=375"
-                                            alt={product.name}
-                                            sx={{
-                                                position: "absolute",
-                                                top: 0,
-                                                left: 0,
-                                                width: "100%",
-                                                height: "100%",
-                                                objectFit: "cover",
-                                            }}
-                                        />
+                                        {allImages.length > 0 ? (
+                                            allImages.map((imageKey, index) => (
+                                                <Box
+                                                    key={index}
+                                                    sx={{
+                                                        position: "relative",
+                                                        width: "calc(50% - 4px)",
+                                                        minWidth: "calc(50% - 4px)",
+                                                        paddingTop: "66.67%",
+                                                        overflow: "hidden",
+                                                        borderRadius: "18px",
+                                                        backgroundColor: "#f5f5f5",
+                                                        flexShrink: 0,
+                                                    }}
+                                                >
+                                                    <Box
+                                                        component="img"
+                                                        src={getImageUrl(imageKey)}
+                                                        alt={`${product.name} - ${index + 1}`}
+                    sx={{
+                        position: "absolute",
+                                                            top: 0,
+                                                            left: 0,
+                                                            width: "100%",
+                                                            height: "100%",
+                                                            objectFit: "cover",
+                                                        }}
+                                                    />
+                                                </Box>
+                                            ))
+                                        ) : (
+                                            <Box
+                                                sx={{
+                                                    position: "relative",
+                                                    width: "100%",
+                                                    paddingTop: "133.33%",
+                                                    overflow: "hidden",
+                                                    borderRadius: "12px",
+                        backgroundColor: "#f5f5f5",
+                                                }}
+                                            >
+                                                <Box
+                                                    component="img"
+                                                    src="/placeholder.svg?height=500&width=375"
+                                                    alt={product.name}
+                                                    sx={{
+                                                        position: "absolute",
+                                                        top: 0,
+                                                        left: 0,
+                                                        width: "100%",
+                                                        height: "100%",
+                                                        objectFit: "cover",
+                                                    }}
+                                                />
+                                            </Box>
+                                        )}
                                     </Box>
-                                )}
+                                </Box>
+
+                                {/* Navigation Dots */}
+                                {allImages.length > 0 && (() => {
+                                    const totalSlides = Math.max(1, allImages.length - 1)
+                                    return (
+                                        <Box
+                                            sx={{
+                                                display: "flex",
+                                                justifyContent: "center",
+                                                alignItems: "center",
+                                                gap: 0.5,
+                                                mt: 1.5,
+                                                mb: -0.5,
+                                                position: "relative",
+                                                width: "100%",
+                                                zIndex: 1,
+                                            }}
+                                        >
+                                            {Array.from({ length: totalSlides }, (_, index) => (
+                                                <Box
+                                                    key={index}
+                                                    onClick={() => setCurrentSlideIndex(index)}
+                                                    className={currentSlideIndex === index ? "swiper-pagination-bullet swiper-pagination-bullet-active" : "swiper-pagination-bullet"}
+                                                    sx={{
+                                                        width: "8px",
+                                                        height: "8px",
+                                                        borderRadius: "50%",
+                                                        backgroundColor: currentSlideIndex === index ? "#000" : "rgba(0, 0, 0, 0.2)",
+                                                        cursor: "pointer",
+                                                        transition: "background-color 0.2s ease, opacity 0.2s ease",
+                                                        flexShrink: 0,
+                                                        opacity: currentSlideIndex === index ? 1 : 0.5,
+                        "&:hover": {
+                                                            opacity: 1,
+                                                        },
+                                                    }}
+                                                />
+                                            ))}
+                                        </Box>
+                                    )
+                                })()}
                             </Box>
 
                             {/* Mobile: Product Details - Same as Desktop but without scroll wrapper */}
