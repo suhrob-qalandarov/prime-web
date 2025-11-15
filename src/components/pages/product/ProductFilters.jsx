@@ -214,7 +214,7 @@ const ProductFilters = ({
             {/* Products count - Separate row below filter button */}
             <Box 
                 sx={{ 
-                    mt: 2,
+                    mt: 0.5,
                     mb: filterOpen ? 2 : 0,
                     position: "relative",
                     zIndex: 1,
