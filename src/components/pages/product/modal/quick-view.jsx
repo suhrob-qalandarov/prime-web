@@ -384,9 +384,14 @@ const QuickViewModal = ({ isOpen, onClose, productId, products }) => {
 
                         {/* Size Selection */}
                         {availableSizes.length > 0 && (
-                            <Box>
+                            <Box sx={{mb: -2 }}>
                                 <Typography sx={{ fontSize: "14px", fontFamily: "Noto Sans", fontWeight: 600, mb: 1 }}>
-                                    O'lcham: {selectedSize ? selectedSize.size : ""}
+                                    O'lcham:{" "}
+                                    {selectedSize && (
+                                        <span style={{ fontSize: "20px", fontWeight: 400, marginLeft: 2 }}>
+                                            {selectedSize.size}
+                                        </span>
+                                    )}
                                 </Typography>
                                 <Box sx={{ display: "flex", gap: 1, flexWrap: "wrap", mt: 1 }}>
                                     {availableSizes.map((size, index) => (
@@ -418,14 +423,20 @@ const QuickViewModal = ({ isOpen, onClose, productId, products }) => {
 
                         {/* Quantity Selector and Add to Cart */}
                         {selectedSize && (
-                            <Box sx={{
-                                display: "flex",
-                                alignItems: "center",
-                                flexWrap: { xs: "wrap", lg: "nowrap" },
-                                gap: { xs: 2, lg: 3 }, mt: 3 }}
-                            >
-                                {/* Quantity Selector */}
-                                <Box
+                            <Box sx={{ mt: 3 }}>
+                                {/* Miqdori Label */}
+                                <Typography sx={{ fontSize: "14px", fontFamily: "Noto Sans", fontWeight: 600, mb: 1 }}>
+                                    Miqdori:
+                                </Typography>
+                                
+                                <Box sx={{
+                                    display: "flex",
+                                    alignItems: "center",
+                                    flexWrap: { xs: "wrap", lg: "nowrap" },
+                                    gap: { xs: 2, lg: 3 },
+                                }}>
+                                    {/* Quantity Selector */}
+                                    <Box
                                     sx={{
                                         display: "flex",
                                         alignItems: "center",
@@ -508,6 +519,7 @@ const QuickViewModal = ({ isOpen, onClose, productId, products }) => {
                                 >
                                     Savatga
                                 </Button>
+                                </Box>
                             </Box>
                         )}
 
