@@ -45,6 +45,18 @@ const CopyIcon = () => (
     </svg>
 )
 
+const QuestionIcon = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 256 256">
+        <path d="M140,180a12,12,0,1,1-12-12A12,12,0,0,1,140,180ZM128,72c-22.06,0-40,16.15-40,36v4a8,8,0,0,0,16,0v-4c0-11,10.77-20,24-20s24,9,24,20-10.77,20-24,20a8,8,0,0,0-8,8v8a8,8,0,0,0,16,0v-.72c18.24-3.35,32-17.9,32-35.28C168,88.15,150.06,72,128,72Zm104,56A104,104,0,1,1,128,24,104.11,104.11,0,0,1,232,128Zm-16,0a88,88,0,1,0-88,88A88.1,88.1,0,0,0,216,128Z"></path>
+    </svg>
+)
+
+const EyeIcon = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 256 256">
+        <path d="M247.31,124.76c-.35-.79-8.82-19.58-27.65-38.41C194.57,61.26,162.88,48,128,48S61.43,61.26,36.34,86.35C17.51,105.18,9,124,8.69,124.76a8,8,0,0,0,0,6.5c.35.79,8.82,19.57,27.65,38.4C61.43,194.74,93.12,208,128,208s66.57-13.26,91.66-38.34c18.83-18.83,27.3-37.61,27.65-38.4A8,8,0,0,0,247.31,124.76ZM128,192c-30.78,0-57.67-11.19-79.93-33.25A133.47,133.47,0,0,1,25,128,133.33,133.33,0,0,1,48.07,97.25C70.33,75.19,97.22,64,128,64s57.67,11.19,79.93,33.25A133.46,133.46,0,0,1,231.05,128C223.84,141.46,192.43,192,128,192Zm0-112a48,48,0,1,0,48,48A48.05,48.05,0,0,0,128,80Zm0,80a32,32,0,1,1,32-32A32,32,0,0,1,128,160Z"></path>
+    </svg>
+)
+
 const QuickViewModal = ({ isOpen, onClose, productId, products }) => {
     const [product, setProduct] = useState(null)
     const [selectedSize, setSelectedSize] = useState(null)
@@ -569,52 +581,86 @@ const QuickViewModal = ({ isOpen, onClose, productId, products }) => {
                                     </Typography>
                                 </Box>
                             </Box>
-                            <Button
-                                variant="text"
-                                fullWidth
-                                sx={{
-                                    color: "#666",
-                                    fontSize: "13px",
-                                    fontFamily: "Noto Sans",
-                                    textTransform: "none",
-                                    justifyContent: "flex-start",
-                                    textAlign: "left",
-                                    px: 0,
-                                    minWidth: "auto",
-                                    "&:hover": {
-                                        backgroundColor: "transparent",
-                                        textDecoration: "underline",
-                                    },
-                                }}
-                            >
-                                Savol Berish
-                            </Button>
                         </Box>
 
-                        {/* View Count */}
-                        <Typography
-                            sx={{
-                                fontSize: "12px",
-                                fontFamily: "Noto Sans",
-                                color: "#999",
-                                mt: 1,
-                            }}
-                        >
-                            6 kishi mahsulotni hozir ko'rmoqda!
-                        </Typography>
+                        {/* More Info */}
+                        <Box sx={{ mt: 1 }}>
+                            <Box sx={{ display: "flex", alignItems: "center", gap: 2, flexWrap: "wrap" }}>
+                                {/* Savol Berish */}
+                                <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
+                                    <QuestionIcon />
+                                    <Box
+                                        component="a"
+                                        href="https://t.me/prime77uz_bot"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        sx={{
+                                            fontFamily: "Noto Sans",
+                                            fontSize: "16px",
+                                            fontWeight: 600,
+                                            color: "#1a1a1a",
+                                            textDecoration: "none",
+                                            "&:hover": {
+                                                textDecoration: "underline",
+                                            },
+                                        }}
+                                    >
+                                        Savol berish
+                                    </Box>
+                                </Box>
+                            </Box>
 
-                        {/* Category Label */}
-                        {product.categoryName && (
-                            <Typography
-                                sx={{
-                                    fontSize: "12px",
-                                    fontFamily: "Noto Sans",
-                                    color: "#666",
-                                }}
-                            >
-                                Kategoriya: {product.categoryName}
-                            </Typography>
-                        )}
+                            {/* View Count */}
+                            <Box sx={{ display: "flex", alignItems: "center", flexWrap: "wrap", gap: 0.5, mt: 2 }}>
+                                <EyeIcon />
+                                <Typography
+                                    sx={{
+                                        fontFamily: "Noto Sans",
+                                        fontSize: "15px",
+                                        letterSpacing: "0.5px",
+                                        fontWeight: 600,
+                                        color: "#1a1a1a",
+                                    }}
+                                >
+                                    10
+                                </Typography>
+                                <Typography
+                                    sx={{
+                                        fontFamily: "Noto Sans",
+                                        fontSize: "14px",
+                                        letterSpacing: "0.5px",
+                                        color: "#666",
+                                    }}
+                                >
+                                    kishi mahsulotni hozir ko'rmoqda!
+                                </Typography>
+                            </Box>
+
+                            {/* Category Label */}
+                            {product.categoryName && (
+                                <Box sx={{ display: "flex", alignItems: "center", gap: 0.5, mt: 2 }}>
+                                    <Typography
+                                        sx={{
+                                            fontFamily: "Noto Sans",
+                                            fontSize: "15px",
+                                            fontWeight: 600,
+                                            color: "#1a1a1a",
+                                        }}
+                                    >
+                                        Kategoriya:
+                                    </Typography>
+                                    <Typography
+                                        sx={{
+                                            fontFamily: "Noto Sans",
+                                            fontSize: "15px",
+                                            color: "#666",
+                                        }}
+                                    >
+                                        {product.categoryName}
+                                    </Typography>
+                                </Box>
+                            )}
+                        </Box>
                     </Box>
                 </Box>
             </Box>
