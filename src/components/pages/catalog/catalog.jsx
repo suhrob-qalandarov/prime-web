@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react"
-import { useSearchParams, useNavigate, Link } from "react-router-dom"
+import { useSearchParams, useNavigate } from "react-router-dom"
 
 import { Stack, Container, Box, useMediaQuery } from "@mui/material"
 import { useTheme } from "@mui/material/styles"
 
 import CategoriesList from "./categories-list"
 import SpotlightList from "./spotlight-list"
+import PageHeader from "../../common/PageHeader"
 
 import { spotlights } from "../../../constants"
 import CategoryService from "../../../service/catalog"
@@ -49,72 +50,48 @@ const Catalog = () => {
         navigate(`?${spotlightParam}${categoryId ? `&category=${categoryId}` : ""}`)
     }
 
+    const pageTitle = selectedSpotlight ? selectedSpotlight.name : "Katalog"
+
     return (
         <Stack>
             <Stack
                 sx={{
                     backgroundColor: "#f0f0f0",
-                    marginTop: "64px",
                     width: "100%",
-                    minHeight: "200px",
                     paddingBottom: "8px",
                 }}
             >
                 <Container>
-                    <Stack
-                        sx={{
-                            marginTop: "10",
-                            textAlign: "center",
-                        }}
-                    >
-                        <Box
-                            sx={{
-                                fontFamily: "Noto Sans, sans-serif",
-                                fontSize: "2.5rem",
-                                fontWeight: "700",
-                                color: "#6b0f2a",
-                                marginBottom: "0px",
-                                textTransform: "none",
-                                letterSpacing: "1px",
-                            }}
-                        >
-                            {selectedSpotlight ? selectedSpotlight.name : "Katalog"}
-                        </Box>
-                        <Box
-                            sx={{
-                                fontFamily: "Noto Sans, sans-serif",
-                                fontSize: "1.1rem",
-                                fontWeight: "300",
-                                color: "#6b0f2a",
-                                marginBottom: "8px",
-                                letterSpacing: "1px",
-                                marginTop: "10px",
-                            }}
-                        >
-                            <Link to="/" className="breadcrumb-link">
-                                Asosiy
-                            </Link>
-                            <span className="breadcrumb-separator">/</span>
-                            <span className="breadcrumb-current">{selectedSpotlight ? selectedSpotlight.name : "Katalog"}</span>
-                        </Box>
-                    </Stack>
+                    <PageHeader 
+                        title={pageTitle}
+                        breadcrumbItems={[
+                            { label: "Asosiy", to: "/" },
+                            { label: pageTitle, to: null }
+                        ]}
+                        showContainer={false}
+                        minHeight="100px"
+                        breadcrumbMarginBottom="0"
+                    />
                     {isMobile ? (
                         <Box
                             sx={{
                                 display: "flex",
-                                gap: 2,
+                                flexWrap: "nowrap",
+                                marginTop: { xs: "26px", sm: "30px" },
                                 marginBottom: "16px",
                                 paddingBottom: "10px",
+                                overflowX: "hidden",
+                                gap: "2px",
                             }}
                         >
-                            <Box sx={{ flex: 1 }}>
+                            <Box sx={{ flex: "1 1 0", minWidth: 0 }}>
                                 <SpotlightList
                                     spotlights={spotlights}
                                     spotlight={selectedSpotlight}
                                     isMobile={isMobile}
                                 />
                             </Box>
-                            <Box sx={{ flex: 1 }}>
+                            <Box sx={{ flex: "1 1 0", minWidth: 0 }}>
                                 <CategoriesList
                                     categories={categoriesData}
                                     onCategorySelect={handleCategorySelect}

@@ -1,23 +1,13 @@
 import './about-us.css'
 import { Stack } from "@mui/material";
+import PageHeader from "../../common/PageHeader";
 
 const AboutUs = () => {
     return (
         <Stack className="about-page">
 
             {/* Page Header */}
-            <section className="page-header">
-                <div className="container-custom">
-                    <div className="page-header-content">
-                        <h1 className="page-title">Biz haqimizda</h1>
-                        <nav className="breadcrumb-nav">
-                            <a href="/" className="breadcrumb-link">Asosiy</a>
-                            <span className="breadcrumb-separator">/</span>
-                            <span className="breadcrumb-current">Biz haqimizda</span>
-                        </nav>
-                    </div>
-                </div>
-            </section>
+            <PageHeader title="Biz haqimizda" />
 
             {/* Hero Section */}
             <section className="about-hero">
