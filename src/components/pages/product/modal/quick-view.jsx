@@ -1,34 +1,62 @@
-"use client"
-
 import { useState, useEffect } from "react"
-import { Modal, Box, Typography, Chip, IconButton } from "@mui/material"
+import { Modal, Box, Typography, Chip, IconButton, Button } from "@mui/material"
 import CloseIcon from "@mui/icons-material/Close"
+import RemoveIcon from "@mui/icons-material/Remove"
+import AddIcon from "@mui/icons-material/Add"
 import urls from "../../../../constants/urls"
 
 const QuickViewModal = ({ isOpen, onClose, productId, products }) => {
     const [product, setProduct] = useState(null)
+    const [selectedSize, setSelectedSize] = useState(null)
+    const [quantity, setQuantity] = useState(1)
 
     useEffect(() => {
         if (productId && products) {
             const foundProduct = products.find((p) => p.id === productId)
             setProduct(foundProduct)
+            // Set default size (first available size)
+            if (foundProduct?.productSizes && foundProduct.productSizes.length > 0) {
+                const availableSizes = foundProduct.productSizes.filter((size) => size.amount > 0)
+                if (availableSizes.length > 0) {
+                    setSelectedSize(availableSizes[0])
+                }
+            }
+            setQuantity(1)
         }
     }, [productId, products])
 
     if (!product) return null
 
-    const mainImage = product.attachmentKeys?.[0] || ""
-    // Handle both local paths (starting with "/") and API paths
-    const imageSrc = mainImage?.startsWith("/") 
-        ? mainImage 
-        : mainImage 
-            ? `${urls.apiBaseUrl}/v1/attachment/${mainImage}` 
-            : "/placeholder.svg?height=500&width=375"
+    // Get all product images
+    const allImages = product.attachmentKeys || []
+    
+    // Helper function to get image URL
+    const getImageUrl = (imageKey) => {
+        if (!imageKey) return "/placeholder.svg?height=500&width=375"
+        return imageKey?.startsWith("/") 
+            ? imageKey 
+            : `${urls.apiBaseUrl}/v1/attachment/${imageKey}`
+    }
+
     const hasDiscount = product.status === "SALE" && product.discount > 0
     const discountedPrice = hasDiscount ? Math.round(product.price * (1 - product.discount / 100)) : product.price
 
     const formatPrice = (price) => {
-        return new Intl.NumberFormat("uz-UZ").format(price) + " UZS"
+        return new Intl.NumberFormat("uz-UZ").format(price)
+    }
+
+    const availableSizes = product.productSizes?.filter((size) => size.amount > 0) || []
+    const maxQuantity = selectedSize ? selectedSize.amount : 0
+
+    const handleQuantityChange = (delta) => {
+        const newQuantity = Math.max(1, Math.min(maxQuantity, quantity + delta))
+        setQuantity(newQuantity)
+    }
+
+    const handleCopyLink = () => {
+        const url = window.location.href
+        navigator.clipboard.writeText(url)
+        // You can add a toast notification here
     }
 
     return (
@@ -37,30 +65,38 @@ const QuickViewModal = ({ isOpen, onClose, productId, products }) => {
             onClose={onClose}
             sx={{
                 display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
+                alignItems: { xs: "center", md: "flex-start" },
+                justifyContent: { xs: "center", md: "flex-end" },
+                pt: { xs: 1, md: 1 },
+                pb: { xs: 1, md: 1 },
+                pr: { xs: 1, md: 1.2 },
+                pl: { xs: 1, md: 1 },
             }}
         >
             <Box
                 sx={{
                     position: "relative",
                     backgroundColor: "white",
-                    borderRadius: "16px",
-                    maxWidth: "900px",
-                    width: "90%",
-                    maxHeight: "90vh",
-                    overflow: "auto",
-                    p: { xs: 2, md: 4 },
+                    borderRadius: "30px",
+                    maxWidth: "860px",
+                    width: "100%",
+                    maxHeight: { xs: "90vh", md: "96.5vh" },
+                    display: "flex",
+                    flexDirection: "column",
                     boxShadow: "0 10px 40px rgba(0,0,0,0.3)",
+                    mt: { xs: 0, md: 1 },
+                    mb: { xs: 0, md: 1 },
+                    mr: { xs: 0, md: 1 },
                 }}
             >
+                {/* Close Button */}
                 <IconButton
                     onClick={onClose}
                     sx={{
                         position: "absolute",
-                        top: 16,
-                        right: 16,
-                        zIndex: 10,
+                        top: 10,
+                        right: 12,
+                        zIndex: 8,
                         backgroundColor: "#f5f5f5",
                         "&:hover": {
                             backgroundColor: "#e0e0e0",
@@ -73,53 +109,134 @@ const QuickViewModal = ({ isOpen, onClose, productId, products }) => {
                 <Box
                     sx={{
                         display: "grid",
-                        gridTemplateColumns: { xs: "1fr", md: "1fr 1fr" },
-                        gap: { xs: 2, md: 3 },
+                        gridTemplateColumns: { xs: "1fr", md: "360px 1fr" },
+                        gap: { xs: 2, md: 2 },
+                        p: { xs: 2, md: 3 },
+                        flex: 1,
+                        minHeight: 0,
+                        overflow: "hidden",
                     }}
                 >
-                    {/* Product Image */}
-                    <Box
-                        sx={{
-                            position: "relative",
-                            width: "100%",
-                            paddingTop: "133.33%",
-                            overflow: "hidden",
-                            borderRadius: "12px",
-                            backgroundColor: "#f5f5f5",
-                        }}
-                    >
-                        <Box
-                            component="img"
-                            src={imageSrc}
-                            alt={product.name}
-                            sx={{
-                                position: "absolute",
-                                top: 0,
-                                left: 0,
-                                width: "100%",
-                                height: "100%",
-                                objectFit: "cover",
-                            }}
-                        />
-                    </Box>
-
-                    {/* Product Details */}
+                    {/* Left Side - Product Images */}
                     <Box
                         sx={{
                             display: "flex",
                             flexDirection: "column",
-                            gap: { xs: 1.5, md: 2 },
+                            gap: 3,
+                            overflowY: "auto",
+                            overflowX: "hidden",
+                            pr: 0,
+                            "&::-webkit-scrollbar": {
+                                width: "6px",
+                            },
+                            "&::-webkit-scrollbar-track": {
+                                backgroundColor: "#f5f5f5",
+                                borderRadius: "3px",
+                            },
+                            "&::-webkit-scrollbar-thumb": {
+                                backgroundColor: "#ccc",
+                                borderRadius: "3px",
+                                "&:hover": {
+                                    backgroundColor: "#999",
+                                },
+                            },
                         }}
                     >
-                        {/* Title */}
+                        {/* All Product Images */}
+                        {allImages.length > 0 ? (
+                            allImages.map((imageKey, index) => (
+                                <Box
+                                    key={index}
+                                    sx={{
+                                        position: "relative",
+                                        width: "100%",
+                                        paddingTop: "133.33%",
+                                        overflow: "hidden",
+                                        borderRadius: "18px",
+                                        backgroundColor: "#f5f5f5",
+                                        flexShrink: 0,
+                                    }}
+                                >
+                                    <Box
+                                        component="img"
+                                        src={getImageUrl(imageKey)}
+                                        alt={`${product.name} - ${index + 1}`}
+                                        sx={{
+                                            position: "absolute",
+                                            top: 0,
+                                            left: 0,
+                                            width: "100%",
+                                            height: "100%",
+                                            objectFit: "cover",
+                                        }}
+                                    />
+                                </Box>
+                            ))
+                        ) : (
+                            <Box
+                                sx={{
+                                    position: "relative",
+                                    width: "100%",
+                                    paddingTop: "133.33%",
+                                    overflow: "hidden",
+                                    borderRadius: "12px",
+                                    backgroundColor: "#f5f5f5",
+                                }}
+                            >
+                                <Box
+                                    component="img"
+                                    src="/placeholder.svg?height=500&width=375"
+                                    alt={product.name}
+                                    sx={{
+                                        position: "absolute",
+                                        top: 0,
+                                        left: 0,
+                                        width: "100%",
+                                        height: "100%",
+                                        objectFit: "cover",
+                                    }}
+                                />
+                            </Box>
+                        )}
+                    </Box>
+
+                    {/* Right Side - Product Details */}
+                    <Box
+                        sx={{
+                            display: "flex",
+                            flexDirection: "column",
+                            gap: 2,
+                            ml: 4,
+                            overflowY: "auto",
+                            overflowX: "hidden",
+                            pr: 1,
+                            "&::-webkit-scrollbar": {
+                                width: "6px",
+                            },
+                            "&::-webkit-scrollbar-track": {
+                                backgroundColor: "#f5f5f5",
+                                borderRadius: "3px",
+                            },
+                            "&::-webkit-scrollbar-thumb": {
+                                backgroundColor: "#ccc",
+                                borderRadius: "3px",
+                                "&:hover": {
+                                    backgroundColor: "#999",
+                                },
+                            },
+                        }}
+                    >
+                        {/* Quickview Title */}
                         <Typography
                             sx={{
-                                fontSize: { xs: "20px", md: "24px" },
-                                fontWeight: 800,
+                                fontSize: "20px",
+                                fontWeight: 700,
                                 color: "#1a1a1a",
+                                fontFamily: "Noto Sans",
+                                mb: -1,
                             }}
                         >
-                            {product.name}
+                            Quickview
                         </Typography>
 
                         {/* Category */}
@@ -137,83 +254,250 @@ const QuickViewModal = ({ isOpen, onClose, productId, products }) => {
                             </Typography>
                         )}
 
+                        {/* Product Name */}
+                        <Typography
+                            sx={{
+                                fontSize: { xs: "18px", md: "20px" },
+                                fontWeight: 600,
+                                color: "#1a1a1a",
+                            }}
+                        >
+                            {product.name}
+                        </Typography>
+
                         {/* Price */}
                         <Box sx={{ display: "flex", alignItems: "center", gap: 1.5, flexWrap: "wrap" }}>
                             <Typography
                                 sx={{
-                                    fontSize: "24px",
-                                    fontWeight: 800,
-                                    color: hasDiscount ? "#ff6b6b" : "#1a1a1a",
+                                    fontSize: "20px",
+                                    fontWeight: 700,
+                                    color: "#1a1a1a",
                                 }}
                             >
-                                {formatPrice(discountedPrice)}
+                                {formatPrice(discountedPrice)} So'm
                             </Typography>
                             {hasDiscount && (
                                 <>
                                     <Typography
                                         sx={{
-                                            fontSize: "16px",
+                                            fontSize: "14px",
                                             color: "#aaa",
                                             textDecoration: "line-through",
                                         }}
                                     >
-                                        {formatPrice(product.price)}
+                                        {formatPrice(product.price)} So'm
                                     </Typography>
                                     <Chip
                                         label={`-${product.discount}%`}
+                                        size="small"
                                         sx={{
-                                            backgroundColor: "#ff6b6b",
+                                            backgroundColor: "#4CAF50",
                                             color: "white",
-                                            fontWeight: 800,
+                                            fontWeight: 700,
+                                            fontSize: "12px",
                                         }}
                                     />
                                 </>
                             )}
                         </Box>
 
-                        {/* Status */}
-                        {product.status && (
-                            <Chip
-                                label={product.status}
+                        {/* Description */}
+                        {product.description && (
+                            <Typography
                                 sx={{
-                                    backgroundColor:
-                                        product.status === "HOT" ? "#ff4444" : product.status === "NEW" ? "#4CAF50" : "#ff6b6b",
-                                    color: "white",
-                                    fontWeight: 800,
-                                    width: "fit-content",
+                                    fontSize: "13px",
+                                    color: "#666",
+                                    lineHeight: 1.6,
                                 }}
-                            />
+                            >
+                                {product.description}
+                            </Typography>
                         )}
 
-                        {/* Sizes */}
-                        {product.productSizes && product.productSizes.length > 0 && (
+                        {/* Size Selection */}
+                        {availableSizes.length > 0 && (
                             <Box>
-                                <Typography sx={{ fontSize: "14px", fontWeight: 600, mb: 1 }}>Mavjud o'lchamlar:</Typography>
-                                <Box sx={{ display: "flex", gap: 1, flexWrap: "wrap" }}>
-                                    {product.productSizes
-                                        .filter((size) => size.amount > 0)
-                                        .map((size, index) => (
-                                            <Chip
-                                                key={index}
-                                                label={size.size}
-                                                sx={{
-                                                    border: "1px solid #e0e0e0",
-                                                    backgroundColor: "white",
-                                                    color: "#666",
-                                                    fontWeight: 600,
-                                                }}
-                                            />
-                                        ))}
+                                <Typography sx={{ fontSize: "14px", fontWeight: 600, mb: 1 }}>
+                                    O'lcham: {selectedSize ? `${selectedSize.size} (Bo'y ${selectedSize.height || "176-187"})` : ""}
+                                </Typography>
+                                <Box sx={{ display: "flex", gap: 1, flexWrap: "wrap", mt: 1 }}>
+                                    {availableSizes.map((size, index) => (
+                                        <Chip
+                                            key={index}
+                                            label={`${size.size} (bo'y ${size.height || "176-187"})`}
+                                            onClick={() => {
+                                                setSelectedSize(size)
+                                                setQuantity(1)
+                                            }}
+                                            sx={{
+                                                border: selectedSize?.size === size.size ? "2px solid #000" : "1px solid #ddd",
+                                                backgroundColor: selectedSize?.size === size.size ? "#f5f5f5" : "white",
+                                                color: "#333",
+                                                fontWeight: selectedSize?.size === size.size ? 700 : 500,
+                                                fontSize: "13px",
+                                                cursor: "pointer",
+                                                "&:hover": {
+                                                    borderColor: "#000",
+                                                    backgroundColor: "#f5f5f5",
+                                                },
+                                            }}
+                                        />
+                                    ))}
                                 </Box>
                             </Box>
                         )}
 
-                        {/* Description */}
-                        {product.description && (
+                        {/* Color - Display only */}
+                        {product.colorName && (
                             <Box>
-                                <Typography sx={{ fontSize: "14px", fontWeight: 600, mb: 1 }}>Tavsif:</Typography>
-                                <Typography sx={{ fontSize: "13px", color: "#666", lineHeight: 1.6 }}>{product.description}</Typography>
+                                <Typography sx={{ fontSize: "14px", fontWeight: 600, mb: 0.5 }}>
+                                    Rang: <span style={{ fontWeight: 400 }}>{product.colorName}</span>
+                                </Typography>
                             </Box>
+                        )}
+
+                        {/* Quantity Selector */}
+                        {selectedSize && (
+                            <Box>
+                                <Typography sx={{ fontSize: "14px", fontWeight: 600, mb: 1 }}>Miqdori:</Typography>
+                                <Box sx={{ display: "flex", alignItems: "center", gap: 1.5, width: "fit-content" }}>
+                                    <IconButton
+                                        onClick={() => handleQuantityChange(-1)}
+                                        disabled={quantity <= 1}
+                                        size="small"
+                                        sx={{
+                                            border: "1px solid #ddd",
+                                            borderRadius: "4px",
+                                            width: "32px",
+                                            height: "32px",
+                                            "&:disabled": {
+                                                borderColor: "#f0f0f0",
+                                                color: "#ccc",
+                                            },
+                                        }}
+                                    >
+                                        <RemoveIcon sx={{ fontSize: "16px" }} />
+                                    </IconButton>
+                                    <Typography
+                                        sx={{
+                                            fontSize: "16px",
+                                            fontWeight: 600,
+                                            minWidth: "30px",
+                                            textAlign: "center",
+                                        }}
+                                    >
+                                        {quantity}
+                                    </Typography>
+                                    <IconButton
+                                        onClick={() => handleQuantityChange(1)}
+                                        disabled={quantity >= maxQuantity}
+                                        size="small"
+                                        sx={{
+                                            border: "1px solid #ddd",
+                                            borderRadius: "4px",
+                                            width: "32px",
+                                            height: "32px",
+                                            "&:disabled": {
+                                                borderColor: "#f0f0f0",
+                                                color: "#ccc",
+                                            },
+                                        }}
+                                    >
+                                        <AddIcon sx={{ fontSize: "16px" }} />
+                                    </IconButton>
+                                </Box>
+                            </Box>
+                        )}
+
+                        {/* Add to Cart Button */}
+                        <Button
+                            variant="contained"
+                            fullWidth
+                            disabled={!selectedSize}
+                            sx={{
+                                backgroundColor: "#8b1538",
+                                color: "white",
+                                fontWeight: 700,
+                                fontSize: "14px",
+                                py: 1.5,
+                                textTransform: "uppercase",
+                                mt: 1,
+                                "&:hover": {
+                                    backgroundColor: "#6b0f2a",
+                                },
+                                "&:disabled": {
+                                    backgroundColor: "#e0e0e0",
+                                    color: "#999",
+                                },
+                            }}
+                        >
+                            SAVATGA
+                        </Button>
+
+                        {/* Additional Actions */}
+                        <Box sx={{ display: "flex", flexDirection: "column", gap: 0.5, mt: 1 }}>
+                            <Button
+                                variant="text"
+                                fullWidth
+                                sx={{
+                                    color: "#666",
+                                    fontSize: "13px",
+                                    textTransform: "none",
+                                    justifyContent: "flex-start",
+                                    textAlign: "left",
+                                    px: 0,
+                                    minWidth: "auto",
+                                    "&:hover": {
+                                        backgroundColor: "transparent",
+                                        textDecoration: "underline",
+                                    },
+                                }}
+                                onClick={handleCopyLink}
+                            >
+                                Kiyim havolasini nusxala!
+                            </Button>
+                            <Button
+                                variant="text"
+                                fullWidth
+                                sx={{
+                                    color: "#666",
+                                    fontSize: "13px",
+                                    textTransform: "none",
+                                    justifyContent: "flex-start",
+                                    textAlign: "left",
+                                    px: 0,
+                                    minWidth: "auto",
+                                    "&:hover": {
+                                        backgroundColor: "transparent",
+                                        textDecoration: "underline",
+                                    },
+                                }}
+                            >
+                                Savol Berish
+                            </Button>
+                        </Box>
+
+                        {/* View Count */}
+                        <Typography
+                            sx={{
+                                fontSize: "12px",
+                                color: "#999",
+                                mt: 1,
+                            }}
+                        >
+                            6 kishi mahsulotni hozir ko'rmoqda!
+                        </Typography>
+
+                        {/* Category Label */}
+                        {product.categoryName && (
+                            <Typography
+                                sx={{
+                                    fontSize: "12px",
+                                    color: "#666",
+                                }}
+                            >
+                                Kategoriya: {product.categoryName}
+                            </Typography>
                         )}
                     </Box>
                 </Box>
