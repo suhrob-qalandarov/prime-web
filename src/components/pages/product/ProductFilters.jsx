@@ -232,12 +232,12 @@ const ProductFilters = ({
                     <Box sx={{ display: "flex", alignItems: "center", gap: 2, flexWrap: "wrap" }}>
                         <Box
                             sx={{
-                                fontSize: isMobile ? "13px" : "14px",
+                                fontSize: isMobile ? "15px" : "16px",
                                 color: "#666",
                                 fontFamily: "Noto Sans, sans-serif",
                             }}
                         >
-                            Mahsulotlar topildi: {totalProducts}
+                            Mahsulotlar topildi: <Box component="span" sx={{ color: "#000" }}>{totalProducts}</Box>
                         </Box>
 
                         {/* Separator and Selected Filters */}
