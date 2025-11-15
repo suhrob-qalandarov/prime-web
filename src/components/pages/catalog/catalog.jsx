@@ -57,12 +57,12 @@ const Catalog = () => {
                     width: "100%",
                     minHeight: "200px",
                     paddingBottom: "8px",
+                    paddingTop: { xs: "30px", sm: "96px", md: "96px", lg: "96px" },
                 }}
             >
                 <Container>
                     <Stack
                         sx={{
-                            marginTop: { xs: "35px", sm: "45px" },
                             textAlign: "center",
                         }}
                     >
