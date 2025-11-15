@@ -1,7 +1,5 @@
 import { useState, useEffect } from "react"
 import { Modal, Box, Typography, Chip, IconButton, Button } from "@mui/material"
-import RemoveIcon from "@mui/icons-material/Remove"
-import AddIcon from "@mui/icons-material/Add"
 import urls from "../../../../constants/urls"
 
 const CloseIcon = () => (
@@ -26,6 +24,18 @@ const SeparatorIcon = () => (
             stroke="#666"
             strokeWidth="1"
         />
+    </svg>
+)
+
+const MinusIcon = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 256 256" style={{ cursor: "pointer" }}>
+        <path d="M224,128a8,8,0,0,1-8,8H40a8,8,0,0,1,0-16H216A8,8,0,0,1,224,128Z"></path>
+    </svg>
+)
+
+const PlusIcon = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 256 256" style={{ cursor: "pointer" }}>
+        <path d="M224,128a8,8,0,0,1-8,8H136v80a8,8,0,0,1-16,0V136H40a8,8,0,0,1,0-16h80V40a8,8,0,0,1,16,0v80h80A8,8,0,0,1,224,128Z"></path>
     </svg>
 )
 
@@ -376,7 +386,7 @@ const QuickViewModal = ({ isOpen, onClose, productId, products }) => {
                         )}
 
                         {/* Color - Display only */}
-                        {product.colorName && (
+                        {product.color && (
                             <Box>
                                 <Typography sx={{ fontSize: "14px", fontWeight: 600, fontFamily: "Noto Sans", mb: 0.5 }}>
                                     Rang: <span style={{ fontWeight: 400 }}>{product.color}</span>
@@ -384,85 +394,100 @@ const QuickViewModal = ({ isOpen, onClose, productId, products }) => {
                             </Box>
                         )}
 
-                        {/* Quantity Selector */}
+                        {/* Quantity Selector and Add to Cart */}
                         {selectedSize && (
-                            <Box>
-                                <Typography sx={{ fontSize: "14px", fontFamily: "Noto Sans", fontWeight: 600, mb: 1 }}>Miqdori:</Typography>
-                                <Box sx={{ display: "flex", alignItems: "center", gap: 1.5, width: "fit-content" }}>
-                                    <IconButton
+                            <Box sx={{
+                                display: "flex",
+                                alignItems: "center",
+                                flexWrap: { xs: "wrap", lg: "nowrap" },
+                                gap: { xs: 2, lg: 3 }, mt: 3 }}
+                            >
+                                {/* Quantity Selector */}
+                                <Box
+                                    sx={{
+                                        display: "flex",
+                                        alignItems: "center",
+                                        justifyContent: "space-between",
+                                        borderRadius: "8px",
+                                        border: "1px solid #e0e0e0",
+                                        width: { xs: "100px", sm: "130px" },
+                                        flexShrink: 0,
+                                        py: { xs: 0.5, md: 1.3 },
+                                        px: { xs: 0.75, md: 0.85 },
+                                    }}
+                                >
+                                    <Box
                                         onClick={() => handleQuantityChange(-1)}
-                                        disabled={quantity <= 1}
-                                        size="small"
                                         sx={{
-                                            border: "1px solid #ddd",
-                                            borderRadius: "4px",
-                                            width: "32px",
-                                            height: "32px",
-                                            "&:disabled": {
-                                                borderColor: "#f0f0f0",
-                                                color: "#ccc",
-                                            },
+                                            display: "flex",
+                                            alignItems: "center",
+                                            justifyContent: "center",
+                                            cursor: quantity <= 1 ? "not-allowed" : "pointer",
+                                            opacity: quantity <= 1 ? 0.4 : 1,
+                                            pointerEvents: quantity <= 1 ? "none" : "auto",
                                         }}
                                     >
-                                        <RemoveIcon sx={{ fontSize: "16px" }} />
-                                    </IconButton>
+                                        <MinusIcon />
+                                    </Box>
                                     <Typography
                                         sx={{
                                             fontFamily: "Noto Sans",
                                             fontSize: "16px",
                                             fontWeight: 600,
-                                            minWidth: "30px",
                                             textAlign: "center",
                                         }}
                                     >
                                         {quantity}
                                     </Typography>
-                                    <IconButton
+                                    <Box
                                         onClick={() => handleQuantityChange(1)}
-                                        disabled={quantity >= maxQuantity}
-                                        size="small"
                                         sx={{
-                                            border: "1px solid #ddd",
-                                            borderRadius: "4px",
-                                            width: "32px",
-                                            height: "32px",
-                                            "&:disabled": {
-                                                borderColor: "#f0f0f0",
-                                                color: "#ccc",
-                                            },
+                                            display: "flex",
+                                            alignItems: "center",
+                                            justifyContent: "center",
+                                            cursor: quantity >= maxQuantity ? "not-allowed" : "pointer",
+                                            opacity: quantity >= maxQuantity ? 0.4 : 1,
+                                            pointerEvents: quantity >= maxQuantity ? "none" : "auto",
                                         }}
                                     >
-                                        <AddIcon sx={{ fontSize: "16px" }} />
-                                    </IconButton>
+                                        <PlusIcon />
+                                    </Box>
                                 </Box>
+
+                                {/* Add to Cart Button */}
+                                <Button
+                                    variant="outlined"
+                                    fullWidth={false}
+                                    disabled={!selectedSize}
+                                    sx={{
+                                        backgroundColor: "white",
+                                        color: "black",
+                                        border: "1px solid black",
+                                        borderRadius: "12px",
+                                        fontWeight: 600,
+                                        fontSize: "14px",
+                                        fontFamily: "Noto Sans",
+                                        py: 1.2,
+                                        px: 2,
+                                        textTransform: "none",
+                                        width: { xs: "100%", lg: "auto" },
+                                        minWidth: { lg: "200px" },
+                                        textAlign: "center",
+                                        "&:hover": {
+                                            backgroundColor: "#f5f5f5",
+                                            borderColor: "black",
+                                        },
+                                        "&:disabled": {
+                                            backgroundColor: "#e0e0e0",
+                                            color: "#999",
+                                            borderColor: "#e0e0e0",
+                                        },
+                                    }}
+                                >
+                                    Savatga
+                                </Button>
                             </Box>
                         )}
-
-                        {/* Add to Cart Button */}
-                        <Button
-                            variant="contained"
-                            fullWidth
-                            disabled={!selectedSize}
-                            sx={{
-                                backgroundColor: "#8b1538",
-                                color: "white",
-                                fontWeight: 700,
-                                fontSize: "14px",
-                                fontFamily: "Noto Sans",
-                                py: 1.5,
-                                textTransform: "uppercase",
-                                mt: 1,
-                                "&:hover": {
-                                    backgroundColor: "#6b0f2a",
-                                },
-                                "&:disabled": {
-                                    backgroundColor: "#e0e0e0",
-                                    color: "#999",
-                                },
-                            }}
-                        >
-                            SAVATGA
-                        </Button>
 
                         {/* Additional Actions */}
                         <Box sx={{ display: "flex", flexDirection: "column", gap: 0.5, mt: 1 }}>
