@@ -661,6 +661,88 @@ const QuickViewModal = ({ isOpen, onClose, productId, products }) => {
                                 </Box>
                             )}
                         </Box>
+
+                        {/* Payment Methods */}
+                        <Box sx={{ mt: 2 }}>
+                            <Box
+                                sx={{
+                                    position: "relative",
+                                    border: "1px solid #e0e0e0",
+                                    borderRadius: "12px",
+                                    pt: { xs: 3, lg: 4 },
+                                    pb: { xs: 2, lg: 3 },
+                                    px: { xs: 1.5, sm: 2 },
+                                    width: { xs: "100%", sm: "66.67%", md: "100%" },
+                                    mx: "auto",
+                                }}
+                            >
+                                {/* Heading */}
+                                <Typography
+                                    sx={{
+                                        fontFamily: "Noto Sans",
+                                        fontSize: "15px",
+                                        fontWeight: 600,
+                                        letterSpacing: "0.5px",
+                                        color: "#1a1a1a",
+                                        backgroundColor: "white",
+                                        position: "absolute",
+                                        top: "-14px",
+                                        left: "50%",
+                                        transform: "translateX(-50%)",
+                                        px: 2.5,
+                                        whiteSpace: "nowrap",
+                                    }}
+                                >
+                                    Kafolatlangan Xarid
+                                </Typography>
+
+                                {/* Payment List */}
+                                <Box sx={{ display: "flex", justifyContent: "center" }}>
+                                    <Box
+                                        sx={{
+                                            width: "25%",
+                                            display: "flex",
+                                            alignItems: "center",
+                                            justifyContent: "center",
+                                            px: { xs: 0.5, lg: 1.5 },
+                                        }}
+                                    >
+                                        <Box
+                                            component="img"
+                                            src="/images/payments/click.webp"
+                                            alt="payment"
+                                            loading="lazy"
+                                            sx={{
+                                                width: "100%",
+                                                height: "auto",
+                                                objectFit: "contain",
+                                            }}
+                                        />
+                                    </Box>
+                                    <Box
+                                        sx={{
+                                            width: "25%",
+                                            display: "flex",
+                                            alignItems: "center",
+                                            justifyContent: "center",
+                                            px: { xs: 0.5, lg: 1.5 },
+                                        }}
+                                    >
+                                        <Box
+                                            component="img"
+                                            src="/images/payments/payme.webp"
+                                            alt="payment"
+                                            loading="lazy"
+                                            sx={{
+                                                width: "100%",
+                                                height: "auto",
+                                                objectFit: "contain",
+                                            }}
+                                        />
+                                    </Box>
+                                </Box>
+                            </Box>
+                        </Box>
                     </Box>
                 </Box>
             </Box>
