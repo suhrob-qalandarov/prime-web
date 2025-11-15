@@ -46,7 +46,9 @@ const ProductGrid = ({ selectedCategory }) => {
                     discount: product.discount || 0,
                     status: product.status,
                     attachmentKeys: product.images,
-                    description: `${product.name} - ${product.brand} mahsuloti. Yuqori sifatli materialdan tayyorlangan.`,
+                    description: product.description
+                        ? product.description
+                        : `${product.name} - ${product.brand} mahsuloti. Yuqori sifatli materialdan tayyorlangan.`,
                     productSizes: [
                         { size: "S", amount: 10 },
                         { size: "M", amount: 15 },
