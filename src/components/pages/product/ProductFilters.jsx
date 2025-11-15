@@ -125,7 +125,7 @@ const ProductFilters = ({
                 }}
             >
                 {/* Left side - Filterlar button */}
-                <Box sx={{ display: "flex", alignItems: "center" }}>
+                <Box sx={{ display: "flex", alignItems: "center", paddingLeft: 0 }}>
                     {isMobile ? (
                         <button
                             onClick={() => setFilterOpen(!filterOpen)}
@@ -133,7 +133,7 @@ const ProductFilters = ({
                                 display: "flex",
                                 alignItems: "center",
                                 justifyContent: "space-between",
-                                padding: "12px 16px",
+                                padding: "12px 0 12px 0",
                                 backgroundColor: "transparent",
                                 border: "none",
                                 borderRadius: "8px",
@@ -153,6 +153,7 @@ const ProductFilters = ({
                                     fontSize: "24px",
                                     transform: filterOpen ? "rotate(180deg)" : "rotate(0deg)",
                                     transition: "transform 0.3s ease",
+                                    marginLeft: "8px",
                                 }}
                             />
                         </button>
@@ -163,7 +164,7 @@ const ProductFilters = ({
                                 display: "flex",
                                 alignItems: "center",
                                 gap: "8px",
-                                padding: "10px 16px",
+                                padding: "10px 0 10px 0",
                                 backgroundColor: "transparent",
                                 border: "none",
                                 borderRadius: "8px",
