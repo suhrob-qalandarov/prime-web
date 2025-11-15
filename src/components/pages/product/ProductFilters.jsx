@@ -90,18 +90,20 @@ const ProductFilters = ({
     ]
 
     const toggleColor = (color) => {
-        const newColors = selectedColors.includes(color)
-            ? selectedColors.filter(c => c !== color)
-            : [...selectedColors, color]
-        onColorChange(newColors)
+        if (selectedColors.includes(color)) {
+            onColorChange([])
+        } else {
+            onColorChange([color])
+        }
         setFilterOpen(false)
     }
 
     const toggleSize = (size) => {
-        const newSizes = selectedSizes.includes(size)
-            ? selectedSizes.filter(s => s !== size)
-            : [...selectedSizes, size]
-        onSizeChange(newSizes)
+        if (selectedSizes.includes(size)) {
+            onSizeChange([])
+        } else {
+            onSizeChange([size])
+        }
         setFilterOpen(false)
     }
 
