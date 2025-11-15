@@ -247,10 +247,11 @@ const QuickViewModal = ({ isOpen, onClose, productId, products }) => {
                         <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between", mb: -1 }}>
                             <Typography
                                 sx={{
-                                    fontSize: "20px",
+                                    fontSize: "22px",
                                     fontWeight: 700,
                                     color: "var(--burgundy-dark)",
                                     fontFamily: "Noto Sans",
+                                    letterSpacing: "1px",
                                 }}
                             >
                                 Quickview
@@ -271,13 +272,13 @@ const QuickViewModal = ({ isOpen, onClose, productId, products }) => {
                         <Typography
                             sx={{
                                 fontFamily: "Noto Sans",
-                                fontSize: "12px",
+                                fontSize: "13px",
                                 color: "#666",
                                 textTransform: "uppercase",
                                 letterSpacing: "1px",
                                 fontWeight: 600,
                                 mt: "10px",
-                                mb: "-12px",
+                                mb: "-13px",
                             }}
                         >
                             {product.categoryName}
@@ -288,7 +289,8 @@ const QuickViewModal = ({ isOpen, onClose, productId, products }) => {
                             sx={{
                                 mt: 0,
                                 fontFamily: "Noto Sans",
-                                fontSize: { xs: "18px", md: "22px" },
+                                fontSize: { xs: "18px", md: "28px" },
+                                letterSpacing: "1px",
                                 fontWeight: 600,
                                 color: "#1a1a1a",
                             }}
@@ -301,7 +303,8 @@ const QuickViewModal = ({ isOpen, onClose, productId, products }) => {
                             <Typography
                                 sx={{
                                     fontFamily: "Noto Sans",
-                                    fontSize: "20px",
+                                    fontSize: "22px",
+                                    letterSpacing: "1px",
                                     fontWeight: 700,
                                     color: "#1a1a1a",
                                 }}
@@ -309,7 +312,7 @@ const QuickViewModal = ({ isOpen, onClose, productId, products }) => {
                                 {formatPrice(discountedPrice)} So'm
                             </Typography>
                             <Box sx={{ display: "flex", alignItems: "center", mx: 1 }}>
-                                <SeparatorIcon />
+                                <SeparatorIcon sx={{ color: "#e0e0e0" }} />
                             </Box>
                             {hasDiscount && (
                                 <>
@@ -338,18 +341,17 @@ const QuickViewModal = ({ isOpen, onClose, productId, products }) => {
                         </Box>
 
                         {/* Description */}
-                        {product.description && (
-                            <Typography
-                                sx={{
-                                    fontFamily: "Noto Sans",
-                                    fontSize: "13px",
-                                    color: "#666",
-                                    lineHeight: 1.6,
-                                }}
-                            >
-                                {product.description}
-                            </Typography>
-                        )}
+                        <Typography
+                            sx={{
+                                fontFamily: "Noto Sans",
+                                fontSize: "15px",
+                                letterSpacing: "0.5px",
+                                color: "#666",
+                                lineHeight: 1.6,
+                            }}
+                        >
+                            {product.description}
+                        </Typography>
 
                         {/* Size Selection */}
                         {availableSizes.length > 0 && (
