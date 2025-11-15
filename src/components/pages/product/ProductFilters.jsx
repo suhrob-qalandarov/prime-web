@@ -238,48 +238,12 @@ const ProductFilters = ({
                         </Box>
 
                         {/* Separator and Selected Filters */}
-                        {(selectedStatus || selectedColors.length > 0 || selectedSizes.length > 0) && (
+                        {(selectedColors.length > 0 || selectedSizes.length > 0) && (
                             <>
                                 <Box sx={{ display: "flex", alignItems: "center", mx: 1 }}>
                                     <SeparatorIcon />
                                 </Box>
                                 <Box sx={{ display: "flex", alignItems: "center", gap: 1, flexWrap: "wrap" }}>
-                                    {selectedStatus && (
-                                        <Chip
-                                            label={selectedStatus}
-                                            onClick={() => {
-                                                onStatusChange(null)
-                                            }}
-                                            onDelete={(e) => {
-                                                e.stopPropagation()
-                                                onStatusChange(null)
-                                            }}
-                                            deleteIcon={<CloseIcon />}
-                                            size="small"
-                                            sx={{
-                                                fontSize: isMobile ? "13px" : "14px",
-                                                height: isMobile ? "28px" : "32px",
-                                                backgroundColor: "#e5e2d0",
-                                                color: "#333",
-                                                flexDirection: "row-reverse",
-                                                paddingLeft: "6px",
-                                                cursor: "pointer",
-                                                "& .MuiChip-deleteIcon": {
-                                                    fontSize: "18px",
-                                                    color: "#666",
-                                                    marginLeft: "2px",
-                                                    marginRight: "0px",
-                                                    cursor: "pointer",
-                                                },
-                                                "& .MuiChip-label": {
-                                                    paddingLeft: "4px",
-                                                    paddingRight: "6px",
-                                                    fontSize: isMobile ? "13px" : "14px",
-                                                    cursor: "pointer",
-                                                },
-                                            }}
-                                        />
-                                    )}
                                     {selectedColors.map((color) => (
                                         <Chip
                                             key={color}
