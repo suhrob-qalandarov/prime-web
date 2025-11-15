@@ -399,11 +399,13 @@ const QuickViewModal = ({ isOpen, onClose, productId, products }) => {
 
                         {/* Separator Line */}
                         <Box
-                                sx={{
+                            sx={{
                                 width: "100%",
                                 height: "1px",
                                 backgroundColor: "#e0e0e0",
                                 my: 1,
+                                display: "block",
+                                minHeight: "1px",
                             }}
                         />
 
