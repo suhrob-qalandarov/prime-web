@@ -208,29 +208,29 @@ const QuickViewModal = ({ isOpen, onClose, productId, products }) => {
                                 </Box>
                             ))
                         ) : (
-                            <Box
-                                sx={{
-                                    position: "relative",
-                                    width: "100%",
-                                    paddingTop: "133.33%",
-                                    overflow: "hidden",
-                                    borderRadius: "12px",
-                                    backgroundColor: "#f5f5f5",
-                                }}
-                            >
-                                <Box
-                                    component="img"
+                    <Box
+                        sx={{
+                            position: "relative",
+                            width: "100%",
+                            paddingTop: "133.33%",
+                            overflow: "hidden",
+                            borderRadius: "12px",
+                            backgroundColor: "#f5f5f5",
+                        }}
+                    >
+                        <Box
+                            component="img"
                                     src="/placeholder.svg?height=500&width=375"
-                                    alt={product.name}
-                                    sx={{
-                                        position: "absolute",
-                                        top: 0,
-                                        left: 0,
-                                        width: "100%",
-                                        height: "100%",
-                                        objectFit: "cover",
-                                    }}
-                                />
+                            alt={product.name}
+                            sx={{
+                                position: "absolute",
+                                top: 0,
+                                left: 0,
+                                width: "100%",
+                                height: "100%",
+                                objectFit: "cover",
+                            }}
+                        />
                             </Box>
                         )}
                     </Box>
@@ -242,27 +242,24 @@ const QuickViewModal = ({ isOpen, onClose, productId, products }) => {
                             flexDirection: "column",
                             gap: 2,
                             ml: 4,
-                            overflowY: "auto",
-                            overflowX: "hidden",
                             pr: 1,
-                            "&::-webkit-scrollbar": {
-                                width: "6px",
-                            },
-                            "&::-webkit-scrollbar-track": {
-                                backgroundColor: "#f5f5f5",
-                                borderRadius: "3px",
-                            },
-                            "&::-webkit-scrollbar-thumb": {
-                                backgroundColor: "#ccc",
-                                borderRadius: "3px",
-                                "&:hover": {
-                                    backgroundColor: "#999",
-                                },
-                            },
+                            overflow: "hidden",
                         }}
                     >
                         {/* Quickview Title and Close Button */}
-                        <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between", mb: -1 }}>
+                        <Box
+                            sx={{
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "space-between",
+                                mb: -1,
+                                position: "sticky",
+                                top: 0,
+                                zIndex: 10,
+                                backgroundColor: "white",
+                                pb: 1,
+                            }}
+                        >
                             <Typography
                                 sx={{
                                     fontSize: "22px",
@@ -286,6 +283,32 @@ const QuickViewModal = ({ isOpen, onClose, productId, products }) => {
                             </IconButton>
                         </Box>
 
+                        {/* Scrollable Content */}
+                        <Box
+                            sx={{
+                                display: "flex",
+                                flexDirection: "column",
+                                gap: 2,
+                                overflowY: "auto",
+                                overflowX: "hidden",
+                                flex: 1,
+                                minHeight: 0,
+                                "&::-webkit-scrollbar": {
+                                    width: "6px",
+                                },
+                                "&::-webkit-scrollbar-track": {
+                                    backgroundColor: "#f5f5f5",
+                                    borderRadius: "3px",
+                                },
+                                "&::-webkit-scrollbar-thumb": {
+                                    backgroundColor: "#ccc",
+                                    borderRadius: "3px",
+                                    "&:hover": {
+                                        backgroundColor: "#999",
+                                    },
+                                },
+                            }}
+                        >
                         {/* Category */}
                         <Typography
                             sx={{
@@ -416,14 +439,14 @@ const QuickViewModal = ({ isOpen, onClose, productId, products }) => {
                                 </Typography>
                                 <Box sx={{ display: "flex", gap: 1, flexWrap: "wrap", mt: 1 }}>
                                     {availableSizes.map((size, index) => (
-                                        <Chip
-                                            key={index}
-                                            label={size.size}
+                                            <Chip
+                                                key={index}
+                                                label={size.size}
                                             onClick={() => {
                                                 setSelectedSize(size)
                                                 setQuantity(1)
                                             }}
-                                            sx={{
+                                                sx={{
                                                 border: selectedSize?.size === size.size ? "2px solid #000" : "1px solid #ddd",
                                                 backgroundColor: selectedSize?.size === size.size ? "#f5f5f5" : "white",
                                                 color: "#333",
@@ -435,9 +458,9 @@ const QuickViewModal = ({ isOpen, onClose, productId, products }) => {
                                                     borderColor: "#000",
                                                     backgroundColor: "#f5f5f5",
                                                 },
-                                            }}
-                                        />
-                                    ))}
+                                                }}
+                                            />
+                                        ))}
                                 </Box>
                             </Box>
                         )}
@@ -742,6 +765,7 @@ const QuickViewModal = ({ isOpen, onClose, productId, products }) => {
                                     </Box>
                                 </Box>
                             </Box>
+                        </Box>
                         </Box>
                     </Box>
                 </Box>
