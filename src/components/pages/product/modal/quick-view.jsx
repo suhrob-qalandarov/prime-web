@@ -1,9 +1,14 @@
 import { useState, useEffect } from "react"
 import { Modal, Box, Typography, Chip, IconButton, Button } from "@mui/material"
-import CloseIcon from "@mui/icons-material/Close"
 import RemoveIcon from "@mui/icons-material/Remove"
 import AddIcon from "@mui/icons-material/Add"
 import urls from "../../../../constants/urls"
+
+const CloseIcon = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="var(--burgundy-dark)" viewBox="0 0 256 256">
+        <path d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z"></path>
+    </svg>
+)
 
 const QuickViewModal = ({ isOpen, onClose, productId, products }) => {
     const [product, setProduct] = useState(null)
@@ -89,23 +94,6 @@ const QuickViewModal = ({ isOpen, onClose, productId, products }) => {
                     mr: { xs: 0, md: 1 },
                 }}
             >
-                {/* Close Button */}
-                <IconButton
-                    onClick={onClose}
-                    sx={{
-                        position: "absolute",
-                        top: 10,
-                        right: 12,
-                        zIndex: 8,
-                        backgroundColor: "#f5f5f5",
-                        "&:hover": {
-                            backgroundColor: "#e0e0e0",
-                        },
-                    }}
-                >
-                    <CloseIcon />
-                </IconButton>
-
                 <Box
                     sx={{
                         display: "grid",
@@ -226,18 +214,29 @@ const QuickViewModal = ({ isOpen, onClose, productId, products }) => {
                             },
                         }}
                     >
-                        {/* Quickview Title */}
-                        <Typography
-                            sx={{
-                                fontSize: "20px",
-                                fontWeight: 700,
-                                color: "#1a1a1a",
-                                fontFamily: "Noto Sans",
-                                mb: -1,
-                            }}
-                        >
-                            Quickview
-                        </Typography>
+                        {/* Quickview Title and Close Button */}
+                        <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between", mb: -1 }}>
+                            <Typography
+                                sx={{
+                                    fontSize: "20px",
+                                    fontWeight: 700,
+                                    color: "var(--burgundy-dark)",
+                                    fontFamily: "Noto Sans",
+                                }}
+                            >
+                                Quickview
+                            </Typography>
+                            <IconButton
+                                onClick={onClose}
+                                sx={{
+                                    backgroundColor: "#f0f0f0",
+                                    padding: "2",
+
+                                }}
+                            >
+                                <CloseIcon />
+                            </IconButton>
+                        </Box>
 
                         {/* Category */}
                         {product.categoryName && (
