@@ -363,27 +363,9 @@ const QuickViewModal = ({ isOpen, onClose, productId, products }) => {
                             }}
                         />
 
-                        {/* Selected Variants */}
-                        <Box sx={{ display: "flex", flexDirection: "row", mb: "-10px" }}>
-                            {/* Rang */}
-                            <Typography
-                                sx={{
-                                    fontFamily: "Noto Sans",
-                                    fontSize: "14px",
-                                    fontWeight: 600,
-                                    color: "#1a1a1a",
-                                }}
-                            >
-                                Rang:{" "}
-                                <span
-                                    style={{
-                                        fontSize: "20px",
-                                        fontWeight: 400,
-                                        marginLeft: "4px",
-                                    }}
-                                >
-                                        {product.color}
-                                    </span>
+                        <Box>
+                            <Typography sx={{ fontSize: "14px", fontWeight: 600, fontFamily: "Noto Sans", mb: 0 }}>
+                                Rang: <span style={{ fontWeight: 400 }}>{product.color}</span>
                             </Typography>
                         </Box>
 
@@ -418,15 +400,6 @@ const QuickViewModal = ({ isOpen, onClose, productId, products }) => {
                                         />
                                     ))}
                                 </Box>
-                            </Box>
-                        )}
-
-                        {/* Color - Display only */}
-                        {product.color && (
-                            <Box>
-                                <Typography sx={{ fontSize: "14px", fontWeight: 600, fontFamily: "Noto Sans", mb: 0.5 }}>
-                                    Rang: <span style={{ fontWeight: 400 }}>{product.color}</span>
-                                </Typography>
                             </Box>
                         )}
 
