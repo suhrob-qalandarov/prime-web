@@ -4,802 +4,974 @@
 export const mockProductsByTab = {
     best: [
         {
-            id: "best-1",
+            id: 1,
             name: "Shim QADAM",
             brand: "POLO",
-            color: "blue",
-            price: 348000,
-            oldPrice: 520000,
-            discount: 0,
-            image: "/images/spotlights/pants-cover.jpg",
+            color: "#2563eb",
+            tag: "HOT",
+            category: "Shimlar",
+            description: "Yuqori sifatli velvet materialdan tayyorlangan, qulay va zamonaviy shim. Har qanday faslga mos.",
+            price: 295800,
+            originalPrice: 348000,
+            discount: 15,
             images: [
                 "/images/spotlights/pants-cover.jpg",
                 "/images/spotlights/shim.jpeg",
-                "/images/spotlights/shim2.jpeg",
+                "/images/spotlights/shim2.jpeg"
             ],
-            badge: "HOT",
-            marqueeDiscount: 0,
-            status: "HOT",
+            sizes: [
+                { size: "S", stock: 10 },
+                { size: "M", stock: 15 },
+                { size: "L", stock: 12 },
+                { size: "XL", stock: 8 }
+            ]
         },
         {
-            id: "best-2",
+            id: 2,
             name: "Shalvar OD",
             brand: "UrbanFlex",
             color: "#1f2937",
+            tag: "HOT",
+            category: "Shimlar",
+            description: "Qulay va zamonaviy dizaynga ega shalvar. Kun davomida qulay kiyish uchun mo'ljallangan.",
             price: 328000,
-            oldPrice: 470000,
-            discount: 0,
-            image: "/images/spotlights/shim2.jpeg",
+            originalPrice: 470000,
+            discount: 30,
             images: [
                 "/images/spotlights/shim2.jpeg",
                 "/images/spotlights/shim3.jpeg",
-                "/images/spotlights/shim4.jpeg",
+                "/images/spotlights/shim4.jpeg"
             ],
-            badge: "HOT",
-            marqueeDiscount: 0,
-            status: "HOT",
+            sizes: [
+                { size: "S", stock: 8 },
+                { size: "M", stock: 12 },
+                { size: "L", stock: 15 },
+                { size: "XL", stock: 10 }
+            ]
         },
         {
-            id: "best-3",
+            id: 3,
             name: "Kurtka Velvet",
             brand: "NordicWave",
             color: "#dc2626",
+            tag: "HOT",
+            category: "Kurtkalar",
+            description: "Qishki mavsum uchun ideal velvet kurtka. Issiqlik va uslubni birlashtirgan.",
             price: 308000,
-            oldPrice: 420000,
-            discount: 0,
-            image: "/images/spotlights/shoes2.jpeg",
+            originalPrice: 420000,
+            discount: 27,
             images: [
                 "/images/spotlights/shoes2.jpeg",
                 "/images/spotlights/shoes3.jpeg",
-                "/images/spotlights/shoes4.jpeg",
+                "/images/spotlights/shoes4.jpeg"
             ],
-            badge: "HOT",
-            marqueeDiscount: 0,
-            status: "HOT",
+            sizes: [
+                { size: "M", stock: 10 },
+                { size: "L", stock: 12 },
+                { size: "XL", stock: 8 }
+            ]
         },
         {
-            id: "best-4",
+            id: 4,
             name: "Keng Shalvar \"Yulduz Bo'l\"",
             brand: "Starline",
+            tag: "HOT",
+            category: "Shimlar",
+            description: "Keng bichimli zamonaviy shalvar. Har qanday tana tuzilmasiga mos tushadi.",
             price: 260000,
-            oldPrice: 315000,
-            discount: 0,
-            image: "/images/spotlights/cover-sh.jpeg",
+            originalPrice: 315000,
+            discount: 17,
             images: [
                 "/images/spotlights/cover-sh.jpeg",
                 "/images/spotlights/cover-sh1.jpeg",
-                "/images/spotlights/shim9.jpeg",
+                "/images/spotlights/shim9.jpeg"
             ],
-            badge: "HOT",
-            marqueeDiscount: 0,
-            status: "HOT",
+            sizes: [
+                { size: "S", stock: 10 },
+                { size: "M", stock: 15 },
+                { size: "L", stock: 12 },
+                { size: "XL", stock: 8 }
+            ]
         },
         {
-            id: "best-5",
+            id: 5,
             name: "Plashovka (Simple.Club)",
             brand: "Simple Club",
+            tag: "HOT",
+            category: "Kiyimlar",
+            description: "Yengil va qulay plashovka. Kundalik kiyish uchun ideal.",
             price: 301000,
-            oldPrice: 350000,
-            discount: 0,
-            image: "/images/spotlights/shim6.jpeg",
+            originalPrice: 350000,
+            discount: 14,
             images: [
                 "/images/spotlights/shim6.jpeg",
                 "/images/spotlights/shim4.jpeg",
-                "/images/spotlights/shim3.jpeg",
+                "/images/spotlights/shim3.jpeg"
             ],
-            badge: "HOT",
-            marqueeDiscount: 0,
-            status: "HOT",
+            sizes: [
+                { size: "S", stock: 8 },
+                { size: "M", stock: 12 },
+                { size: "L", stock: 10 }
+            ]
         },
         {
-            id: "best-6",
+            id: 6,
             name: "Kurtka Ayıq",
             brand: "PolarBear",
+            tag: "HOT",
+            category: "Kurtkalar",
+            description: "Qishki mavsum uchun mo'ljallangan issiq kurtka. Yuqori sifatli materialdan tayyorlangan.",
             price: 336000,
-            oldPrice: 420000,
-            discount: 0,
-            image: "/images/spotlights/cover3.webp",
+            originalPrice: 420000,
+            discount: 20,
             images: [
                 "/images/spotlights/cover3.webp",
                 "/images/spotlights/cover-sh1.jpeg",
-                "/images/spotlights/shim.jpeg",
+                "/images/spotlights/shim.jpeg"
             ],
-            badge: "HOT",
-            marqueeDiscount: 0,
-            status: "HOT",
+            sizes: [
+                { size: "M", stock: 10 },
+                { size: "L", stock: 12 },
+                { size: "XL", stock: 8 }
+            ]
         },
     ],
     sale: [
         {
-            id: "sale-1",
+            id: 7,
             name: "Sweatshirt 15/15",
             brand: "PrimeWear",
             color: "#059669",
+            tag: "SALE",
+            category: "Kiyimlar",
+            description: "Qulay va uslubli sweatshirt. Sport uslubi va kundalik kiyish uchun ideal.",
             price: 240000,
-            oldPrice: 300000,
+            originalPrice: 300000,
             discount: 20,
-            image: "/images/spotlights/cover-sh1.jpeg",
             images: [
                 "/images/spotlights/cover-sh1.jpeg",
                 "/images/spotlights/shim3.jpeg",
-                "/images/spotlights/shim6.jpeg",
+                "/images/spotlights/shim6.jpeg"
             ],
-            badge: "SALE",
-            marqueeDiscount: 20,
-            status: "SALE",
+            sizes: [
+                { size: "S", stock: 10 },
+                { size: "M", stock: 15 },
+                { size: "L", stock: 12 },
+                { size: "XL", stock: 8 }
+            ]
         },
         {
-            id: "sale-2",
+            id: 8,
             name: "Simple Club",
             brand: "Simple Club",
             color: "#ea580c",
+            tag: "SALE",
+            category: "Shimlar",
+            description: "Soddalashtirilgan dizaynga ega shim. Qulay va bardoshli materialdan tayyorlangan.",
             price: 191750,
-            oldPrice: 295000,
+            originalPrice: 295000,
             discount: 35,
-            image: "/images/spotlights/shim3.jpeg",
             images: [
                 "/images/spotlights/shim3.jpeg",
                 "/images/spotlights/shim4.jpeg",
-                "/images/spotlights/shim9.jpeg",
+                "/images/spotlights/shim9.jpeg"
             ],
-            badge: "SALE",
-            marqueeDiscount: 35,
-            status: "SALE",
+            sizes: [
+                { size: "S", stock: 8 },
+                { size: "M", stock: 12 },
+                { size: "L", stock: 10 }
+            ]
         },
         {
-            id: "sale-3",
+            id: 9,
             name: "Jordan Low Sky",
             brand: "AirBold",
+            tag: "SALE",
+            category: "Krassovkalar",
+            description: "Jordan Low Sky - zamonaviy dizayn va qulaylikni birlashtirgan yuqori sifatli krassovkalar.",
             price: 265000,
-            oldPrice: 330000,
+            originalPrice: 330000,
             discount: 20,
-            image: "/images/spotlights/shoes5.jpeg",
             images: [
                 "/images/spotlights/shoes5.jpeg",
                 "/images/spotlights/shoes4.jpeg",
-                "/images/spotlights/shoes3.jpeg",
+                "/images/spotlights/shoes3.jpeg"
             ],
-            badge: "SALE",
-            marqueeDiscount: 20,
-            status: "SALE",
+            sizes: [
+                { size: "39", stock: 9 },
+                { size: "42", stock: 4 },
+                { size: "43", stock: 7 }
+            ]
         },
         {
-            id: "sale-4",
+            id: 10,
             name: "Hoodie Classic",
             brand: "UrbanFlex",
+            tag: "SALE",
+            category: "Kiyimlar",
+            description: "Klassik dizaynga ega hoodie. Qulay va uslubli kundalik kiyish uchun ideal.",
             price: 228000,
-            oldPrice: 285000,
+            originalPrice: 285000,
             discount: 20,
-            image: "/images/spotlights/shim9.jpeg",
             images: [
                 "/images/spotlights/shim9.jpeg",
                 "/images/spotlights/shim6.jpeg",
-                "/images/spotlights/shim4.jpeg",
+                "/images/spotlights/shim4.jpeg"
             ],
-            badge: "SALE",
-            marqueeDiscount: 20,
-            status: "SALE",
+            sizes: [
+                { size: "S", stock: 10 },
+                { size: "M", stock: 15 },
+                { size: "L", stock: 12 },
+                { size: "XL", stock: 8 }
+            ]
         },
     ],
     new: [
         {
-            id: "new-1",
+            id: 11,
             name: "Kargo Shortik",
             brand: "PrimeWear",
             color: "#7c3aed",
+            tag: "NEW",
+            category: "Shortiklar",
+            description: "Yangi dizaynga ega kargo shortik. Qulay va funksional.",
             price: 289000,
-            oldPrice: 346000,
-            discount: 0,
-            image: "/images/spotlights/shim4.jpeg",
+            originalPrice: 346000,
+            discount: 16,
             images: [
                 "/images/spotlights/shim4.jpeg",
                 "/images/spotlights/shim2.jpeg",
-                "/images/spotlights/shim3.jpeg",
+                "/images/spotlights/shim3.jpeg"
             ],
-            badge: "NEW",
-            marqueeDiscount: 0,
-            status: "NEW",
+            sizes: [
+                { size: "S", stock: 10 },
+                { size: "M", stock: 15 },
+                { size: "L", stock: 12 }
+            ]
         },
         {
-            id: "new-2",
+            id: 12,
             name: "Kurtka Classic",
             brand: "NordicWave",
+            tag: "NEW",
+            category: "Kurtkalar",
+            description: "Klassik dizaynga ega yangi kurtka. Zamonaviy va uslubli.",
             price: 301000,
-            oldPrice: 350000,
-            discount: 0,
-            image: "/images/spotlights/shim6.jpeg",
+            originalPrice: 350000,
+            discount: 14,
             images: [
                 "/images/spotlights/shim6.jpeg",
                 "/images/spotlights/shim9.jpeg",
-                "/images/spotlights/shim2.jpeg",
+                "/images/spotlights/shim2.jpeg"
             ],
-            badge: "NEW",
-            marqueeDiscount: 0,
-            status: "NEW",
+            sizes: [
+                { size: "M", stock: 10 },
+                { size: "L", stock: 12 },
+                { size: "XL", stock: 8 }
+            ]
         },
         {
-            id: "new-3",
+            id: 13,
             name: "Loose Fit T-shirt",
             brand: "CottonEase",
+            tag: "NEW",
+            category: "Futbolkalar",
+            description: "Keng bichimli qulay futbolka. Har qanday kundalik holat uchun ideal.",
             price: 165000,
-            oldPrice: 0,
+            originalPrice: 0,
             discount: 0,
-            image: "/images/spotlights/shim2.jpeg",
             images: [
                 "/images/spotlights/shim2.jpeg",
                 "/images/spotlights/shim.jpeg",
-                "/images/spotlights/shim3.jpeg",
+                "/images/spotlights/shim3.jpeg"
             ],
-            badge: "NEW",
-            marqueeDiscount: 0,
-            status: "NEW",
+            sizes: [
+                { size: "S", stock: 15 },
+                { size: "M", stock: 20 },
+                { size: "L", stock: 18 },
+                { size: "XL", stock: 12 }
+            ]
         },
         {
-            id: "new-4",
+            id: 14,
             name: "Sneakers Cloud",
             brand: "CloudStep",
+            tag: "NEW",
+            category: "Krassovkalar",
+            description: "Yengil va qulay sneakers. Kun davomida qulay yurish uchun mo'ljallangan.",
             price: 275000,
-            oldPrice: 0,
+            originalPrice: 0,
             discount: 0,
-            image: "/images/spotlights/shoes5.jpeg",
             images: [
                 "/images/spotlights/shoes5.jpeg",
                 "/images/spotlights/shoes4.jpeg",
-                "/images/spotlights/shoes3.jpeg",
+                "/images/spotlights/shoes3.jpeg"
             ],
-            badge: "NEW",
-            marqueeDiscount: 0,
-            status: "NEW",
+            sizes: [
+                { size: "39", stock: 10 },
+                { size: "40", stock: 12 },
+                { size: "41", stock: 8 },
+                { size: "42", stock: 15 }
+            ]
         },
         {
-            id: "new-5",
-            name: "Sneakers Cloud",
+            id: 15,
+            name: "Sneakers Cloud Pro",
             brand: "CloudStep",
+            tag: "NEW",
+            category: "Krassovkalar",
+            description: "Professional darajadagi sneakers. Sport va kundalik yurish uchun ideal.",
             price: 275000,
-            oldPrice: 0,
+            originalPrice: 0,
             discount: 0,
-            image: "/images/spotlights/shoes6.jpeg",
             images: [
                 "/images/spotlights/shoes6.jpeg",
                 "/images/spotlights/shoes3.jpeg",
-                "/images/spotlights/shoes4.jpeg",
+                "/images/spotlights/shoes4.jpeg"
             ],
-            badge: "NEW",
-            marqueeDiscount: 0,
-            status: "NEW",
+            sizes: [
+                { size: "40", stock: 10 },
+                { size: "41", stock: 12 },
+                { size: "42", stock: 8 }
+            ]
         },
     ],
 }
 
-// Flat array of all products for ProductGrid component
+// Flat array of all products for ProductGrid component (30 products)
 export const mockProducts = [
     {
-        id: "1",
+        id: 1,
         name: "Shim QADAM",
         brand: "POLO",
-        description: "Uslub va qulaylikni birlashtirgan zamonaviy velvet shim! Ushbu oversize shim yuqori sifatli velvet " +
-            "(kordroy) matodan tikilgan bo‘lib, teriga yoqimli, bardoshli va zamonaviy ko‘rinishga ega. Har kuni kiyish " +
-            "uchun ideal, keng bichimi har qanday tana tuzilmasiga mos tushadi va erkin harakatlanish imkonini beradi.",
-        category: "Shimlar",
         color: "#2563eb",
-        price: 348000,
-        oldPrice: 520000,
-        discount: 0,
-        image: "/images/spotlights/pants-cover.jpg",
+        tag: "HOT",
+        category: "Shimlar",
+        description: "Yuqori sifatli velvet materialdan tayyorlangan, qulay va zamonaviy shim. Har qanday faslga mos.",
+        price: 295800,
+        originalPrice: 348000,
+        discount: 15,
         images: [
             "/images/spotlights/pants-cover.jpg",
             "/images/spotlights/shim.jpeg",
-            "/images/spotlights/shim2.jpeg",
+            "/images/spotlights/shim2.jpeg"
         ],
-        badge: "HOT",
-        marqueeDiscount: 0,
-        status: "HOT",
+        sizes: [
+            { size: "S", stock: 10 },
+            { size: "M", stock: 15 },
+            { size: "L", stock: 12 },
+            { size: "XL", stock: 8 }
+        ]
     },
     {
-        id: "2",
+        id: 2,
         name: "Shalvar OD",
         brand: "UrbanFlex",
-        category: "Shimlar",
         color: "#1f2937",
+        tag: "HOT",
+        category: "Shimlar",
+        description: "Qulay va zamonaviy dizaynga ega shalvar. Kun davomida qulay kiyish uchun mo'ljallangan.",
         price: 328000,
-        oldPrice: 470000,
-        discount: 0,
-        image: "/images/spotlights/shim2.jpeg",
+        originalPrice: 470000,
+        discount: 30,
         images: [
             "/images/spotlights/shim2.jpeg",
             "/images/spotlights/shim3.jpeg",
-            "/images/spotlights/shim4.jpeg",
+            "/images/spotlights/shim4.jpeg"
         ],
-        badge: "HOT",
-        marqueeDiscount: 0,
-        status: "HOT",
+        sizes: [
+            { size: "S", stock: 8 },
+            { size: "M", stock: 12 },
+            { size: "L", stock: 15 },
+            { size: "XL", stock: 10 }
+        ]
     },
     {
-        id: "3",
+        id: 3,
         name: "Kurtka Velvet",
         brand: "NordicWave",
-        category: "Kurtkalar",
         color: "#dc2626",
+        tag: "HOT",
+        category: "Kurtkalar",
+        description: "Qishki mavsum uchun ideal velvet kurtka. Issiqlik va uslubni birlashtirgan.",
         price: 308000,
-        oldPrice: 420000,
-        discount: 0,
-        image: "/images/spotlights/shoes2.jpeg",
+        originalPrice: 420000,
+        discount: 27,
         images: [
             "/images/spotlights/shoes2.jpeg",
             "/images/spotlights/shoes3.jpeg",
-            "/images/spotlights/shoes4.jpeg",
+            "/images/spotlights/shoes4.jpeg"
         ],
-        badge: "HOT",
-        marqueeDiscount: 0,
-        status: "HOT",
+        sizes: [
+            { size: "M", stock: 10 },
+            { size: "L", stock: 12 },
+            { size: "XL", stock: 8 }
+        ]
     },
     {
-        id: "4",
+        id: 4,
         name: "Keng Shalvar \"Yulduz Bo'l\"",
         brand: "Starline",
+        tag: "HOT",
         category: "Shimlar",
+        description: "Keng bichimli zamonaviy shalvar. Har qanday tana tuzilmasiga mos tushadi.",
         price: 260000,
-        oldPrice: 315000,
-        discount: 0,
-        image: "/images/spotlights/cover-sh.jpeg",
+        originalPrice: 315000,
+        discount: 17,
         images: [
             "/images/spotlights/cover-sh.jpeg",
             "/images/spotlights/cover-sh1.jpeg",
-            "/images/spotlights/shim9.jpeg",
+            "/images/spotlights/shim9.jpeg"
         ],
-        badge: "HOT",
-        marqueeDiscount: 0,
-        status: "HOT",
+        sizes: [
+            { size: "S", stock: 10 },
+            { size: "M", stock: 15 },
+            { size: "L", stock: 12 },
+            { size: "XL", stock: 8 }
+        ]
     },
     {
-        id: "5",
+        id: 5,
         name: "Plashovka (Simple.Club)",
         brand: "Simple Club",
+        tag: "HOT",
         category: "Kiyimlar",
+        description: "Yengil va qulay plashovka. Kundalik kiyish uchun ideal.",
         price: 301000,
-        oldPrice: 350000,
-        discount: 0,
-        image: "/images/spotlights/shim6.jpeg",
+        originalPrice: 350000,
+        discount: 14,
         images: [
             "/images/spotlights/shim6.jpeg",
             "/images/spotlights/shim4.jpeg",
-            "/images/spotlights/shim3.jpeg",
+            "/images/spotlights/shim3.jpeg"
         ],
-        badge: "HOT",
-        marqueeDiscount: 0,
-        status: "HOT",
+        sizes: [
+            { size: "S", stock: 8 },
+            { size: "M", stock: 12 },
+            { size: "L", stock: 10 }
+        ]
     },
     {
-        id: "6",
+        id: 6,
         name: "Kurtka Ayıq",
         brand: "PolarBear",
+        tag: "HOT",
         category: "Kurtkalar",
+        description: "Qishki mavsum uchun mo'ljallangan issiq kurtka. Yuqori sifatli materialdan tayyorlangan.",
         price: 336000,
-        oldPrice: 420000,
-        discount: 0,
-        image: "/images/spotlights/cover3.webp",
+        originalPrice: 420000,
+        discount: 20,
         images: [
             "/images/spotlights/cover3.webp",
             "/images/spotlights/cover-sh1.jpeg",
-            "/images/spotlights/shim.jpeg",
+            "/images/spotlights/shim.jpeg"
         ],
-        badge: "HOT",
-        marqueeDiscount: 0,
-        status: "HOT",
+        sizes: [
+            { size: "M", stock: 10 },
+            { size: "L", stock: 12 },
+            { size: "XL", stock: 8 }
+        ]
     },
     {
-        id: "7",
+        id: 7,
         name: "Sweatshirt 15/15",
-        category: "Kiyimlar",
         brand: "PrimeWear",
         color: "#059669",
+        tag: "SALE",
+        category: "Kiyimlar",
+        description: "Qulay va uslubli sweatshirt. Sport uslubi va kundalik kiyish uchun ideal.",
         price: 240000,
-        oldPrice: 300000,
+        originalPrice: 300000,
         discount: 20,
-        image: "/images/spotlights/cover-sh1.jpeg",
         images: [
             "/images/spotlights/cover-sh1.jpeg",
             "/images/spotlights/shim3.jpeg",
-            "/images/spotlights/shim6.jpeg",
+            "/images/spotlights/shim6.jpeg"
         ],
-        badge: "SALE",
-        marqueeDiscount: 20,
-        status: "SALE",
+        sizes: [
+            { size: "S", stock: 10 },
+            { size: "M", stock: 15 },
+            { size: "L", stock: 12 },
+            { size: "XL", stock: 8 }
+        ]
     },
     {
-        id: "8",
+        id: 8,
         name: "Simple Club",
         brand: "Simple Club",
-        category: "Shimlar",
         color: "#ea580c",
+        tag: "SALE",
+        category: "Shimlar",
+        description: "Soddalashtirilgan dizaynga ega shim. Qulay va bardoshli materialdan tayyorlangan.",
         price: 191750,
-        oldPrice: 295000,
+        originalPrice: 295000,
         discount: 35,
-        image: "/images/spotlights/shim3.jpeg",
         images: [
             "/images/spotlights/shim3.jpeg",
             "/images/spotlights/shim4.jpeg",
-            "/images/spotlights/shim9.jpeg",
+            "/images/spotlights/shim9.jpeg"
         ],
-        badge: "SALE",
-        marqueeDiscount: 35,
-        status: "SALE",
+        sizes: [
+            { size: "S", stock: 8 },
+            { size: "M", stock: 12 },
+            { size: "L", stock: 10 }
+        ]
     },
     {
-        id: "9",
+        id: 9,
         name: "Jordan Low Sky",
         brand: "AirBold",
-        description: "Jordan Low Sky - zamonaviy dizayn va qulaylikni birlashtirgan yuqori sifatli krassovkalar. Ushbu krassovkalar yuqori sifatli materialdan tayyorlangan bo'lib, kun davomida qulay kiyish uchun mo'ljallangan. Sport uslubi va ko'p qavatli poyabzal texnologiyasi bilan jihozlangan, har qanday kundalik yurish va yengil jismoniy faoliyat uchun ideal.",
+        tag: "SALE",
         category: "Krassovkalar",
-        color: "#fafafa",
+        description: "Jordan Low Sky - zamonaviy dizayn va qulaylikni birlashtirgan yuqori sifatli krassovkalar.",
         price: 265000,
-        oldPrice: 330000,
+        originalPrice: 330000,
         discount: 20,
-        sizes: [
-            { size: "39", amount: 9 },
-            { size: "42", amount: 4 },
-            { size: "43", amount: 7 }
-        ],
-        image: "/images/spotlights/shoes5.jpeg",
         images: [
             "/images/spotlights/shoes5.jpeg",
             "/images/spotlights/shoes4.jpeg",
-            "/images/spotlights/shoes3.jpeg",
+            "/images/spotlights/shoes3.jpeg"
         ],
-        badge: "SALE",
-        marqueeDiscount: 20,
-        status: "SALE",
+        sizes: [
+            { size: "39", stock: 9 },
+            { size: "42", stock: 4 },
+            { size: "43", stock: 7 }
+        ]
     },
     {
-        id: "10",
+        id: 10,
         name: "Hoodie Classic",
         brand: "UrbanFlex",
+        tag: "SALE",
         category: "Kiyimlar",
+        description: "Klassik dizaynga ega hoodie. Qulay va uslubli kundalik kiyish uchun ideal.",
         price: 228000,
-        oldPrice: 285000,
+        originalPrice: 285000,
         discount: 20,
-        image: "/images/spotlights/shim9.jpeg",
         images: [
             "/images/spotlights/shim9.jpeg",
             "/images/spotlights/shim6.jpeg",
-            "/images/spotlights/shim4.jpeg",
+            "/images/spotlights/shim4.jpeg"
         ],
-        badge: "SALE",
-        marqueeDiscount: 20,
-        status: "SALE",
+        sizes: [
+            { size: "S", stock: 10 },
+            { size: "M", stock: 15 },
+            { size: "L", stock: 12 },
+            { size: "XL", stock: 8 }
+        ]
     },
     {
-        id: "11",
+        id: 11,
         name: "Kargo Shortik",
         brand: "PrimeWear",
-        category: "Shortiklar",
         color: "#7c3aed",
+        tag: "NEW",
+        category: "Shortiklar",
+        description: "Yangi dizaynga ega kargo shortik. Qulay va funksional.",
         price: 289000,
-        oldPrice: 346000,
-        discount: 0,
-        image: "/images/spotlights/shim4.jpeg",
+        originalPrice: 346000,
+        discount: 16,
         images: [
             "/images/spotlights/shim4.jpeg",
             "/images/spotlights/shim2.jpeg",
-            "/images/spotlights/shim3.jpeg",
+            "/images/spotlights/shim3.jpeg"
         ],
-        badge: "NEW",
-        marqueeDiscount: 0,
-        status: "NEW",
+        sizes: [
+            { size: "S", stock: 10 },
+            { size: "M", stock: 15 },
+            { size: "L", stock: 12 }
+        ]
     },
     {
-        id: "12",
+        id: 12,
         name: "Kurtka Classic",
         brand: "NordicWave",
+        tag: "NEW",
         category: "Kurtkalar",
+        description: "Klassik dizaynga ega yangi kurtka. Zamonaviy va uslubli.",
         price: 301000,
-        oldPrice: 350000,
-        discount: 0,
-        image: "/images/spotlights/shim6.jpeg",
+        originalPrice: 350000,
+        discount: 14,
         images: [
             "/images/spotlights/shim6.jpeg",
             "/images/spotlights/shim9.jpeg",
-            "/images/spotlights/shim2.jpeg",
+            "/images/spotlights/shim2.jpeg"
         ],
-        badge: "NEW",
-        marqueeDiscount: 0,
-        status: "NEW",
+        sizes: [
+            { size: "M", stock: 10 },
+            { size: "L", stock: 12 },
+            { size: "XL", stock: 8 }
+        ]
     },
     {
-        id: "13",
+        id: 13,
         name: "Loose Fit T-shirt",
         brand: "CottonEase",
+        tag: "NEW",
         category: "Futbolkalar",
+        description: "Keng bichimli qulay futbolka. Har qanday kundalik holat uchun ideal.",
         price: 165000,
-        oldPrice: 0,
+        originalPrice: 0,
         discount: 0,
-        image: "/images/spotlights/shim2.jpeg",
         images: [
             "/images/spotlights/shim2.jpeg",
             "/images/spotlights/shim.jpeg",
-            "/images/spotlights/shim3.jpeg",
+            "/images/spotlights/shim3.jpeg"
         ],
-        badge: "NEW",
-        marqueeDiscount: 0,
-        status: "NEW",
+        sizes: [
+            { size: "S", stock: 15 },
+            { size: "M", stock: 20 },
+            { size: "L", stock: 18 },
+            { size: "XL", stock: 12 }
+        ]
     },
     {
-        id: "14",
+        id: 14,
         name: "Sneakers Cloud",
         brand: "CloudStep",
+        tag: "NEW",
         category: "Krassovkalar",
+        description: "Yengil va qulay sneakers. Kun davomida qulay yurish uchun mo'ljallangan.",
         price: 275000,
-        oldPrice: 0,
+        originalPrice: 0,
         discount: 0,
-        image: "/images/spotlights/shoes5.jpeg",
         images: [
             "/images/spotlights/shoes5.jpeg",
             "/images/spotlights/shoes4.jpeg",
-            "/images/spotlights/shoes3.jpeg",
+            "/images/spotlights/shoes3.jpeg"
         ],
-        badge: "NEW",
-        marqueeDiscount: 0,
-        status: "NEW",
+        sizes: [
+            { size: "39", stock: 10 },
+            { size: "40", stock: 12 },
+            { size: "41", stock: 8 },
+            { size: "42", stock: 15 }
+        ]
     },
     {
-        id: "15",
+        id: 15,
         name: "Sneakers Cloud Pro",
         brand: "CloudStep",
+        tag: "NEW",
         category: "Krassovkalar",
+        description: "Professional darajadagi sneakers. Sport va kundalik yurish uchun ideal.",
         price: 275000,
-        oldPrice: 0,
+        originalPrice: 0,
         discount: 0,
-        image: "/images/spotlights/shoes6.jpeg",
         images: [
             "/images/spotlights/shoes6.jpeg",
             "/images/spotlights/shoes3.jpeg",
-            "/images/spotlights/shoes4.jpeg",
+            "/images/spotlights/shoes4.jpeg"
         ],
-        badge: "NEW",
-        marqueeDiscount: 0,
-        status: "NEW",
+        sizes: [
+            { size: "40", stock: 10 },
+            { size: "41", stock: 12 },
+            { size: "42", stock: 8 }
+        ]
     },
     {
-        id: "16",
+        id: 16,
         name: "Classic Denim Jacket",
         brand: "DenimCo",
+        tag: "HOT",
         category: "Kiyimlar",
+        description: "Klassik dizaynga ega denim jaket. Zamonaviy va uslubli.",
         price: 420000,
-        oldPrice: 550000,
-        discount: 0,
-        image: "/images/spotlights/cover3.webp",
+        originalPrice: 550000,
+        discount: 24,
         images: [
             "/images/spotlights/cover3.webp",
-            "/images/spotlights/cover-sh1.jpeg",
+            "/images/spotlights/cover-sh1.jpeg"
         ],
-        badge: "HOT",
-        marqueeDiscount: 0,
-        status: "HOT",
+        sizes: [
+            { size: "M", stock: 10 },
+            { size: "L", stock: 12 },
+            { size: "XL", stock: 8 }
+        ]
     },
     {
-        id: "17",
+        id: 17,
         name: "Sport Tracksuit",
         brand: "SportLine",
+        tag: "HOT",
         category: "Kiyimlar",
+        description: "Sport uchun mo'ljallangan tracksuit. Qulay va funksional.",
         price: 380000,
-        oldPrice: 480000,
-        discount: 0,
-        image: "/images/spotlights/pants-cover.jpg",
+        originalPrice: 480000,
+        discount: 21,
         images: [
             "/images/spotlights/pants-cover.jpg",
-            "/images/spotlights/shim.jpeg",
+            "/images/spotlights/shim.jpeg"
         ],
-        badge: "HOT",
-        marqueeDiscount: 0,
-        status: "HOT",
+        sizes: [
+            { size: "S", stock: 8 },
+            { size: "M", stock: 12 },
+            { size: "L", stock: 15 },
+            { size: "XL", stock: 10 }
+        ]
     },
     {
-        id: "18",
+        id: 18,
         name: "Casual Pants",
         brand: "ComfortWear",
+        tag: "HOT",
+        category: "Shimlar",
+        description: "Kundalik kiyish uchun qulay shim. Qulay va bardoshli.",
         price: 290000,
-        oldPrice: 360000,
-        discount: 0,
-        image: "/images/spotlights/shim2.jpeg",
+        originalPrice: 360000,
+        discount: 19,
         images: [
             "/images/spotlights/shim2.jpeg",
-            "/images/spotlights/shim3.jpeg",
+            "/images/spotlights/shim3.jpeg"
         ],
-        badge: "HOT",
-        marqueeDiscount: 0,
-        status: "HOT",
+        sizes: [
+            { size: "S", stock: 10 },
+            { size: "M", stock: 15 },
+            { size: "L", stock: 12 },
+            { size: "XL", stock: 8 }
+        ]
     },
     {
-        id: "19",
+        id: 19,
         name: "Winter Coat",
         brand: "WarmStyle",
+        tag: "SALE",
+        category: "Kurtkalar",
+        description: "Qishki mavsum uchun issiq palto. Yuqori sifatli materialdan tayyorlangan.",
         price: 550000,
-        oldPrice: 720000,
+        originalPrice: 720000,
         discount: 24,
-        image: "/images/spotlights/cover-sh.jpeg",
         images: [
             "/images/spotlights/cover-sh.jpeg",
-            "/images/spotlights/cover-sh1.jpeg",
+            "/images/spotlights/cover-sh1.jpeg"
         ],
-        badge: "SALE",
-        marqueeDiscount: 24,
-        status: "SALE",
+            sizes: [
+                { size: "M", stock: 8 },
+                { size: "L", stock: 10 },
+                { size: "XL", stock: 6 }
+            ]
     },
     {
-        id: "20",
+        id: 20,
         name: "Summer Shorts",
         brand: "BeachWear",
+        tag: "SALE",
+        category: "Shortiklar",
+        description: "Yozgi mavsum uchun qulay shortik. Yengil va nafas olishi yaxshi materialdan.",
         price: 180000,
-        oldPrice: 240000,
+        originalPrice: 240000,
         discount: 25,
-        image: "/images/spotlights/shim4.jpeg",
         images: [
             "/images/spotlights/shim4.jpeg",
-            "/images/spotlights/shim2.jpeg",
+            "/images/spotlights/shim2.jpeg"
         ],
-        badge: "SALE",
-        marqueeDiscount: 25,
-        status: "SALE",
+            sizes: [
+                { size: "S", stock: 12 },
+                { size: "M", stock: 15 },
+                { size: "L", stock: 10 }
+            ]
     },
     {
-        id: "21",
+        id: 21,
         name: "Leather Boots",
         brand: "LeatherCraft",
+        tag: "SALE",
+        category: "Krassovkalar",
+        description: "Yuqori sifatli teri etik. Qulay va bardoshli.",
         price: 450000,
-        oldPrice: 600000,
+        originalPrice: 600000,
         discount: 25,
-        image: "/images/spotlights/shoes2.jpeg",
         images: [
             "/images/spotlights/shoes2.jpeg",
-            "/images/spotlights/shoes3.jpeg",
+            "/images/spotlights/shoes3.jpeg"
         ],
-        badge: "SALE",
-        marqueeDiscount: 25,
-        status: "SALE",
+            sizes: [
+                { size: "40", stock: 8 },
+                { size: "41", stock: 10 },
+                { size: "42", stock: 12 }
+            ]
     },
     {
-        id: "22",
+        id: 22,
         name: "Formal Shirt",
         brand: "FormalWear",
+        tag: "NEW",
+        category: "Futbolkalar",
+        description: "Rasmiy holatlar uchun ideal futbolka. Zamonaviy va uslubli.",
         price: 220000,
-        oldPrice: 280000,
-        discount: 0,
-        image: "/images/spotlights/shim6.jpeg",
+        originalPrice: 280000,
+        discount: 21,
         images: [
             "/images/spotlights/shim6.jpeg",
-            "/images/spotlights/shim9.jpeg",
+            "/images/spotlights/shim9.jpeg"
         ],
-        badge: "NEW",
-        marqueeDiscount: 0,
-        status: "NEW",
+        sizes: [
+            { size: "S", stock: 10 },
+            { size: "M", stock: 15 },
+            { size: "L", stock: 12 },
+            { size: "XL", stock: 8 }
+        ]
     },
     {
-        id: "23",
+        id: 23,
         name: "Running Shoes",
         brand: "RunFast",
+        tag: "SALE",
+        category: "Krassovkalar",
+        description: "Yugurish uchun mo'ljallangan krassovkalar. Qulay va bardoshli.",
         price: 320000,
-        oldPrice: 400000,
+        originalPrice: 400000,
         discount: 20,
-        image: "/images/spotlights/shoes4.jpeg",
         images: [
             "/images/spotlights/shoes4.jpeg",
-            "/images/spotlights/shoes5.jpeg",
+            "/images/spotlights/shoes5.jpeg"
         ],
-        badge: "SALE",
-        marqueeDiscount: 20,
-        status: "SALE",
+        sizes: [
+            { size: "39", stock: 10 },
+            { size: "40", stock: 12 },
+            { size: "41", stock: 8 },
+            { size: "42", stock: 15 }
+        ]
     },
     {
-        id: "24",
+        id: 24,
         name: "Hoodie Zip",
         brand: "ZipStyle",
+        tag: "NEW",
+        category: "Kiyimlar",
+        description: "Zip bilan hoodie. Qulay va funksional.",
         price: 280000,
-        oldPrice: 350000,
-        discount: 0,
-        image: "/images/spotlights/shim9.jpeg",
+        originalPrice: 350000,
+        discount: 20,
         images: [
             "/images/spotlights/shim9.jpeg",
-            "/images/spotlights/shim6.jpeg",
+            "/images/spotlights/shim6.jpeg"
         ],
-        badge: "NEW",
-        marqueeDiscount: 0,
-        status: "NEW",
+        sizes: [
+            { size: "S", stock: 10 },
+            { size: "M", stock: 15 },
+            { size: "L", stock: 12 },
+            { size: "XL", stock: 8 }
+        ]
     },
     {
-        id: "25",
+        id: 25,
         name: "Wool Sweater",
         brand: "WoolCo",
+        tag: "HOT",
+        category: "Kiyimlar",
+        description: "Yupqa jun kazak. Qishki mavsum uchun ideal.",
         price: 380000,
-        oldPrice: 480000,
-        discount: 0,
-        image: "/images/spotlights/cover-sh1.jpeg",
+        originalPrice: 480000,
+        discount: 21,
         images: [
             "/images/spotlights/cover-sh1.jpeg",
-            "/images/spotlights/shim3.jpeg",
+            "/images/spotlights/shim3.jpeg"
         ],
-        badge: "HOT",
-        marqueeDiscount: 0,
-        status: "HOT",
+        sizes: [
+            { size: "M", stock: 10 },
+            { size: "L", stock: 12 },
+            { size: "XL", stock: 8 }
+        ]
     },
     {
-        id: "26",
+        id: 26,
         name: "Baseball Cap",
         brand: "CapStyle",
+        tag: "SALE",
+        category: "Aksessuarlar",
+        description: "Klassik dizaynga ega baseball cap. Zamonaviy va uslubli.",
         price: 85000,
-        oldPrice: 120000,
+        originalPrice: 120000,
         discount: 29,
-        image: "/images/spotlights/shim3.jpeg",
         images: [
             "/images/spotlights/shim3.jpeg",
-            "/images/spotlights/shim4.jpeg",
+            "/images/spotlights/shim4.jpeg"
         ],
-        badge: "SALE",
-        marqueeDiscount: 29,
-        status: "SALE",
+            sizes: [
+                { size: "One Size", stock: 50 }
+            ]
     },
     {
-        id: "27",
+        id: 27,
         name: "Cargo Pants",
         brand: "CargoPro",
+        tag: "NEW",
+        category: "Shimlar",
+        description: "Funksional kargo shim. Qulay va bardoshli.",
         price: 310000,
-        oldPrice: 390000,
-        discount: 0,
-        image: "/images/spotlights/pants-cover2.jpg",
+        originalPrice: 390000,
+        discount: 21,
         images: [
             "/images/spotlights/pants-cover2.jpg",
-            "/images/spotlights/shim2.jpeg",
+            "/images/spotlights/shim2.jpeg"
         ],
-        badge: "NEW",
-        marqueeDiscount: 0,
-        status: "NEW",
+        sizes: [
+            { size: "S", stock: 8 },
+            { size: "M", stock: 12 },
+            { size: "L", stock: 15 },
+            { size: "XL", stock: 10 }
+        ]
     },
     {
-        id: "28",
+        id: 28,
         name: "Vintage Jeans",
         brand: "VintageCo",
+        tag: "SALE",
+        category: "Shimlar",
+        description: "Vintage uslubidagi jeans. Zamonaviy va uslubli.",
         price: 350000,
-        oldPrice: 450000,
+        originalPrice: 450000,
         discount: 22,
-        image: "/images/spotlights/shim.jpeg",
         images: [
             "/images/spotlights/shim.jpeg",
-            "/images/spotlights/shim2.jpeg",
+            "/images/spotlights/shim2.jpeg"
         ],
-        badge: "SALE",
-        marqueeDiscount: 22,
-        status: "SALE",
+        sizes: [
+            { size: "S", stock: 10 },
+            { size: "M", stock: 15 },
+            { size: "L", stock: 12 },
+            { size: "XL", stock: 8 }
+        ]
     },
     {
-        id: "29",
+        id: 29,
         name: "Parka Jacket",
         brand: "ParkaStyle",
+        tag: "SALE",
+        category: "Kurtkalar",
+        description: "Qishki mavsum uchun ideal parka. Issiq va bardoshli.",
         price: 520000,
-        oldPrice: 680000,
+        originalPrice: 680000,
         discount: 24,
-        image: "/images/spotlights/cover3.webp",
         images: [
             "/images/spotlights/cover3.webp",
-            "/images/spotlights/cover-sh1.jpeg",
+            "/images/spotlights/cover-sh1.jpeg"
         ],
-        badge: "SALE",
-        marqueeDiscount: 24,
-        status: "SALE",
+            sizes: [
+                { size: "M", stock: 8 },
+                { size: "L", stock: 10 },
+                { size: "XL", stock: 6 }
+            ]
     },
     {
-        id: "30",
+        id: 30,
         name: "Trainers Pro",
         brand: "TrainPro",
+        tag: "NEW",
+        category: "Krassovkalar",
+        description: "Professional darajadagi trainers. Sport uchun ideal.",
         price: 340000,
-        oldPrice: 0,
+        originalPrice: 0,
         discount: 0,
-        image: "/images/spotlights/shoes3.jpeg",
         images: [
             "/images/spotlights/shoes3.jpeg",
-            "/images/spotlights/shoes4.jpeg",
+            "/images/spotlights/shoes4.jpeg"
         ],
-        badge: "NEW",
-        marqueeDiscount: 0,
-        status: "NEW",
+        sizes: [
+            { size: "39", stock: 10 },
+            { size: "40", stock: 12 },
+            { size: "41", stock: 8 },
+            { size: "42", stock: 15 }
+        ]
     },
 ]
-
