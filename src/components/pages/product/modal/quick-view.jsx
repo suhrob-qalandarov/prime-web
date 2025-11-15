@@ -138,7 +138,7 @@ const QuickViewModal = ({ isOpen, onClose, productId, products }) => {
                     boxShadow: "0 10px 40px rgba(0,0,0,0.3)",
                     mt: { xs: 0, md: 1 },
                     mb: { xs: 0, md: 1 },
-                    mr: { xs: 0, md: 1 },
+                    ml: { xs: 0, md: "auto" },
                 }}
             >
                 <Box
@@ -146,7 +146,9 @@ const QuickViewModal = ({ isOpen, onClose, productId, products }) => {
                         display: "grid",
                         gridTemplateColumns: { xs: "1fr", md: "360px 1fr" },
                         gap: { xs: 2, md: 2 },
-                        p: { xs: 2, md: 3 },
+                        pl: { xs: 2, md: 3 },
+                        pt: { xs: 2, md: 3 },
+                        pb: { xs: 2, md: 3 },
                         flex: 1,
                         minHeight: 0,
                         overflow: "hidden",
@@ -242,7 +244,7 @@ const QuickViewModal = ({ isOpen, onClose, productId, products }) => {
                             flexDirection: "column",
                             gap: 2,
                             ml: 4,
-                            pr: 1,
+                            pr: 1.5,
                             overflow: "hidden",
                         }}
                     >
@@ -293,6 +295,7 @@ const QuickViewModal = ({ isOpen, onClose, productId, products }) => {
                                 overflowX: "hidden",
                                 flex: 1,
                                 minHeight: 0,
+                                pr: "12px",
                                 "&::-webkit-scrollbar": {
                                     width: "6px",
                                 },
@@ -389,6 +392,7 @@ const QuickViewModal = ({ isOpen, onClose, productId, products }) => {
                             sx={{
                                 fontFamily: "Noto Sans",
                                 fontSize: "15px",
+                                pr: 1.5,
                                 letterSpacing: "0.5px",
                                 color: "#666",
                                 lineHeight: 1.6,
