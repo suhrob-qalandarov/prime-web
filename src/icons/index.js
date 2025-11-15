@@ -38,7 +38,7 @@ export const CartIcon = ({ size = 24, color = "currentColor" }) => (
 );
 
 // X Close Icon
-export const CloseIcon = () => (
+export const CartCloseIcon = () => (
     <svg
         xmlns="http://www.w3.org/2000/svg"
         width="20"

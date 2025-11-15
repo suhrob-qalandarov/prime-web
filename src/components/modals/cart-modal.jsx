@@ -2,7 +2,7 @@
 
 import "./cart-modal.css"
 import { Box, Stack, Typography } from "@mui/material"
-import { CloseIcon } from "../../icons"
+import { CartCloseIcon } from "../../icons"
 import { Link } from "react-router-dom"
 import { useState, useEffect } from "react"
 
@@ -75,7 +75,7 @@ const CartModal = ({ isOpen, onClose }) => {
                 <Box className="cart-header">
                     <h3 className="cart-title">Savat</h3>
                     <button className="cart-close" onClick={onClose}>
-                        <CloseIcon />
+                        <CartCloseIcon />
                     </button>
                 </Box>
 
