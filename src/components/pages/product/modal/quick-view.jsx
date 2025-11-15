@@ -311,16 +311,16 @@ const QuickViewModal = ({ isOpen, onClose, productId, products }) => {
                             >
                                 {formatPrice(discountedPrice)} So'm
                             </Typography>
-                            <Box sx={{ display: "flex", alignItems: "center", mx: 1 }}>
-                                <SeparatorIcon sx={{ color: "#e0e0e0" }} />
-                            </Box>
                             {hasDiscount && (
                                 <>
+                                    <Box sx={{ display: "flex", alignItems: "center", mx: 1 }}>
+                                        <SeparatorIcon sx={{ color: "#636262" }} />
+                                    </Box>
                                     <Typography
                                         sx={{
                                             fontFamily: "Noto Sans",
-                                            fontSize: "14px",
-                                            color: "#aaa",
+                                            fontSize: "16px",
+                                            color: "#636262",
                                             textDecoration: "line-through",
                                         }}
                                     >
@@ -328,12 +328,15 @@ const QuickViewModal = ({ isOpen, onClose, productId, products }) => {
                                     </Typography>
                                     <Chip
                                         label={`-${product.discount}%`}
-                                        size="small"
                                         sx={{
-                                            backgroundColor: "#4CAF50",
-                                            color: "white",
-                                            fontWeight: 700,
-                                            fontSize: "12px",
+                                            backgroundColor: "rgba(189,236,118,0.87)",
+                                            color: "black",
+                                            fontWeight: 600,
+                                            fontSize: "14px",
+                                            height: "25px",
+                                            "& .MuiChip-label": {
+                                                px: 1.5,
+                                            },
                                         }}
                                     />
                                 </>
