@@ -10,6 +10,25 @@ const CloseIcon = () => (
     </svg>
 )
 
+const SeparatorIcon = () => (
+    <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="1"
+        height="16"
+        viewBox="0 0 1 16"
+        fill="none"
+    >
+        <line
+            x1="0.5"
+            y1="0"
+            x2="0.5"
+            y2="16"
+            stroke="#666"
+            strokeWidth="1"
+        />
+    </svg>
+)
+
 const QuickViewModal = ({ isOpen, onClose, productId, products }) => {
     const [product, setProduct] = useState(null)
     const [selectedSize, setSelectedSize] = useState(null)
@@ -47,7 +66,7 @@ const QuickViewModal = ({ isOpen, onClose, productId, products }) => {
     const discountedPrice = hasDiscount ? Math.round(product.price * (1 - product.discount / 100)) : product.price
 
     const formatPrice = (price) => {
-        return new Intl.NumberFormat("uz-UZ").format(price)
+        return new Intl.NumberFormat("fr-FR").format(price)
     }
 
     const availableSizes = product.productSizes?.filter((size) => size.amount > 0) || []
@@ -239,24 +258,27 @@ const QuickViewModal = ({ isOpen, onClose, productId, products }) => {
                         </Box>
 
                         {/* Category */}
-                        {product.categoryName && (
-                            <Typography
-                                sx={{
-                                    fontSize: "14px",
-                                    color: "#666",
-                                    textTransform: "uppercase",
-                                    letterSpacing: "1px",
-                                    fontWeight: 600,
-                                }}
-                            >
-                                {product.categoryName}
-                            </Typography>
-                        )}
+                        <Typography
+                            sx={{
+                                fontFamily: "Noto Sans",
+                                fontSize: "12px",
+                                color: "#666",
+                                textTransform: "uppercase",
+                                letterSpacing: "1px",
+                                fontWeight: 600,
+                                mt: "10px",
+                                mb: "-12px",
+                            }}
+                        >
+                            {product.categoryName}
+                        </Typography>
 
                         {/* Product Name */}
                         <Typography
                             sx={{
-                                fontSize: { xs: "18px", md: "20px" },
+                                mt: 0,
+                                fontFamily: "Noto Sans",
+                                fontSize: { xs: "18px", md: "22px" },
                                 fontWeight: 600,
                                 color: "#1a1a1a",
                             }}
@@ -268,6 +290,7 @@ const QuickViewModal = ({ isOpen, onClose, productId, products }) => {
                         <Box sx={{ display: "flex", alignItems: "center", gap: 1.5, flexWrap: "wrap" }}>
                             <Typography
                                 sx={{
+                                    fontFamily: "Noto Sans",
                                     fontSize: "20px",
                                     fontWeight: 700,
                                     color: "#1a1a1a",
@@ -275,10 +298,14 @@ const QuickViewModal = ({ isOpen, onClose, productId, products }) => {
                             >
                                 {formatPrice(discountedPrice)} So'm
                             </Typography>
+                            <Box sx={{ display: "flex", alignItems: "center", mx: 1 }}>
+                                <SeparatorIcon />
+                            </Box>
                             {hasDiscount && (
                                 <>
                                     <Typography
                                         sx={{
+                                            fontFamily: "Noto Sans",
                                             fontSize: "14px",
                                             color: "#aaa",
                                             textDecoration: "line-through",
@@ -304,6 +331,7 @@ const QuickViewModal = ({ isOpen, onClose, productId, products }) => {
                         {product.description && (
                             <Typography
                                 sx={{
+                                    fontFamily: "Noto Sans",
                                     fontSize: "13px",
                                     color: "#666",
                                     lineHeight: 1.6,
@@ -316,14 +344,14 @@ const QuickViewModal = ({ isOpen, onClose, productId, products }) => {
                         {/* Size Selection */}
                         {availableSizes.length > 0 && (
                             <Box>
-                                <Typography sx={{ fontSize: "14px", fontWeight: 600, mb: 1 }}>
-                                    O'lcham: {selectedSize ? `${selectedSize.size} (Bo'y ${selectedSize.height || "176-187"})` : ""}
+                                <Typography sx={{ fontSize: "14px", fontFamily: "Noto Sans", fontWeight: 600, mb: 1 }}>
+                                    O'lcham: {selectedSize ? selectedSize.size : ""}
                                 </Typography>
                                 <Box sx={{ display: "flex", gap: 1, flexWrap: "wrap", mt: 1 }}>
                                     {availableSizes.map((size, index) => (
                                         <Chip
                                             key={index}
-                                            label={`${size.size} (bo'y ${size.height || "176-187"})`}
+                                            label={size.size}
                                             onClick={() => {
                                                 setSelectedSize(size)
                                                 setQuantity(1)
@@ -334,6 +362,7 @@ const QuickViewModal = ({ isOpen, onClose, productId, products }) => {
                                                 color: "#333",
                                                 fontWeight: selectedSize?.size === size.size ? 700 : 500,
                                                 fontSize: "13px",
+                                                fontFamily: "Noto Sans",
                                                 cursor: "pointer",
                                                 "&:hover": {
                                                     borderColor: "#000",
@@ -349,8 +378,8 @@ const QuickViewModal = ({ isOpen, onClose, productId, products }) => {
                         {/* Color - Display only */}
                         {product.colorName && (
                             <Box>
-                                <Typography sx={{ fontSize: "14px", fontWeight: 600, mb: 0.5 }}>
-                                    Rang: <span style={{ fontWeight: 400 }}>{product.colorName}</span>
+                                <Typography sx={{ fontSize: "14px", fontWeight: 600, fontFamily: "Noto Sans", mb: 0.5 }}>
+                                    Rang: <span style={{ fontWeight: 400 }}>{product.color}</span>
                                 </Typography>
                             </Box>
                         )}
@@ -358,7 +387,7 @@ const QuickViewModal = ({ isOpen, onClose, productId, products }) => {
                         {/* Quantity Selector */}
                         {selectedSize && (
                             <Box>
-                                <Typography sx={{ fontSize: "14px", fontWeight: 600, mb: 1 }}>Miqdori:</Typography>
+                                <Typography sx={{ fontSize: "14px", fontFamily: "Noto Sans", fontWeight: 600, mb: 1 }}>Miqdori:</Typography>
                                 <Box sx={{ display: "flex", alignItems: "center", gap: 1.5, width: "fit-content" }}>
                                     <IconButton
                                         onClick={() => handleQuantityChange(-1)}
@@ -379,6 +408,7 @@ const QuickViewModal = ({ isOpen, onClose, productId, products }) => {
                                     </IconButton>
                                     <Typography
                                         sx={{
+                                            fontFamily: "Noto Sans",
                                             fontSize: "16px",
                                             fontWeight: 600,
                                             minWidth: "30px",
@@ -418,6 +448,7 @@ const QuickViewModal = ({ isOpen, onClose, productId, products }) => {
                                 color: "white",
                                 fontWeight: 700,
                                 fontSize: "14px",
+                                fontFamily: "Noto Sans",
                                 py: 1.5,
                                 textTransform: "uppercase",
                                 mt: 1,
@@ -441,6 +472,7 @@ const QuickViewModal = ({ isOpen, onClose, productId, products }) => {
                                 sx={{
                                     color: "#666",
                                     fontSize: "13px",
+                                    fontFamily: "Noto Sans",
                                     textTransform: "none",
                                     justifyContent: "flex-start",
                                     textAlign: "left",
@@ -461,6 +493,7 @@ const QuickViewModal = ({ isOpen, onClose, productId, products }) => {
                                 sx={{
                                     color: "#666",
                                     fontSize: "13px",
+                                    fontFamily: "Noto Sans",
                                     textTransform: "none",
                                     justifyContent: "flex-start",
                                     textAlign: "left",
@@ -480,6 +513,7 @@ const QuickViewModal = ({ isOpen, onClose, productId, products }) => {
                         <Typography
                             sx={{
                                 fontSize: "12px",
+                                fontFamily: "Noto Sans",
                                 color: "#999",
                                 mt: 1,
                             }}
@@ -492,6 +526,7 @@ const QuickViewModal = ({ isOpen, onClose, productId, products }) => {
                             <Typography
                                 sx={{
                                     fontSize: "12px",
+                                    fontFamily: "Noto Sans",
                                     color: "#666",
                                 }}
                             >
