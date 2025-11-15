@@ -402,23 +402,24 @@ const ProductFilters = ({
                             ))}
                         </Select>
                     </FormControl>
-                </Box>
-                </Box>
-
-                {/* No products message - Below products count */}
-                {totalProducts === 0 && (
-                    <Box
-                        sx={{
-                            fontSize: isMobile ? "13px" : "14px",
-                            color: "#000",
-                            fontFamily: "Noto Sans, sans-serif",
-                            mt: 2,
-                        }}
-                    >
-                        Tanlangan mezonlar bo'yicha mahsulotlar topilmadi
                     </Box>
-                )}
+                </Box>
             </Box>
+
+            {/* No products message - Below products count */}
+            {totalProducts === 0 && (
+                <Box
+                    sx={{
+                        fontSize: isMobile ? "13px" : "14px",
+                        color: "#000",
+                        fontFamily: "Noto Sans, sans-serif",
+                        mt: 2,
+                        mb: filterOpen ? 2 : 0,
+                    }}
+                >
+                    Tanlangan mezonlar bo'yicha mahsulotlar topilmadi
+                </Box>
+            )}
 
             {/* Filter Dropdown */}
             <Collapse 
