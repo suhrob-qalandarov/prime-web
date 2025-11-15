@@ -23,6 +23,37 @@ const FilterIcon = () => (
     </svg>
 )
 
+const SeparatorIcon = () => (
+    <svg 
+        xmlns="http://www.w3.org/2000/svg" 
+        width="1" 
+        height="16" 
+        viewBox="0 0 1 16" 
+        fill="none"
+    >
+        <line 
+            x1="0.5" 
+            y1="0" 
+            x2="0.5" 
+            y2="16" 
+            stroke="#666" 
+            strokeWidth="1"
+        />
+    </svg>
+)
+
+const CloseIcon = () => (
+    <svg 
+        xmlns="http://www.w3.org/2000/svg" 
+        width="1em" 
+        height="1em" 
+        fill="currentColor" 
+        viewBox="0 0 256 256"
+    >
+        <path d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z"></path>
+    </svg>
+)
+
 const ProductFilters = ({ 
     totalProducts, 
     selectedStatus, 
@@ -180,32 +211,160 @@ const ProductFilters = ({
             {/* Products count - Separate row below filter button */}
             <Box 
                 sx={{ 
-                    display: "flex", 
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                    gap: 3,
                     mt: 2,
                     mb: filterOpen ? 2 : 0,
                     position: "relative",
                     zIndex: 1,
                 }}
             >
-                <Box
-                    sx={{
-                        fontSize: isMobile ? "13px" : "14px",
-                        color: "#666",
-                        fontFamily: "Noto Sans, sans-serif",
+                <Box 
+                    sx={{ 
+                        display: "flex", 
+                        alignItems: "center",
+                        justifyContent: "space-between",
+                        gap: 3,
+                        flexWrap: "wrap",
                     }}
                 >
-                    {totalProducts > 0 ? (
-                        <>Mahsulotlar topildi: {totalProducts}</>
-                    ) : (
-                        <>Tanlangan mezonlar bo'yicha mahsulotlar topilmadi</>
-                    )}
-                </Box>
+                    <Box sx={{ display: "flex", alignItems: "center", gap: 2, flexWrap: "wrap" }}>
+                        <Box
+                            sx={{
+                                fontSize: isMobile ? "13px" : "14px",
+                                color: "#666",
+                                fontFamily: "Noto Sans, sans-serif",
+                            }}
+                        >
+                            Mahsulotlar topildi: {totalProducts}
+                        </Box>
 
-                {/* Sort dropdown - Right side */}
-                <Box sx={{ display: "flex", alignItems: "center" }}>
+                        {/* Separator and Selected Filters */}
+                        {(selectedStatus || selectedColors.length > 0 || selectedSizes.length > 0) && (
+                            <>
+                                <Box sx={{ display: "flex", alignItems: "center", mx: 1 }}>
+                                    <SeparatorIcon />
+                                </Box>
+                                <Box sx={{ display: "flex", alignItems: "center", gap: 1, flexWrap: "wrap" }}>
+                                    {selectedStatus && (
+                                        <Chip
+                                            label={selectedStatus}
+                                            onClick={() => {
+                                                onStatusChange(null)
+                                            }}
+                                            onDelete={(e) => {
+                                                e.stopPropagation()
+                                                onStatusChange(null)
+                                            }}
+                                            deleteIcon={<CloseIcon />}
+                                            size="small"
+                                            sx={{
+                                                fontSize: isMobile ? "13px" : "14px",
+                                                height: isMobile ? "28px" : "32px",
+                                                backgroundColor: "#e5e2d0",
+                                                color: "#333",
+                                                flexDirection: "row-reverse",
+                                                paddingLeft: "6px",
+                                                cursor: "pointer",
+                                                "& .MuiChip-deleteIcon": {
+                                                    fontSize: "18px",
+                                                    color: "#666",
+                                                    marginLeft: "2px",
+                                                    marginRight: "0px",
+                                                    cursor: "pointer",
+                                                },
+                                                "& .MuiChip-label": {
+                                                    paddingLeft: "4px",
+                                                    paddingRight: "6px",
+                                                    fontSize: isMobile ? "13px" : "14px",
+                                                    cursor: "pointer",
+                                                },
+                                            }}
+                                        />
+                                    )}
+                                    {selectedColors.map((color) => (
+                                        <Chip
+                                            key={color}
+                                            label={color}
+                                            onClick={() => {
+                                                const newColors = selectedColors.filter(c => c !== color)
+                                                onColorChange(newColors)
+                                            }}
+                                            onDelete={(e) => {
+                                                e.stopPropagation()
+                                                const newColors = selectedColors.filter(c => c !== color)
+                                                onColorChange(newColors)
+                                            }}
+                                            deleteIcon={<CloseIcon />}
+                                            size="small"
+                                            sx={{
+                                                fontSize: isMobile ? "13px" : "14px",
+                                                height: isMobile ? "28px" : "32px",
+                                                backgroundColor: "#e5e2d0",
+                                                color: "#333",
+                                                flexDirection: "row-reverse",
+                                                paddingLeft: "6px",
+                                                cursor: "pointer",
+                                                "& .MuiChip-deleteIcon": {
+                                                    fontSize: "18px",
+                                                    color: "#666",
+                                                    marginLeft: "2px",
+                                                    marginRight: "0px",
+                                                    cursor: "pointer",
+                                                },
+                                                "& .MuiChip-label": {
+                                                    paddingLeft: "4px",
+                                                    paddingRight: "6px",
+                                                    fontSize: isMobile ? "13px" : "14px",
+                                                    cursor: "pointer",
+                                                },
+                                            }}
+                                        />
+                                    ))}
+                                    {selectedSizes.map((size) => (
+                                        <Chip
+                                            key={size}
+                                            label={size}
+                                            onClick={() => {
+                                                const newSizes = selectedSizes.filter(s => s !== size)
+                                                onSizeChange(newSizes)
+                                            }}
+                                            onDelete={(e) => {
+                                                e.stopPropagation()
+                                                const newSizes = selectedSizes.filter(s => s !== size)
+                                                onSizeChange(newSizes)
+                                            }}
+                                            deleteIcon={<CloseIcon />}
+                                            size="small"
+                                            sx={{
+                                                fontSize: isMobile ? "13px" : "14px",
+                                                height: isMobile ? "28px" : "32px",
+                                                backgroundColor: "#e5e2d0",
+                                                color: "#333",
+                                                flexDirection: "row-reverse",
+                                                paddingLeft: "6px",
+                                                cursor: "pointer",
+                                                "& .MuiChip-deleteIcon": {
+                                                    fontSize: "18px",
+                                                    color: "#666",
+                                                    marginLeft: "2px",
+                                                    marginRight: "0px",
+                                                    cursor: "pointer",
+                                                },
+                                                "& .MuiChip-label": {
+                                                    paddingLeft: "4px",
+                                                    paddingRight: "6px",
+                                                    fontSize: isMobile ? "13px" : "14px",
+                                                    cursor: "pointer",
+                                                },
+                                            }}
+                                        />
+                                    ))}
+                                </Box>
+                            </>
+                        )}
+                    </Box>
+
+                    {/* Sort dropdown - Right side */}
+                    <Box sx={{ display: "flex", alignItems: "center" }}>
                     <FormControl
                         sx={{
                             minWidth: isMobile ? "150px" : "220px",
@@ -278,6 +437,21 @@ const ProductFilters = ({
                         </Select>
                     </FormControl>
                 </Box>
+                </Box>
+
+                {/* No products message - Below products count */}
+                {totalProducts === 0 && (
+                    <Box
+                        sx={{
+                            fontSize: isMobile ? "13px" : "14px",
+                            color: "#000",
+                            fontFamily: "Noto Sans, sans-serif",
+                            mt: 2,
+                        }}
+                    >
+                        Tanlangan mezonlar bo'yicha mahsulotlar topilmadi
+                    </Box>
+                )}
             </Box>
 
             {/* Filter Dropdown */}
