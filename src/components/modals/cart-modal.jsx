@@ -1,12 +1,12 @@
-import { CartCloseIcon } from "../../icons"
-import { Link } from "react-router-dom"
-import { useState, useEffect } from "react"
-import { mockProducts } from "../../mock/products"
+import {CartCloseIcon} from "../../icons"
+import {Link} from "react-router-dom"
+import {useEffect, useState} from "react"
+import {mockProducts} from "../../mock/products"
 
 const buildMockCartItems = () => {
-    const tags = ["HOT", "SALE", "NEW"]
+    const tags = ["HOT", "NEW", "SALE", "NEW", "SALE"]
 
-    const items = tags
+    return tags
         .map((tag, index) => {
             const product = mockProducts.find((p) => p.tag === tag)
             if (!product) return null
@@ -25,8 +25,6 @@ const buildMockCartItems = () => {
             }
         })
         .filter(Boolean)
-
-    return items
 }
 
 const CartModal = ({ isOpen, onClose }) => {
@@ -119,7 +117,7 @@ const CartModal = ({ isOpen, onClose }) => {
                         className="bg-transparent border-none mr-2 text-[28px] text-[#6B7280] hover:text-[color:var(--burgundy-color)] transition-colors"
                         onClick={onClose}
                     >
-                        <CartCloseIcon />
+                        <CartCloseIcon size={20} />
                     </button>
                 </div>
 
@@ -133,7 +131,7 @@ const CartModal = ({ isOpen, onClose }) => {
                             <small>Ha ul-bul narsa qo&apos;shmaymizmi bu yerga?</small>
                         </div>
                     ) : (
-                        <div id="cartItems">
+                        <div>
                             {cartItems.map((item) => (
                                 <div key={item.id} className="flex gap-3 py-3 border-b border-[#f0f0f0]">
                                     {/* Image */}
@@ -171,8 +169,8 @@ const CartModal = ({ isOpen, onClose }) => {
                                                 </div>
                                             </div>
 
-                                            <button className="text-[#ef4444] text-[18px] px-1 leading-none">
-                                                ×
+                                            <button className="text-[#ef4444] px-1 leading-none">
+                                                <CartCloseIcon size={18} />
                                             </button>
                                         </div>
 
@@ -187,7 +185,7 @@ const CartModal = ({ isOpen, onClose }) => {
                                                     </span>
                                                 )}
                                             </div>
-                                            <span className="text-[15px] text-[#111827]">
+                                            <span className="text-lg text-[#111827] mr-2">
                                                 ×{item.quantity}
                                             </span>
                                         </div>
