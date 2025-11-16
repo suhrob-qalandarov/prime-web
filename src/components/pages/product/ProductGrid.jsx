@@ -26,56 +26,8 @@ const ProductGrid = ({ selectedCategory }) => {
         // Simulate loading delay
         setLoading(true)
         const timer = setTimeout(() => {
-            // Use mock data instead of API call
-            const transformedProducts = mockProducts.map((product) => {
-                const hasDiscount = product.status === "SALE" && product.discount > 0
-                // In mock data, price is already the discounted price
-                const displayPrice = product.price
-                const displayOldPrice = hasDiscount && product.oldPrice ? product.oldPrice : null
-
-                // Create original product structure for QuickView modal
-                // For QuickView, we need the original (non-discounted) price
-                const originalPrice = hasDiscount && product.oldPrice ? product.oldPrice : product.price
-                
-                const originalProduct = {
-                    id: product.id,
-                    name: product.name,
-                    brand: product.brand,
-                    categoryName: product.category,
-                    color: product.color,
-                    price: originalPrice,
-                    discount: product.discount || 0,
-                    status: product.status,
-                    attachmentKeys: product.images,
-                    description: product.description
-                        ? product.description
-                        : `${product.name} - ${product.brand} mahsuloti. Yuqori sifatli materialdan tayyorlangan.`,
-                    productSizes: product.sizes ? product.sizes : [
-                        { size: "S", amount: 10 },
-                        { size: "M", amount: 15 },
-                        { size: "L", amount: 12 },
-                        { size: "XL", amount: 8 },
-                    ],
-                }
-
-                return {
-                    id: product.id,
-                    name: product.name,
-                    brand: product.brand,
-                    categoryName: product.category,
-                    color: product.color,
-                    price: displayPrice,
-                    oldPrice: displayOldPrice,
-                    discount: product.discount || 0,
-                    image: product.image,
-                    images: product.images,
-                    badge: product.badge,
-                    marqueeDiscount: product.marqueeDiscount || 0,
-                    originalProduct,
-                }
-            })
-            
-            setProducts(transformedProducts)
+            // Use mock data directly
+            setProducts(mockProducts)
             setPage(1)
             setLoading(false)
         }, 300) // Small delay to simulate API call
@@ -83,16 +35,38 @@ const ProductGrid = ({ selectedCategory }) => {
         return () => clearTimeout(timer)
     }, [selectedCategory])
 
+    // Transform products for display and filter
+    const transformedProducts = useMemo(() => {
+        return products.map((product) => {
+            const hasDiscount = product.tag === "SALE" && product.discount > 0
+            return {
+                id: product.id,
+                name: product.name,
+                brand: product.brand,
+                categoryName: product.category,
+                color: product.color,
+                price: product.price,
+                oldPrice: hasDiscount ? product.originalPrice : null,
+                discount: product.discount || 0,
+                image: product.images?.[0],
+                images: product.images,
+                badge: product.tag,
+                marqueeDiscount: product.discount || 0,
+                status: product.tag,
+            }
+        })
+    }, [products])
+
     // Filter and sort products
     const filteredProducts = useMemo(() => {
-        let filtered = [...products]
+        let filtered = [...transformedProducts]
 
         // Filter by status
         if (selectedStatus) {
             filtered = filtered.filter(product => {
-                if (selectedStatus === "Sale") return product.discount > 0
-                if (selectedStatus === "New") return product.badge === "NEW"
-                if (selectedStatus === "Hot") return product.badge === "HOT" || product.status === "HOT"
+                if (selectedStatus === "Sale") return product.tag === "SALE" || product.discount > 0
+                if (selectedStatus === "New") return product.tag === "NEW"
+                if (selectedStatus === "Hot") return product.tag === "HOT"
                 return true
             })
         }
@@ -114,7 +88,7 @@ const ProductGrid = ({ selectedCategory }) => {
         }
 
         return filtered
-    }, [products, selectedStatus, selectedSort, selectedColors, selectedSizes])
+    }, [transformedProducts, selectedStatus, selectedSort, selectedColors])
 
     // Reset page when filters change
     useEffect(() => {
@@ -146,7 +120,6 @@ const ProductGrid = ({ selectedCategory }) => {
                 isOpen={quickViewOpen}
                 onClose={() => setQuickViewOpen(false)}
                 productId={selectedProductId}
-                products={products.map(p => p.originalProduct).filter(Boolean)}
             />
 
             {/* Filters Section */}
@@ -198,8 +171,8 @@ const ProductGrid = ({ selectedCategory }) => {
                                         .filter((pageNum) => {
                                             if (totalPages <= 7) return true
                                             if (pageNum === 1 || pageNum === totalPages) return true
-                                            if (Math.abs(pageNum - page) <= 1) return true
-                                            return false
+                                            return Math.abs(pageNum - page) <= 1;
+
                                         })
                                         .map((pageNum, idx, arr) => {
                                             const showEllipsis = idx > 0 && pageNum - arr[idx - 1] > 1

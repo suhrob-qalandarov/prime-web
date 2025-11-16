@@ -1,63 +1,11 @@
 import { useState, useEffect } from "react"
 import { Modal, Box, Typography, Chip, IconButton, Button } from "@mui/material"
 import urls from "../../../../constants/urls"
+import { CloseIcon, SeparatorIcon, MinusIcon, PlusIcon, CopyIcon, QuestionIcon, EyeIcon } from "../../../../icons"
+import { mockProducts } from "../../../../mock/products"
+import ProductService from "../../../../service/product"
 
-const CloseIcon = () => (
-    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="var(--burgundy-dark)" viewBox="0 0 256 256">
-        <path d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z"></path>
-    </svg>
-)
-
-const SeparatorIcon = () => (
-    <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="1"
-        height="16"
-        viewBox="0 0 1 16"
-        fill="none"
-    >
-        <line
-            x1="0.5"
-            y1="0"
-            x2="0.5"
-            y2="16"
-            stroke="#666"
-            strokeWidth="1"
-        />
-    </svg>
-)
-
-const MinusIcon = () => (
-    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 256 256" style={{ cursor: "pointer" }}>
-        <path d="M224,128a8,8,0,0,1-8,8H40a8,8,0,0,1,0-16H216A8,8,0,0,1,224,128Z"></path>
-    </svg>
-)
-
-const PlusIcon = () => (
-    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 256 256" style={{ cursor: "pointer" }}>
-        <path d="M224,128a8,8,0,0,1-8,8H136v80a8,8,0,0,1-16,0V136H40a8,8,0,0,1,0-16h80V40a8,8,0,0,1,16,0v80h80A8,8,0,0,1,224,128Z"></path>
-    </svg>
-)
-
-const CopyIcon = () => (
-    <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor" viewBox="0 0 256 256">
-        <path d="M216,32H88a8,8,0,0,0-8,8V80H40a8,8,0,0,0-8,8V216a8,8,0,0,0,8,8H168a8,8,0,0,0,8-8V176h40a8,8,0,0,0,8-8V40A8,8,0,0,0,216,32Zm-8,128H176V88a8,8,0,0,0-8-8H96V48H208Z"></path>
-    </svg>
-)
-
-const QuestionIcon = () => (
-    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 256 256">
-        <path d="M140,180a12,12,0,1,1-12-12A12,12,0,0,1,140,180ZM128,72c-22.06,0-40,16.15-40,36v4a8,8,0,0,0,16,0v-4c0-11,10.77-20,24-20s24,9,24,20-10.77,20-24,20a8,8,0,0,0-8,8v8a8,8,0,0,0,16,0v-.72c18.24-3.35,32-17.9,32-35.28C168,88.15,150.06,72,128,72Zm104,56A104,104,0,1,1,128,24,104.11,104.11,0,0,1,232,128Zm-16,0a88,88,0,1,0-88,88A88.1,88.1,0,0,0,216,128Z"></path>
-    </svg>
-)
-
-const EyeIcon = () => (
-    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 256 256">
-        <path d="M247.31,124.76c-.35-.79-8.82-19.58-27.65-38.41C194.57,61.26,162.88,48,128,48S61.43,61.26,36.34,86.35C17.51,105.18,9,124,8.69,124.76a8,8,0,0,0,0,6.5c.35.79,8.82,19.57,27.65,38.4C61.43,194.74,93.12,208,128,208s66.57-13.26,91.66-38.34c18.83-18.83,27.3-37.61,27.65-38.4A8,8,0,0,0,247.31,124.76ZM128,192c-30.78,0-57.67-11.19-79.93-33.25A133.47,133.47,0,0,1,25,128,133.33,133.33,0,0,1,48.07,97.25C70.33,75.19,97.22,64,128,64s57.67,11.19,79.93,33.25A133.46,133.46,0,0,1,231.05,128C223.84,141.46,192.43,192,128,192Zm0-112a48,48,0,1,0,48,48A48.05,48.05,0,0,0,128,80Zm0,80a32,32,0,1,1,32-32A32,32,0,0,1,128,160Z"></path>
-    </svg>
-)
-
-const QuickViewModal = ({ isOpen, onClose, productId, products }) => {
+const QuickViewModal = ({ isOpen, onClose, productId}) => {
     const [product, setProduct] = useState(null)
     const [selectedSize, setSelectedSize] = useState(null)
     const [quantity, setQuantity] = useState(1)
@@ -69,20 +17,57 @@ const QuickViewModal = ({ isOpen, onClose, productId, products }) => {
     const minSwipeDistance = 50
 
     useEffect(() => {
-        if (productId && products) {
-            const foundProduct = products.find((p) => p.id === productId)
+        if (!productId) return
+
+        let isMounted = true
+
+        const loadProduct = async () => {
+            try {
+                setProduct(null)
+                const apiProduct = await ProductService.getProductById(productId)
+                if (!isMounted) return
+                handleProductLoaded(apiProduct)
+            } catch (e) {
+                console.log("QuickView fallback to mock, error:", e)
+                const mockProduct = mockProducts.find((p) => p.id === productId)
+                if (!isMounted) return
+                handleProductLoaded(mockProduct || null)
+            }
+        }
+
+        const handleProductLoaded = (foundProduct) => {
+            if (!foundProduct) {
+                setProduct(null)
+                setSelectedSize(null)
+                setQuantity(1)
+                setCurrentSlideIndex(0)
+                return
+            }
+
             setProduct(foundProduct)
+
             // Set default size (first available size)
-            if (foundProduct?.productSizes && foundProduct.productSizes.length > 0) {
-                const availableSizes = foundProduct.productSizes.filter((size) => size.amount > 0)
+            if (foundProduct?.sizes && foundProduct.sizes.length > 0) {
+                const availableSizes = foundProduct.sizes.filter((size) => size.stock > 0)
                 if (availableSizes.length > 0) {
                     setSelectedSize(availableSizes[0])
+                } else {
+                    setSelectedSize(null)
                 }
+            } else {
+                setSelectedSize(null)
             }
+
             setQuantity(1)
             setCurrentSlideIndex(0) // Reset slide index when product changes
         }
-    }, [productId, products])
+
+        loadProduct()
+
+        return () => {
+            isMounted = false
+        }
+    }, [productId])
 
     const onTouchStartHandler = (e) => {
         setTouchEnd(null)
@@ -116,7 +101,7 @@ const QuickViewModal = ({ isOpen, onClose, productId, products }) => {
     if (!product) return null
 
     // Get all product images
-    const allImages = product.attachmentKeys || []
+    const allImages = product.images || []
     
     // Helper function to get image URL
     const getImageUrl = (imageKey) => {
@@ -126,15 +111,15 @@ const QuickViewModal = ({ isOpen, onClose, productId, products }) => {
             : `${urls.apiBaseUrl}/v1/attachment/${imageKey}`
     }
 
-    const hasDiscount = product.status === "SALE" && product.discount > 0
+    const hasDiscount = product.tag === "SALE" && product.discount > 0
     const discountedPrice = hasDiscount ? Math.round(product.price * (1 - product.discount / 100)) : product.price
 
     const formatPrice = (price) => {
         return new Intl.NumberFormat("fr-FR").format(price)
     }
 
-    const availableSizes = product.productSizes?.filter((size) => size.amount > 0) || []
-    const maxQuantity = selectedSize ? selectedSize.amount : 0
+    const availableSizes = product.sizes?.filter((size) => size.stock > 0) || []
+    const maxQuantity = selectedSize ? selectedSize.stock : 0
 
     const handleQuantityChange = (delta) => {
         const newQuantity = Math.max(1, Math.min(maxQuantity, quantity + delta))
@@ -215,14 +200,13 @@ const QuickViewModal = ({ isOpen, onClose, productId, products }) => {
                         >
                             Quickview
                         </Typography>
-                <IconButton
-                    onClick={onClose}
-                    sx={{
+                        <IconButton
+                            onClick={onClose}
+                            sx={{
                                 backgroundColor: "#f0f0f0",
                                 padding: "2",
-                    }}
-                >
-                    <CloseIcon />
+                            }}
+                        ><CloseIcon />
                 </IconButton>
                     </Box>
 
@@ -303,8 +287,8 @@ const QuickViewModal = ({ isOpen, onClose, productId, products }) => {
                                                         component="img"
                                                         src={getImageUrl(imageKey)}
                                                         alt={`${product.name} - ${index + 1}`}
-                    sx={{
-                        position: "absolute",
+                                                        sx={{
+                                                            position: "absolute",
                                                             top: 0,
                                                             left: 0,
                                                             width: "100%",
@@ -322,7 +306,7 @@ const QuickViewModal = ({ isOpen, onClose, productId, products }) => {
                                                     paddingTop: "133.33%",
                                                     overflow: "hidden",
                                                     borderRadius: "12px",
-                        backgroundColor: "#f5f5f5",
+                                                    backgroundColor: "#f5f5f5",
                                                 }}
                                             >
                                                 <Box
@@ -374,7 +358,7 @@ const QuickViewModal = ({ isOpen, onClose, productId, products }) => {
                                                         transition: "background-color 0.2s ease, opacity 0.2s ease",
                                                         flexShrink: 0,
                                                         opacity: currentSlideIndex === index ? 1 : 0.5,
-                        "&:hover": {
+                                                        "&:hover": {
                                                             opacity: 1,
                                                         },
                                                     }}
@@ -399,7 +383,7 @@ const QuickViewModal = ({ isOpen, onClose, productId, products }) => {
                                     mb: "-13px",
                                 }}
                             >
-                                {product.categoryName}
+                            {product.category}
                             </Typography>
 
                             {/* Product Name */}
@@ -1375,7 +1359,7 @@ const QuickViewModal = ({ isOpen, onClose, productId, products }) => {
                             </Box>
 
                             {/* Category Label */}
-                            {product.categoryName && (
+                            {product.category && (
                                 <Box sx={{ display: "flex", alignItems: "center", gap: 0.5, mt: 2 }}>
                                     <Typography
                                         sx={{
@@ -1394,7 +1378,7 @@ const QuickViewModal = ({ isOpen, onClose, productId, products }) => {
                                             color: "#666",
                                         }}
                                     >
-                                        {product.categoryName}
+                                        {product.category}
                                     </Typography>
                                 </Box>
                             )}

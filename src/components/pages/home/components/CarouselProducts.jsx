@@ -22,7 +22,7 @@ const useItemsPerView = () => {
     return itemsPerView
 }
 
-const CarouselProducts = ({ products = [], isLoading = false }) => {
+const CarouselProducts = ({ products = [], isLoading = false, onQuickView }) => {
     const itemsPerView = useItemsPerView()
     const totalItems = products.length
     const [index, setIndex] = useState(0)
@@ -89,7 +89,7 @@ const CarouselProducts = ({ products = [], isLoading = false }) => {
                       ))
                     : visibleProducts.map((product, idx) => (
                           <Box key={product?.id ?? `product-${idx}`} className="carousel-card">
-                              <ProductCard product={product} />
+                              <ProductCard product={product} onQuickView={onQuickView} />
                           </Box>
                       ))}
             </Box>

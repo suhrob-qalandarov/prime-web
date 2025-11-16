@@ -5,6 +5,7 @@ import { useMemo, useState, useRef, useCallback, useLayoutEffect } from "react"
 import CarouselProducts from "./components/CarouselProducts"
 import ImageWithSkeleton from "../../common/ImageWithSkeleton"
 import { mockProductsByTab } from "../../../mock/products"
+import QuickViewModal from "../product/modal/quick-view"
 import "./home.css"
 
 const mockTabs = [
@@ -18,6 +19,8 @@ const Home = () => {
     const tabListRef = useRef(null)
     const tabRefs = useRef([])
     const [indicatorStyle, setIndicatorStyle] = useState({ width: 0, left: 0 })
+    const [quickViewOpen, setQuickViewOpen] = useState(false)
+    const [selectedProductId, setSelectedProductId] = useState(null)
     const activeProducts = useMemo(() => mockProductsByTab[activeTab] || [], [activeTab])
 
     const updateIndicator = useCallback(() => {
@@ -43,6 +46,21 @@ const Home = () => {
         window.addEventListener("resize", updateIndicator)
         return () => window.removeEventListener("resize", updateIndicator)
     }, [updateIndicator])
+
+    const handleQuickView = (productId) => {
+        setSelectedProductId(productId)
+        setQuickViewOpen(true)
+    }
+
+    // Transform products for QuickViewModal (same format as ProductGrid)
+    const transformedProducts = useMemo(() => {
+        return activeProducts.map((product) => ({
+            ...product,
+            attachmentKeys: product.images || [],
+            categoryName: product.category || "Mahsulot",
+            colorName: product.colorName || product.color,
+        }))
+    }, [activeProducts])
 
     return (
         <div>
@@ -133,7 +151,7 @@ const Home = () => {
                         </Box>
 
                         <div className="relative">
-                            <CarouselProducts products={activeProducts} />
+                            <CarouselProducts products={activeProducts} onQuickView={handleQuickView} />
                         </div>
                     </Stack>
                 </div>
@@ -183,6 +201,13 @@ const Home = () => {
                     </div>
                 </section>
             </Stack>
+
+            <QuickViewModal
+                isOpen={quickViewOpen}
+                onClose={() => setQuickViewOpen(false)}
+                productId={selectedProductId}
+                products={transformedProducts}
+            />
         </div>
     )
 }
