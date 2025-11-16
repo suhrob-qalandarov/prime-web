@@ -211,7 +211,7 @@ const CartModal = ({ isOpen, onClose }) => {
                     <div className="flex h-[40px] gap-4 font-['Noto Sans'] font-semibold items-start mt-2">
                         <Link
                             to="/order"
-                            className="flex-1 bg-[color:var(--burgundy-color)] text-white border-none px-5 py-[13px] rounded-lg text-[95%] tracking-[0.5px] no-underline flex items-center justify-center"
+                            className="flex-1 bg-[color:var(--burgundy-color)] text-white border-none px-5 py-[13px] rounded-lg text-[95%] tracking-[0.5px] no-underline flex items-center justify-center whitespace-nowrap"
                             id="cartCheckoutBtn"
                             onClick={onClose}
                         >
