@@ -198,7 +198,10 @@ const CartModal = ({ isOpen, onClose }) => {
                 </div>
 
                 {/* Footer */}
-                <div className="px-2 pb-3 pt-2 border-t border-[#e9ecef] rounded-b-[15px]" id="cartFooter">
+                <div
+                    className="px-2 pb-16 lg:pb-3 pt-2 border-t border-[#e9ecef] rounded-b-[15px]"
+                    id="cartFooter"
+                >
                     <div className="flex items-center justify-between mb-2 py-1.5 text-[16px] font-semibold text-[color:var(--text-color)] font-['Noto Sans']">
                         <span>Summa</span>
                         <span id="cartTotalPrice">
