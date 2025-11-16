@@ -1,13 +1,14 @@
-import {CartCloseIcon} from "../../icons"
-import {Link} from "react-router-dom"
-import {useEffect, useState} from "react"
-import {mockProducts} from "../../mock/products"
+import { CartCloseIcon } from "../../icons"
+import { Link } from "react-router-dom"
+import { useEffect, useState } from "react"
+import { mockProducts } from "../../mock/products"
+import BottomNavbar from "../header/bottom/bottom-navbar";
 
 const buildMockCartItems = () => {
     const tags = ["HOT", "NEW", "SALE", "NEW", "SALE"]
 
     return tags
-        .map((tag, index) => {
+        .map((tag) => {
             const product = mockProducts.find((p) => p.tag === tag)
             if (!product) return null
 
@@ -226,6 +227,7 @@ const CartModal = ({ isOpen, onClose }) => {
                         <span onClick={onClose}>Yoki xaridlarni anti-to&apos;xtatish</span>
                     </p>
                 </div>
+                <BottomNavbar />
             </div>
         </div>
     )
