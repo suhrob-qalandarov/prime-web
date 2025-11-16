@@ -1,6 +1,33 @@
 import { CartCloseIcon } from "../../icons"
 import { Link } from "react-router-dom"
 import { useState, useEffect } from "react"
+import { mockProducts } from "../../mock/products"
+
+const buildMockCartItems = () => {
+    const tags = ["HOT", "SALE", "NEW"]
+
+    const items = tags
+        .map((tag, index) => {
+            const product = mockProducts.find((p) => p.tag === tag)
+            if (!product) return null
+
+            return {
+                id: product.id,
+                name: product.name,
+                image: product.images?.[0],
+                // Demo uchun faqat o'lcham qiymati
+                size: "XL",
+                // Rang nuqtasi uchun hex color (agar bo'lmasa, kulrang)
+                colorHex: product.color || "#6B7280",
+                price: product.price,
+                originalPrice: product.originalPrice && product.originalPrice > product.price ? product.originalPrice : null,
+                quantity: 3,
+            }
+        })
+        .filter(Boolean)
+
+    return items
+}
 
 const CartModal = ({ isOpen, onClose }) => {
     const [screenSize, setScreenSize] = useState("desktop")
@@ -21,6 +48,9 @@ const CartModal = ({ isOpen, onClose }) => {
         window.addEventListener("resize", handleResize)
         return () => window.removeEventListener("resize", handleResize)
     }, [])
+
+    const cartItems = buildMockCartItems()
+    const totalPrice = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0)
 
     if (!isOpen) return null
 
@@ -94,23 +124,87 @@ const CartModal = ({ isOpen, onClose }) => {
                 </div>
 
                 {/* Body */}
-                <div className="flex-1 px-5 py-5 overflow-y-auto" id="cartBody">
-                    <div
-                        className="py-10 px-5 text-[#6B7280] tracking-[0.7px] text-[19.7px] font-normal font-['Noto Sans']"
-                        id="cartEmpty"
-                    >
-                        <small>Ha ul-bul narsa qo&apos;shmaymizmi bu yerga?</small>
-                    </div>
-                    <div id="cartItems">
-                        {/* Cart items will be populated dynamically */}
-                    </div>
+                <div className="flex-1 px-2 py-2 overflow-y-auto" id="cartBody">
+                    {cartItems.length === 0 ? (
+                        <div
+                            className="py-10 px-5 text-[#6B7280] tracking-[0.7px] text-[19.7px] font-normal font-['Noto Sans']"
+                            id="cartEmpty"
+                        >
+                            <small>Ha ul-bul narsa qo&apos;shmaymizmi bu yerga?</small>
+                        </div>
+                    ) : (
+                        <div id="cartItems">
+                            {cartItems.map((item) => (
+                                <div key={item.id} className="flex gap-3 py-3 border-b border-[#f0f0f0]">
+                                    {/* Image */}
+                                    <div className="w-[85px] h-[95px] rounded-xl bg-[#f3f4f6] overflow-hidden flex-shrink-0">
+                                        {item.image && (
+                                            <img
+                                                src={item.image}
+                                                alt={item.name}
+                                                className="w-full h-full object-cover"
+                                            />
+                                        )}
+                                    </div>
+
+                                    {/* Texts */}
+                                    <div className="flex-1 flex flex-col">
+                                        <div className="flex justify-between items-start gap-2">
+                                            <div>
+                                                <p className="mt-1 text-[15px] font-semibold text-[#111827] leading-tight">
+                                                    {item.name}
+                                                </p>
+                                                <div className="mt-2 flex items-center gap-2">
+                                                    <span className="text-[14px] font-sans">
+                                                        Rang:
+                                                    </span>
+                                                    <span
+                                                        className="w-5 h-5 rounded-full border border-[#e5e7eb] inline-block"
+                                                        style={{ backgroundColor: item.colorHex }}
+                                                    />
+                                                </div>
+                                                <div className="flex items-center gap-2">
+                                                    <p className="mt-1 text-[14px] font-sans">
+                                                        O&apos;lcham:
+                                                    </p>
+                                                    <span className="font-semibold">{item.size}</span>
+                                                </div>
+                                            </div>
+
+                                            <button className="text-[#ef4444] text-[18px] px-1 leading-none">
+                                                ×
+                                            </button>
+                                        </div>
+
+                                        <div className="mt-2 flex items-center justify-between">
+                                            <div className="flex items-baseline gap-2">
+                                                <span className="text-[15px] font-semibold text-[#111827]">
+                                                    {item.price.toLocaleString("fr-FR")} So&apos;m
+                                                </span>
+                                                {item.originalPrice && (
+                                                    <span className="text-[14px] text-[#9CA3AF] line-through">
+                                                        {item.originalPrice.toLocaleString("fr-FR")} So&apos;m
+                                                    </span>
+                                                )}
+                                            </div>
+                                            <span className="text-[15px] text-[#111827]">
+                                                ×{item.quantity}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    )}
                 </div>
 
                 {/* Footer */}
                 <div className="px-2 pb-3 pt-2 border-t border-[#e9ecef] rounded-b-[15px]" id="cartFooter">
                     <div className="flex items-center justify-between mb-2 py-1.5 text-[16px] font-semibold text-[color:var(--text-color)] font-['Noto Sans']">
                         <span>Summa</span>
-                        <span id="cartTotalPrice">0 So&apos;m</span>
+                        <span id="cartTotalPrice">
+                            {totalPrice.toLocaleString("fr-FR")} So&apos;m
+                        </span>
                     </div>
                     <div className="flex h-[40px] gap-4 font-['Noto Sans'] font-semibold items-start mt-2">
                         <Link
