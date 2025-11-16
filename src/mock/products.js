@@ -349,8 +349,8 @@ export const mockProducts = [
         category: "Shimlar",
         description: "Yuqori sifatli velvet materialdan tayyorlangan, qulay va zamonaviy shim. Har qanday faslga mos.",
         price: 295800,
-        originalPrice: 348000,
-        discount: 15,
+        originalPrice: 0,
+        discount: 0,
         images: [
             "/images/spotlights/pants-cover.jpg",
             "/images/spotlights/shim.jpeg",
@@ -372,8 +372,8 @@ export const mockProducts = [
         category: "Shimlar",
         description: "Qulay va zamonaviy dizaynga ega shalvar. Kun davomida qulay kiyish uchun mo'ljallangan.",
         price: 328000,
-        originalPrice: 470000,
-        discount: 30,
+        originalPrice: 0,
+        discount: 0,
         images: [
             "/images/spotlights/shim2.jpeg",
             "/images/spotlights/shim3.jpeg",
@@ -395,8 +395,8 @@ export const mockProducts = [
         category: "Kurtkalar",
         description: "Qishki mavsum uchun ideal velvet kurtka. Issiqlik va uslubni birlashtirgan.",
         price: 308000,
-        originalPrice: 420000,
-        discount: 27,
+        originalPrice: 0,
+        discount: 0,
         images: [
             "/images/spotlights/shoes2.jpeg",
             "/images/spotlights/shoes3.jpeg",
@@ -416,8 +416,8 @@ export const mockProducts = [
         category: "Shimlar",
         description: "Keng bichimli zamonaviy shalvar. Har qanday tana tuzilmasiga mos tushadi.",
         price: 260000,
-        originalPrice: 315000,
-        discount: 17,
+        originalPrice: 0,
+        discount: 0,
         images: [
             "/images/spotlights/cover-sh.jpeg",
             "/images/spotlights/cover-sh1.jpeg",
@@ -438,8 +438,8 @@ export const mockProducts = [
         category: "Kiyimlar",
         description: "Yengil va qulay plashovka. Kundalik kiyish uchun ideal.",
         price: 301000,
-        originalPrice: 350000,
-        discount: 14,
+        originalPrice: 0,
+        discount: 0,
         images: [
             "/images/spotlights/shim6.jpeg",
             "/images/spotlights/shim4.jpeg",
@@ -459,8 +459,8 @@ export const mockProducts = [
         category: "Kurtkalar",
         description: "Qishki mavsum uchun mo'ljallangan issiq kurtka. Yuqori sifatli materialdan tayyorlangan.",
         price: 336000,
-        originalPrice: 420000,
-        discount: 20,
+        originalPrice: 0,
+        discount: 0,
         images: [
             "/images/spotlights/cover3.webp",
             "/images/spotlights/cover-sh1.jpeg",
@@ -569,8 +569,8 @@ export const mockProducts = [
         category: "Shortiklar",
         description: "Yangi dizaynga ega kargo shortik. Qulay va funksional.",
         price: 289000,
-        originalPrice: 346000,
-        discount: 16,
+        originalPrice: 0,
+        discount: 0,
         images: [
             "/images/spotlights/shim4.jpeg",
             "/images/spotlights/shim2.jpeg",
@@ -590,8 +590,8 @@ export const mockProducts = [
         category: "Kurtkalar",
         description: "Klassik dizaynga ega yangi kurtka. Zamonaviy va uslubli.",
         price: 301000,
-        originalPrice: 350000,
-        discount: 14,
+        originalPrice: 0,
+        discount: 0,
         images: [
             "/images/spotlights/shim6.jpeg",
             "/images/spotlights/shim9.jpeg",
@@ -676,8 +676,8 @@ export const mockProducts = [
         category: "Kiyimlar",
         description: "Klassik dizaynga ega denim jaket. Zamonaviy va uslubli.",
         price: 420000,
-        originalPrice: 550000,
-        discount: 24,
+        originalPrice: 0,
+        discount: 0,
         images: [
             "/images/spotlights/cover3.webp",
             "/images/spotlights/cover-sh1.jpeg"
@@ -696,8 +696,8 @@ export const mockProducts = [
         category: "Kiyimlar",
         description: "Sport uchun mo'ljallangan tracksuit. Qulay va funksional.",
         price: 380000,
-        originalPrice: 480000,
-        discount: 21,
+        originalPrice: 0,
+        discount: 0,
         images: [
             "/images/spotlights/pants-cover.jpg",
             "/images/spotlights/shim.jpeg"
@@ -717,8 +717,8 @@ export const mockProducts = [
         category: "Shimlar",
         description: "Kundalik kiyish uchun qulay shim. Qulay va bardoshli.",
         price: 290000,
-        originalPrice: 360000,
-        discount: 19,
+        originalPrice: 0,
+        discount: 0,
         images: [
             "/images/spotlights/shim2.jpeg",
             "/images/spotlights/shim3.jpeg"
@@ -798,8 +798,8 @@ export const mockProducts = [
         category: "Futbolkalar",
         description: "Rasmiy holatlar uchun ideal futbolka. Zamonaviy va uslubli.",
         price: 220000,
-        originalPrice: 280000,
-        discount: 21,
+        originalPrice: 0,
+        discount: 0,
         images: [
             "/images/spotlights/shim6.jpeg",
             "/images/spotlights/shim9.jpeg"
@@ -840,8 +840,8 @@ export const mockProducts = [
         category: "Kiyimlar",
         description: "Zip bilan hoodie. Qulay va funksional.",
         price: 280000,
-        originalPrice: 350000,
-        discount: 20,
+        originalPrice: 0,
+        discount: 0,
         images: [
             "/images/spotlights/shim9.jpeg",
             "/images/spotlights/shim6.jpeg"
@@ -861,8 +861,8 @@ export const mockProducts = [
         category: "Kiyimlar",
         description: "Yupqa jun kazak. Qishki mavsum uchun ideal.",
         price: 380000,
-        originalPrice: 480000,
-        discount: 21,
+        originalPrice: 0,
+        discount: 0,
         images: [
             "/images/spotlights/cover-sh1.jpeg",
             "/images/spotlights/shim3.jpeg"
@@ -899,8 +899,8 @@ export const mockProducts = [
         category: "Shimlar",
         description: "Funksional kargo shim. Qulay va bardoshli.",
         price: 310000,
-        originalPrice: 390000,
-        discount: 21,
+        originalPrice: 0,
+        discount: 0,
         images: [
             "/images/spotlights/pants-cover2.jpg",
             "/images/spotlights/shim2.jpeg"
