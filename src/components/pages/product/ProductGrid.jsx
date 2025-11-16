@@ -35,28 +35,6 @@ const ProductGrid = ({ selectedCategory }) => {
         return () => clearTimeout(timer)
     }, [selectedCategory])
 
-    // Transform products for QuickView modal
-    const productsForQuickView = useMemo(() => {
-        return products.map((product) => ({
-            id: product.id,
-            name: product.name,
-            brand: product.brand,
-            categoryName: product.category,
-            color: product.color,
-            price: product.originalPrice || product.price,
-            discount: product.discount || 0,
-            status: product.tag,
-            attachmentKeys: product.images,
-            description: product.description || `${product.name} - ${product.brand} mahsuloti. Yuqori sifatli materialdan tayyorlangan.`,
-            productSizes: product.sizes || [
-                { size: "S", amount: 10 },
-                { size: "M", amount: 15 },
-                { size: "L", amount: 12 },
-                { size: "XL", amount: 8 },
-            ],
-        }))
-    }, [products])
-
     // Transform products for display and filter
     const transformedProducts = useMemo(() => {
         return products.map((product) => {
@@ -110,7 +88,7 @@ const ProductGrid = ({ selectedCategory }) => {
         }
 
         return filtered
-    }, [transformedProducts, selectedStatus, selectedSort, selectedColors, selectedSizes])
+    }, [transformedProducts, selectedStatus, selectedSort, selectedColors])
 
     // Reset page when filters change
     useEffect(() => {
@@ -142,7 +120,6 @@ const ProductGrid = ({ selectedCategory }) => {
                 isOpen={quickViewOpen}
                 onClose={() => setQuickViewOpen(false)}
                 productId={selectedProductId}
-                products={productsForQuickView}
             />
 
             {/* Filters Section */}
@@ -194,8 +171,8 @@ const ProductGrid = ({ selectedCategory }) => {
                                         .filter((pageNum) => {
                                             if (totalPages <= 7) return true
                                             if (pageNum === 1 || pageNum === totalPages) return true
-                                            if (Math.abs(pageNum - page) <= 1) return true
-                                            return false
+                                            return Math.abs(pageNum - page) <= 1;
+
                                         })
                                         .map((pageNum, idx, arr) => {
                                             const showEllipsis = idx > 0 && pageNum - arr[idx - 1] > 1
