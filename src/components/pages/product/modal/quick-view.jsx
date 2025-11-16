@@ -2,8 +2,10 @@ import { useState, useEffect } from "react"
 import { Modal, Box, Typography, Chip, IconButton, Button } from "@mui/material"
 import urls from "../../../../constants/urls"
 import { CloseIcon, SeparatorIcon, MinusIcon, PlusIcon, CopyIcon, QuestionIcon, EyeIcon } from "../../../../icons"
+import { mockProducts } from "../../../../mock/products"
+import ProductService from "../../../../service/product"
 
-const QuickViewModal = ({ isOpen, onClose, productId, products }) => {
+const QuickViewModal = ({ isOpen, onClose, productId}) => {
     const [product, setProduct] = useState(null)
     const [selectedSize, setSelectedSize] = useState(null)
     const [quantity, setQuantity] = useState(1)
@@ -15,20 +17,57 @@ const QuickViewModal = ({ isOpen, onClose, productId, products }) => {
     const minSwipeDistance = 50
 
     useEffect(() => {
-        if (productId && products) {
-            const foundProduct = products.find((p) => p.id === productId)
+        if (!productId) return
+
+        let isMounted = true
+
+        const loadProduct = async () => {
+            try {
+                setProduct(null)
+                const apiProduct = await ProductService.getProductById(productId)
+                if (!isMounted) return
+                handleProductLoaded(apiProduct)
+            } catch (e) {
+                console.log("QuickView fallback to mock, error:", e)
+                const mockProduct = mockProducts.find((p) => p.id === productId)
+                if (!isMounted) return
+                handleProductLoaded(mockProduct || null)
+            }
+        }
+
+        const handleProductLoaded = (foundProduct) => {
+            if (!foundProduct) {
+                setProduct(null)
+                setSelectedSize(null)
+                setQuantity(1)
+                setCurrentSlideIndex(0)
+                return
+            }
+
             setProduct(foundProduct)
+
             // Set default size (first available size)
-            if (foundProduct?.productSizes && foundProduct.productSizes.length > 0) {
-                const availableSizes = foundProduct.productSizes.filter((size) => size.amount > 0)
+            if (foundProduct?.sizes && foundProduct.sizes.length > 0) {
+                const availableSizes = foundProduct.sizes.filter((size) => size.stock > 0)
                 if (availableSizes.length > 0) {
                     setSelectedSize(availableSizes[0])
+                } else {
+                    setSelectedSize(null)
                 }
+            } else {
+                setSelectedSize(null)
             }
+
             setQuantity(1)
             setCurrentSlideIndex(0) // Reset slide index when product changes
         }
-    }, [productId, products])
+
+        loadProduct()
+
+        return () => {
+            isMounted = false
+        }
+    }, [productId])
 
     const onTouchStartHandler = (e) => {
         setTouchEnd(null)
@@ -62,7 +101,7 @@ const QuickViewModal = ({ isOpen, onClose, productId, products }) => {
     if (!product) return null
 
     // Get all product images
-    const allImages = product.attachmentKeys || []
+    const allImages = product.images || []
     
     // Helper function to get image URL
     const getImageUrl = (imageKey) => {
@@ -72,15 +111,15 @@ const QuickViewModal = ({ isOpen, onClose, productId, products }) => {
             : `${urls.apiBaseUrl}/v1/attachment/${imageKey}`
     }
 
-    const hasDiscount = product.status === "SALE" && product.discount > 0
+    const hasDiscount = product.tag === "SALE" && product.discount > 0
     const discountedPrice = hasDiscount ? Math.round(product.price * (1 - product.discount / 100)) : product.price
 
     const formatPrice = (price) => {
         return new Intl.NumberFormat("fr-FR").format(price)
     }
 
-    const availableSizes = product.productSizes?.filter((size) => size.amount > 0) || []
-    const maxQuantity = selectedSize ? selectedSize.amount : 0
+    const availableSizes = product.sizes?.filter((size) => size.stock > 0) || []
+    const maxQuantity = selectedSize ? selectedSize.stock : 0
 
     const handleQuantityChange = (delta) => {
         const newQuantity = Math.max(1, Math.min(maxQuantity, quantity + delta))
@@ -161,14 +200,13 @@ const QuickViewModal = ({ isOpen, onClose, productId, products }) => {
                         >
                             Quickview
                         </Typography>
-                <IconButton
-                    onClick={onClose}
-                    sx={{
+                        <IconButton
+                            onClick={onClose}
+                            sx={{
                                 backgroundColor: "#f0f0f0",
                                 padding: "2",
-                    }}
-                >
-                    <CloseIcon />
+                            }}
+                        ><CloseIcon />
                 </IconButton>
                     </Box>
 
@@ -249,8 +287,8 @@ const QuickViewModal = ({ isOpen, onClose, productId, products }) => {
                                                         component="img"
                                                         src={getImageUrl(imageKey)}
                                                         alt={`${product.name} - ${index + 1}`}
-                    sx={{
-                        position: "absolute",
+                                                        sx={{
+                                                            position: "absolute",
                                                             top: 0,
                                                             left: 0,
                                                             width: "100%",
@@ -268,7 +306,7 @@ const QuickViewModal = ({ isOpen, onClose, productId, products }) => {
                                                     paddingTop: "133.33%",
                                                     overflow: "hidden",
                                                     borderRadius: "12px",
-                        backgroundColor: "#f5f5f5",
+                                                    backgroundColor: "#f5f5f5",
                                                 }}
                                             >
                                                 <Box
@@ -320,7 +358,7 @@ const QuickViewModal = ({ isOpen, onClose, productId, products }) => {
                                                         transition: "background-color 0.2s ease, opacity 0.2s ease",
                                                         flexShrink: 0,
                                                         opacity: currentSlideIndex === index ? 1 : 0.5,
-                        "&:hover": {
+                                                        "&:hover": {
                                                             opacity: 1,
                                                         },
                                                     }}
@@ -345,7 +383,7 @@ const QuickViewModal = ({ isOpen, onClose, productId, products }) => {
                                     mb: "-13px",
                                 }}
                             >
-                                {product.categoryName}
+                            {product.category}
                             </Typography>
 
                             {/* Product Name */}
@@ -1321,7 +1359,7 @@ const QuickViewModal = ({ isOpen, onClose, productId, products }) => {
                             </Box>
 
                             {/* Category Label */}
-                            {product.categoryName && (
+                            {product.category && (
                                 <Box sx={{ display: "flex", alignItems: "center", gap: 0.5, mt: 2 }}>
                                     <Typography
                                         sx={{
@@ -1340,7 +1378,7 @@ const QuickViewModal = ({ isOpen, onClose, productId, products }) => {
                                             color: "#666",
                                         }}
                                     >
-                                        {product.categoryName}
+                                        {product.category}
                                     </Typography>
                                 </Box>
                             )}
