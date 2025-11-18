@@ -47,15 +47,20 @@ const Login = () => {
     }
 
     const handleInputChange = (index, value) => {
+        // Faqat raqam qabul qilish
+        if (value && !/^[0-9]$/.test(value)) return
+        
         if (value.length > 1) return // Prevent multiple characters
 
         const newCode = [...code]
         newCode[index] = value
         setCode(newCode)
 
-        // Move to next input if value is entered
+        // Move to next input if value is entered - setTimeout bilan state yangilanishini kutish
         if (value && index < 5) {
-            inputRefs.current[index + 1]?.focus()
+            setTimeout(() => {
+                inputRefs.current[index + 1]?.focus()
+            }, 0)
         }
 
         // Submit when all 6 digits are entered
@@ -67,11 +72,28 @@ const Login = () => {
             }
         }
     }
+    
+    const handleInputFocus = (index) => {
+        // Faqat birinchi input yoki oldingi input'lar to'ldirilgan bo'lsa focus qilish
+        if (index > 0 && !code[index - 1]) {
+            // Oldingi input bo'sh bo'lsa, uni focus qilish
+            inputRefs.current[index - 1]?.focus()
+        }
+    }
 
     const handleKeyDown = (index, e) => {
-        // Move to previous input on backspace if current input is empty
-        if (e.key === "Backspace" && !code[index] && index > 0) {
-            inputRefs.current[index - 1]?.focus()
+        // Move to previous input on backspace
+        if (e.key === "Backspace") {
+            if (!code[index] && index > 0) {
+                // Joriy input bo'sh bo'lsa, oldingi input'ga o'tish
+                inputRefs.current[index - 1]?.focus()
+            } else if (code[index] && index > 0) {
+                // Joriy input to'ldirilgan bo'lsa, uni tozalash va oldingi input'ga o'tish
+                const newCode = [...code]
+                newCode[index] = ""
+                setCode(newCode)
+                inputRefs.current[index - 1]?.focus()
+            }
         }
     }
 
@@ -174,12 +196,17 @@ const Login = () => {
                             <input
                                 key={index}
                                 ref={(el) => (inputRefs.current[index] = el)}
-                                type="text"
+                                type="tel"
+                                inputMode="numeric"
+                                pattern="[0-9]*"
                                 className="w-[40px] h-[50px] sm:w-[45px] sm:h-[57px] text-center text-xl sm:text-2xl font-bold border-2 border-[color:var(--burgundy-dark)] rounded-[15px] transition-all duration-300 bg-[var(--light-color)] focus:border-[color:var(--burgundy-color)] focus:outline-none focus:shadow-[0_0_0_3px_rgba(139,21,56,0.1)] focus:scale-105 disabled:opacity-60 disabled:cursor-not-allowed"
                                 maxLength={1}
                                 value={digit}
                                 onChange={(e) => handleInputChange(index, e.target.value)}
+                                onFocus={() => handleInputFocus(index)}
                                 onKeyDown={(e) => handleKeyDown(index, e)}
+                                onPaste={(e) => e.preventDefault()}
+                                onClick={() => handleInputFocus(index)}
                                 disabled={isLoading}
                             />
                         ))}
