@@ -1,5 +1,4 @@
 import {Box, Button, Snackbar, Stack} from "@mui/material"
-import "./login.css"
 import { useState, useRef, useEffect } from "react"
 import AuthService from "../../service/auth"
 import { useNavigate, useSearchParams } from "react-router-dom"
@@ -128,45 +127,22 @@ const Login = () => {
     return (
         <Stack
             sx={{
-                minHeight: "92vh",
-                backgroundColor: "white",
+                height: "100vh",
+                backgroundColor: "var(--light-color)",
                 display: "flex",
                 alignItems: "center",
-                padding: "40px 0",
-                marginTop: "70px",
+                justifyContent: "center",
+                overflow: "hidden",
+                padding: { xs: "20px", sm: "40px" },
             }}
         >
-            <div className="login-content">
-                <Box
-                    component="img"
-                    src="/images/bot/prime77.jpeg"
-                    alt="Telegram Bot"
-                    className="login-bot-logo"
-                    sx={{
-                        width: 100,
-                        height: 100,
-                        borderRadius: "50%",
-                        objectFit: "cover",
-                        marginBottom: 5,
-                        boxShadow: "0 4px 8px rgba(0,0,0,0.15)",
-                    }}
-                />
-                <h2
-                    className="main-title"
-                    sx={{
-                        fontFamily: "Noto Sans",
-                    }}
-                >
+            <div className="text-center max-w-[400px] w-full mx-auto">
+                <h2 className="text-[color:var(--burgundy-dark)] text-[1.8rem] font-[900] mb-[30px] capitalize font-['Noto Sans']">
                     Kodni Kiriting
                 </h2>
 
-                <Box
-                    className="login-description"
-                    sx={{
-                        fontFamily: "Noto Sans",
-                    }}
-                >
-                    <a className="login-bot-name" href="https://t.me/prime77uzBot" target="_blank" rel="noopener noreferrer">
+                <Box className="text-[#444] text-[15px] leading-[1.4] mb-[40px] font-['Noto Sans'] font-medium">
+                    <a className="text-sm font-semibold mb-[10px] text-black" href="https://t.me/prime77uzBot" target="_blank" rel="noopener noreferrer">
                         @prime77uzbot
                     </a>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;telegram botiga kiring va 2 daqiqalik
@@ -175,13 +151,13 @@ const Login = () => {
                 </Box>
 
                 <form id="loginForm">
-                    <div className="code-inputs">
+                    <div className="flex justify-center gap-[10px] mb-[30px] flex-wrap">
                         {code.map((digit, index) => (
                             <input
                                 key={index}
                                 ref={(el) => (inputRefs.current[index] = el)}
                                 type="text"
-                                className="code-input"
+                                className="w-[45px] h-[57px] text-center text-2xl font-bold border-2 border-[color:var(--burgundy-dark)] rounded-[15px] transition-all duration-300 bg-[var(--light-color)] focus:border-[color:var(--burgundy-color)] focus:outline-none focus:shadow-[0_0_0_3px_rgba(139,21,56,0.1)] focus:scale-105 disabled:opacity-60 disabled:cursor-not-allowed"
                                 maxLength={1}
                                 value={digit}
                                 onChange={(e) => handleInputChange(index, e.target.value)}
@@ -192,9 +168,9 @@ const Login = () => {
                     </div>
 
                     {isLoading && (
-                        <div className="text-center">
-                            <div className="spinner" style={{ display: "block" }}></div>
-                            <p className="status-text">Tekshirilmoqda...</p>
+                        <div className="text-center mt-5">
+                            <div className="w-6 h-6 border-[3px] border-[#f3f3f3] border-t-[color:var(--burgundy-color)] rounded-full animate-spin mx-auto block"></div>
+                            <p className="text-[color:var(--burgundy-color)] mt-5 font-semibold text-base">Tekshirilmoqda...</p>
                         </div>
                     )}
                 </form>
@@ -271,7 +247,6 @@ const Login = () => {
             />
 
             <Snackbar
-                className="code-input-snack"
                 open={codeSnackbar}
                 onClose={handleCodeCloseSnackbar}
                 anchorOrigin={{ vertical: "top", horizontal: "right" }}
