@@ -144,15 +144,15 @@ const Login = () => {
                 backgroundColor: "var(--light-color)",
                 display: "flex",
                 alignItems: "flex-start",
-                justifyContent: "center",
+                justifyContent: "flex-start",
                 overflow: "hidden",
                 padding: { xs: "16px", sm: "40px" },
-                paddingTop: { xs: "80px", sm: "120px", md: "140px" },
+                paddingTop: { xs: "130px", sm: "120px", md: "140px" },
                 zIndex: 1,
             }}
         >
             <div className="text-center max-w-[400px] w-full mx-auto">
-                <h2 className="text-[color:var(--burgundy-dark)] text-[1.5rem] sm:text-[1.8rem] font-[900] mb-[20px] sm:mb-[30px] capitalize font-['Noto Sans']">
+                <h2 className="text-[color:var(--burgundy-dark)] text-[1.5rem] sm:text-[1.8rem] font-[900] mb-[30px] capitalize font-['Noto Sans']">
                     Kodni Kiriting
                 </h2>
 
