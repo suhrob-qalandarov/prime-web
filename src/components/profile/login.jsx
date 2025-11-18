@@ -156,13 +156,16 @@ const Login = () => {
                     Kodni Kiriting
                 </h2>
 
-                <Box className="text-[#444] text-[14px] sm:text-[15px] leading-[1.4] mb-[30px] sm:mb-[40px] font-['Noto Sans'] font-medium px-2">
-                    <a className="text-sm font-semibold mb-[10px] text-black" href="https://t.me/prime77uzBot" target="_blank" rel="noopener noreferrer">
-                        @prime77uzbot
-                    </a>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;telegram botiga kiring va 2 daqiqalik
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    kodingizni oling.
+                <Box className="text-[#444] text-[15px] sm:text-[15px] leading-[1.4] mb-[30px] sm:mb-[40px] font-['Noto Sans'] font-medium px-2 flex flex-col items-center">
+                    <div>
+                        <a className="text-sm font-bold text-black" href="https://t.me/prime77uzBot" target="_blank" rel="noopener noreferrer">
+                            @prime77uzbot
+                        </a>
+                        <span className="text-sm font-bold">&nbsp;&nbsp;&nbsp;telegram botiga kiring</span>
+                    </div>
+                    <div className="mt-1.5 text-sm font-bold">
+                        va 2 daqiqalik kodingizni oling.
+                    </div>
                 </Box>
 
                 <form id="loginForm">
