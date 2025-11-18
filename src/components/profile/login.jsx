@@ -122,26 +122,41 @@ const Login = () => {
     useEffect(() => {
         // Focus first input on component mount
         inputRefs.current[0]?.focus()
+        
+        // Disable body scroll on mobile
+        document.body.style.overflow = "hidden"
+        
+        return () => {
+            document.body.style.overflow = ""
+        }
     }, [])
 
     return (
         <Stack
             sx={{
+                position: "fixed",
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                width: "100%",
                 height: "100vh",
                 backgroundColor: "var(--light-color)",
                 display: "flex",
-                alignItems: "center",
+                alignItems: "flex-start",
                 justifyContent: "center",
                 overflow: "hidden",
-                padding: { xs: "20px", sm: "40px" },
+                padding: { xs: "16px", sm: "40px" },
+                paddingTop: { xs: "80px", sm: "120px", md: "140px" },
+                zIndex: 1,
             }}
         >
             <div className="text-center max-w-[400px] w-full mx-auto">
-                <h2 className="text-[color:var(--burgundy-dark)] text-[1.8rem] font-[900] mb-[30px] capitalize font-['Noto Sans']">
+                <h2 className="text-[color:var(--burgundy-dark)] text-[1.5rem] sm:text-[1.8rem] font-[900] mb-[20px] sm:mb-[30px] capitalize font-['Noto Sans']">
                     Kodni Kiriting
                 </h2>
 
-                <Box className="text-[#444] text-[15px] leading-[1.4] mb-[40px] font-['Noto Sans'] font-medium">
+                <Box className="text-[#444] text-[14px] sm:text-[15px] leading-[1.4] mb-[30px] sm:mb-[40px] font-['Noto Sans'] font-medium px-2">
                     <a className="text-sm font-semibold mb-[10px] text-black" href="https://t.me/prime77uzBot" target="_blank" rel="noopener noreferrer">
                         @prime77uzbot
                     </a>
@@ -151,13 +166,13 @@ const Login = () => {
                 </Box>
 
                 <form id="loginForm">
-                    <div className="flex justify-center gap-[10px] mb-[30px] flex-wrap">
+                    <div className="flex justify-center gap-[8px] sm:gap-[10px] mb-[20px] sm:mb-[30px] flex-wrap">
                         {code.map((digit, index) => (
                             <input
                                 key={index}
                                 ref={(el) => (inputRefs.current[index] = el)}
                                 type="text"
-                                className="w-[45px] h-[57px] text-center text-2xl font-bold border-2 border-[color:var(--burgundy-dark)] rounded-[15px] transition-all duration-300 bg-[var(--light-color)] focus:border-[color:var(--burgundy-color)] focus:outline-none focus:shadow-[0_0_0_3px_rgba(139,21,56,0.1)] focus:scale-105 disabled:opacity-60 disabled:cursor-not-allowed"
+                                className="w-[40px] h-[50px] sm:w-[45px] sm:h-[57px] text-center text-xl sm:text-2xl font-bold border-2 border-[color:var(--burgundy-dark)] rounded-[15px] transition-all duration-300 bg-[var(--light-color)] focus:border-[color:var(--burgundy-color)] focus:outline-none focus:shadow-[0_0_0_3px_rgba(139,21,56,0.1)] focus:scale-105 disabled:opacity-60 disabled:cursor-not-allowed"
                                 maxLength={1}
                                 value={digit}
                                 onChange={(e) => handleInputChange(index, e.target.value)}
@@ -168,9 +183,9 @@ const Login = () => {
                     </div>
 
                     {isLoading && (
-                        <div className="text-center mt-5">
+                        <div className="text-center mt-4 sm:mt-5">
                             <div className="w-6 h-6 border-[3px] border-[#f3f3f3] border-t-[color:var(--burgundy-color)] rounded-full animate-spin mx-auto block"></div>
-                            <p className="text-[color:var(--burgundy-color)] mt-5 font-semibold text-base">Tekshirilmoqda...</p>
+                            <p className="text-[color:var(--burgundy-color)] mt-4 sm:mt-5 font-semibold text-sm sm:text-base">Tekshirilmoqda...</p>
                         </div>
                     )}
                 </form>
