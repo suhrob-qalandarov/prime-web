@@ -446,104 +446,104 @@ const ConfirmOrder = () => {
                                         {comment}
                                     </Typography>
                                 </Box>)}
+
+                                {/* Delivery Method Selection - After verification */}
+                                <Box>
+                                    <Typography
+                                        sx={{
+                                            fontSize: "18px",
+                                            fontWeight: 700,
+                                            mb: 2,
+                                            color: "#1a1a1a",
+                                        }}
+                                    >
+                                        Yetkazib berish usulini tanlang
+                                    </Typography>
+                                    <FormControl component="fieldset">
+                                        <RadioGroup
+                                            value={deliveryMethod}
+                                            onChange={(e) => setDeliveryMethod(e.target.value)}
+                                        >
+                                            <FormControlLabel
+                                                value="bts"
+                                                control={<Radio />}
+                                                label={
+                                                    <Box>
+                                                        <Typography sx={{ fontWeight: 600, mb: 1 }}>
+                                                            BTS Pochta
+                                                        </Typography>
+                                                        <Typography
+                                                            sx={{
+                                                                fontSize: "14px",
+                                                                fontWeight: 600,
+                                                                mb: 1,
+                                                                color: "#666",
+                                                            }}
+                                                        >
+                                                            Viloyatlarga (BTS):
+                                                        </Typography>
+                                                        <Box sx={{ pl: 2, display: "flex", flexDirection: "column", gap: 0.5 }}>
+                                                            <Typography sx={{ fontSize: "13px", color: "#666" }}>
+                                                                • 2-4 kun ichida sizga eng yaqin BTS chiqarish punktigacha yetkaziladi.
+                                                            </Typography>
+                                                            <Typography sx={{ fontSize: "13px", color: "#666" }}>
+                                                                • Buyurtmani onlayn rasmiylashtirishda to'lovni amalga oshiring, yetkazib berish uchun esa mahsulotni qabul qilganingizda to'laysiz.
+                                                            </Typography>
+                                                            <Typography sx={{ fontSize: "13px", color: "#666" }}>
+                                                                • Buyurtmangizni o'zingizga qulay vaqtda olib ketishingiz mumkin.
+                                                            </Typography>
+                                                        </Box>
+                                                    </Box>
+                                                }
+                                                sx={{
+                                                    mb: 2,
+                                                    alignItems: "flex-start",
+                                                    "& .MuiFormControlLabel-label": {
+                                                        ml: 1,
+                                                    },
+                                                }}
+                                            />
+                                            <FormControlLabel
+                                                value="yandex"
+                                                control={<Radio />}
+                                                label={
+                                                    <Typography sx={{ fontWeight: 600 }}>
+                                                        Yandex Yetkazib berish
+                                                    </Typography>
+                                                }
+                                                sx={{
+                                                    mb: 2,
+                                                    "& .MuiFormControlLabel-label": {
+                                                        ml: 1,
+                                                    },
+                                                }}
+                                            />
+                                        </RadioGroup>
+                                    </FormControl>
+                                </Box>
+
+                                {/* Payment Button - After verification */}
+                                <Button
+                                    variant="contained"
+                                    onClick={handlePayment}
+                                    sx={{
+                                        backgroundColor: "#333",
+                                        color: "white",
+                                        py: 1,
+                                        px: 2,
+                                        fontSize: "14px",
+                                        fontWeight: 600,
+                                        textTransform: "uppercase",
+                                        borderRadius: "8px",
+                                        "&:hover": {
+                                            backgroundColor: "#555",
+                                        },
+                                    }}
+                                >
+                                    TO'LASH
+                                </Button>
                             </>
                         )}
-
-                        {/* Delivery Method Selection */}
-                        <Box>
-                            <Typography
-                                sx={{
-                                    fontSize: "18px",
-                                    fontWeight: 700,
-                                    mb: 2,
-                                    color: "#1a1a1a",
-                                }}
-                            >
-                                Yetkazib berish usulini tanlang
-                            </Typography>
-                            <FormControl component="fieldset">
-                                <RadioGroup
-                                    value={deliveryMethod}
-                                    onChange={(e) => setDeliveryMethod(e.target.value)}
-                                >
-                                    <FormControlLabel
-                                        value="bts"
-                                        control={<Radio />}
-                                        label={
-                                            <Box>
-                                                <Typography sx={{ fontWeight: 600, mb: 1 }}>
-                                                    BTS Pochta
-                                                </Typography>
-                                                <Typography
-                                                    sx={{
-                                                        fontSize: "14px",
-                                                        fontWeight: 600,
-                                                        mb: 1,
-                                                        color: "#666",
-                                                    }}
-                                                >
-                                                    Viloyatlarga (BTS):
-                                                </Typography>
-                                                <Box sx={{ pl: 2, display: "flex", flexDirection: "column", gap: 0.5 }}>
-                                                    <Typography sx={{ fontSize: "13px", color: "#666" }}>
-                                                        • 2-4 kun ichida sizga eng yaqin BTS chiqarish punktigacha yetkaziladi.
-                                                    </Typography>
-                                                    <Typography sx={{ fontSize: "13px", color: "#666" }}>
-                                                        • Buyurtmani onlayn rasmiylashtirishda to'lovni amalga oshiring, yetkazib berish uchun esa mahsulotni qabul qilganingizda to'laysiz.
-                                                    </Typography>
-                                                    <Typography sx={{ fontSize: "13px", color: "#666" }}>
-                                                        • Buyurtmangizni o'zingizga qulay vaqtda olib ketishingiz mumkin.
-                                                    </Typography>
-                                                </Box>
-                                            </Box>
-                                        }
-                                        sx={{
-                                            mb: 2,
-                                            alignItems: "flex-start",
-                                            "& .MuiFormControlLabel-label": {
-                                                ml: 1,
-                                            },
-                                        }}
-                                    />
-                                    <FormControlLabel
-                                        value="yandex"
-                                        control={<Radio />}
-                                        label={
-                                            <Typography sx={{ fontWeight: 600 }}>
-                                                Yandex Yetkazib berish
-                                            </Typography>
-                                        }
-                                        sx={{
-                                            mb: 2,
-                                            "& .MuiFormControlLabel-label": {
-                                                ml: 1,
-                                            },
-                                        }}
-                                    />
-                                </RadioGroup>
-                            </FormControl>
-                        </Box>
-
-                        {/* Payment Button */}
-                        <Button
-                            variant="contained"
-                            onClick={handlePayment}
-                            sx={{
-                                backgroundColor: "#333",
-                                color: "white",
-                                py: 1,
-                                px: 2,
-                                fontSize: "14px",
-                                fontWeight: 600,
-                                textTransform: "uppercase",
-                                borderRadius: "8px",
-                                "&:hover": {
-                                    backgroundColor: "#555",
-                                },
-                            }}
-                        >
-                            TO'LASH
-                        </Button>
                     </Box>
 
                     {/* Divider */}
