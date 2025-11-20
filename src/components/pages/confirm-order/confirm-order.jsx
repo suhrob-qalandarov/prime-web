@@ -260,7 +260,7 @@ const ConfirmOrder = () => {
                                         <Button
                                             variant="contained"
                                             onClick={handleSendCode}
-                                            disabled={sendingCode || !fullName.trim() || !telegram.trim() || !comment.trim()}
+                                            disabled={sendingCode || !fullName.trim() || !telegram.trim()}
                                             sx={{
                                                 backgroundColor: "#333",
                                                 color: "white",
