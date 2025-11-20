@@ -25,6 +25,14 @@ const ConfirmOrder = () => {
     const [promoCode, setPromoCode] = useState("")
     const [cartItems, setCartItems] = useState([])
     const [loading, setLoading] = useState(true)
+    
+    // Phone verification states
+    const [codeSent, setCodeSent] = useState(false)
+    const [code, setCode] = useState("")
+    const [sendingCode, setSendingCode] = useState(false)
+    const [verifying, setVerifying] = useState(false)
+    const [verified, setVerified] = useState(false)
+    const [telegram, setTelegram] = useState("")
 
     // Mock data for demonstration - replace with actual cart data
     const mockProduct = {
@@ -71,12 +79,54 @@ const ConfirmOrder = () => {
         return cartItems.reduce((sum, item) => sum + (item.originalPrice || item.price), 0)
     }
 
+    const handleSendCode = async () => {
+        setSendingCode(true)
+        try {
+            // TODO: Call API to send verification code
+            // await AuthService.sendVerificationCode(user.phone)
+            await new Promise((resolve) => setTimeout(resolve, 1500)) // Simulate API call
+            setCodeSent(true)
+        } catch (error) {
+            console.error("Error sending code:", error)
+        } finally {
+            setSendingCode(false)
+        }
+    }
+
+    const handleVerifyCode = async () => {
+        if (code.length !== 6) return
+        
+        setVerifying(true)
+        try {
+            // TODO: Call API to verify code and get telegram username
+            // const response = await AuthService.verifyCode(user.phone, code)
+            // setTelegram(response.telegram || "")
+            await new Promise((resolve) => setTimeout(resolve, 1500)) // Simulate API call
+            // Mock telegram username - replace with actual API response
+            setTelegram("@anderson")
+            setVerified(true)
+        } catch (error) {
+            console.error("Error verifying code:", error)
+            // Show error message
+        } finally {
+            setVerifying(false)
+        }
+    }
+
+    const handleCodeChange = (e) => {
+        const value = e.target.value.replace(/\D/g, "") // Only numbers
+        if (value.length <= 6) {
+            setCode(value)
+        }
+    }
+
     const handlePayment = async () => {
         try {
             const orderData = {
                 comment: comment,
                 deliveryMethod: deliveryMethod,
                 promoCode: promoCode || null,
+                telegram: telegram,
                 orderItems: cartItems.map((item) => ({
                     productId: item.id,
                     quantity: item.quantity,
@@ -126,88 +176,166 @@ const ConfirmOrder = () => {
                 >
                     {/* Left Section */}
                     <Box sx={{ display: "flex", flexDirection: "column", gap: 3 }}>
-
-                        {/* Customer Info */}
-                        <Box>
-                            <Typography
-                                sx={{
-                                    fontSize: "18px",
-                                    fontWeight: 700,
-                                    mb: 2,
-                                    color: "#1a1a1a",
-                                }}
-                            >
-                                Mijoz
-                            </Typography>
-                            <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
+                        {!verified ? (
+                            <>
+                                {!codeSent ? (
+                                    /* Send Code Button */
+                                    <Button
+                                        variant="contained"
+                                        onClick={handleSendCode}
+                                        disabled={sendingCode}
+                                        sx={{
+                                            backgroundColor: "#333",
+                                            color: "white",
+                                            py: 1,
+                                            px: 2,
+                                            fontSize: "14px",
+                                            fontWeight: 600,
+                                            textTransform: "uppercase",
+                                            borderRadius: "8px",
+                                            "&:hover": {
+                                                backgroundColor: "#555",
+                                            },
+                                            "&:disabled": {
+                                                backgroundColor: "#999",
+                                            },
+                                        }}
+                                    >
+                                        {sendingCode ? "Yuborilmoqda..." : "Kodni yuborish"}
+                                    </Button>
+                                ) : (
+                                    /* Code Input and Verify Button */
+                                    <Box sx={{ display: "flex", gap: 2, alignItems: "center" }}>
+                                        <TextField
+                                            value={code}
+                                            onChange={handleCodeChange}
+                                            placeholder="000000"
+                                            size="small"
+                                            inputProps={{
+                                                maxLength: 6,
+                                                pattern: "[0-9]*",
+                                                inputMode: "numeric",
+                                                style: {
+                                                    textAlign: "center",
+                                                    fontSize: "16px",
+                                                    letterSpacing: "4px",
+                                                    fontWeight: 600,
+                                                },
+                                            }}
+                                            sx={{
+                                                flex: 0.5,
+                                                "& .MuiOutlinedInput-root": {
+                                                    borderRadius: "8px",
+                                                },
+                                            }}
+                                        />
+                                        <Button
+                                            variant="contained"
+                                            onClick={handleVerifyCode}
+                                            disabled={verifying || code.length !== 6}
+                                            sx={{
+                                                backgroundColor: "#333",
+                                                color: "white",
+                                                py: 1,
+                                                px: 2,
+                                                fontSize: "14px",
+                                                fontWeight: 600,
+                                                textTransform: "uppercase",
+                                                borderRadius: "8px",
+                                                "&:hover": {
+                                                    backgroundColor: "#555",
+                                                },
+                                                "&:disabled": {
+                                                    backgroundColor: "#999",
+                                                },
+                                            }}
+                                        >
+                                            {verifying ? "Tekshirilmoqda..." : "Tasdiqlash"}
+                                        </Button>
+                                    </Box>
+                                )}
+                            </>
+                        ) : (
+                            <>
+                                {/* Customer Info */}
                                 <Box>
                                     <Typography
-                                        component="span"
-                                        sx={{ fontSize: "14px", color: "#666", mr: 1 }}
+                                        sx={{
+                                            fontSize: "18px",
+                                            fontWeight: 700,
+                                            mb: 2,
+                                            color: "#1a1a1a",
+                                        }}
                                     >
-                                        Ism:
+                                        Mijoz
                                     </Typography>
-                                    <Typography component="span" sx={{ fontSize: "16px", fontWeight: 700 }}>
-                                        {user?.firstName || "Noma'lum"}
-                                    </Typography>
+                                    <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
+                                        <Box>
+                                            <Typography
+                                                component="span"
+                                                sx={{ fontSize: "14px", color: "#666", mr: 1 }}
+                                            >
+                                                Ism:
+                                            </Typography>
+                                            <Typography component="span" sx={{ fontSize: "16px", fontWeight: 700 }}>
+                                                {user?.firstName || "Noma'lum"}
+                                            </Typography>
+                                        </Box>
+                                        <Box>
+                                            <Typography
+                                                component="span"
+                                                sx={{ fontSize: "14px", color: "#666", mr: 1 }}
+                                            >
+                                                Telefon raqami:
+                                            </Typography>
+                                            <Typography component="span" sx={{ fontSize: "16px", fontWeight: 700 }}>
+                                                {user?.phone || "Noma'lum"}
+                                            </Typography>
+                                        </Box>
+                                        {telegram && (
+                                            <Box>
+                                                <Typography
+                                                    component="span"
+                                                    sx={{ fontSize: "14px", color: "#666", mr: 1 }}
+                                                >
+                                                    Telegram:
+                                                </Typography>
+                                                <Typography component="span" sx={{ fontSize: "16px", fontWeight: 700 }}>
+                                                    {telegram}
+                                                </Typography>
+                                            </Box>
+                                        )}
+                                    </Box>
                                 </Box>
+
+                                {/* Comment field */}
                                 <Box>
                                     <Typography
-                                        component="span"
-                                        sx={{ fontSize: "14px", color: "#666", mr: 1 }}
+                                        sx={{
+                                            fontSize: "18px",
+                                            fontWeight: 700,
+                                            mb: 2,
+                                            color: "#1a1a1a",
+                                        }}
                                     >
-                                        Telefon raqami:
+                                        Izoh
                                     </Typography>
-                                    <Typography component="span" sx={{ fontSize: "16px", fontWeight: 700 }}>
-                                        {user?.phone || "Noma'lum"}
-                                    </Typography>
+                                    <TextField
+                                        label="Izoh..."
+                                        multiline
+                                        rows={2}
+                                        value={comment}
+                                        onChange={(e) => setComment(e.target.value)}
+                                        fullWidth
+                                        sx={{
+                                            "& .MuiOutlinedInput-root": {
+                                                borderRadius: "8px",
+                                            },
+                                        }}
+                                    />
                                 </Box>
-                            </Box>
-                        </Box>
-
-                        {/* F.I.O field */}
-                        <Typography>
-                            Iltimos, buyurtma rasmiylashtiriladigan to'liq ismni kiriting (Buyurtma shu nomga rasmiylashtiriladi)
-                        </Typography>
-                        <TextField
-                            label="F.I.O"
-                            multiline
-                            onChange={(e) => setComment(e.target.value)}
-                            sx={{
-                                "& .MuiOutlinedInput-root": {
-                                    borderRadius: "8px",
-                                },
-                            }}
-                        />
-
-                        {/* Telegram username or phone number field */}
-                        <Typography>
-                            Iltimos, Telegram username yoki Telegramda ro'yxatdan o'tilgan raqamingizni kiriting
-                        </Typography>
-                        <TextField
-                            label="Telegram username/telefon raqam"
-                            multiline
-                            onChange={(e) => setComment(e.target.value)}
-                            sx={{
-                                "& .MuiOutlinedInput-root": {
-                                    borderRadius: "8px",
-                                },
-                            }}
-                        />
-
-                        {/* Comment field */}
-                        <TextField
-                            label="Izoh..."
-                            multiline
-                            rows={2}
-                            value={comment}
-                            onChange={(e) => setComment(e.target.value)}
-                            sx={{
-                                "& .MuiOutlinedInput-root": {
-                                    borderRadius: "8px",
-                                },
-                            }}
-                        />
+                            </>
+                        )}
 
                         {/* Delivery Method Selection */}
                         <Box>
@@ -291,9 +419,10 @@ const ConfirmOrder = () => {
                             sx={{
                                 backgroundColor: "#333",
                                 color: "white",
-                                py: 1.5,
-                                fontSize: "16px",
-                                fontWeight: 700,
+                                py: 1,
+                                px: 2,
+                                fontSize: "14px",
+                                fontWeight: 600,
                                 textTransform: "uppercase",
                                 borderRadius: "8px",
                                 "&:hover": {
