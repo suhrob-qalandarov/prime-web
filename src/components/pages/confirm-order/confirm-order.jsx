@@ -33,6 +33,7 @@ const ConfirmOrder = () => {
     const [verifying, setVerifying] = useState(false)
     const [verified, setVerified] = useState(false)
     const [telegram, setTelegram] = useState("")
+    const [fullName, setFullName] = useState("")
 
     // Mock data for demonstration - replace with actual cart data
     const mockProduct = {
@@ -98,12 +99,9 @@ const ConfirmOrder = () => {
         
         setVerifying(true)
         try {
-            // TODO: Call API to verify code and get telegram username
-            // const response = await AuthService.verifyCode(user.phone, code)
-            // setTelegram(response.telegram || "")
+            // TODO: Call API to verify code
+            // await AuthService.verifyCode(user.phone, code)
             await new Promise((resolve) => setTimeout(resolve, 1500)) // Simulate API call
-            // Mock telegram username - replace with actual API response
-            setTelegram("@anderson")
             setVerified(true)
         } catch (error) {
             console.error("Error verifying code:", error)
@@ -127,6 +125,7 @@ const ConfirmOrder = () => {
                 deliveryMethod: deliveryMethod,
                 promoCode: promoCode || null,
                 telegram: telegram,
+                fullName: fullName,
                 orderItems: cartItems.map((item) => ({
                     productId: item.id,
                     quantity: item.quantity,
@@ -179,60 +178,89 @@ const ConfirmOrder = () => {
                         {!verified ? (
                             <>
                                 {!codeSent ? (
-                                    /* Send Code Button */
-                                    <Button
-                                        variant="contained"
-                                        onClick={handleSendCode}
-                                        disabled={sendingCode}
-                                        sx={{
-                                            backgroundColor: "#333",
-                                            color: "white",
-                                            py: 1,
-                                            px: 2,
-                                            fontSize: "14px",
-                                            fontWeight: 600,
-                                            textTransform: "uppercase",
-                                            borderRadius: "8px",
-                                            "&:hover": {
-                                                backgroundColor: "#555",
-                                            },
-                                            "&:disabled": {
-                                                backgroundColor: "#999",
-                                            },
-                                        }}
-                                    >
-                                        {sendingCode ? "Yuborilmoqda..." : "Kodni yuborish"}
-                                    </Button>
-                                ) : (
-                                    /* Code Input and Verify Button */
-                                    <Box sx={{ display: "flex", gap: 2, alignItems: "center" }}>
-                                        <TextField
-                                            value={code}
-                                            onChange={handleCodeChange}
-                                            placeholder="000000"
-                                            size="small"
-                                            inputProps={{
-                                                maxLength: 6,
-                                                pattern: "[0-9]*",
-                                                inputMode: "numeric",
-                                                style: {
-                                                    textAlign: "center",
-                                                    fontSize: "16px",
-                                                    letterSpacing: "4px",
-                                                    fontWeight: 600,
-                                                },
-                                            }}
-                                            sx={{
-                                                flex: 0.5,
-                                                "& .MuiOutlinedInput-root": {
-                                                    borderRadius: "8px",
-                                                },
-                                            }}
-                                        />
+                                    <>
+                                        {/* Form Title - Before code sent */}
+                                        <Box>
+                                            <Typography
+                                                sx={{
+                                                    fontSize: "18px",
+                                                    fontWeight: 700,
+                                                    mb: 2,
+                                                    color: "#1a1a1a",
+                                                }}
+                                            >
+                                                Formani to'ldiring
+                                            </Typography>
+                                        </Box>
+
+                                        {/* F.I.O field */}
+                                        <Box>
+                                            <Typography sx={{ fontSize: "14px", color: "#666", mb: 1 }}>
+                                                Iltimos, buyurtma rasmiylashtiriladigan to'liq ismni kiriting (Buyurtma shu nomga rasmiylashtiriladi)
+                                            </Typography>
+                                            <TextField
+                                                label="F.I.O"
+                                                value={fullName}
+                                                onChange={(e) => setFullName(e.target.value)}
+                                                fullWidth
+                                                sx={{
+                                                    "& .MuiOutlinedInput-root": {
+                                                        borderRadius: "8px",
+                                                    },
+                                                }}
+                                            />
+                                        </Box>
+
+                                        {/* Telegram username or phone number field */}
+                                        <Box>
+                                            <Typography sx={{ fontSize: "14px", color: "#666", mb: 1 }}>
+                                                Iltimos, Telegram username yoki Telegramda ro'yxatdan o'tilgan raqamingizni kiriting
+                                            </Typography>
+                                            <TextField
+                                                label="Telegram username/telefon raqam"
+                                                value={telegram}
+                                                onChange={(e) => setTelegram(e.target.value)}
+                                                fullWidth
+                                                sx={{
+                                                    "& .MuiOutlinedInput-root": {
+                                                        borderRadius: "8px",
+                                                    },
+                                                }}
+                                            />
+                                        </Box>
+
+                                        {/* Comment field */}
+                                        <Box>
+                                            <Typography
+                                                sx={{
+                                                    fontSize: "18px",
+                                                    fontWeight: 700,
+                                                    mb: 2,
+                                                    color: "#1a1a1a",
+                                                }}
+                                            >
+                                                Izoh
+                                            </Typography>
+                                            <TextField
+                                                label="Izoh..."
+                                                multiline
+                                                rows={2}
+                                                value={comment}
+                                                onChange={(e) => setComment(e.target.value)}
+                                                fullWidth
+                                                sx={{
+                                                    "& .MuiOutlinedInput-root": {
+                                                        borderRadius: "8px",
+                                                    },
+                                                }}
+                                            />
+                                        </Box>
+
+                                        {/* Send Code Button */}
                                         <Button
                                             variant="contained"
-                                            onClick={handleVerifyCode}
-                                            disabled={verifying || code.length !== 6}
+                                            onClick={handleSendCode}
+                                            disabled={sendingCode || !fullName.trim() || !telegram.trim() || !comment.trim()}
                                             sx={{
                                                 backgroundColor: "#333",
                                                 color: "white",
@@ -250,14 +278,121 @@ const ConfirmOrder = () => {
                                                 },
                                             }}
                                         >
-                                            {verifying ? "Tekshirilmoqda..." : "Tasdiqlash"}
+                                            {sendingCode ? "Yuborilmoqda..." : "Kodni yuborish"}
                                         </Button>
-                                    </Box>
+                                    </>
+                                ) : (
+                                    <>
+                                        {/* Customer Info - After code sent (with input values) */}
+                                        <Box>
+                                            <Typography
+                                                sx={{
+                                                    fontSize: "18px",
+                                                    fontWeight: 700,
+                                                    mb: 2,
+                                                    color: "#1a1a1a",
+                                                }}
+                                            >
+                                                Mijoz
+                                            </Typography>
+                                            <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
+                                                <Box>
+                                                    <Typography
+                                                        component="span"
+                                                        sx={{ fontSize: "14px", color: "#666", mr: 1 }}
+                                                    >
+                                                        Ism:
+                                                    </Typography>
+                                                    <Typography component="span" sx={{ fontSize: "16px", fontWeight: 700 }}>
+                                                        {fullName || user?.firstName || "Noma'lum"}
+                                                    </Typography>
+                                                </Box>
+                                                <Box>
+                                                    <Typography
+                                                        component="span"
+                                                        sx={{ fontSize: "14px", color: "#666", mr: 1 }}
+                                                    >
+                                                        Telegram/Telefon:
+                                                    </Typography>
+                                                    <Typography component="span" sx={{ fontSize: "16px", fontWeight: 700 }}>
+                                                        {telegram || "Noma'lum"}
+                                                    </Typography>
+                                                </Box>
+                                            </Box>
+                                        </Box>
+
+                                        {/* Izoh - After code sent */}
+                                        <Box>
+                                            <Typography
+                                                sx={{
+                                                    fontSize: "18px",
+                                                    fontWeight: 700,
+                                                    mb: 2,
+                                                    color: "#1a1a1a",
+                                                }}
+                                            >
+                                                Izoh
+                                            </Typography>
+                                            <Typography sx={{ fontSize: "16px", color: "#1a1a1a" }}>
+                                                {comment || "Izoh yo'q"}
+                                            </Typography>
+                                        </Box>
+
+                                        {/* Code Input and Verify Button */}
+                                        <Box sx={{ display: "flex", gap: 2, alignItems: "center" }}>
+                                            <TextField
+                                                value={code}
+                                                onChange={handleCodeChange}
+                                                placeholder="000000"
+                                                size="small"
+                                                inputProps={{
+                                                    maxLength: 6,
+                                                    pattern: "[0-9]*",
+                                                    inputMode: "numeric",
+                                                    style: {
+                                                        textAlign: "center",
+                                                        fontSize: "16px",
+                                                        letterSpacing: "4px",
+                                                        fontWeight: 600,
+                                                    },
+                                                }}
+                                                sx={{
+                                                    flex: 0.5,
+                                                    "& .MuiOutlinedInput-root": {
+                                                        borderRadius: "8px",
+                                                    },
+                                                }}
+                                            />
+                                            <Button
+                                                variant="contained"
+                                                onClick={handleVerifyCode}
+                                                disabled={verifying || code.length !== 6}
+                                                sx={{
+                                                    backgroundColor: "#333",
+                                                    color: "white",
+                                                    py: 1,
+                                                    px: 2,
+                                                    fontSize: "14px",
+                                                    fontWeight: 600,
+                                                    textTransform: "uppercase",
+                                                    borderRadius: "8px",
+                                                    "&:hover": {
+                                                        backgroundColor: "#555",
+                                                    },
+                                                    "&:disabled": {
+                                                        backgroundColor: "#999",
+                                                    },
+                                                }}
+                                            >
+                                                {verifying ? "Tekshirilmoqda..." : "Tasdiqlash"}
+                                            </Button>
+                                        </Box>
+                                    </>
                                 )}
                             </>
                         ) : (
                             <>
-                                {/* Customer Info */}
+                                {/* Customer Info - After verification */}
                                 <Box>
                                     <Typography
                                         sx={{
@@ -278,7 +413,7 @@ const ConfirmOrder = () => {
                                                 Ism:
                                             </Typography>
                                             <Typography component="span" sx={{ fontSize: "16px", fontWeight: 700 }}>
-                                                {user?.firstName || "Noma'lum"}
+                                                {fullName || user?.firstName || "Noma'lum"}
                                             </Typography>
                                         </Box>
                                         <Box>
@@ -308,7 +443,7 @@ const ConfirmOrder = () => {
                                     </Box>
                                 </Box>
 
-                                {/* Comment field */}
+                                {/* Comment field - After verification */}
                                 <Box>
                                     <Typography
                                         sx={{
@@ -320,19 +455,9 @@ const ConfirmOrder = () => {
                                     >
                                         Izoh
                                     </Typography>
-                                    <TextField
-                                        label="Izoh..."
-                                        multiline
-                                        rows={2}
-                                        value={comment}
-                                        onChange={(e) => setComment(e.target.value)}
-                                        fullWidth
-                                        sx={{
-                                            "& .MuiOutlinedInput-root": {
-                                                borderRadius: "8px",
-                                            },
-                                        }}
-                                    />
+                                    <Typography sx={{ fontSize: "16px", color: "#1a1a1a" }}>
+                                        {comment || "Izoh yo'q"}
+                                    </Typography>
                                 </Box>
                             </>
                         )}
