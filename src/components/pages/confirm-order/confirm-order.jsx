@@ -321,8 +321,8 @@ const ConfirmOrder = () => {
                                             </Box>
                                         </Box>
 
-                                        {/* Izoh - After code sent */}
-                                        <Box>
+                                        {/* Comment field - After verification */}
+                                        {comment && (<Box>
                                             <Typography
                                                 sx={{
                                                     fontSize: "18px",
@@ -334,9 +334,9 @@ const ConfirmOrder = () => {
                                                 Izoh
                                             </Typography>
                                             <Typography sx={{ fontSize: "16px", color: "#1a1a1a" }}>
-                                                {comment || "Izoh yo'q"}
+                                                {comment}
                                             </Typography>
-                                        </Box>
+                                        </Box>)}
 
                                         {/* Code Input and Verify Button */}
                                         <Box sx={{ display: "flex", gap: 2, alignItems: "center" }}>
@@ -431,7 +431,7 @@ const ConfirmOrder = () => {
                                 </Box>
 
                                 {/* Comment field - After verification */}
-                                <Box>
+                                {comment && (<Box>
                                     <Typography
                                         sx={{
                                             fontSize: "18px",
@@ -443,9 +443,9 @@ const ConfirmOrder = () => {
                                         Izoh
                                     </Typography>
                                     <Typography sx={{ fontSize: "16px", color: "#1a1a1a" }}>
-                                        {comment || "Izoh yo'q"}
+                                        {comment}
                                     </Typography>
-                                </Box>
+                                </Box>)}
                             </>
                         )}
 
