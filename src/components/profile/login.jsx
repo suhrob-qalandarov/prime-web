@@ -1,5 +1,4 @@
 import {Box, Button, Snackbar, Stack} from "@mui/material"
-import "./login.css"
 import { useState, useRef, useEffect } from "react"
 import AuthService from "../../service/auth"
 import { useNavigate, useSearchParams } from "react-router-dom"
@@ -48,15 +47,20 @@ const Login = () => {
     }
 
     const handleInputChange = (index, value) => {
+        // Faqat raqam qabul qilish
+        if (value && !/^[0-9]$/.test(value)) return
+        
         if (value.length > 1) return // Prevent multiple characters
 
         const newCode = [...code]
         newCode[index] = value
         setCode(newCode)
 
-        // Move to next input if value is entered
+        // Move to next input if value is entered - setTimeout bilan state yangilanishini kutish
         if (value && index < 5) {
-            inputRefs.current[index + 1]?.focus()
+            setTimeout(() => {
+                inputRefs.current[index + 1]?.focus()
+            }, 0)
         }
 
         // Submit when all 6 digits are entered
@@ -68,11 +72,28 @@ const Login = () => {
             }
         }
     }
+    
+    const handleInputFocus = (index) => {
+        // Faqat birinchi input yoki oldingi input'lar to'ldirilgan bo'lsa focus qilish
+        if (index > 0 && !code[index - 1]) {
+            // Oldingi input bo'sh bo'lsa, uni focus qilish
+            inputRefs.current[index - 1]?.focus()
+        }
+    }
 
     const handleKeyDown = (index, e) => {
-        // Move to previous input on backspace if current input is empty
-        if (e.key === "Backspace" && !code[index] && index > 0) {
-            inputRefs.current[index - 1]?.focus()
+        // Move to previous input on backspace
+        if (e.key === "Backspace") {
+            if (!code[index] && index > 0) {
+                // Joriy input bo'sh bo'lsa, oldingi input'ga o'tish
+                inputRefs.current[index - 1]?.focus()
+            } else if (code[index] && index > 0) {
+                // Joriy input to'ldirilgan bo'lsa, uni tozalash va oldingi input'ga o'tish
+                const newCode = [...code]
+                newCode[index] = ""
+                setCode(newCode)
+                inputRefs.current[index - 1]?.focus()
+            }
         }
     }
 
@@ -123,78 +144,78 @@ const Login = () => {
     useEffect(() => {
         // Focus first input on component mount
         inputRefs.current[0]?.focus()
+        
+        // Disable body scroll on mobile
+        document.body.style.overflow = "hidden"
+        
+        return () => {
+            document.body.style.overflow = ""
+        }
     }, [])
 
     return (
         <Stack
             sx={{
-                minHeight: "92vh",
-                backgroundColor: "white",
+                position: "fixed",
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                width: "100%",
+                height: "100vh",
+                backgroundColor: "var(--light-color)",
                 display: "flex",
-                alignItems: "center",
-                padding: "40px 0",
-                marginTop: "70px",
+                alignItems: "flex-start",
+                justifyContent: "flex-start",
+                overflow: "hidden",
+                padding: { xs: "16px", sm: "40px" },
+                paddingTop: { xs: "130px", sm: "120px", md: "140px" },
+                zIndex: 1,
             }}
         >
-            <div className="login-content">
-                <Box
-                    component="img"
-                    src="/images/bot/prime77.jpeg"
-                    alt="Telegram Bot"
-                    className="login-bot-logo"
-                    sx={{
-                        width: 100,
-                        height: 100,
-                        borderRadius: "50%",
-                        objectFit: "cover",
-                        marginBottom: 5,
-                        boxShadow: "0 4px 8px rgba(0,0,0,0.15)",
-                    }}
-                />
-                <h2
-                    className="main-title"
-                    sx={{
-                        fontFamily: "Noto Sans",
-                    }}
-                >
+            <div className="text-center max-w-[400px] w-full mx-auto">
+                <h2 className="text-[color:var(--burgundy-dark)] text-[1.5rem] sm:text-[1.8rem] font-[900] mb-[30px] capitalize font-['Noto Sans']">
                     Kodni Kiriting
                 </h2>
 
-                <Box
-                    className="login-description"
-                    sx={{
-                        fontFamily: "Noto Sans",
-                    }}
-                >
-                    <a className="login-bot-name" href="https://t.me/prime77uzBot" target="_blank" rel="noopener noreferrer">
-                        @prime77uzbot
-                    </a>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;telegram botiga kiring va 2 daqiqalik
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    kodingizni oling.
+                <Box className="text-black text-[15px] sm:text-[15px] leading-[1.4] mb-[30px] sm:mb-[40px] font-['Noto Sans'] font-medium px-2 flex flex-col items-center">
+                    <div>
+                        <a className="text-sm font-semibold text-[var(--burgundy-dark)] underline underline-offset-4 font-['Noto Sans']" href="https://t.me/prime77uzBot" target="_blank" rel="noopener noreferrer">
+                            @prime77uzbot
+                        </a>
+                        <span className="text-[15px] font-bold font-['Noto Sans']">&nbsp;&nbsp;&nbsp;telegram botiga kiring va</span>
+                    </div>
+                    <div className="mt-3 text-[15px] font-bold font-['Noto Sans']">
+                        2 daqiqalik kodingizni oling.
+                    </div>
                 </Box>
 
                 <form id="loginForm">
-                    <div className="code-inputs">
+                    <div className="flex justify-center gap-[8px] sm:gap-[10px] mb-[20px] sm:mb-[30px] flex-wrap">
                         {code.map((digit, index) => (
                             <input
                                 key={index}
                                 ref={(el) => (inputRefs.current[index] = el)}
-                                type="text"
-                                className="code-input"
+                                type="tel"
+                                inputMode="numeric"
+                                pattern="[0-9]*"
+                                className="w-[40px] h-[50px] sm:w-[45px] sm:h-[57px] text-center text-xl sm:text-2xl font-bold border-2 border-[color:var(--burgundy-dark)] rounded-[15px] transition-all duration-300 bg-[var(--light-color)] focus:border-[color:var(--burgundy-color)] focus:outline-none focus:shadow-[0_0_0_3px_rgba(139,21,56,0.1)] focus:scale-105 disabled:opacity-60 disabled:cursor-not-allowed"
                                 maxLength={1}
                                 value={digit}
                                 onChange={(e) => handleInputChange(index, e.target.value)}
+                                onFocus={() => handleInputFocus(index)}
                                 onKeyDown={(e) => handleKeyDown(index, e)}
+                                onPaste={(e) => e.preventDefault()}
+                                onClick={() => handleInputFocus(index)}
                                 disabled={isLoading}
                             />
                         ))}
                     </div>
 
                     {isLoading && (
-                        <div className="text-center">
-                            <div className="spinner" style={{ display: "block" }}></div>
-                            <p className="status-text">Tekshirilmoqda...</p>
+                        <div className="text-center mt-4 sm:mt-5">
+                            <div className="w-6 h-6 border-[3px] border-[#f3f3f3] border-t-[color:var(--burgundy-color)] rounded-full animate-spin mx-auto block"></div>
+                            <p className="text-[color:var(--burgundy-color)] mt-4 sm:mt-5 font-semibold text-sm sm:text-base">Tekshirilmoqda...</p>
                         </div>
                     )}
                 </form>
@@ -271,7 +292,6 @@ const Login = () => {
             />
 
             <Snackbar
-                className="code-input-snack"
                 open={codeSnackbar}
                 onClose={handleCodeCloseSnackbar}
                 anchorOrigin={{ vertical: "top", horizontal: "right" }}

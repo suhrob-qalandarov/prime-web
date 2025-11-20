@@ -1,0 +1,651 @@
+import { useState, useEffect } from "react"
+import { useNavigate } from "react-router-dom"
+import {
+    Container,
+    Box,
+    Stack,
+    Typography,
+    TextField,
+    Radio,
+    RadioGroup,
+    FormControlLabel,
+    FormControl,
+    Button,
+    Divider,
+} from "@mui/material"
+import PageHeader from "../../common/PageHeader"
+import AuthService from "../../../service/auth"
+import OrderService from "../../../service/order"
+
+const ConfirmOrder = () => {
+    const navigate = useNavigate()
+    const [user, setUser] = useState(null)
+    const [comment, setComment] = useState("")
+    const [deliveryMethod, setDeliveryMethod] = useState("bts")
+    const [promoCode, setPromoCode] = useState("")
+    const [cartItems, setCartItems] = useState([])
+    const [loading, setLoading] = useState(true)
+    
+    // Phone verification states
+    const [codeSent, setCodeSent] = useState(false)
+    const [code, setCode] = useState("")
+    const [sendingCode, setSendingCode] = useState(false)
+    const [verifying, setVerifying] = useState(false)
+    const [verified, setVerified] = useState(false)
+    const [telegram, setTelegram] = useState("")
+    const [fullName, setFullName] = useState("")
+
+    // Mock data for demonstration - replace with actual cart data
+    const mockProduct = {
+        id: 1,
+        name: "Kurtka Ayiq",
+        details: "Qora XL (bo'y 176-187)",
+        quantity: 1,
+        price: 336000,
+        originalPrice: 420000,
+        discount: 84000,
+        image: "/images/spotlights/clothe.jpg",
+    }
+
+    useEffect(() => {
+        const fetchUser = async () => {
+            const userFromLS = await AuthService.getUserFromLS()
+            if (userFromLS && userFromLS.id) {
+                setUser(userFromLS)
+            } else {
+                navigate("/login")
+            }
+            setLoading(false)
+        }
+        fetchUser()
+
+        // TODO: Fetch actual cart items from localStorage or API
+        // For now, using mock data
+        setCartItems([mockProduct])
+    }, [navigate])
+
+    const formatPrice = (price) => {
+        return new Intl.NumberFormat("uz-UZ").format(price) + " So'm"
+    }
+
+    const calculateTotal = () => {
+        return cartItems.reduce((sum, item) => sum + (item.price || item.originalPrice - item.discount), 0)
+    }
+
+    const calculateDiscount = () => {
+        return cartItems.reduce((sum, item) => sum + (item.discount || 0), 0)
+    }
+
+    const calculateSubtotal = () => {
+        return cartItems.reduce((sum, item) => sum + (item.originalPrice || item.price), 0)
+    }
+
+    const handleSendCode = async () => {
+        setSendingCode(true)
+        try {
+            // TODO: Call API to send verification code
+            // await AuthService.sendVerificationCode(user.phone)
+            await new Promise((resolve) => setTimeout(resolve, 1500)) // Simulate API call
+            setCodeSent(true)
+        } catch (error) {
+            console.error("Error sending code:", error)
+        } finally {
+            setSendingCode(false)
+        }
+    }
+
+    const handleVerifyCode = async () => {
+        if (code.length !== 6) return
+        
+        setVerifying(true)
+        try {
+            // TODO: Call API to verify code
+            // await AuthService.verifyCode(user.phone, code)
+            await new Promise((resolve) => setTimeout(resolve, 1500)) // Simulate API call
+            setVerified(true)
+        } catch (error) {
+            console.error("Error verifying code:", error)
+            // Show error message
+        } finally {
+            setVerifying(false)
+        }
+    }
+
+    const handleCodeChange = (e) => {
+        const value = e.target.value.replace(/\D/g, "") // Only numbers
+        if (value.length <= 6) {
+            setCode(value)
+        }
+    }
+
+    const handlePayment = async () => {
+        try {
+            const orderData = {
+                comment: comment,
+                deliveryMethod: deliveryMethod,
+                promoCode: promoCode || null,
+                telegram: telegram,
+                fullName: fullName,
+                orderItems: cartItems.map((item) => ({
+                    productId: item.id,
+                    quantity: item.quantity,
+                    price: item.price,
+                })),
+            }
+
+            await OrderService.confirmOrder(orderData)
+            // Navigate to success page or show success message
+            navigate("/profile")
+        } catch (error) {
+            console.error("Error confirming order:", error)
+            // Show error message
+        }
+    }
+
+    if (loading) {
+        return (
+            <Box sx={{ textAlign: "center", py: 8 }}>
+                <Typography>Yuklanmoqda...</Typography>
+            </Box>
+        )
+    }
+
+    const subtotal = calculateSubtotal()
+    const discount = calculateDiscount()
+    const total = calculateTotal()
+
+    return (
+        <Stack>
+            <PageHeader title="Buyurtma qilish" />
+            <Container
+                maxWidth="xl"
+                sx={{
+                    px: { xs: 2, sm: 3, md: 4 },
+                    py: { xs: 3, md: 5 },
+                }}
+            >
+                <Box
+                    sx={{
+                        display: "grid",
+                        gridTemplateColumns: { xs: "1fr", lg: "1fr 1px 1fr" },
+                        gap: { xs: 3, lg: 4 },
+                        maxWidth: "1200px",
+                        margin: "0 auto",
+                    }}
+                >
+                    {/* Left Section */}
+                    <Box sx={{ display: "flex", flexDirection: "column", gap: 3 }}>
+                        {!verified ? (
+                            <>
+                                {!codeSent ? (
+                                    <>
+                                        {/* Form Title - Before code sent */}
+                                        <Box>
+                                            <Typography
+                                                sx={{
+                                                    fontSize: "18px",
+                                                    fontWeight: 700,
+                                                    mb: 2,
+                                                    color: "#1a1a1a",
+                                                }}
+                                            >
+                                                Formani to'ldiring
+                                            </Typography>
+                                        </Box>
+
+                                        {/* F.I.O field */}
+                                        <Box>
+                                            <Typography sx={{ fontSize: "14px", color: "#666", mb: 1 }}>
+                                                Iltimos, buyurtma rasmiylashtiriladigan to'liq ismni kiriting (Buyurtma shu nomga rasmiylashtiriladi)
+                                            </Typography>
+                                            <TextField
+                                                label="F.I.O *"
+                                                value={fullName}
+                                                onChange={(e) => setFullName(e.target.value)}
+                                                fullWidth
+                                                sx={{
+                                                    "& .MuiOutlinedInput-root": {
+                                                        borderRadius: "8px",
+                                                    },
+                                                }}
+                                            />
+                                        </Box>
+
+                                        {/* Telegram username or phone number field */}
+                                        <Box>
+                                            <Typography sx={{ fontSize: "14px", color: "#666", mb: 1 }}>
+                                                Iltimos, Telegram username yoki Telegramda ro'yxatdan o'tilgan raqamingizni kiriting
+                                            </Typography>
+                                            <TextField
+                                                label="Telegram username/telefon raqam *"
+                                                value={telegram}
+                                                onChange={(e) => setTelegram(e.target.value)}
+                                                fullWidth
+                                                sx={{
+                                                    "& .MuiOutlinedInput-root": {
+                                                        borderRadius: "8px",
+                                                    },
+                                                }}
+                                            />
+                                        </Box>
+
+                                        {/* Comment field */}
+                                        <Box>
+                                            <Typography
+                                                sx={{
+                                                    fontSize: "18px",
+                                                    fontWeight: 700,
+                                                    mb: 2,
+                                                    color: "#1a1a1a",
+                                                }}
+                                            >
+                                                Izoh
+                                            </Typography>
+                                            <TextField
+                                                label="Izoh..."
+                                                multiline
+                                                rows={2}
+                                                value={comment}
+                                                onChange={(e) => setComment(e.target.value)}
+                                                fullWidth
+                                                sx={{
+                                                    "& .MuiOutlinedInput-root": {
+                                                        borderRadius: "8px",
+                                                    },
+                                                }}
+                                            />
+                                        </Box>
+
+                                        {/* Send Code Button */}
+                                        <Button
+                                            variant="contained"
+                                            onClick={handleSendCode}
+                                            disabled={sendingCode || !fullName.trim() || !telegram.trim()}
+                                            sx={{
+                                                backgroundColor: "#333",
+                                                color: "white",
+                                                py: 1,
+                                                px: 2,
+                                                fontSize: "14px",
+                                                fontWeight: 600,
+                                                textTransform: "uppercase",
+                                                borderRadius: "8px",
+                                                "&:hover": {
+                                                    backgroundColor: "#555",
+                                                },
+                                                "&:disabled": {
+                                                    backgroundColor: "#999",
+                                                },
+                                            }}
+                                        >
+                                            {sendingCode ? "Yuborilmoqda..." : "Kodni yuborish"}
+                                        </Button>
+                                    </>
+                                ) : (
+                                    <>
+                                        {/* Customer Info - After code sent (with input values) */}
+                                        <Box>
+                                            <Typography
+                                                sx={{
+                                                    fontSize: "18px",
+                                                    fontWeight: 700,
+                                                    mb: 2,
+                                                    color: "#1a1a1a",
+                                                }}
+                                            >
+                                                Mijoz
+                                            </Typography>
+                                            <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
+                                                <Box>
+                                                    <Typography
+                                                        component="span"
+                                                        sx={{ fontSize: "14px", color: "#666", mr: 1 }}
+                                                    >
+                                                        Ism:
+                                                    </Typography>
+                                                    <Typography component="span" sx={{ fontSize: "16px", fontWeight: 700 }}>
+                                                        {fullName || user?.firstName || "Noma'lum"}
+                                                    </Typography>
+                                                </Box>
+                                                <Box>
+                                                    <Typography
+                                                        component="span"
+                                                        sx={{ fontSize: "14px", color: "#666", mr: 1 }}
+                                                    >
+                                                        Telegram/Telefon:
+                                                    </Typography>
+                                                    <Typography component="span" sx={{ fontSize: "16px", fontWeight: 700 }}>
+                                                        {telegram || "Noma'lum"}
+                                                    </Typography>
+                                                </Box>
+                                            </Box>
+                                        </Box>
+
+                                        {/* Comment field - After verification */}
+                                        {comment && (<Box>
+                                            <Typography
+                                                sx={{
+                                                    fontSize: "18px",
+                                                    fontWeight: 700,
+                                                    mb: 2,
+                                                    color: "#1a1a1a",
+                                                }}
+                                            >
+                                                Izoh
+                                            </Typography>
+                                            <Typography sx={{ fontSize: "16px", color: "#1a1a1a" }}>
+                                                {comment}
+                                            </Typography>
+                                        </Box>)}
+
+                                        {/* Code Input and Verify Button */}
+                                        <Typography sx={{ fontSize: "14px", color: "#666", mb: 1 }}>
+                                            <a className="underline underline-offset-4 font-['Noto Sans']" href="https://t.me/prime77uzBot" target="_blank" rel="noopener noreferrer">
+                                                @prime77uzbot
+                                            </a>
+                                            <span>&nbsp;&nbsp;telegram botiga kiring va buyurtmani tasdiqlash uchun 2 daqiqalik kodingizni oling.</span>
+                                        </Typography>
+                                        <Box sx={{ display: "flex", gap: 2, alignItems: "center" }}>
+                                            <TextField
+                                                value={code}
+                                                onChange={handleCodeChange}
+                                                placeholder="000000"
+                                                size="small"
+                                                inputProps={{
+                                                    maxLength: 6,
+                                                    pattern: "[0-9]*",
+                                                    inputMode: "numeric",
+                                                    style: {
+                                                        textAlign: "center",
+                                                        fontSize: "16px",
+                                                        letterSpacing: "4px",
+                                                        fontWeight: 600,
+                                                    },
+                                                }}
+                                                sx={{
+                                                    flex: 0.5,
+                                                    "& .MuiOutlinedInput-root": {
+                                                        borderRadius: "8px",
+                                                    },
+                                                }}
+                                            />
+                                            <Button
+                                                variant="contained"
+                                                onClick={handleVerifyCode}
+                                                disabled={verifying || code.length !== 6}
+                                                sx={{
+                                                    backgroundColor: "#333",
+                                                    color: "white",
+                                                    py: 1,
+                                                    px: 2,
+                                                    fontSize: "14px",
+                                                    fontWeight: 600,
+                                                    textTransform: "uppercase",
+                                                    borderRadius: "8px",
+                                                    "&:hover": {
+                                                        backgroundColor: "#555",
+                                                    },
+                                                    "&:disabled": {
+                                                        backgroundColor: "#999",
+                                                    },
+                                                }}
+                                            >
+                                                {verifying ? "Tekshirilmoqda..." : "Tasdiqlash"}
+                                            </Button>
+                                        </Box>
+                                    </>
+                                )}
+                            </>
+                        ) : (
+                            <>
+                                {/* Customer Info - After verification */}
+                                <Box>
+                                    <Typography
+                                        sx={{
+                                            fontSize: "18px",
+                                            fontWeight: 700,
+                                            mb: 2,
+                                            color: "#1a1a1a",
+                                        }}
+                                    >
+                                        Mijoz
+                                    </Typography>
+                                    <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
+                                        <Box>
+                                            <Typography
+                                                component="span"
+                                                sx={{ fontSize: "14px", color: "#666", mr: 1 }}
+                                            >
+                                                Ism:
+                                            </Typography>
+                                            <Typography component="span" sx={{ fontSize: "16px", fontWeight: 700 }}>
+                                                {fullName || user?.firstName || "Noma'lum"}
+                                            </Typography>
+                                        </Box>
+                                        <Box>
+                                            <Typography
+                                                component="span"
+                                                sx={{ fontSize: "14px", color: "#666", mr: 1 }}
+                                            >
+                                                Telegram/Telefon:
+                                            </Typography>
+                                            <Typography component="span" sx={{ fontSize: "16px", fontWeight: 700 }}>
+                                                {telegram || "Noma'lum"}
+                                            </Typography>
+                                        </Box>
+                                    </Box>
+                                </Box>
+
+                                {/* Comment field - After verification */}
+                                {comment && (<Box>
+                                    <Typography
+                                        sx={{
+                                            fontSize: "18px",
+                                            fontWeight: 700,
+                                            mb: 2,
+                                            color: "#1a1a1a",
+                                        }}
+                                    >
+                                        Izoh
+                                    </Typography>
+                                    <Typography sx={{ fontSize: "16px", color: "#1a1a1a" }}>
+                                        {comment}
+                                    </Typography>
+                                </Box>)}
+
+                                {/* Delivery Method Selection - After verification */}
+                                <Box>
+                                    <Typography
+                                        sx={{
+                                            fontSize: "18px",
+                                            fontWeight: 700,
+                                            mb: 2,
+                                            color: "#1a1a1a",
+                                        }}
+                                    >
+                                        Yetkazib berish usulini tanlang
+                                    </Typography>
+                                    <FormControl component="fieldset">
+                                        <RadioGroup
+                                            value={deliveryMethod}
+                                            onChange={(e) => setDeliveryMethod(e.target.value)}
+                                        >
+                                            <FormControlLabel
+                                                value="bts"
+                                                control={<Radio />}
+                                                label={
+                                                    <Box>
+                                                        <Typography sx={{ fontWeight: 600, mb: 1 }}>
+                                                            BTS Pochta
+                                                        </Typography>
+                                                        <Typography
+                                                            sx={{
+                                                                fontSize: "14px",
+                                                                fontWeight: 600,
+                                                                mb: 1,
+                                                                color: "#666",
+                                                            }}
+                                                        >
+                                                            Viloyatlarga (BTS):
+                                                        </Typography>
+                                                        <Box sx={{ pl: 2, display: "flex", flexDirection: "column", gap: 0.5 }}>
+                                                            <Typography sx={{ fontSize: "13px", color: "#666" }}>
+                                                                • 2-4 kun ichida sizga eng yaqin BTS chiqarish punktigacha yetkaziladi.
+                                                            </Typography>
+                                                            <Typography sx={{ fontSize: "13px", color: "#666" }}>
+                                                                • Buyurtmani onlayn rasmiylashtirishda to'lovni amalga oshiring, yetkazib berish uchun esa mahsulotni qabul qilganingizda to'laysiz.
+                                                            </Typography>
+                                                            <Typography sx={{ fontSize: "13px", color: "#666" }}>
+                                                                • Buyurtmangizni o'zingizga qulay vaqtda olib ketishingiz mumkin.
+                                                            </Typography>
+                                                        </Box>
+                                                    </Box>
+                                                }
+                                                sx={{
+                                                    mb: 2,
+                                                    alignItems: "flex-start",
+                                                    "& .MuiFormControlLabel-label": {
+                                                        ml: 1,
+                                                    },
+                                                }}
+                                            />
+                                            <FormControlLabel
+                                                value="yandex"
+                                                control={<Radio />}
+                                                label={
+                                                    <Typography sx={{ fontWeight: 600 }}>
+                                                        Yandex Yetkazib berish
+                                                    </Typography>
+                                                }
+                                                sx={{
+                                                    mb: 2,
+                                                    "& .MuiFormControlLabel-label": {
+                                                        ml: 1,
+                                                    },
+                                                }}
+                                            />
+                                        </RadioGroup>
+                                    </FormControl>
+                                </Box>
+
+                                {/* Payment Button - After verification */}
+                                <Button
+                                    variant="contained"
+                                    onClick={handlePayment}
+                                    sx={{
+                                        backgroundColor: "#333",
+                                        color: "white",
+                                        py: 1,
+                                        px: 2,
+                                        fontSize: "14px",
+                                        fontWeight: 600,
+                                        textTransform: "uppercase",
+                                        borderRadius: "8px",
+                                        "&:hover": {
+                                            backgroundColor: "#555",
+                                        },
+                                    }}
+                                >
+                                    TO'LASH
+                                </Button>
+                            </>
+                        )}
+                    </Box>
+
+                    {/* Divider */}
+                    <Divider
+                        orientation="vertical"
+                        flexItem
+                        sx={{
+                            display: { xs: "none", lg: "block" },
+                            borderColor: "#e0e0e0",
+                        }}
+                    />
+
+                    {/* Right Section */}
+                    <Box sx={{ display: "flex", flexDirection: "column", gap: 3 }}>
+                        {/* Order Heading */}
+                        <Typography
+                            sx={{
+                                fontSize: "18px",
+                                fontWeight: 700,
+                                color: "#1a1a1a",
+                            }}
+                        >
+                            Buyurtma
+                        </Typography>
+
+                        {/* Product Information */}
+                        {cartItems.map((item) => (
+                            <Box key={item.id} sx={{ display: "flex", gap: 2 }}>
+                                <Box
+                                    component="img"
+                                    src={item.image || "/placeholder.svg"}
+                                    alt={item.name}
+                                    sx={{
+                                        width: "80px",
+                                        height: "80px",
+                                        objectFit: "cover",
+                                        borderRadius: "8px",
+                                    }}
+                                />
+                                <Box sx={{ flex: 1 }}>
+                                    <Typography sx={{ fontSize: "16px", fontWeight: 600, mb: 0.5 }}>
+                                        {item.name}
+                                    </Typography>
+                                    <Typography sx={{ fontSize: "14px", color: "#666", mb: 1 }}>
+                                        {item.details}
+                                    </Typography>
+                                    <Typography sx={{ fontSize: "15px", fontWeight: 600 }}>
+                                        {item.quantity} x {formatPrice(item.price)}
+                                    </Typography>
+                                </Box>
+                            </Box>
+                        ))}
+
+                        {/* Order Summary */}
+                        <Box
+                            sx={{
+                                borderTop: "1px solid #e0e0e0",
+                                pt: 2,
+                                display: "flex",
+                                flexDirection: "column",
+                                gap: 1.5,
+                            }}
+                        >
+                            <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+                                <Typography sx={{ fontSize: "15px", color: "#666" }}>
+                                    Summa
+                                </Typography>
+                                <Typography sx={{ fontSize: "15px", fontWeight: 600 }}>
+                                    {formatPrice(subtotal)}
+                                </Typography>
+                            </Box>
+                            {discount > 0 && (
+                                <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+                                    <Typography sx={{ fontSize: "15px", color: "#666" }}>
+                                        Chegirma
+                                    </Typography>
+                                    <Typography sx={{ fontSize: "15px", fontWeight: 600, color: "#d32f2f" }}>
+                                        -{formatPrice(discount)}
+                                    </Typography>
+                                </Box>
+                            )}
+                            <Box sx={{ display: "flex", justifyContent: "space-between", pt: 1 }}>
+                                <Typography sx={{ fontSize: "18px", fontWeight: 700 }}>
+                                    Jami
+                                </Typography>
+                                <Typography sx={{ fontSize: "18px", fontWeight: 700 }}>
+                                    {formatPrice(total)}
+                                </Typography>
+                            </Box>
+                        </Box>
+                    </Box>
+                </Box>
+            </Container>
+        </Stack>
+    )
+}
+
+export default ConfirmOrder
+

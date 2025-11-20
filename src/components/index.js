@@ -6,3 +6,4 @@ export {default as Footer} from "./footer/footer";
 export {default as Catalog} from "./pages/catalog/catalog"
 export {default as AboutUs} from './pages/aboutus/about-us'
 export {default as Contact} from "./pages/contact/contact"
+export {default as ConfirmOrder} from "./pages/confirm-order/confirm-order"

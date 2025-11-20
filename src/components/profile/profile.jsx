@@ -16,6 +16,7 @@ import {useNavigate, useSearchParams} from "react-router-dom"
 import UserOrder from "./user-order";
 import AuthService from "../../service/auth";
 import urls from "../../constants/urls";
+import PageHeader from "../common/PageHeader";
 
 const Profile = () => {
     const [user, setUser] = useState(null)
@@ -118,24 +119,11 @@ const Profile = () => {
 
     return (
         <Stack>
-            <Stack className="page-header">
-                <Container>
-                    <div className="page-header-content">
-                        <h1 className="page-title">Profil</h1>
-                        <nav className="breadcrumb-nav">
-                            <a href="/" className="breadcrumb-link">
-                                Asosiy
-                            </a>
-                            <span className="breadcrumb-separator">/</span>
-                            <span className="breadcrumb-current">Profil</span>
-                        </nav>
-                    </div>
-                </Container>
-            </Stack>
+            <PageHeader title="Profil" />
 
             <Stack sx={{ padding: "20px 20px", minHeight: "60vh" }}>
                 <Box sx={{ display: "flex", gap: "0px", justifyContent: "center", flexWrap: "wrap" }}>
-                    <Container maxWidth="md" sx={{ padding: "0px", margin: "0px" }} className="container-custom">
+                    <Container maxWidth="md" sx={{ padding: "0px", margin: "0px" }}>
                         <Card
                             sx={{
                                 maxWidth: 330,
