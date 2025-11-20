@@ -199,7 +199,7 @@ const ConfirmOrder = () => {
                                                 Iltimos, buyurtma rasmiylashtiriladigan to'liq ismni kiriting (Buyurtma shu nomga rasmiylashtiriladi)
                                             </Typography>
                                             <TextField
-                                                label="F.I.O"
+                                                label="F.I.O *"
                                                 value={fullName}
                                                 onChange={(e) => setFullName(e.target.value)}
                                                 fullWidth
@@ -217,7 +217,7 @@ const ConfirmOrder = () => {
                                                 Iltimos, Telegram username yoki Telegramda ro'yxatdan o'tilgan raqamingizni kiriting
                                             </Typography>
                                             <TextField
-                                                label="Telegram username/telefon raqam"
+                                                label="Telegram username/telefon raqam *"
                                                 value={telegram}
                                                 onChange={(e) => setTelegram(e.target.value)}
                                                 fullWidth
@@ -339,6 +339,12 @@ const ConfirmOrder = () => {
                                         </Box>)}
 
                                         {/* Code Input and Verify Button */}
+                                        <Typography sx={{ fontSize: "14px", color: "#666", mb: 1 }}>
+                                            <a className="underline underline-offset-4 font-['Noto Sans']" href="https://t.me/prime77uzBot" target="_blank" rel="noopener noreferrer">
+                                                @prime77uzbot
+                                            </a>
+                                            <span>&nbsp;&nbsp;telegram botiga kiring va buyurtmani tasdiqlash uchun 2 daqiqalik kodingizni oling.</span>
+                                        </Typography>
                                         <Box sx={{ display: "flex", gap: 2, alignItems: "center" }}>
                                             <TextField
                                                 value={code}
