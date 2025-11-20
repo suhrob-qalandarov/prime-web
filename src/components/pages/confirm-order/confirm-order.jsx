@@ -126,11 +126,80 @@ const ConfirmOrder = () => {
                 >
                     {/* Left Section */}
                     <Box sx={{ display: "flex", flexDirection: "column", gap: 3 }}>
-                        {/* Comment Field */}
+
+                        {/* Customer Info */}
+                        <Box>
+                            <Typography
+                                sx={{
+                                    fontSize: "18px",
+                                    fontWeight: 700,
+                                    mb: 2,
+                                    color: "#1a1a1a",
+                                }}
+                            >
+                                Mijoz
+                            </Typography>
+                            <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
+                                <Box>
+                                    <Typography
+                                        component="span"
+                                        sx={{ fontSize: "14px", color: "#666", mr: 1 }}
+                                    >
+                                        Ism:
+                                    </Typography>
+                                    <Typography component="span" sx={{ fontSize: "16px", fontWeight: 700 }}>
+                                        {user?.firstName || "Noma'lum"}
+                                    </Typography>
+                                </Box>
+                                <Box>
+                                    <Typography
+                                        component="span"
+                                        sx={{ fontSize: "14px", color: "#666", mr: 1 }}
+                                    >
+                                        Telefon raqami:
+                                    </Typography>
+                                    <Typography component="span" sx={{ fontSize: "16px", fontWeight: 700 }}>
+                                        {user?.phone || "Noma'lum"}
+                                    </Typography>
+                                </Box>
+                            </Box>
+                        </Box>
+
+                        {/* F.I.O field */}
+                        <Typography>
+                            Iltimos, buyurtma rasmiylashtiriladigan to'liq ismni kiriting (Buyurtma shu nomga rasmiylashtiriladi)
+                        </Typography>
+                        <TextField
+                            label="F.I.O"
+                            multiline
+                            onChange={(e) => setComment(e.target.value)}
+                            sx={{
+                                "& .MuiOutlinedInput-root": {
+                                    borderRadius: "8px",
+                                },
+                            }}
+                        />
+
+                        {/* Telegram username or phone number field */}
+                        <Typography>
+                            Iltimos, Telegram username yoki Telegramda ro'yxatdan o'tilgan raqamingizni kiriting
+                        </Typography>
+                        <TextField
+                            label="Telegram username/telefon raqam"
+                            multiline
+                            onChange={(e) => setComment(e.target.value)}
+                            sx={{
+                                "& .MuiOutlinedInput-root": {
+                                    borderRadius: "8px",
+                                },
+                            }}
+                        />
+
+                        {/* Comment field */}
                         <TextField
                             label="Izoh..."
                             multiline
-                            rows={4}
+                            rows={2}
                             value={comment}
                             onChange={(e) => setComment(e.target.value)}
                             sx={{
@@ -211,25 +280,6 @@ const ConfirmOrder = () => {
                                             },
                                         }}
                                     />
-                                    <FormControlLabel
-                                        value="pickup"
-                                        control={<Radio />}
-                                        label={
-                                            <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-                                                <Typography sx={{ fontWeight: 600 }}>
-                                                    Do'kondan olib ketish
-                                                </Typography>
-                                                <Typography sx={{ fontSize: "13px", color: "#999", fontStyle: "italic" }}>
-                                                    Tez orada...
-                                                </Typography>
-                                            </Box>
-                                        }
-                                        sx={{
-                                            "& .MuiFormControlLabel-label": {
-                                                ml: 1,
-                                            },
-                                        }}
-                                    />
                                 </RadioGroup>
                             </FormControl>
                         </Box>
@@ -267,44 +317,6 @@ const ConfirmOrder = () => {
 
                     {/* Right Section */}
                     <Box sx={{ display: "flex", flexDirection: "column", gap: 3 }}>
-                        {/* Customer Info */}
-                        <Box>
-                            <Typography
-                                sx={{
-                                    fontSize: "18px",
-                                    fontWeight: 700,
-                                    mb: 2,
-                                    color: "#1a1a1a",
-                                }}
-                            >
-                                Mijoz
-                            </Typography>
-                            <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
-                                <Box>
-                                    <Typography
-                                        component="span"
-                                        sx={{ fontSize: "14px", color: "#666", mr: 1 }}
-                                    >
-                                        Ism:
-                                    </Typography>
-                                    <Typography component="span" sx={{ fontSize: "16px", fontWeight: 700 }}>
-                                        {user?.firstName || "Noma'lum"}
-                                    </Typography>
-                                </Box>
-                                <Box>
-                                    <Typography
-                                        component="span"
-                                        sx={{ fontSize: "14px", color: "#666", mr: 1 }}
-                                    >
-                                        Telefon raqami:
-                                    </Typography>
-                                    <Typography component="span" sx={{ fontSize: "16px", fontWeight: 700 }}>
-                                        {user?.phone || "Noma'lum"}
-                                    </Typography>
-                                </Box>
-                            </Box>
-                        </Box>
-
                         {/* Order Heading */}
                         <Typography
                             sx={{
@@ -343,119 +355,6 @@ const ConfirmOrder = () => {
                                 </Box>
                             </Box>
                         ))}
-
-                        {/* Cashback Wallet */}
-                        <Box>
-                            <Box sx={{ display: "flex", alignItems: "center", gap: 1, mb: 1 }}>
-                                <Typography
-                                    sx={{
-                                        fontSize: "16px",
-                                        fontWeight: 600,
-                                        color: "#1a1a1a",
-                                    }}
-                                >
-                                    Keshbek Hamyondan Sarflash
-                                </Typography>
-                                <Box
-                                    component="span"
-                                    sx={{
-                                        width: "18px",
-                                        height: "18px",
-                                        borderRadius: "50%",
-                                        border: "1px solid #ccc",
-                                        display: "flex",
-                                        alignItems: "center",
-                                        justifyContent: "center",
-                                        cursor: "pointer",
-                                        fontSize: "12px",
-                                        color: "#666",
-                                    }}
-                                >
-                                    ?
-                                </Box>
-                            </Box>
-                            <Button
-                                variant="contained"
-                                sx={{
-                                    backgroundColor: "#333",
-                                    color: "white",
-                                    py: 1,
-                                    px: 2,
-                                    fontSize: "14px",
-                                    fontWeight: 600,
-                                    borderRadius: "8px",
-                                    textTransform: "none",
-                                    "&:hover": {
-                                        backgroundColor: "#555",
-                                    },
-                                }}
-                            >
-                                Keshbek hamyon
-                            </Button>
-                        </Box>
-
-                        {/* Promo Code */}
-                        <Box>
-                            <Box sx={{ display: "flex", alignItems: "center", gap: 1, mb: 1 }}>
-                                <Typography
-                                    sx={{
-                                        fontSize: "16px",
-                                        fontWeight: 600,
-                                        color: "#1a1a1a",
-                                    }}
-                                >
-                                    Promo-Kod
-                                </Typography>
-                                <Box
-                                    component="span"
-                                    sx={{
-                                        width: "18px",
-                                        height: "18px",
-                                        borderRadius: "50%",
-                                        border: "1px solid #ccc",
-                                        display: "flex",
-                                        alignItems: "center",
-                                        justifyContent: "center",
-                                        cursor: "pointer",
-                                        fontSize: "12px",
-                                        color: "#666",
-                                    }}
-                                >
-                                    ?
-                                </Box>
-                            </Box>
-                            <Box sx={{ display: "flex", gap: 1 }}>
-                                <TextField
-                                    placeholder="Promo-kodni kiriting"
-                                    value={promoCode}
-                                    onChange={(e) => setPromoCode(e.target.value)}
-                                    size="small"
-                                    sx={{
-                                        flex: 1,
-                                        "& .MuiOutlinedInput-root": {
-                                            borderRadius: "8px",
-                                        },
-                                    }}
-                                />
-                                <Button
-                                    variant="contained"
-                                    sx={{
-                                        backgroundColor: "#333",
-                                        color: "white",
-                                        px: 3,
-                                        fontSize: "14px",
-                                        fontWeight: 600,
-                                        borderRadius: "8px",
-                                        textTransform: "none",
-                                        "&:hover": {
-                                            backgroundColor: "#555",
-                                        },
-                                    }}
-                                >
-                                    QO'LLASH
-                                </Button>
-                            </Box>
-                        </Box>
 
                         {/* Order Summary */}
                         <Box
