@@ -421,25 +421,12 @@ const ConfirmOrder = () => {
                                                 component="span"
                                                 sx={{ fontSize: "14px", color: "#666", mr: 1 }}
                                             >
-                                                Telefon raqami:
+                                                Telegram/Telefon:
                                             </Typography>
                                             <Typography component="span" sx={{ fontSize: "16px", fontWeight: 700 }}>
-                                                {user?.phone || "Noma'lum"}
+                                                {telegram || "Noma'lum"}
                                             </Typography>
                                         </Box>
-                                        {telegram && (
-                                            <Box>
-                                                <Typography
-                                                    component="span"
-                                                    sx={{ fontSize: "14px", color: "#666", mr: 1 }}
-                                                >
-                                                    Telegram:
-                                                </Typography>
-                                                <Typography component="span" sx={{ fontSize: "16px", fontWeight: 700 }}>
-                                                    {telegram}
-                                                </Typography>
-                                            </Box>
-                                        )}
                                     </Box>
                                 </Box>
 
