@@ -1,280 +1,170 @@
-import './about-us.css'
-import { Stack } from "@mui/material";
-import PageHeader from "../../common/PageHeader";
+import { Stack, Container, Box, Typography, Button } from "@mui/material"
+import { Link } from "react-router-dom"
+import PageHeader from "../../common/PageHeader"
 
 const AboutUs = () => {
     return (
-        <Stack className="about-page">
-
+        <Stack>
             {/* Page Header */}
             <PageHeader title="Biz haqimizda" />
 
             {/* Hero Section */}
-            <section className="about-hero">
-                <div className="container-custom">
-                    <div className="row align-items-center">
-                        <div className="col-lg-6">
-                            <div className="about-hero-content">
-                                <h2 className="about-hero-title">PRIME77 - Sizning uslubingiz!</h2>
-                                <p className="about-hero-text">
+            <section className="bg-[#f5f5dc] py-12 md:py-16">
+                <Container maxWidth="xl" sx={{ px: { xs: 2, sm: 3, md: 4 } }}>
+                    <Box
+                        sx={{
+                            display: "grid",
+                            gridTemplateColumns: { xs: "1fr", lg: "1fr 1fr" },
+                            gap: { xs: 2, lg: 0 },
+                            alignItems: "center",
+                        }}
+                    >
+                        {/* Image - Left Side */}
+                        <Box
+                            sx={{
+                                order: { xs: 2, lg: 1 },
+                                textAlign: "center",
+                            }}
+                        >
+                            <Box
+                                component="img"
+                                src="/images/logo.jpeg"
+                                alt="Prime77 Team"
+                                sx={{
+                                    width: "100%",
+                                    maxWidth: "500px",
+                                    height: { xs: "300px", md: "400px" },
+                                    objectFit: "cover",
+                                    borderRadius: "15px",
+                                    boxShadow: "0 15px 35px rgba(0, 0, 0, 0.1)",
+                                }}
+                            />
+                        </Box>
+
+                        {/* Content - Right Side */}
+                        <Box
+                            sx={{
+                                order: { xs: 1, lg: 2 },
+                                pr: { lg: 4 },
+                            }}
+                        >
+                            <Typography
+                                sx={{
+                                    fontSize: { xs: "1.8rem", md: "2.2rem" },
+                                    fontWeight: 700,
+                                    color: "#6b0f2a",
+                                    mb: 3,
+                                    lineHeight: 1.2,
+                                }}
+                            >
+                                PRIME77 - Sizning uslubingiz!
+                            </Typography>
+                            <Typography
+                                sx={{
+                                    fontSize: { xs: "14px", md: "16px" },
+                                    color: "#232526",
+                                    lineHeight: 1.6,
+                                    mb: 5,
+                                }}
+                            >
                                     Biz 2020-yildan beri erkaklar uchun zamonaviy va sifatli kiyimlar ishlab chiqaramiz.
                                     Har bir mahsulotimiz diqqat bilan tanlab olingan materiallardan tayyorlanadi va
                                     yuqori sifat standartlariga javob beradi.
-                                </p>
-                                <div className="about-stats">
-                                    <div className="stat-item">
-                                        <div className="stat-number">1000+</div>
-                                        <div className="stat-label">Mamnun mijozlar</div>
-                                    </div>
-                                    <div className="stat-item">
-                                        <div className="stat-number">500+</div>
-                                        <div className="stat-label">Mahsulotlar</div>
-                                    </div>
-                                    <div className="stat-item">
-                                        <div className="stat-number">4</div>
-                                        <div className="stat-label">Yillik tajriba</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-lg-6">
-                            <div className="about-hero-image">
-                                <img src="/images/hero-badge.jpg" alt="Prime77 Team" className="hero-img" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            {/* Mission & Vision Section */}
-            <section className="mission-vision">
-                <div className="container-custom">
-                    <div className="row g-4">
-                        <div className="col-lg-6">
-                            <div className="mission-card">
-                                <div className="card-icon">
-                                    <i className="fas fa-bullseye"></i>
-                                </div>
-                                <h3 className="card-title">Bizning maqsadimiz</h3>
-                                <p className="card-text">
-                                    Har bir erkak o'zining noyob uslubini topishiga yordam berish va
-                                    yuqori sifatli, zamonaviy kiyimlar bilan ta'minlash.
-                                    Biz mijozlarimizning ehtiyojlarini birinchi o'rinda qo'yamiz.
-                                </p>
-                            </div>
-                        </div>
-                        <div className="col-lg-6">
-                            <div className="vision-card">
-                                <div className="card-icon">
-                                    <i className="fas fa-eye"></i>
-                                </div>
-                                <h3 className="card-title">Bizning ko'z o'ngimiz</h3>
-                                <p className="card-text">
-                                    O'zbekistondagi eng yetakchi erkaklar kiyimi brendi bo'lish va
-                                    xalqaro bozorda o'z o'rnimizni egallash. Innovatsiya va sifat
-                                    orqali mijozlarimizning ishonchini qozonish.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            {/* Values Section */}
-            <section className="values-section">
-                <div className="container-custom">
-                    <div className="section-header">
-                        <h2 className="section-title">Bizning qadriyatlarimiz</h2>
-                        <p className="section-subtitle">
-                            Prime77 ni boshqa brendlardan ajratib turadigan asosiy tamoyillar
-                        </p>
-                    </div>
-                    <div className="row g-4">
-                        <div className="col-lg-3 col-md-6">
-                            <div className="value-item">
-                                <div className="value-icon">
-                                    <i className="fas fa-gem"></i>
-                                </div>
-                                <h4 className="value-title">Sifat</h4>
-                                <p className="value-text">
-                                    Har bir mahsulotimiz eng yuqori sifat standartlariga javob beradi
-                                </p>
-                            </div>
-                        </div>
-                        <div className="col-lg-3 col-md-6">
-                            <div className="value-item">
-                                <div className="value-icon">
-                                    <i className="fas fa-lightbulb"></i>
-                                </div>
-                                <h4 className="value-title">Innovatsiya</h4>
-                                <p className="value-text">
-                                    Zamonaviy texnologiyalar va yangi g'oyalarni qo'llaymiz
-                                </p>
-                            </div>
-                        </div>
-                        <div className="col-lg-3 col-md-6">
-                            <div className="value-item">
-                                <div className="value-icon">
-                                    <i className="fas fa-handshake"></i>
-                                </div>
-                                <h4 className="value-title">Ishonch</h4>
-                                <p className="value-text">
-                                    Mijozlarimiz bilan uzoq muddatli munosabatlar o'rnatamiz
-                                </p>
-                            </div>
-                        </div>
-                        <div className="col-lg-3 col-md-6">
-                            <div className="value-item">
-                                <div className="value-icon">
-                                    <i className="fas fa-rocket"></i>
-                                </div>
-                                <h4 className="value-title">Rivojlanish</h4>
-                                <p className="value-text">
-                                    Doimo o'sib boramiz va yangi cho'qqilarni zabt etamiz
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            {/* Story Section */}
-            <section className="story-section">
-                <div className="container-custom">
-                    <div className="row align-items-center">
-                        <div className="col-lg-6">
-                            <div className="story-image">
-                                <img src="/images/hero-image.jpeg" alt="Prime77 Story" className="story-img" />
-                            </div>
-                        </div>
-                        <div className="col-lg-6">
-                            <div className="story-content">
-                                <h2 className="story-title">Bizning hikoyamiz</h2>
-                                <div className="story-timeline">
-                                    <div className="timeline-item">
-                                        <div className="timeline-year">2020</div>
-                                        <div className="timeline-content">
-                                            <h4>Boshlanish</h4>
-                                            <p>Prime77 brendi kichik do'kon sifatida o'z faoliyatini boshladi</p>
-                                        </div>
-                                    </div>
-                                    <div className="timeline-item">
-                                        <div className="timeline-year">2021</div>
-                                        <div className="timeline-content">
-                                            <h4>Kengayish</h4>
-                                            <p>Mahsulotlar assortimenti kengaytirildi va onlayn savdo boshlandi</p>
-                                        </div>
-                                    </div>
-                                    <div className="timeline-item">
-                                        <div className="timeline-year">2022</div>
-                                        <div className="timeline-content">
-                                            <h4>Tan olinish</h4>
-                                            <p>Mijozlar orasida mashhurlik qozondi va brendni tan olishdi</p>
-                                        </div>
-                                    </div>
-                                    <div className="timeline-item">
-                                        <div className="timeline-year">2024</div>
-                                        <div className="timeline-content">
-                                            <h4>Bugun</h4>
-                                            <p>O'zbekistondagi yetakchi erkaklar kiyimi brendlaridan biri</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            {/* Team Section */}
-            <section className="team-section">
-                <div className="container-custom">
-                    <div className="section-header">
-                        <h2 className="section-title">Bizning jamoa</h2>
-                        <p className="section-subtitle">
-                            Prime77 ni muvaffaqiyatga olib kelgan professional jamoa
-                        </p>
-                    </div>
-                    <div className="row g-4">
-                        <div className="col-lg-4 col-md-6">
-                            <div className="team-member">
-                                <div className="member-image">
-                                    <img src="/images/" alt="Team Member" className="member-img" />
-                                </div>
-                                <div className="member-info">
-                                    <h4 className="member-name">Asilbek Karimov</h4>
-                                    <p className="member-position">Asoschisi va Bosh direktor</p>
-                                    <div className="member-social">
-                                        <a href="https://t.me/prime77" target="_blank" rel="noopener noreferrer">
-                                            <i className="fab fa-telegram-plane"></i>
-                                        </a>
-                                        <a href="https://www.instagram.com/prime77" target="_blank" rel="noopener noreferrer">
-                                            <i className="fab fa-instagram"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-lg-4 col-md-6">
-                            <div className="team-member">
-                                <div className="member-image">
-                                    <img src="/images/" alt="Team Member" className="member-img" />
-                                </div>
-                                <div className="member-info">
-                                    <h4 className="member-name">Sardor Umarov</h4>
-                                    <p className="member-position">Dizayner</p>
-                                    <div className="member-social">
-                                        <a href="https://t.me/prime77" target="_blank" rel="noopener noreferrer">
-                                            <i className="fab fa-telegram-plane"></i>
-                                        </a>
-                                        <a href="https://www.instagram.com/prime77" target="_blank" rel="noopener noreferrer">
-                                            <i className="fab fa-instagram"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-lg-4 col-md-6">
-                            <div className="team-member">
-                                <div className="member-image">
-                                    <img src="/images/" alt="Team Member" className="member-img" />
-                                </div>
-                                <div className="member-info">
-                                    <h4 className="member-name">Dilshod Rahimov</h4>
-                                    <p className="member-position">Marketing menejeri</p>
-                                    <div className="member-social">
-                                        <a href="https://t.me/prime77" target="_blank" rel="noopener noreferrer">
-                                            <i className="fab fa-telegram-plane"></i>
-                                        </a>
-                                        <a href="https://www.instagram.com/prime77" target="_blank" rel="noopener noreferrer">
-                                            <i className="fab fa-instagram"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                            </Typography>
+                        </Box>
+                    </Box>
+                </Container>
             </section>
 
             {/* CTA Section */}
-            <section className="cta-section">
-                <div className="container-custom">
-                    <div className="cta-content">
-                        <h2 className="cta-title">Bizning kolleksiyamizni ko'ring!</h2>
-                        <p className="cta-text">
+            <section className="bg-[#f5f5dc] py-16 md:py-20">
+                <Container maxWidth="xl" sx={{ px: { xs: 2, sm: 3, md: 4 } }}>
+                    <Box
+                        sx={{
+                            maxWidth: "600px",
+                            margin: "0 auto",
+                            textAlign: "center",
+                        }}
+                    >
+                        <Typography
+                            sx={{
+                                fontSize: { xs: "1.8rem", md: "2.2rem" },
+                                fontWeight: 700,
+                                color: "#6b0f2a",
+                                mb: 2.5,
+                            }}
+                        >
+                            Bizning kolleksiyamizni ko'ring!
+                        </Typography>
+                        <Typography
+                            sx={{
+                                fontSize: { xs: "14px", md: "16px" },
+                                color: "#232526",
+                                mb: 5,
+                            }}
+                        >
                             Eng so'nggi va zamonaviy erkaklar kiyimlarini kashf eting
-                        </p>
-                        <div className="cta-buttons">
-                            <a href="/catalog" className="btn-custom">Katalogni ko'rish</a>
-                            <a href="/contact" className="btn-outline">Biz bilan bog'lanish</a>
-                        </div>
-                    </div>
-                </div>
+                        </Typography>
+                        <Box
+                            sx={{
+                                display: "flex",
+                                justifyContent: "center",
+                                gap: 2.5,
+                                flexWrap: "wrap",
+                            }}
+                        >
+                            <Button
+                                component={Link}
+                                to="/catalog"
+                                variant="outlined"
+                                sx={{
+                                    borderColor: "#333",
+                                    color: "#333",
+                                    borderWidth: "2px",
+                                    px: 4,
+                                    py: 1.5,
+                                    fontSize: "16px",
+                                    fontWeight: 600,
+                                    borderRadius: "12px",
+                                    textTransform: "none",
+                                    "&:hover": {
+                                        backgroundColor: "#333",
+                                        color: "white",
+                                        borderColor: "#333",
+                                    },
+                                }}
+                            >
+                                Katalogni ko'rish
+                            </Button>
+                            <Button
+                                component={Link}
+                                to="/contact"
+                                variant="outlined"
+                                sx={{
+                                    borderColor: "#333",
+                                    color: "#333",
+                                    borderWidth: "2px",
+                                    px: 4,
+                                    py: 1.5,
+                                    fontSize: "16px",
+                                    fontWeight: 600,
+                                    borderRadius: "12px",
+                                    textTransform: "none",
+                                    "&:hover": {
+                                        backgroundColor: "#333",
+                                        color: "white",
+                                        borderColor: "#333",
+                                    },
+                                }}
+                            >
+                                Biz bilan bog'lanish
+                            </Button>
+                        </Box>
+                    </Box>
+                </Container>
             </section>
-
         </Stack>
-    );
-};
+    )
+}
 
-export default AboutUs;
+export default AboutUs

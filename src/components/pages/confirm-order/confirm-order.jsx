@@ -23,7 +23,31 @@ const ConfirmOrder = () => {
     const [comment, setComment] = useState("")
     const [deliveryMethod, setDeliveryMethod] = useState("bts")
     const [promoCode, setPromoCode] = useState("")
-    const [cartItems, setCartItems] = useState([])
+    const [cartItems, setCartItems] = useState([
+        {
+            id: 1,
+            productId: 1,
+            name: "Kurtka Ayiq",
+            brand: "North Face",
+            color: "Qora",
+            size: "XL (Bo'y 176-187)",
+            price: 336000,
+            originalPrice: 420000,
+            quantity: 1,
+            image: "/images/spotlights/clothe.jpg",
+        },
+        {
+            id: 3,
+            productId: 3,
+            name: "Shalvar OD",
+            color: "Kulrang",
+            size: "M",
+            price: 328000,
+            originalPrice: null,
+            quantity: 1,
+            image: "/images/spotlights/shim2.jpeg",
+        }
+    ])
     const [loading, setLoading] = useState(true)
     
     // Phone verification states
@@ -34,18 +58,6 @@ const ConfirmOrder = () => {
     const [verified, setVerified] = useState(false)
     const [telegram, setTelegram] = useState("")
     const [fullName, setFullName] = useState("")
-
-    // Mock data for demonstration - replace with actual cart data
-    const mockProduct = {
-        id: 1,
-        name: "Kurtka Ayiq",
-        details: "Qora XL (bo'y 176-187)",
-        quantity: 1,
-        price: 336000,
-        originalPrice: 420000,
-        discount: 84000,
-        image: "/images/spotlights/clothe.jpg",
-    }
 
     useEffect(() => {
         const fetchUser = async () => {
@@ -58,14 +70,10 @@ const ConfirmOrder = () => {
             setLoading(false)
         }
         fetchUser()
-
-        // TODO: Fetch actual cart items from localStorage or API
-        // For now, using mock data
-        setCartItems([mockProduct])
     }, [navigate])
 
     const formatPrice = (price) => {
-        return new Intl.NumberFormat("uz-UZ").format(price) + " So'm"
+        return new Intl.NumberFormat("fr-FR").format(price) + " So'm"
     }
 
     const calculateTotal = () => {
@@ -183,10 +191,12 @@ const ConfirmOrder = () => {
                                         <Box>
                                             <Typography
                                                 sx={{
-                                                    fontSize: "18px",
+                                                    fontFamily: "Noto Sans",
+                                                    fontSize: "22px",
                                                     fontWeight: 700,
+                                                    letterSpacing: 0.7,
                                                     mb: 2,
-                                                    color: "#1a1a1a",
+                                                    color: "var(--burgundy-dark)",
                                                 }}
                                             >
                                                 Formani to'ldiring
@@ -195,7 +205,12 @@ const ConfirmOrder = () => {
 
                                         {/* F.I.O field */}
                                         <Box>
-                                            <Typography sx={{ fontSize: "14px", color: "#666", mb: 1 }}>
+                                            <Typography sx={{
+                                                fontFamily: "Noto Sans",
+                                                fontSize: "14px",
+                                                color: "var(--burgundy-color)",
+                                                mb: 1
+                                            }}>
                                                 Iltimos, buyurtma rasmiylashtiriladigan to'liq ismni kiriting (Buyurtma shu nomga rasmiylashtiriladi)
                                             </Typography>
                                             <TextField
@@ -213,7 +228,12 @@ const ConfirmOrder = () => {
 
                                         {/* Telegram username or phone number field */}
                                         <Box>
-                                            <Typography sx={{ fontSize: "14px", color: "#666", mb: 1 }}>
+                                            <Typography sx={{
+                                                fontFamily: "Noto Sans",
+                                                fontSize: "14px",
+                                                color: "var(--burgundy-color)",
+                                                mb: 1
+                                            }}>
                                                 Iltimos, Telegram username yoki Telegramda ro'yxatdan o'tilgan raqamingizni kiriting
                                             </Typography>
                                             <TextField
@@ -231,16 +251,6 @@ const ConfirmOrder = () => {
 
                                         {/* Comment field */}
                                         <Box>
-                                            <Typography
-                                                sx={{
-                                                    fontSize: "18px",
-                                                    fontWeight: 700,
-                                                    mb: 2,
-                                                    color: "#1a1a1a",
-                                                }}
-                                            >
-                                                Izoh
-                                            </Typography>
                                             <TextField
                                                 label="Izoh..."
                                                 multiline
@@ -262,16 +272,21 @@ const ConfirmOrder = () => {
                                             onClick={handleSendCode}
                                             disabled={sendingCode || !fullName.trim() || !telegram.trim()}
                                             sx={{
-                                                backgroundColor: "#333",
+                                                backgroundColor: "var(--burgundy-dark)",
                                                 color: "white",
                                                 py: 1,
                                                 px: 2,
+                                                fontFamily: "Noto Sans",
                                                 fontSize: "14px",
                                                 fontWeight: 600,
                                                 textTransform: "uppercase",
                                                 borderRadius: "8px",
+                                                boxShadow: "none",
+                                                transition: "background-color 0.3s ease, color 0.4s ease",
                                                 "&:hover": {
-                                                    backgroundColor: "#555",
+                                                    backgroundColor: "rgba(189,236,118,0.87)",
+                                                    color: "var(--burgundy-dark)",
+                                                    boxShadow: "none",
                                                 },
                                                 "&:disabled": {
                                                     backgroundColor: "#999",
@@ -567,9 +582,12 @@ const ConfirmOrder = () => {
                         {/* Order Heading */}
                         <Typography
                             sx={{
-                                fontSize: "18px",
+                                fontFamily: "Noto Sans",
+                                fontSize: "22px",
                                 fontWeight: 700,
-                                color: "#1a1a1a",
+                                letterSpacing: 0.7,
+                                mb: 2,
+                                color: "var(--burgundy-dark)",
                             }}
                         >
                             Buyurtma
@@ -577,26 +595,48 @@ const ConfirmOrder = () => {
 
                         {/* Product Information */}
                         {cartItems.map((item) => (
-                            <Box key={item.id} sx={{ display: "flex", gap: 2 }}>
+                            <Box key={item.id} sx={{ display: "flex", flexDirection: "row", gap: 2, alignItems: "center" }}>
                                 <Box
                                     component="img"
                                     src={item.image || "/placeholder.svg"}
                                     alt={item.name}
                                     sx={{
-                                        width: "80px",
-                                        height: "80px",
+                                        width: "100px",
+                                        height: "135px",
                                         objectFit: "cover",
                                         borderRadius: "8px",
+                                        flexShrink: 0,
                                     }}
                                 />
-                                <Box sx={{ flex: 1 }}>
-                                    <Typography sx={{ fontSize: "16px", fontWeight: 600, mb: 0.5 }}>
-                                        {item.name}
+                                <Box sx={{ flex: 1, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                                    <Box>
+                                        <Typography
+                                            sx={{
+                                                fontSize: "16px",
+                                                fontWeight: 600,
+                                                color: "var(--burgundy-dark)"
+                                            }}
+                                        >
+                                            {item.name}
+                                        </Typography>
+
+                                        {item.brand && (
+                                            <Typography sx={{
+                                                fontFamily: "Noto Sans",
+                                                fontSize: "12px",
+                                                fontWeight: 600,
+                                                color: "#1a1a1a",
+                                                textTransform: "uppercase",
+                                                mb: 0.5
+                                            }}>
+                                                {item.brand}
+                                            </Typography>
+                                        )}
+                                    </Box>
+                                    <Typography sx={{ fontFamily: "Noto Sans", fontSize: "15px",  color: "#1a1a1a", ml: 2 }}>
+                                        {item.color} {item.size}
                                     </Typography>
-                                    <Typography sx={{ fontSize: "14px", color: "#666", mb: 1 }}>
-                                        {item.details}
-                                    </Typography>
-                                    <Typography sx={{ fontSize: "15px", fontWeight: 600 }}>
+                                    <Typography sx={{ fontSize: "15px", fontWeight: 600, ml: 2 }}>
                                         {item.quantity} x {formatPrice(item.price)}
                                     </Typography>
                                 </Box>
