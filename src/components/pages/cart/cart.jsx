@@ -158,20 +158,16 @@ const Cart = () => {
                         }}
                     >
                         {/* Left Section - Cart Items */}
-                        <Box sx={{ display: "flex", flexDirection: "column", gap: 0 }}>
-                            {cartItems.map((item) => (
-                                <Box
-                                    key={item.id}
-                                    sx={{
-                                        display: "flex",
-                                        gap: 2,
-                                        p: 2,
-                                        borderBottom: "1px solid #e0e0e0",
-                                        "&:last-child": {
-                                            borderBottom: "none",
-                                        },
-                                    }}
-                                >
+                        <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+                            {cartItems.map((item, index) => (
+                                <Box key={item.id}>
+                                    <Box
+                                        sx={{
+                                            display: "flex",
+                                            gap: 2,
+                                            p: 2,
+                                        }}
+                                    >
                                     {/* Product Image - Left */}
                                     <Box
                                         component="img"
@@ -179,7 +175,7 @@ const Cart = () => {
                                         alt={item.name}
                                         sx={{
                                             width: "100px",
-                                            height: "100px",
+                                            height: "135px",
                                             objectFit: "cover",
                                             borderRadius: "8px",
                                             flexShrink: 0,
@@ -331,6 +327,19 @@ const Cart = () => {
                                             <CloseIcon sx={{ fontSize: "18px" }} />
                                         </IconButton>
                                     </Box>
+                                    </Box>
+                                    {/* Border after product - same spacing as gap (gap: 2 = 16px) */}
+                                    {index < cartItems.length - 1 && (
+                                        <Box
+                                            sx={{
+                                                height: "1px",
+                                                backgroundColor: "#e0e0e0",
+                                                mt: 2,
+                                                marginLeft: 2,
+                                                marginRight: 2
+                                            }}
+                                        />
+                                    )}
                                 </Box>
                             ))}
                         </Box>
