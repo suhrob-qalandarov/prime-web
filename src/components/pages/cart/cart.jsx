@@ -153,7 +153,7 @@ const Cart = () => {
                         sx={{
                             display: "grid",
                             gridTemplateColumns: { xs: "1fr", lg: "1.96fr 0.85fr" },
-                            gap: { xs: 3, lg: 4 },
+                            gap: { xs: 3, lg: 6 },
                         }}
                     >
                         {/* Left Section - Cart Items */}
@@ -344,7 +344,6 @@ const Cart = () => {
                                             backgroundColor: "#e0e0e0",
                                             mt: 2,
                                             marginLeft: 2,
-                                            marginRight: 2
                                         }}
                                     />
                                 </Box>
