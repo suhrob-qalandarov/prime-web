@@ -73,7 +73,7 @@ const ConfirmOrder = () => {
     }, [navigate])
 
     const formatPrice = (price) => {
-        return new Intl.NumberFormat("uz-UZ").format(price) + " So'm"
+        return new Intl.NumberFormat("fr-FR").format(price) + " So'm"
     }
 
     const calculateTotal = () => {
