@@ -375,11 +375,11 @@ const Cart = () => {
 
                             {/* Order Summary */}
                             <Box sx={{ display: "flex", flexDirection: "column", gap: 2, mb: 3 }}>
-                                <Box sx={{ display: "flex", justifyContent: "space-between", pb:1.5}}>
+                                <Box sx={{ display: "flex", justifyContent: "space-between", pb: 1.5 }}>
                                     <Typography sx={{ fontFamily: "Noto Sans", fontSize: "15px", fontWeight: 600, letterSpacing: 0.7 }}>
                                         Summa
                                     </Typography>
-                                    <Typography sx={{ fontFamily: "Noto Sans", fontSize: "15px", fontWeight: 600, letterSpacing: 0.7  }}>
+                                    <Typography sx={{ fontFamily: "Noto Sans", fontSize: "15px", fontWeight: 600, letterSpacing: 0.7 }}>
                                         {formatPrice(subtotal)}
                                     </Typography>
                                 </Box>
@@ -388,24 +388,25 @@ const Cart = () => {
                                     sx={{
                                         display: "flex",
                                         justifyContent: "space-between",
-                                        pt: 3,
+                                        pt: 2,
                                         borderTop: "1px solid #e0e0e0",
+                                        pb: 1,
                                     }}
                                 >
-                                    <Box sx={{ display: "flex", justifyContent: "space-between", pb:1.5 }}>
-                                        <Typography sx={{ fontFamily: "Noto Sans", fontSize: "15px", fontWeight: 600, letterSpacing: 0.7  }}>
-                                            Chegirma
-                                        </Typography>
-                                        <Typography sx={{ fontFamily: "Noto Sans", fontSize: "15px", fontWeight: 600, letterSpacing: 0.7  }}>
-                                            -{formatPrice(discount)}
-                                        </Typography>
-                                    </Box>
+                                    <Typography sx={{ fontFamily: "Noto Sans", fontSize: "15px", fontWeight: 600, letterSpacing: 0.7 }}>
+                                        Chegirma
+                                    </Typography>
+                                    <Typography sx={{ fontFamily: "Noto Sans", fontSize: "15px", fontWeight: 600, letterSpacing: 0.7 }}>
+                                        -{formatPrice(discount)}
+                                    </Typography>
                                 </Box>
+
                                 <Box
                                     sx={{
                                         display: "flex",
                                         justifyContent: "space-between",
-                                        pt: 2,
+                                        pt: 1,
+                                        pb: 1,
                                         borderTop: "1px solid #e0e0e0",
                                     }}
                                 >
@@ -417,7 +418,7 @@ const Cart = () => {
                                     }}>
                                         Jami
                                     </Typography>
-                                    <Typography sx={{ fontFamily: "Noto Sans", fontSize: "24px", fontWeight: 700, letterSpacing: 0.7  }}>
+                                    <Typography sx={{ fontFamily: "Noto Sans", fontSize: "24px", fontWeight: 700, letterSpacing: 0.7 }}>
                                         {formatPrice(total)}
                                     </Typography>
                                 </Box>
