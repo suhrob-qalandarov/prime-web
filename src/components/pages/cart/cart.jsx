@@ -123,10 +123,12 @@ const Cart = () => {
         <Stack>
             <PageHeader title="Savat" />
             <Container
-                maxWidth="xl"
+                maxWidth={false}
                 sx={{
-                    px: { xs: 2, sm: 3, md: 4 },
+                    px: { xs: 6, lg: "40px" },
                     py: { xs: 3, md: 5 },
+                    maxWidth: "1400px",
+                    margin: "0 auto",
                 }}
             >
                 {cartItems.length === 0 ? (
@@ -152,10 +154,8 @@ const Cart = () => {
                     <Box
                         sx={{
                             display: "grid",
-                            gridTemplateColumns: { xs: "1fr", lg: "1.5fr 1fr" },
+                            gridTemplateColumns: { xs: "1fr", lg: "1.96fr 0.85fr" },
                             gap: { xs: 3, lg: 4 },
-                            maxWidth: "1400px",
-                            margin: "0 auto",
                         }}
                     >
                         {/* Left Section - Cart Items */}
@@ -188,7 +188,7 @@ const Cart = () => {
                                     />
 
                                     {/* Product Details - Middle */}
-                                    <Box sx={{ flex: 1, display: "flex", flexDirection: "column", gap: 1 }}>
+                                    <Box sx={{ flex: 1, display: "flex", flexDirection: "column", gap: 1, justifyContent: "center" }}>
                                         <Typography
                                             sx={{
                                                 fontSize: "16px",
@@ -214,10 +214,11 @@ const Cart = () => {
                                             display: "flex",
                                             alignItems: "center",
                                             gap: 2,
+                                            flexShrink: 0,
                                         }}
                                     >
                                         {/* Price */}
-                                        <Box sx={{ display: "flex", flexDirection: "column", alignItems: "flex-start", gap: 0.5 }}>
+                                        <Box sx={{ display: "flex", flexDirection: "column", alignItems: "flex-start", gap: 0.5, minWidth: "fit-content" }}>
                                             {item.originalPrice && item.originalPrice > item.price ? (
                                                 <>
                                                     <Typography
@@ -253,7 +254,7 @@ const Cart = () => {
                                         </Box>
 
                                         {/* Quantity Selector */}
-                                        <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                                        <Box sx={{ display: "flex", alignItems: "center", gap: 1, flexShrink: 0 }}>
                                             <IconButton
                                                 size="small"
                                                 onClick={() => handleQuantityChange(item.id, -1)}
@@ -302,6 +303,7 @@ const Cart = () => {
                                                 fontSize: "16px",
                                                 fontWeight: 600,
                                                 color: "#1a1a1a",
+                                                whiteSpace: "nowrap",
                                             }}
                                         >
                                             {formatPrice(item.price * item.quantity)}
@@ -314,6 +316,7 @@ const Cart = () => {
                                             sx={{
                                                 color: "#ef4444",
                                                 padding: "4px",
+                                                flexShrink: 0,
                                                 "&:hover": {
                                                     backgroundColor: "transparent",
                                                 },
