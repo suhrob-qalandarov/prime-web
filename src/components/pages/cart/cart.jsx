@@ -154,7 +154,7 @@ const Cart = () => {
                             display: "grid",
                             gridTemplateColumns: { xs: "1fr", lg: "1.5fr 1fr" },
                             gap: { xs: 3, lg: 4 },
-                            maxWidth: "1200px",
+                            maxWidth: "1400px",
                             margin: "0 auto",
                         }}
                     >
@@ -173,7 +173,7 @@ const Cart = () => {
                                         },
                                     }}
                                 >
-                                    {/* Product Image */}
+                                    {/* Product Image - Left */}
                                     <Box
                                         component="img"
                                         src={item.image || "/placeholder.svg"}
@@ -187,8 +187,8 @@ const Cart = () => {
                                         }}
                                     />
 
-                                    {/* Product Details */}
-                                    <Box sx={{ flex: 1, display: "flex", flexDirection: "column", gap: 1.5 }}>
+                                    {/* Product Details - Middle */}
+                                    <Box sx={{ flex: 1, display: "flex", flexDirection: "column", gap: 1 }}>
                                         <Typography
                                             sx={{
                                                 fontSize: "16px",
@@ -199,35 +199,55 @@ const Cart = () => {
                                             {item.name}
                                         </Typography>
 
-                                        <Box sx={{ display: "flex", flexDirection: "column", gap: 0.5 }}>
-                                            <Typography sx={{ fontSize: "14px", color: "#666" }}>
-                                                {item.color}
-                                            </Typography>
-                                            <Typography sx={{ fontSize: "14px", color: "#666" }}>
-                                                {item.size}
-                                            </Typography>
-                                        </Box>
+                                        <Typography sx={{ fontSize: "14px", color: "#666" }}>
+                                            {item.color}
+                                        </Typography>
 
+                                        <Typography sx={{ fontSize: "14px", color: "#666" }}>
+                                            {item.size}
+                                        </Typography>
+                                    </Box>
+
+                                    {/* Right Side - Price, Quantity, Total, Remove */}
+                                    <Box
+                                        sx={{
+                                            display: "flex",
+                                            alignItems: "center",
+                                            gap: 2,
+                                        }}
+                                    >
                                         {/* Price */}
-                                        <Box sx={{ display: "flex", alignItems: "center", gap: 1, flexWrap: "wrap" }}>
-                                            <Typography
-                                                sx={{
-                                                    fontSize: "16px",
-                                                    fontWeight: 600,
-                                                    color: "#1a1a1a",
-                                                }}
-                                            >
-                                                {formatPrice(item.price)}
-                                            </Typography>
-                                            {item.originalPrice && item.originalPrice > item.price && (
+                                        <Box sx={{ display: "flex", flexDirection: "column", alignItems: "flex-start", gap: 0.5 }}>
+                                            {item.originalPrice && item.originalPrice > item.price ? (
+                                                <>
+                                                    <Typography
+                                                        sx={{
+                                                            fontSize: "16px",
+                                                            fontWeight: 600,
+                                                            color: "#1a1a1a",
+                                                        }}
+                                                    >
+                                                        {formatPrice(item.price)}
+                                                    </Typography>
+                                                    <Typography
+                                                        sx={{
+                                                            fontSize: "14px",
+                                                            color: "#999",
+                                                            textDecoration: "line-through",
+                                                        }}
+                                                    >
+                                                        {formatPrice(item.originalPrice)}
+                                                    </Typography>
+                                                </>
+                                            ) : (
                                                 <Typography
                                                     sx={{
-                                                        fontSize: "14px",
-                                                        color: "#999",
-                                                        textDecoration: "line-through",
+                                                        fontSize: "16px",
+                                                        fontWeight: 600,
+                                                        color: "#1a1a1a",
                                                     }}
                                                 >
-                                                    {formatPrice(item.originalPrice)}
+                                                    {formatPrice(item.price)}
                                                 </Typography>
                                             )}
                                         </Box>
@@ -241,8 +261,9 @@ const Cart = () => {
                                                     border: "1px solid #e0e0e0",
                                                     width: "32px",
                                                     height: "32px",
+                                                    backgroundColor: "#f5f5f5",
                                                     "&:hover": {
-                                                        backgroundColor: "#f5f5f5",
+                                                        backgroundColor: "#e0e0e0",
                                                     },
                                                 }}
                                             >
@@ -265,26 +286,28 @@ const Cart = () => {
                                                     border: "1px solid #e0e0e0",
                                                     width: "32px",
                                                     height: "32px",
+                                                    backgroundColor: "#f5f5f5",
                                                     "&:hover": {
-                                                        backgroundColor: "#f5f5f5",
+                                                        backgroundColor: "#e0e0e0",
                                                     },
                                                 }}
                                             >
                                                 <AddIcon sx={{ fontSize: "18px" }} />
                                             </IconButton>
                                         </Box>
-                                    </Box>
 
-                                    {/* Right Side - Total Price and Remove Button */}
-                                    <Box
-                                        sx={{
-                                            display: "flex",
-                                            flexDirection: "column",
-                                            alignItems: "flex-end",
-                                            justifyContent: "space-between",
-                                            gap: 1,
-                                        }}
-                                    >
+                                        {/* Total Price */}
+                                        <Typography
+                                            sx={{
+                                                fontSize: "16px",
+                                                fontWeight: 600,
+                                                color: "#1a1a1a",
+                                            }}
+                                        >
+                                            {formatPrice(item.price * item.quantity)}
+                                        </Typography>
+
+                                        {/* Remove Button */}
                                         <IconButton
                                             size="small"
                                             onClick={() => handleRemoveItem(item.id)}
@@ -298,15 +321,6 @@ const Cart = () => {
                                         >
                                             <CloseIcon sx={{ fontSize: "18px" }} />
                                         </IconButton>
-                                        <Typography
-                                            sx={{
-                                                fontSize: "16px",
-                                                fontWeight: 600,
-                                                color: "#1a1a1a",
-                                            }}
-                                        >
-                                            {formatPrice(item.price * item.quantity)}
-                                        </Typography>
                                     </Box>
                                 </Box>
                             ))}
