@@ -318,17 +318,18 @@ const Cart = () => {
                                 position: { lg: "sticky" },
                                 top: { lg: "100px" },
                                 height: { lg: "fit-content" },
-                                backgroundColor: "white",
+                                backgroundColor: "#f0f0f0",
                                 borderRadius: "8px",
                                 p: 3,
                             }}
                         >
                             <Typography
                                 sx={{
-                                    fontSize: "18px",
+                                    fontSize: "22px",
                                     fontWeight: 700,
+                                    letterSpacing: 0.7,
                                     mb: 3,
-                                    color: "#1a1a1a",
+                                    color: "var(--burgundy-light)",
                                 }}
                             >
                                 Buyurtma
@@ -337,7 +338,7 @@ const Cart = () => {
                             {/* Order Summary */}
                             <Box sx={{ display: "flex", flexDirection: "column", gap: 2, mb: 3 }}>
                                 <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-                                    <Typography sx={{ fontSize: "15px", color: "#666" }}>
+                                    <Typography sx={{ fontSize: "15px", fontWeight: 600 }}>
                                         Summa
                                     </Typography>
                                     <Typography sx={{ fontSize: "15px", fontWeight: 600 }}>
@@ -346,7 +347,7 @@ const Cart = () => {
                                 </Box>
                                 {discount > 0 && (
                                     <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-                                        <Typography sx={{ fontSize: "15px", color: "#666" }}>
+                                        <Typography sx={{ fontSize: "15px", fontWeight: 600 }}>
                                             Chegirma
                                         </Typography>
                                         <Typography sx={{ fontSize: "15px", fontWeight: 600, color: "#d32f2f" }}>
@@ -362,7 +363,10 @@ const Cart = () => {
                                         borderTop: "1px solid #e0e0e0",
                                     }}
                                 >
-                                    <Typography sx={{ fontSize: "18px", fontWeight: 700 }}>
+                                    <Typography sx={{ fontSize: "22px",
+                                        fontWeight: 700,
+                                        letterSpacing: 0.7,
+                                    }}>
                                         Jami
                                     </Typography>
                                     <Typography sx={{ fontSize: "18px", fontWeight: 700 }}>
@@ -377,7 +381,7 @@ const Cart = () => {
                                 onClick={handleCheckout}
                                 fullWidth
                                 sx={{
-                                    backgroundColor: "#333",
+                                    backgroundColor: "var(--burgundy-color)",
                                     color: "white",
                                     py: 1.5,
                                     fontSize: "16px",
@@ -386,7 +390,7 @@ const Cart = () => {
                                     borderRadius: "8px",
                                     mb: 2,
                                     "&:hover": {
-                                        backgroundColor: "#555",
+                                        backgroundColor: "var(--burgundy-dark)",
                                     },
                                 }}
                             >
