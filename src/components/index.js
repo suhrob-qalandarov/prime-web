@@ -7,3 +7,4 @@ export {default as Catalog} from "./pages/catalog/catalog"
 export {default as AboutUs} from './pages/aboutus/about-us'
 export {default as Contact} from "./pages/contact/contact"
 export {default as ConfirmOrder} from "./pages/confirm-order/confirm-order"
+export {default as Cart} from "./pages/cart/cart"
