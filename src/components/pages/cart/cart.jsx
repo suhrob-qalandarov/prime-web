@@ -356,12 +356,13 @@ const Cart = () => {
                                 top: { lg: "100px" },
                                 height: { lg: "fit-content" },
                                 backgroundColor: "#f0f0f0",
-                                borderRadius: "8px",
+                                borderRadius: "18px",
                                 p: 3,
                             }}
                         >
                             <Typography
                                 sx={{
+                                    fontFamily: "Noto Sans",
                                     fontSize: "22px",
                                     fontWeight: 700,
                                     letterSpacing: 0.7,
@@ -374,24 +375,32 @@ const Cart = () => {
 
                             {/* Order Summary */}
                             <Box sx={{ display: "flex", flexDirection: "column", gap: 2, mb: 3 }}>
-                                <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-                                    <Typography sx={{ fontSize: "15px", fontWeight: 600 }}>
+                                <Box sx={{ display: "flex", justifyContent: "space-between", pb:1.5}}>
+                                    <Typography sx={{ fontFamily: "Noto Sans", fontSize: "15px", fontWeight: 600, letterSpacing: 0.7 }}>
                                         Summa
                                     </Typography>
-                                    <Typography sx={{ fontSize: "15px", fontWeight: 600 }}>
+                                    <Typography sx={{ fontFamily: "Noto Sans", fontSize: "15px", fontWeight: 600, letterSpacing: 0.7  }}>
                                         {formatPrice(subtotal)}
                                     </Typography>
                                 </Box>
-                                {discount > 0 && (
-                                    <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-                                        <Typography sx={{ fontSize: "15px", fontWeight: 600 }}>
+
+                                <Box
+                                    sx={{
+                                        display: "flex",
+                                        justifyContent: "space-between",
+                                        pt: 3,
+                                        borderTop: "1px solid #e0e0e0",
+                                    }}
+                                >
+                                    <Box sx={{ display: "flex", justifyContent: "space-between", pb:1.5 }}>
+                                        <Typography sx={{ fontFamily: "Noto Sans", fontSize: "15px", fontWeight: 600, letterSpacing: 0.7  }}>
                                             Chegirma
                                         </Typography>
-                                        <Typography sx={{ fontSize: "15px", fontWeight: 600, color: "#d32f2f" }}>
+                                        <Typography sx={{ fontFamily: "Noto Sans", fontSize: "15px", fontWeight: 600, letterSpacing: 0.7  }}>
                                             -{formatPrice(discount)}
                                         </Typography>
                                     </Box>
-                                )}
+                                </Box>
                                 <Box
                                     sx={{
                                         display: "flex",
@@ -400,13 +409,15 @@ const Cart = () => {
                                         borderTop: "1px solid #e0e0e0",
                                     }}
                                 >
-                                    <Typography sx={{ fontSize: "22px",
+                                    <Typography sx={{
+                                        fontFamily: "Noto Sans",
+                                        fontSize: "23px",
                                         fontWeight: 700,
-                                        letterSpacing: 0.7,
+                                        letterSpacing: 0.3,
                                     }}>
                                         Jami
                                     </Typography>
-                                    <Typography sx={{ fontSize: "18px", fontWeight: 700 }}>
+                                    <Typography sx={{ fontFamily: "Noto Sans", fontSize: "24px", fontWeight: 700, letterSpacing: 0.7  }}>
                                         {formatPrice(total)}
                                     </Typography>
                                 </Box>
@@ -421,10 +432,12 @@ const Cart = () => {
                                     backgroundColor: "var(--burgundy-color)",
                                     color: "white",
                                     py: 1.5,
-                                    fontSize: "16px",
+                                    fontFamily: "Noto Sans",
+                                    letterSpacing: 0.6,
+                                    fontSize: "14px",
                                     fontWeight: 700,
                                     textTransform: "uppercase",
-                                    borderRadius: "8px",
+                                    borderRadius: "12px",
                                     mb: 2,
                                     "&:hover": {
                                         backgroundColor: "var(--burgundy-dark)",
@@ -438,13 +451,10 @@ const Cart = () => {
                             <Typography
                                 sx={{
                                     textAlign: "center",
+                                    fontFamily: "Noto Sans",
                                     fontSize: "15px",
-                                    color: "#666",
-                                    cursor: "pointer",
-                                    mt: 1,
-                                    "&:hover": {
-                                        color: "#333",
-                                    },
+                                    color: "#333",
+                                    cursor: "pointer"
                                 }}
                                 onClick={() => navigate("/catalog")}
                             >
