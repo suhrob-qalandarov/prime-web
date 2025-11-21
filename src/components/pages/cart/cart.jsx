@@ -339,17 +339,15 @@ const Cart = () => {
                                     </Box>
                                     </Box>
                                     {/* Border after product - same spacing as gap (gap: 2 = 16px) */}
-                                    {index < cartItems.length - 1 && (
-                                        <Box
-                                            sx={{
-                                                height: "1px",
-                                                backgroundColor: "#e0e0e0",
-                                                mt: 2,
-                                                marginLeft: 2,
-                                                marginRight: 2
-                                            }}
-                                        />
-                                    )}
+                                    <Box
+                                        sx={{
+                                            height: "1px",
+                                            backgroundColor: "#e0e0e0",
+                                            mt: 2,
+                                            marginLeft: 2,
+                                            marginRight: 2
+                                        }}
+                                    />
                                 </Box>
                             ))}
                         </Box>
