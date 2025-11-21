@@ -367,7 +367,7 @@ const Cart = () => {
                                     fontWeight: 700,
                                     letterSpacing: 0.7,
                                     mb: 3,
-                                    color: "var(--burgundy-light)",
+                                    color: "var(--burgundy-dark)",
                                 }}
                             >
                                 Buyurtma
@@ -415,10 +415,11 @@ const Cart = () => {
                                         fontSize: "23px",
                                         fontWeight: 700,
                                         letterSpacing: 0.3,
+                                        color: "var(--burgundy-dark)",
                                     }}>
                                         Jami
                                     </Typography>
-                                    <Typography sx={{ fontFamily: "Noto Sans", fontSize: "24px", fontWeight: 700, letterSpacing: 0.7 }}>
+                                    <Typography sx={{ fontFamily: "Noto Sans", fontSize: "24px", fontWeight: 700, letterSpacing: 0.7, color: "var(--burgundy-dark)" }}>
                                         {formatPrice(total)}
                                     </Typography>
                                 </Box>
@@ -430,7 +431,7 @@ const Cart = () => {
                                 onClick={handleCheckout}
                                 fullWidth
                                 sx={{
-                                    backgroundColor: "var(--burgundy-color)",
+                                    backgroundColor: "var(--burgundy-dark)",
                                     color: "white",
                                     py: 1.5,
                                     fontFamily: "Noto Sans",
@@ -440,8 +441,12 @@ const Cart = () => {
                                     textTransform: "uppercase",
                                     borderRadius: "12px",
                                     mb: 2,
+                                    boxShadow: "none",
+                                    transition: "background-color 0.3s ease, color 0.4s ease",
                                     "&:hover": {
-                                        backgroundColor: "var(--burgundy-dark)",
+                                        backgroundColor: "rgba(189,236,118,0.87)",
+                                        color: "var(--burgundy-dark)",
+                                        boxShadow: "none",
                                     },
                                 }}
                             >
@@ -454,7 +459,7 @@ const Cart = () => {
                                     textAlign: "center",
                                     fontFamily: "Noto Sans",
                                     fontSize: "15px",
-                                    color: "#333",
+                                    color: "var(--burgundy-dark)",
                                     cursor: "pointer"
                                 }}
                                 onClick={() => navigate("/catalog")}
