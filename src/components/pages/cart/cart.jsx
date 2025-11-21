@@ -77,15 +77,21 @@ const Cart = () => {
     }
 
     const handleQuantityChange = (itemId, change) => {
-        setCartItems((prevItems) =>
-            prevItems.map((item) => {
-                if (item.id === itemId) {
-                    const newQuantity = Math.max(1, item.quantity + change)
-                    return { ...item, quantity: newQuantity }
-                }
-                return item
-            })
-        )
+        setCartItems((prevItems) => {
+            return prevItems
+                .map((item) => {
+                    if (item.id === itemId) {
+                        const newQuantity = item.quantity + change
+                        // If quantity becomes 0 or less, remove the item
+                        if (newQuantity <= 0) {
+                            return null
+                        }
+                        return { ...item, quantity: newQuantity }
+                    }
+                    return item
+                })
+                .filter(Boolean) // Remove null items
+        })
     }
 
     const handleRemoveItem = (itemId) => {
@@ -285,9 +291,7 @@ const Cart = () => {
                                                     display: "flex",
                                                     alignItems: "center",
                                                     justifyContent: "center",
-                                                    cursor: item.quantity <= 1 ? "not-allowed" : "pointer",
-                                                    opacity: item.quantity <= 1 ? 0.4 : 1,
-                                                    pointerEvents: item.quantity <= 1 ? "none" : "auto",
+                                                    cursor: "pointer",
                                                 }}
                                             >
                                                 <MinusIcon />
