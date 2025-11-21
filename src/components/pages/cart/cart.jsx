@@ -163,9 +163,11 @@ const Cart = () => {
                                 <Box key={item.id}>
                                     <Box
                                         sx={{
-                                            display: "flex",
+                                            display: "grid",
+                                            gridTemplateColumns: "100px 1fr 1fr auto",
                                             gap: 2,
                                             p: 2,
+                                            alignItems: "center",
                                         }}
                                     >
                                     {/* Product Image - Left */}
@@ -183,7 +185,7 @@ const Cart = () => {
                                     />
 
                                     {/* Product Details - Middle */}
-                                    <Box sx={{ flex: 1, display: "flex", flexDirection: "column", gap: 1, justifyContent: "center" }}>
+                                    <Box sx={{ display: "flex", flexDirection: "column", gap: 1, justifyContent: "center" }}>
                                         <Typography
                                             sx={{
                                                 fontSize: "16px",
@@ -203,39 +205,10 @@ const Cart = () => {
                                         </Typography>
                                     </Box>
 
-                                    {/* Right Side - Price, Quantity, Total, Remove */}
-                                    <Box
-                                        sx={{
-                                            display: "flex",
-                                            alignItems: "center",
-                                            gap: 2,
-                                            flexShrink: 0,
-                                        }}
-                                    >
-                                        {/* Price */}
-                                        <Box sx={{ display: "flex", flexDirection: "column", alignItems: "flex-start", gap: 0.5, minWidth: "fit-content" }}>
-                                            {item.originalPrice && item.originalPrice > item.price ? (
-                                                <>
-                                                    <Typography
-                                                        sx={{
-                                                            fontSize: "16px",
-                                                            fontWeight: 600,
-                                                            color: "#1a1a1a",
-                                                        }}
-                                                    >
-                                                        {formatPrice(item.price)}
-                                                    </Typography>
-                                                    <Typography
-                                                        sx={{
-                                                            fontSize: "14px",
-                                                            color: "#999",
-                                                            textDecoration: "line-through",
-                                                        }}
-                                                    >
-                                                        {formatPrice(item.originalPrice)}
-                                                    </Typography>
-                                                </>
-                                            ) : (
+                                    {/* Price - Center between product details and quantity */}
+                                    <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 0.5, justifySelf: "center", width: "100%" }}>
+                                        {item.originalPrice && item.originalPrice > item.price ? (
+                                            <>
                                                 <Typography
                                                     sx={{
                                                         fontSize: "16px",
@@ -245,9 +218,39 @@ const Cart = () => {
                                                 >
                                                     {formatPrice(item.price)}
                                                 </Typography>
-                                            )}
-                                        </Box>
+                                                <Typography
+                                                    sx={{
+                                                        fontSize: "14px",
+                                                        color: "#999",
+                                                        textDecoration: "line-through",
+                                                    }}
+                                                >
+                                                    {formatPrice(item.originalPrice)}
+                                                </Typography>
+                                            </>
+                                        ) : (
+                                            <Typography
+                                                sx={{
+                                                    fontSize: "16px",
+                                                    fontWeight: 600,
+                                                    color: "#1a1a1a",
+                                                }}
+                                            >
+                                                {formatPrice(item.price)}
+                                            </Typography>
+                                        )}
+                                    </Box>
 
+                                    {/* Right Side - Quantity, Total, Remove */}
+                                    <Box
+                                        sx={{
+                                            display: "flex",
+                                            alignItems: "center",
+                                            gap: 3,
+                                            flexShrink: 0,
+                                            justifySelf: "flex-end",
+                                        }}
+                                    >
                                         {/* Quantity Selector - like quick-view */}
                                         <Box
                                             sx={{
@@ -261,6 +264,7 @@ const Cart = () => {
                                                 flexShrink: 0,
                                                 py: 0.6,
                                                 px: 0.75,
+                                                mr: 2,
                                             }}
                                         >
                                             <Box
@@ -306,6 +310,7 @@ const Cart = () => {
                                                 fontWeight: 600,
                                                 color: "#1a1a1a",
                                                 whiteSpace: "nowrap",
+                                                ml: 2,
                                             }}
                                         >
                                             {formatPrice(item.price * item.quantity)}
