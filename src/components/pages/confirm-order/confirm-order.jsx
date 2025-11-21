@@ -191,10 +191,12 @@ const ConfirmOrder = () => {
                                         <Box>
                                             <Typography
                                                 sx={{
-                                                    fontSize: "18px",
+                                                    fontFamily: "Noto Sans",
+                                                    fontSize: "22px",
                                                     fontWeight: 700,
+                                                    letterSpacing: 0.7,
                                                     mb: 2,
-                                                    color: "#1a1a1a",
+                                                    color: "var(--burgundy-dark)",
                                                 }}
                                             >
                                                 Formani to'ldiring
@@ -203,7 +205,12 @@ const ConfirmOrder = () => {
 
                                         {/* F.I.O field */}
                                         <Box>
-                                            <Typography sx={{ fontSize: "14px", color: "#666", mb: 1 }}>
+                                            <Typography sx={{
+                                                fontFamily: "Noto Sans",
+                                                fontSize: "14px",
+                                                color: "var(--burgundy-color)",
+                                                mb: 1
+                                            }}>
                                                 Iltimos, buyurtma rasmiylashtiriladigan to'liq ismni kiriting (Buyurtma shu nomga rasmiylashtiriladi)
                                             </Typography>
                                             <TextField
@@ -221,7 +228,12 @@ const ConfirmOrder = () => {
 
                                         {/* Telegram username or phone number field */}
                                         <Box>
-                                            <Typography sx={{ fontSize: "14px", color: "#666", mb: 1 }}>
+                                            <Typography sx={{
+                                                fontFamily: "Noto Sans",
+                                                fontSize: "14px",
+                                                color: "var(--burgundy-color)",
+                                                mb: 1
+                                            }}>
                                                 Iltimos, Telegram username yoki Telegramda ro'yxatdan o'tilgan raqamingizni kiriting
                                             </Typography>
                                             <TextField
@@ -239,16 +251,6 @@ const ConfirmOrder = () => {
 
                                         {/* Comment field */}
                                         <Box>
-                                            <Typography
-                                                sx={{
-                                                    fontSize: "18px",
-                                                    fontWeight: 700,
-                                                    mb: 2,
-                                                    color: "#1a1a1a",
-                                                }}
-                                            >
-                                                Izoh
-                                            </Typography>
                                             <TextField
                                                 label="Izoh..."
                                                 multiline
@@ -270,16 +272,21 @@ const ConfirmOrder = () => {
                                             onClick={handleSendCode}
                                             disabled={sendingCode || !fullName.trim() || !telegram.trim()}
                                             sx={{
-                                                backgroundColor: "#333",
+                                                backgroundColor: "var(--burgundy-dark)",
                                                 color: "white",
                                                 py: 1,
                                                 px: 2,
+                                                fontFamily: "Noto Sans",
                                                 fontSize: "14px",
                                                 fontWeight: 600,
                                                 textTransform: "uppercase",
                                                 borderRadius: "8px",
+                                                boxShadow: "none",
+                                                transition: "background-color 0.3s ease, color 0.4s ease",
                                                 "&:hover": {
-                                                    backgroundColor: "#555",
+                                                    backgroundColor: "rgba(189,236,118,0.87)",
+                                                    color: "var(--burgundy-dark)",
+                                                    boxShadow: "none",
                                                 },
                                                 "&:disabled": {
                                                     backgroundColor: "#999",
@@ -579,7 +586,7 @@ const ConfirmOrder = () => {
                                 fontSize: "22px",
                                 fontWeight: 700,
                                 letterSpacing: 0.7,
-                                mb: 3,
+                                mb: 2,
                                 color: "var(--burgundy-dark)",
                             }}
                         >
