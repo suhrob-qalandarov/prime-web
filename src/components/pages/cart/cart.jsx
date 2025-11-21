@@ -8,10 +8,9 @@ import {
     Button,
     IconButton,
 } from "@mui/material"
-import CloseIcon from "@mui/icons-material/Close"
 import PageHeader from "../../common/PageHeader"
 import urls from "../../../constants/urls"
-import { MinusIcon, PlusIcon } from "../../../icons"
+import { MinusIcon, PlusIcon, CloseIcon2 } from "../../../icons"
 
 const Cart = () => {
     const navigate = useNavigate()
@@ -334,7 +333,7 @@ const Cart = () => {
                                                 },
                                             }}
                                         >
-                                            <CloseIcon sx={{ fontSize: "18px" }} />
+                                            <CloseIcon2 size={20} />
                                         </IconButton>
                                     </Box>
                                     </Box>
