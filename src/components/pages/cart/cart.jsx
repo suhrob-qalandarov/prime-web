@@ -165,7 +165,7 @@ const Cart = () => {
                                         sx={{
                                             display: "grid",
                                             gridTemplateColumns: "100px 1fr 1fr auto",
-                                            gap: 2,
+                                            gap: 3,
                                             p: 2,
                                             alignItems: "center",
                                         }}
@@ -185,7 +185,7 @@ const Cart = () => {
                                     />
 
                                     {/* Product Details - Middle */}
-                                    <Box sx={{ display: "flex", flexDirection: "column", gap: 1, justifyContent: "center" }}>
+                                    <Box sx={{ display: "flex", flexDirection: "column", gap: 0.5, justifyContent: "center" }}>
                                         <Typography
                                             sx={{
                                                 fontSize: "16px",
@@ -196,11 +196,11 @@ const Cart = () => {
                                             {item.name}
                                         </Typography>
 
-                                        <Typography sx={{ fontSize: "14px", color: "#666" }}>
+                                        <Typography sx={{ fontSize: "15px", color: "#666" }}>
                                             {item.color}
                                         </Typography>
 
-                                        <Typography sx={{ fontSize: "14px", color: "#666" }}>
+                                        <Typography sx={{ fontSize: "15px", color: "#666" }}>
                                             {item.size}
                                         </Typography>
                                     </Box>
@@ -211,6 +211,7 @@ const Cart = () => {
                                             <>
                                                 <Typography
                                                     sx={{
+                                                        fontFamily: "Noto Sans",
                                                         fontSize: "16px",
                                                         fontWeight: 600,
                                                         color: "#1a1a1a",
@@ -220,8 +221,10 @@ const Cart = () => {
                                                 </Typography>
                                                 <Typography
                                                     sx={{
-                                                        fontSize: "14px",
-                                                        color: "#999",
+                                                        fontFamily: "Noto Sans",
+                                                        fontSize: "16px",
+                                                        fontWeight: 500,
+                                                        color: "#636262",
                                                         textDecoration: "line-through",
                                                     }}
                                                 >
@@ -231,6 +234,7 @@ const Cart = () => {
                                         ) : (
                                             <Typography
                                                 sx={{
+                                                    fontFamily: "Noto Sans",
                                                     fontSize: "16px",
                                                     fontWeight: 600,
                                                     color: "#1a1a1a",
@@ -262,8 +266,8 @@ const Cart = () => {
                                                 backgroundColor: "#f0f0f0",
                                                 width: "100px",
                                                 flexShrink: 0,
-                                                py: 0.6,
-                                                px: 0.75,
+                                                py: 1.6,
+                                                px: 1,
                                                 mr: 2,
                                             }}
                                         >
@@ -306,9 +310,10 @@ const Cart = () => {
                                         {/* Total Price */}
                                         <Typography
                                             sx={{
+                                                fontFamily: "Noto Sans",
                                                 fontSize: "16px",
                                                 fontWeight: 600,
-                                                color: "#1a1a1a",
+                                                color: "var(--burgundy-dark)",
                                                 whiteSpace: "nowrap",
                                                 ml: 2,
                                             }}
