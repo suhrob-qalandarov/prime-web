@@ -8,11 +8,10 @@ import {
     Button,
     IconButton,
 } from "@mui/material"
-import AddIcon from "@mui/icons-material/Add"
-import RemoveIcon from "@mui/icons-material/Remove"
 import CloseIcon from "@mui/icons-material/Close"
 import PageHeader from "../../common/PageHeader"
 import urls from "../../../constants/urls"
+import { MinusIcon, PlusIcon } from "../../../icons"
 
 const Cart = () => {
     const navigate = useNavigate()
@@ -253,48 +252,55 @@ const Cart = () => {
                                             )}
                                         </Box>
 
-                                        {/* Quantity Selector */}
-                                        <Box sx={{ display: "flex", alignItems: "center", gap: 1, flexShrink: 0 }}>
-                                            <IconButton
-                                                size="small"
+                                        {/* Quantity Selector - like quick-view */}
+                                        <Box
+                                            sx={{
+                                                display: "flex",
+                                                alignItems: "center",
+                                                justifyContent: "space-between",
+                                                borderRadius: "8px",
+                                                border: "1px solid #e0e0e0",
+                                                backgroundColor: "#f0f0f0",
+                                                width: "100px",
+                                                flexShrink: 0,
+                                                py: 0.6,
+                                                px: 0.75,
+                                            }}
+                                        >
+                                            <Box
                                                 onClick={() => handleQuantityChange(item.id, -1)}
                                                 sx={{
-                                                    border: "1px solid #e0e0e0",
-                                                    width: "32px",
-                                                    height: "32px",
-                                                    backgroundColor: "#f5f5f5",
-                                                    "&:hover": {
-                                                        backgroundColor: "#e0e0e0",
-                                                    },
+                                                    display: "flex",
+                                                    alignItems: "center",
+                                                    justifyContent: "center",
+                                                    cursor: item.quantity <= 1 ? "not-allowed" : "pointer",
+                                                    opacity: item.quantity <= 1 ? 0.4 : 1,
+                                                    pointerEvents: item.quantity <= 1 ? "none" : "auto",
                                                 }}
                                             >
-                                                <RemoveIcon sx={{ fontSize: "18px" }} />
-                                            </IconButton>
+                                                <MinusIcon />
+                                            </Box>
                                             <Typography
                                                 sx={{
-                                                    minWidth: "30px",
-                                                    textAlign: "center",
+                                                    fontFamily: "Noto Sans",
                                                     fontSize: "16px",
                                                     fontWeight: 600,
+                                                    textAlign: "center",
                                                 }}
                                             >
                                                 {item.quantity}
                                             </Typography>
-                                            <IconButton
-                                                size="small"
+                                            <Box
                                                 onClick={() => handleQuantityChange(item.id, 1)}
                                                 sx={{
-                                                    border: "1px solid #e0e0e0",
-                                                    width: "32px",
-                                                    height: "32px",
-                                                    backgroundColor: "#f5f5f5",
-                                                    "&:hover": {
-                                                        backgroundColor: "#e0e0e0",
-                                                    },
+                                                    display: "flex",
+                                                    alignItems: "center",
+                                                    justifyContent: "center",
+                                                    cursor: "pointer",
                                                 }}
                                             >
-                                                <AddIcon sx={{ fontSize: "18px" }} />
-                                            </IconButton>
+                                                <PlusIcon />
+                                            </Box>
                                         </Box>
 
                                         {/* Total Price */}
