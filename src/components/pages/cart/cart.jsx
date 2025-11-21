@@ -21,6 +21,7 @@ const Cart = () => {
             id: 1,
             productId: 1,
             name: "Kurtka Ayiq",
+            brand: "North Face",
             color: "Qora",
             size: "XL (Bo'y 176-187)",
             price: 336000,
@@ -189,17 +190,25 @@ const Cart = () => {
                                             sx={{
                                                 fontSize: "16px",
                                                 fontWeight: 600,
-                                                color: "#1a1a1a",
+                                                color: "var(--burgundy-dark)",
                                             }}
                                         >
                                             {item.name}
                                         </Typography>
 
-                                        <Typography sx={{ fontSize: "15px", color: "#666" }}>
-                                            {item.color}
-                                        </Typography>
+                                        {item.brand && (
+                                            <Typography sx={{ fontFamily: "Noto Sans", fontSize: "12px", fontWeight: 600, color: "#1a1a1a", textTransform: "uppercase" }}>
+                                                {item.brand}
+                                            </Typography>
+                                        )}
 
-                                        <Typography sx={{ fontSize: "15px", color: "#666" }}>
+                                        {item.color && (
+                                            <Typography sx={{ fontFamily: "Noto Sans", fontSize: "15px", color: "#666" }}>
+                                                {item.color}
+                                            </Typography>
+                                        )}
+
+                                        <Typography sx={{ fontFamily: "Noto Sans", fontSize: "15px", color: "#666" }}>
                                             {item.size}
                                         </Typography>
                                     </Box>
