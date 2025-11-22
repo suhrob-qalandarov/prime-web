@@ -23,6 +23,8 @@ const ConfirmOrder = () => {
     const [user, setUser] = useState(null)
     const [comment, setComment] = useState("")
     const [deliveryMethod, setDeliveryMethod] = useState("bts")
+    const [btsOpen, setBtsOpen] = useState(true)
+    const [yandexOpen, setYandexOpen] = useState(false)
     const [promoCode, setPromoCode] = useState("")
     const [cartItems, setCartItems] = useState([
         {
@@ -125,6 +127,27 @@ const ConfirmOrder = () => {
         if (value.length <= 6) {
             setCode(value)
         }
+    }
+
+    const handleDeliveryMethodChange = (newMethod) => {
+        if (newMethod === deliveryMethod) return
+        
+        // Avval yangi variant ochiladi
+        if (newMethod === "bts") {
+            setBtsOpen(true)
+            // Keyin eski variant yopiladi (animatsiya to'liq tugagandan keyin - 300ms)
+            setTimeout(() => {
+                setYandexOpen(false)
+            }, 300)
+        } else if (newMethod === "yandex") {
+            setYandexOpen(true)
+            // Keyin eski variant yopiladi (animatsiya to'liq tugagandan keyin - 300ms)
+            setTimeout(() => {
+                setBtsOpen(false)
+            }, 300)
+        }
+        
+        setDeliveryMethod(newMethod)
     }
 
     const handlePayment = async () => {
@@ -528,7 +551,7 @@ const ConfirmOrder = () => {
                                             fontWeight: 700,
                                             letterSpacing: 0.7,
                                             color: "var(--burgundy-dark)",
-                                            mb: 2
+                                            mt: 2
                                         }}
                                     >
                                         Yetkazib berish usulini tanlang
@@ -536,34 +559,41 @@ const ConfirmOrder = () => {
                                     <FormControl component="fieldset">
                                         <RadioGroup
                                             value={deliveryMethod}
-                                            onChange={(e) => setDeliveryMethod(e.target.value)}
+                                            onChange={(e) => handleDeliveryMethodChange(e.target.value)}
                                         >
-                                            <Box sx={{ mb: 2 }}>
+                                            <Box
+                                                onClick={() => handleDeliveryMethodChange("bts")}
+                                                sx={{
+                                                    p: 2.5,
+                                                    border: "1px solid #e0e0e0",
+                                                    borderRadius: "8px",
+                                                    mt: 2.5,
+                                                    cursor: "pointer",
+                                                    backgroundColor: deliveryMethod === "bts" ? "#f5f5f5" : "transparent",
+                                                    transition: "background-color 0.2s ease",
+                                                    "&:hover": {
+                                                        backgroundColor: "#fafafa",
+                                                    },
+                                                }}
+                                            >
                                                 <FormControlLabel
                                                     value="bts"
                                                     control={<Radio />}
                                                     label={
-                                                        <Typography sx={{ fontWeight: 600 }}>
+                                                        <Typography sx={{ fontSize: "18px", fontWeight: 600 }}>
                                                             BTS Pochta
                                                         </Typography>
                                                     }
+                                                    onClick={(e) => e.stopPropagation()}
                                                     sx={{
-                                                        alignItems: "flex-start",
+                                                        m: 0,
                                                         "& .MuiFormControlLabel-label": {
                                                             ml: 1,
                                                         },
                                                     }}
                                                 />
-                                                <Collapse in={deliveryMethod === "bts"}>
-                                                    <Box
-                                                        sx={{
-                                                            ml: "36px",
-                                                            mt: 1,
-                                                            p: 2,
-                                                            backgroundColor: "#f5f5f5",
-                                                            borderRadius: "8px",
-                                                        }}
-                                                    >
+                                                <Collapse in={btsOpen} timeout={300}>
+                                                    <Box sx={{ pt: 2, pl: 2 }}>
                                                         <Typography
                                                             sx={{
                                                                 fontSize: "14px",
@@ -572,47 +602,55 @@ const ConfirmOrder = () => {
                                                                 color: "#666",
                                                             }}
                                                         >
-                                                            Viloyatlarga (BTS):
+                                                            <strong>Viloyatlarga (BTS):</strong>
                                                         </Typography>
-                                                        <Box sx={{ pl: 2, display: "flex", flexDirection: "column", gap: 0.5 }}>
-                                                            <Typography sx={{ fontSize: "13px", color: "#666" }}>
-                                                                • 2-4 kun ichida sizga eng yaqin BTS chiqarish punktigacha yetkaziladi.
+                                                        <Box component="ul" sx={{ pl: 3, m: 0, display: "flex", flexDirection: "column", gap: 0.5 }}>
+                                                            <Typography component="li" sx={{ fontSize: "13px", color: "#666", listStyle: "disc" }}>
+                                                                2–4 kun ichida sizga eng yaqin BTS chiqarish punktigacha yetkaziladi.
                                                             </Typography>
-                                                            <Typography sx={{ fontSize: "13px", color: "#666" }}>
-                                                                • Buyurtmani onlayn rasmiylashtirishda to'lovni amalga oshiring, yetkazib berish uchun esa mahsulotni qabul qilganingizda to'laysiz.
+                                                            <Typography component="li" sx={{ fontSize: "13px", color: "#666", listStyle: "disc" }}>
+                                                                Buyurtmani onlayn rasmiylashtirishda to'lovni amalga oshiring, yetkazib berish uchun esa mahsulotni qabul qilganingizda to'laysiz.
                                                             </Typography>
-                                                            <Typography sx={{ fontSize: "13px", color: "#666" }}>
-                                                                • Buyurtmangizni o'zingizga qulay vaqtda olib ketishingiz mumkin.
+                                                            <Typography component="li" sx={{ fontSize: "13px", color: "#666", listStyle: "disc" }}>
+                                                                Buyurtmangizni o'zingizga qulay vaqtda olib ketishingiz mumkin.
                                                             </Typography>
                                                         </Box>
                                                     </Box>
                                                 </Collapse>
                                             </Box>
-                                            <Box sx={{ mb: 2 }}>
+                                            <Box
+                                                onClick={() => handleDeliveryMethodChange("yandex")}
+                                                sx={{
+                                                    p: 2.5,
+                                                    border: "1px solid #e0e0e0",
+                                                    borderRadius: "8px",
+                                                    mt: 2.5,
+                                                    cursor: "pointer",
+                                                    backgroundColor: deliveryMethod === "yandex" ? "#f5f5f5" : "transparent",
+                                                    transition: "background-color 0.2s ease",
+                                                    "&:hover": {
+                                                        backgroundColor: "#fafafa",
+                                                    },
+                                                }}
+                                            >
                                                 <FormControlLabel
                                                     value="yandex"
                                                     control={<Radio />}
                                                     label={
-                                                        <Typography sx={{ fontWeight: 600 }}>
+                                                        <Typography sx={{ fontSize: "18px", fontWeight: 600 }}>
                                                             Yandex Yetkazib berish
                                                         </Typography>
                                                     }
+                                                    onClick={(e) => e.stopPropagation()}
                                                     sx={{
+                                                        m: 0,
                                                         "& .MuiFormControlLabel-label": {
                                                             ml: 1,
                                                         },
                                                     }}
                                                 />
-                                                <Collapse in={deliveryMethod === "yandex"}>
-                                                    <Box
-                                                        sx={{
-                                                            ml: "36px",
-                                                            mt: 1,
-                                                            p: 2,
-                                                            backgroundColor: "#f5f5f5",
-                                                            borderRadius: "8px",
-                                                        }}
-                                                    >
+                                                <Collapse in={yandexOpen} timeout={300}>
+                                                    <Box sx={{ pt: 2, pl: 2 }}>
                                                         <Typography
                                                             sx={{
                                                                 fontSize: "14px",
@@ -621,14 +659,14 @@ const ConfirmOrder = () => {
                                                                 color: "#666",
                                                             }}
                                                         >
-                                                            Toshkent bo'yicha (Yandex):
+                                                            <strong>Toshkent bo'yicha (Yandex):</strong>
                                                         </Typography>
-                                                        <Box sx={{ pl: 2, display: "flex", flexDirection: "column", gap: 0.5 }}>
-                                                            <Typography sx={{ fontSize: "13px", color: "#666" }}>
-                                                                • Buyurtmangiz 1–2 kun ichida yetkaziladi.
+                                                        <Box component="ul" sx={{ pl: 3, m: 0, display: "flex", flexDirection: "column", gap: 0.5 }}>
+                                                            <Typography component="li" sx={{ fontSize: "13px", color: "#666", listStyle: "disc" }}>
+                                                                Buyurtmangiz 1–2 kun ichida yetkaziladi.
                                                             </Typography>
-                                                            <Typography sx={{ fontSize: "13px", color: "#666" }}>
-                                                                • Buyurtmani onlayn rasmiylashtirishda to'lovni amalga oshiring, yetkazib berish uchun esa mahsulotni qabul qilganingizda to'laysiz.
+                                                            <Typography component="li" sx={{ fontSize: "13px", color: "#666", listStyle: "disc" }}>
+                                                                Buyurtmani onlayn rasmiylashtirishda to'lovni amalga oshiring, yetkazib berish uchun esa mahsulotni qabul qilganingizda to'laysiz.
                                                             </Typography>
                                                         </Box>
                                                     </Box>
