@@ -320,16 +320,16 @@ const ConfirmOrder = () => {
                                         {/* Buyurtma ma'lumotlari - codeSent bo'lganda */}
                                             <Typography
                                                 sx={{
-                                                fontFamily: "Noto Sans",
-                                                fontSize: "22px",
+                                                    fontFamily: "Noto Sans",
+                                                    fontSize: "22px",
                                                     fontWeight: 700,
-                                                letterSpacing: 0.7,
-                                                color: "var(--burgundy-dark)",
-                                                mb: 2
+                                                    letterSpacing: 0.7,
+                                                    color: "var(--burgundy-dark)",
+                                                    mb: 2
                                             }}
-                                        >
-                                            Buyurtma ma'lumotlari
-                                        </Typography>
+                                            >
+                                                Buyurtma ma'lumotlari
+                                            </Typography>
                                         
                                         {/* Qabul qiluvchi - faqat fullName va telegram to'ldirilganda ko'rinadi */}
                                         {fullName && telegram && (
@@ -476,142 +476,6 @@ const ConfirmOrder = () => {
                                                 </Box>
                                             </Box>
                                         )}
-
-                                        {/* Delivery Method Selection - faqat codeSent bo'lganda ko'rinadi */}
-                                        {codeSent && (
-                                            <Box sx={{ mb: 2 }}>
-                                                <Typography
-                                                    sx={{
-                                                        fontFamily: "Noto Sans",
-                                                        fontSize: "22px",
-                                                        fontWeight: 700,
-                                                        letterSpacing: 0.7,
-                                                        color: "var(--burgundy-dark)",
-                                                        mb: 2
-                                                    }}
-                                                >
-                                                    Yetkazib berish usulini tanlang
-                                                </Typography>
-                                            <FormControl component="fieldset">
-                                                <RadioGroup
-                                                    value={deliveryMethod}
-                                                    onChange={(e) => handleDeliveryMethodChange(e.target.value)}
-                                                >
-                                                    <Box
-                                                        onClick={() => handleDeliveryMethodChange("bts")}
-                                                        sx={{
-                                                            p: 2.5,
-                                                            border: "1px solid #e0e0e0",
-                                                            borderRadius: "8px",
-                                                            mt: 2.5,
-                                                            cursor: "pointer",
-                                                            backgroundColor: deliveryMethod === "bts" ? "#f5f5f5" : "transparent",
-                                                            transition: "background-color 0.2s ease",
-                                                            "&:hover": {
-                                                                backgroundColor: "#fafafa",
-                                                            },
-                                                        }}
-                                                    >
-                                                        <FormControlLabel
-                                                            value="bts"
-                                                            control={<Radio />}
-                                                            label={
-                                                                <Typography sx={{ fontSize: "18px", fontWeight: 600 }}>
-                                                                    BTS Pochta
-                                                                </Typography>
-                                                            }
-                                                            onClick={(e) => e.stopPropagation()}
-                                                            sx={{
-                                                                m: 0,
-                                                                "& .MuiFormControlLabel-label": {
-                                                                    ml: 1,
-                                                                },
-                                                            }}
-                                                        />
-                                                        <Collapse in={btsOpen} timeout={{ enter: 200, exit: 500 }}>
-                                                            <Box sx={{ pt: 2, pl: 2 }}>
-                                                                <Typography
-                                                                    sx={{
-                                                                        fontSize: "14px",
-                                                                        fontWeight: 600,
-                                                                        mb: 1,
-                                                                        color: "#666",
-                                                                    }}
-                                                                >
-                                                                    <strong>Viloyatlarga (BTS):</strong>
-                                                                </Typography>
-                                                                <Box component="ul" sx={{ pl: 3, m: 0, display: "flex", flexDirection: "column", gap: 0.5 }}>
-                                                                    <Typography component="li" sx={{ fontSize: "13px", color: "#666", listStyle: "disc" }}>
-                                                                        2–4 kun ichida sizga eng yaqin BTS chiqarish punktigacha yetkaziladi.
-                                                                    </Typography>
-                                                                    <Typography component="li" sx={{ fontSize: "13px", color: "#666", listStyle: "disc" }}>
-                                                                        Buyurtmani onlayn rasmiylashtirishda to'lovni amalga oshiring, yetkazib berish uchun esa mahsulotni qabul qilganingizda to'laysiz.
-                                                                    </Typography>
-                                                                    <Typography component="li" sx={{ fontSize: "13px", color: "#666", listStyle: "disc" }}>
-                                                                        Buyurtmangizni o'zingizga qulay vaqtda olib ketishingiz mumkin.
-                                                                    </Typography>
-                                                                </Box>
-                                                            </Box>
-                                                        </Collapse>
-                                                    </Box>
-                                                    <Box
-                                                        onClick={() => handleDeliveryMethodChange("yandex")}
-                                                        sx={{
-                                                            p: 2.5,
-                                                            border: "1px solid #e0e0e0",
-                                                            borderRadius: "8px",
-                                                            mt: 2.5,
-                                                            cursor: "pointer",
-                                                            backgroundColor: deliveryMethod === "yandex" ? "#f5f5f5" : "transparent",
-                                                            transition: "background-color 0.2s ease",
-                                                            "&:hover": {
-                                                                backgroundColor: "#fafafa",
-                                                            },
-                                                        }}
-                                                    >
-                                                        <FormControlLabel
-                                                            value="yandex"
-                                                            control={<Radio />}
-                                                            label={
-                                                                <Typography sx={{ fontSize: "18px", fontWeight: 600 }}>
-                                                                    Yandex Yetkazib berish
-                                                                </Typography>
-                                                            }
-                                                            onClick={(e) => e.stopPropagation()}
-                                                            sx={{
-                                                                m: 0,
-                                                                "& .MuiFormControlLabel-label": {
-                                                                    ml: 1,
-                                                                },
-                                                            }}
-                                                        />
-                                                        <Collapse in={yandexOpen} timeout={{ enter: 200, exit: 500 }}>
-                                                            <Box sx={{ pt: 2, pl: 2 }}>
-                                                                <Typography
-                                                                    sx={{
-                                                                        fontSize: "14px",
-                                                                        fontWeight: 600,
-                                                                        mb: 1,
-                                                                        color: "#666",
-                                                                    }}
-                                                                >
-                                                                    <strong>Toshkent bo'yicha (Yandex):</strong>
-                                                                </Typography>
-                                                                <Box component="ul" sx={{ pl: 3, m: 0, display: "flex", flexDirection: "column", gap: 0.5 }}>
-                                                                    <Typography component="li" sx={{ fontSize: "13px", color: "#666", listStyle: "disc" }}>
-                                                                        Buyurtmangiz 1–2 kun ichida yetkaziladi.
-                                                                    </Typography>
-                                                                    <Typography component="li" sx={{ fontSize: "13px", color: "#666", listStyle: "disc" }}>
-                                                                        Buyurtmani onlayn rasmiylashtirishda to'lovni amalga oshiring, yetkazib berish uchun esa mahsulotni qabul qilganingizda to'laysiz.
-                                                                    </Typography>
-                                                                </Box>
-                                                            </Box>
-                                                        </Collapse>
-                                                    </Box>
-                                                </RadioGroup>
-                                            </FormControl>
-                                            </Box>
-                                        )}
                                     </>
                                 )}
                             </>
@@ -646,135 +510,134 @@ const ConfirmOrder = () => {
                                             }}>
                                                 Mijoz
                                             </Typography>
-                                    <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
-                                        <Box>
-                                            <Typography
-                                                component="span"
-                                                            sx={{
-                                                                fontFamily: "Noto Sans",
-                                                                fontSize: "14px",
-                                                                color: "#666",
-                                                                mr: 1
-                                                            }}>
-                                                            Ism:
-                                                        </Typography>
-                                                        <Typography
-                                                            component="span"
-                                                            sx={{
-                                                                fontFamily: "Noto Sans",
-                                                                fontSize: "16px",
-                                                                fontWeight: 700
-                                                            }}>
-                                                            {customer.firstName || "Noma'lum"}
-                                                        </Typography>
-                                                    </Box>
-                                                    <Box>
-                                                        <Typography
-                                                            component="span"
-                                                            sx={{
-                                                                fontFamily: "Noto Sans",
-                                                                fontSize: "14px",
-                                                                color: "#666",
-                                                                mr: 1
-                                                            }}>
-                                                            Telefon raqam:
-                                                        </Typography>
-                                                        <Typography
-                                                            component="span"
-                                                            sx={{
-                                                                fontFamily: "Noto Sans",
-                                                                fontSize: "16px",
-                                                                fontWeight: 700
-                                                            }}>
-                                                            {customer.phone || "Noma'lum"}
-                                                        </Typography>
-                                                    </Box>
-                                                    <Box>
-                                                        <Typography
-                                                            component="span"
-                                                            sx={{
-                                                                fontFamily: "Noto Sans",
-                                                                fontSize: "14px",
-                                                                color: "#666",
-                                                                mr: 1
-                                                            }}>
-                                                            Telegram username:
-                                                        </Typography>
-                                                        <Typography
-                                                            component="span"
-                                                            sx={{
-                                                                fontFamily: "Noto Sans",
-                                                                fontSize: "16px",
-                                                                fontWeight: 700
-                                                            }}>
-                                                            @{customer.username || "Noma'lum"}
-                                                        </Typography>
-                                                    </Box>
+                                            <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
+                                                <Box>
+                                                    <Typography
+                                                        component="span"
+                                                        sx={{
+                                                            fontFamily: "Noto Sans",
+                                                            fontSize: "14px",
+                                                            color: "#666",
+                                                            mr: 1
+                                                    }}>
+                                                        Ism:
+                                                    </Typography>
+                                                    <Typography
+                                                        component="span"
+                                                        sx={{
+                                                            fontFamily: "Noto Sans",
+                                                            fontSize: "16px",
+                                                            fontWeight: 700
+                                                    }}>
+                                                        {customer.firstName || "Noma'lum"}
+                                                    </Typography>
+                                                </Box>
+                                                <Box>
+                                                    <Typography
+                                                        component="span"
+                                                        sx={{
+                                                            fontFamily: "Noto Sans",
+                                                            fontSize: "14px",
+                                                            color: "#666",
+                                                            mr: 1
+                                                    }}>
+                                                        Telefon raqam:
+                                                    </Typography>
+                                                    <Typography
+                                                        component="span"
+                                                        sx={{
+                                                            fontFamily: "Noto Sans",
+                                                            fontSize: "16px",
+                                                            fontWeight: 700
+                                                    }}>
+                                                        {customer.phone || "Noma'lum"}
+                                                    </Typography>
+                                                </Box>
+                                                <Box>
+                                                    <Typography
+                                                        component="span"
+                                                        sx={{
+                                                            fontFamily: "Noto Sans",
+                                                            fontSize: "14px",
+                                                            color: "#666",
+                                                            mr: 1
+                                                    }}>
+                                                        Telegram username:
+                                                    </Typography>
+                                                    <Typography
+                                                        component="span"
+                                                        sx={{
+                                                            fontFamily: "Noto Sans",
+                                                            fontSize: "16px",
+                                                            fontWeight: 700
+                                                    }}>
+                                                        @{customer.username || "Noma'lum"}
+                                                    </Typography>
                                                 </Box>
                                             </Box>
-                                        )}
+                                        </Box>
+                                    )}
 
-                                        {/* Qabul qiluvchi - faqat fullName va telegram to'ldirilganda ko'rinadi */}
-                                        {fullName && telegram && (
-                                            <Box sx={{ flex: 1 }}>
-                                                <Typography
-                                                    sx={{
-                                                        fontFamily: "Noto Sans",
-                                                        fontSize: "22px",
-                                                        fontWeight: 700,
-                                                        letterSpacing: 0.7,
-                                                        color: "var(--burgundy-dark)",
-                                                        mb: 2
-                                                    }}
-                                                >
-                                                    Qabul qiluvchi
-                                                </Typography>
-                                                <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
-                                                    <Box>
-                                                        <Typography
-                                                            component="span"
-                                                            sx={{
-                                                                fontFamily: "Noto Sans",
-                                                                fontSize: "14px",
-                                                                color: "#666",
-                                                                mr: 1
-                                                            }}>
-                                                Ism:
-                                            </Typography>
-                                                        <Typography
-                                                            component="span"
-                                                            sx={{
-                                                                fontFamily: "Noto Sans",
-                                                                fontSize: "16px",
-                                                                fontWeight: 700
-                                                            }}>
-                                                {fullName || user?.firstName || "Noma'lum"}
-                                            </Typography>
-                                        </Box>
-                                        <Box>
+                                    {/* Qabul qiluvchi - faqat fullName va telegram to'ldirilganda ko'rinadi */}
+                                    {fullName && telegram && (
+                                        <Box sx={{ flex: 1 }}>
                                             <Typography
-                                                component="span"
-                                                            sx={{
-                                                                fontFamily: "Noto Sans",
-                                                                fontSize: "14px",
-                                                                color: "#666",
-                                                                mr: 1
-                                                            }}>
-                                                            Telegram username/raqam:
+                                                sx={{
+                                                    fontFamily: "Noto Sans",
+                                                    fontSize: "22px",
+                                                    fontWeight: 700,
+                                                    letterSpacing: 0.7,
+                                                    color: "var(--burgundy-dark)",
+                                                    mb: 2
+                                            }}>
+                                                Qabul qiluvchi
                                             </Typography>
-                                                        <Typography
-                                                            component="span"
-                                                            sx={{
-                                                                fontFamily: "Noto Sans",
-                                                                fontSize: "16px",
-                                                                fontWeight: 700
-                                                            }}>
-                                                {telegram || "Noma'lum"}
-                                            </Typography>
-                                        </Box>
-                                    </Box>
+                                            <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
+                                                <Box>
+                                                    <Typography
+                                                        component="span"
+                                                        sx={{
+                                                            fontFamily: "Noto Sans",
+                                                            fontSize: "14px",
+                                                            color: "#666",
+                                                            mr: 1
+                                                    }}>
+                                                        Ism:
+                                                    </Typography>
+                                                    <Typography
+                                                        component="span"
+                                                        sx={{
+                                                            fontFamily: "Noto Sans",
+                                                            fontSize: "16px",
+                                                            fontWeight: 700
+                                                    }}>
+                                                        {fullName || user?.firstName || "Noma'lum"}
+                                                    </Typography>
+                                                </Box>
+                                                <Box>
+                                                    <Typography
+                                                        component="span"
+                                                        sx={{
+                                                            fontFamily: "Noto Sans",
+                                                            fontSize: "14px",
+                                                            color: "#666",
+                                                            mr: 1
+                                                    }}>
+                                                        Telegram username/raqam:
+                                                    </Typography>
+                                                    <Typography
+                                                        component="span"
+                                                        sx={{
+                                                            fontFamily: "Noto Sans",
+                                                            fontSize: "16px",
+                                                            fontWeight: 700
+                                                    }}>
+                                                        {telegram || "Noma'lum"}
+                                                    </Typography>
+                                                </Box>
                                             </Box>
-                                        )}
+                                        </Box>
+                                    )}
                                 </Box>
 
                                 {/* Comment field - After verification */}
@@ -1068,14 +931,14 @@ const ConfirmOrder = () => {
                                     </Typography>
 
                                     {item.brand && (
-                                                <Typography sx={{
-                                                    fontFamily: "Noto Sans",
-                                                    fontSize: "12px",
-                                                    fontWeight: 600,
-                                                    color: "#1a1a1a",
-                                                    textTransform: "uppercase",
-                                                    mb: 0.5
-                                                }}>
+                                        <Typography sx={{
+                                            fontFamily: "Noto Sans",
+                                            fontSize: "12px",
+                                            fontWeight: 600,
+                                            color: "#1a1a1a",
+                                            textTransform: "uppercase",
+                                            mb: 0.5
+                                        }}>
                                             {item.brand}
                                         </Typography>
                                     )}
@@ -1089,8 +952,8 @@ const ConfirmOrder = () => {
                                 </Box>
                             </Box>
                                 {/* Border after product - same spacing as gap (gap: 2 = 16px) */}
-                        <Box
-                            sx={{
+                                <Box
+                                    sx={{
                                         height: "1px",
                                         backgroundColor: "#e0e0e0",
                                         mt: 3,
@@ -1120,12 +983,12 @@ const ConfirmOrder = () => {
                                 }}
                             >
                                 <Typography sx={{ fontFamily: "Noto Sans", fontSize: "15px", fontWeight: 600, letterSpacing: 0.7 }}>
-                                        Chegirma
-                                    </Typography>
+                                    Chegirma
+                                </Typography>
                                 <Typography sx={{ fontFamily: "Noto Sans", fontSize: "15px", fontWeight: 600, letterSpacing: 0.7 }}>
-                                        -{formatPrice(discount)}
-                                    </Typography>
-                                </Box>
+                                    -{formatPrice(discount)}
+                                </Typography>
+                            </Box>
 
                             <Box
                                 sx={{
