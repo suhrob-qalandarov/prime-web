@@ -21,6 +21,7 @@ import OrderService from "../../../service/order"
 const ConfirmOrder = () => {
     const navigate = useNavigate()
     const [user, setUser] = useState(null)
+    const [customer, setCustomer] = useState(null)
     const [comment, setComment] = useState("")
     const [deliveryMethod, setDeliveryMethod] = useState("bts")
     const [btsOpen, setBtsOpen] = useState(true)
@@ -66,7 +67,7 @@ const ConfirmOrder = () => {
         const fetchUser = async () => {
             const userFromLS = await AuthService.getUserFromLS()
             if (userFromLS && userFromLS.id) {
-                setUser(userFromLS)
+                setCustomer(userFromLS)
             } else {
                 navigate("/login")
             }
@@ -328,7 +329,7 @@ const ConfirmOrder = () => {
                                                     mb: 2
                                                 }}
                                             >
-                                                Mijoz
+                                                Qabul qiluvchi
                                             </Typography>
                                             <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
                                                 <Box>
@@ -461,6 +462,18 @@ const ConfirmOrder = () => {
                         ) : (
                             <>
                                 {/* Customer Info - After code sent (with input values) */}
+                                    <Typography
+                                        sx={{
+                                            fontFamily: "Noto Sans",
+                                            fontSize: "22px",
+                                            fontWeight: 700,
+                                            letterSpacing: 0.7,
+                                            color: "var(--burgundy-dark)",
+                                            mb: 2
+                                        }}
+                                    >
+                                        Buyurtma ma'lumotlari
+                                    </Typography>
                                     <Box>
                                         <Typography
                                             sx={{
@@ -473,6 +486,87 @@ const ConfirmOrder = () => {
                                             }}
                                         >
                                             Mijoz
+                                        </Typography>
+                                        <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
+                                            <Box>
+                                                <Typography
+                                                    component="span"
+                                                    sx={{
+                                                        fontFamily: "Noto Sans",
+                                                        fontSize: "14px",
+                                                        color: "#666",
+                                                        mr: 1
+                                                    }}>
+                                                    Ism:
+                                                </Typography>
+                                                <Typography
+                                                    component="span"
+                                                    sx={{
+                                                        fontFamily: "Noto Sans",
+                                                        fontSize: "16px",
+                                                        fontWeight: 700
+                                                    }}>
+                                                    {customer.firstName || "Noma'lum"}
+                                                </Typography>
+                                            </Box>
+                                            <Box>
+                                                <Typography
+                                                    component="span"
+                                                    sx={{
+                                                        fontFamily: "Noto Sans",
+                                                        fontSize: "14px",
+                                                        color: "#666",
+                                                        mr: 1
+                                                    }}>
+                                                    Telefon raqam:
+                                                </Typography>
+                                                <Typography
+                                                    component="span"
+                                                    sx={{
+                                                        fontFamily: "Noto Sans",
+                                                        fontSize: "16px",
+                                                        fontWeight: 700
+                                                    }}>
+                                                    {customer.phone || "Noma'lum"}
+                                                </Typography>
+                                            </Box>
+                                            <Box>
+                                                <Typography
+                                                    component="span"
+                                                    sx={{
+                                                        fontFamily: "Noto Sans",
+                                                        fontSize: "14px",
+                                                        color: "#666",
+                                                        mr: 1
+                                                    }}>
+                                                    Telegram username:
+                                                </Typography>
+                                                <Typography
+                                                    component="span"
+                                                    sx={{
+                                                        fontFamily: "Noto Sans",
+                                                        fontSize: "16px",
+                                                        fontWeight: 700
+                                                    }}>
+                                                    @{customer.username || "Noma'lum"}
+                                                </Typography>
+                                            </Box>
+                                        </Box>
+                                    </Box>
+
+                                {/* Recipient Info */}
+                                    <Box>
+                                        <Typography
+                                            sx={{
+                                                fontFamily: "Noto Sans",
+                                                fontSize: "22px",
+                                                fontWeight: 700,
+                                                letterSpacing: 0.7,
+                                                color: "var(--burgundy-dark)",
+                                                mb: 2
+                                            }}
+                                        >
+                                            Qabul qiluvchi
                                         </Typography>
                                         <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
                                             <Box>
