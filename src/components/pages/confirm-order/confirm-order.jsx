@@ -592,59 +592,61 @@ const ConfirmOrder = () => {
                         </Typography>
 
                         {/* Product Information */}
-                        {cartItems.map((item) => (
-                            <Box key={item.id} sx={{ display: "flex", flexDirection: "row", gap: 2, alignItems: "center" }}>
-                                <Box
-                                    component="img"
-                                    src={item.image || "/placeholder.svg"}
-                                    alt={item.name}
-                                    sx={{
-                                        width: "100px",
-                                        height: "135px",
-                                        objectFit: "cover",
-                                        borderRadius: "8px",
-                                        flexShrink: 0,
-                                    }}
-                                />
-                                <Box sx={{ flex: 1, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                                    <Box>
-                                        <Typography
-                                            sx={{
-                                                fontSize: "16px",
-                                                fontWeight: 600,
-                                                color: "var(--burgundy-dark)"
-                                            }}
-                                        >
-                                            {item.name}
-                                        </Typography>
-
-                                        {item.brand && (
-                                            <Typography sx={{
-                                                fontFamily: "Noto Sans",
-                                                fontSize: "12px",
-                                                fontWeight: 600,
-                                                color: "#1a1a1a",
-                                                textTransform: "uppercase",
-                                                mb: 0.5
-                                            }}>
-                                                {item.brand}
+                        {cartItems.map((item, index) => (
+                            <Box key={item.id}>
+                                <Box sx={{ display: "flex", flexDirection: "row", gap: 2, alignItems: "center" }}>
+                                    <Box
+                                        component="img"
+                                        src={item.image || "/placeholder.svg"}
+                                        alt={item.name}
+                                        sx={{
+                                            width: "100px",
+                                            height: "135px",
+                                            objectFit: "cover",
+                                            borderRadius: "8px",
+                                            flexShrink: 0,
+                                        }}
+                                    />
+                                    <Box sx={{ flex: 1, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                                        <Box>
+                                            <Typography
+                                                sx={{
+                                                    fontFamily: "Noto Sans",
+                                                    fontSize: "16px",
+                                                    fontWeight: 600,
+                                                    color: "var(--burgundy-dark)"
+                                                }}
+                                            >
+                                                {item.name}
                                             </Typography>
-                                        )}
+
+                                            {item.brand && (
+                                                <Typography sx={{
+                                                    fontFamily: "Noto Sans",
+                                                    fontSize: "12px",
+                                                    fontWeight: 600,
+                                                    color: "#1a1a1a",
+                                                    textTransform: "uppercase",
+                                                    mb: 0.5
+                                                }}>
+                                                    {item.brand}
+                                                </Typography>
+                                            )}
+                                        </Box>
+                                        <Typography sx={{ fontFamily: "Noto Sans", fontSize: "15px",  color: "#1a1a1a", ml: 2 }}>
+                                            {item.size} {item.color}
+                                        </Typography>
+                                        <Typography sx={{ fontFamily: "Noto Sans", fontSize: "15px", fontWeight: 600, ml: 2 }}>
+                                            {item.quantity} x {formatPrice(item.price)}
+                                        </Typography>
                                     </Box>
-                                    <Typography sx={{ fontFamily: "Noto Sans", fontSize: "15px",  color: "#1a1a1a", ml: 2 }}>
-                                        {item.size} {item.color}
-                                    </Typography>
-                                    <Typography sx={{ fontSize: "15px", fontWeight: 600, ml: 2 }}>
-                                        {item.quantity} x {formatPrice(item.price)}
-                                    </Typography>
                                 </Box>
                                 {/* Border after product - same spacing as gap (gap: 2 = 16px) */}
                                 <Box
                                     sx={{
                                         height: "1px",
                                         backgroundColor: "#e0e0e0",
-                                        mt: 2,
-                                        marginLeft: 2,
+                                        mt: 3,
                                     }}
                                 />
                             </Box>
