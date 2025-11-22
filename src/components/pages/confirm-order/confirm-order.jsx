@@ -559,23 +559,20 @@ const ConfirmOrder = () => {
                                             <Box
                                                 onClick={() => handleDeliveryMethodChange("bts")}
                                                 sx={{
-                                                    p: 2.5,
+                                                    p: 2,
                                                     border: "1px solid #e0e0e0",
                                                     borderRadius: "8px",
-                                                    mt: 2.5,
+                                                    mt: 2,
                                                     cursor: "pointer",
-                                                    backgroundColor: deliveryMethod === "bts" ? "#f5f5f5" : "transparent",
-                                                    transition: "background-color 0.2s ease",
-                                                    "&:hover": {
-                                                        backgroundColor: "#fafafa",
-                                                    },
+                                                    backgroundColor: "#f0f0f0",
+                                                    transition: "background-color 0.2s ease"
                                                 }}
                                             >
                                                 <FormControlLabel
                                                     value="bts"
                                                     control={<Radio />}
                                                     label={
-                                                        <Typography sx={{ fontSize: "18px", fontWeight: 600 }}>
+                                                        <Typography sx={{ fontFamily: "Noto Sans", fontSize: "18px", fontWeight: 500 }}>
                                                             BTS Pochta
                                                         </Typography>
                                                     }
@@ -591,22 +588,22 @@ const ConfirmOrder = () => {
                                                     <Box sx={{ pt: 2, pl: 2 }}>
                                                         <Typography
                                                             sx={{
-                                                                fontSize: "14px",
+                                                                fontFamily: "Noto Sans",
+                                                                fontSize: "16px",
                                                                 fontWeight: 600,
-                                                                mb: 1,
-                                                                color: "#666",
+                                                                mb: 1
                                                             }}
                                                         >
                                                             <strong>Viloyatlarga (BTS):</strong>
                                                         </Typography>
                                                         <Box component="ul" sx={{ pl: 3, m: 0, display: "flex", flexDirection: "column", gap: 0.5 }}>
-                                                            <Typography component="li" sx={{ fontSize: "13px", color: "#666", listStyle: "disc" }}>
+                                                            <Typography component="li" sx={{ fontFamily: "Noto Sans", fontSize: "15px", listStyle: "disc" }}>
                                                                 2–4 kun ichida sizga eng yaqin BTS chiqarish punktigacha yetkaziladi.
                                                             </Typography>
-                                                            <Typography component="li" sx={{ fontSize: "13px", color: "#666", listStyle: "disc" }}>
+                                                            <Typography component="li" sx={{ fontFamily: "Noto Sans", fontSize: "14px", listStyle: "disc" }}>
                                                                 Buyurtmani onlayn rasmiylashtirishda to'lovni amalga oshiring, yetkazib berish uchun esa mahsulotni qabul qilganingizda to'laysiz.
                                                             </Typography>
-                                                            <Typography component="li" sx={{ fontSize: "13px", color: "#666", listStyle: "disc" }}>
+                                                            <Typography component="li" sx={{ fontFamily: "Noto Sans", fontSize: "15px", listStyle: "disc" }}>
                                                                 Buyurtmangizni o'zingizga qulay vaqtda olib ketishingiz mumkin.
                                                             </Typography>
                                                         </Box>
@@ -621,18 +618,15 @@ const ConfirmOrder = () => {
                                                     borderRadius: "8px",
                                                     mt: 2.5,
                                                     cursor: "pointer",
-                                                    backgroundColor: deliveryMethod === "yandex" ? "#f5f5f5" : "transparent",
+                                                    backgroundColor: "#f0f0f0",
                                                     transition: "background-color 0.2s ease",
-                                                    "&:hover": {
-                                                        backgroundColor: "#fafafa",
-                                                    },
                                                 }}
                                             >
                                                 <FormControlLabel
                                                     value="yandex"
                                                     control={<Radio />}
                                                     label={
-                                                        <Typography sx={{ fontSize: "18px", fontWeight: 600 }}>
+                                                        <Typography sx={{ fontFamily: "Noto Sans", fontSize: "18px", fontWeight: 500 }}>
                                                             Yandex Yetkazib berish
                                                         </Typography>
                                                     }
@@ -648,19 +642,19 @@ const ConfirmOrder = () => {
                                                     <Box sx={{ pt: 2, pl: 2 }}>
                                                         <Typography
                                                             sx={{
-                                                                fontSize: "14px",
+                                                                fontFamily: "Noto Sans",
+                                                                fontSize: "16px",
                                                                 fontWeight: 600,
                                                                 mb: 1,
-                                                                color: "#666",
                                                             }}
                                                         >
                                                             <strong>Toshkent bo'yicha (Yandex):</strong>
                                                         </Typography>
                                                         <Box component="ul" sx={{ pl: 3, m: 0, display: "flex", flexDirection: "column", gap: 0.5 }}>
-                                                            <Typography component="li" sx={{ fontSize: "13px", color: "#666", listStyle: "disc" }}>
+                                                            <Typography component="li" sx={{ fontFamily: "Noto Sans", fontSize: "13px", listStyle: "disc" }}>
                                                                 Buyurtmangiz 1–2 kun ichida yetkaziladi.
                                                             </Typography>
-                                                            <Typography component="li" sx={{ fontSize: "13px", color: "#666", listStyle: "disc" }}>
+                                                            <Typography component="li" sx={{ fontFamily: "Noto Sans", fontSize: "13px", listStyle: "disc" }}>
                                                                 Buyurtmani onlayn rasmiylashtirishda to'lovni amalga oshiring, yetkazib berish uchun esa mahsulotni qabul qilganingizda to'laysiz.
                                                             </Typography>
                                                         </Box>
