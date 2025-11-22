@@ -131,22 +131,17 @@ const ConfirmOrder = () => {
 
     const handleDeliveryMethodChange = (newMethod) => {
         if (newMethod === deliveryMethod) return
-        
-        // Avval yangi variant ochiladi
         if (newMethod === "bts") {
             setBtsOpen(true)
-            // Keyin eski variant yopiladi (animatsiya to'liq tugagandan keyin - 300ms)
             setTimeout(() => {
                 setYandexOpen(false)
-            }, 300)
+            }, 200)
         } else if (newMethod === "yandex") {
             setYandexOpen(true)
-            // Keyin eski variant yopiladi (animatsiya to'liq tugagandan keyin - 300ms)
             setTimeout(() => {
                 setBtsOpen(false)
-            }, 300)
+            }, 200)
         }
-        
         setDeliveryMethod(newMethod)
     }
 
@@ -592,7 +587,7 @@ const ConfirmOrder = () => {
                                                         },
                                                     }}
                                                 />
-                                                <Collapse in={btsOpen} timeout={300}>
+                                                <Collapse in={btsOpen} timeout={{ enter: 200, exit: 700 }}>
                                                     <Box sx={{ pt: 2, pl: 2 }}>
                                                         <Typography
                                                             sx={{
@@ -649,7 +644,7 @@ const ConfirmOrder = () => {
                                                         },
                                                     }}
                                                 />
-                                                <Collapse in={yandexOpen} timeout={300}>
+                                                <Collapse in={yandexOpen} timeout={{ enter: 200, exit: 700 }}>
                                                     <Box sx={{ pt: 2, pl: 2 }}>
                                                         <Typography
                                                             sx={{
