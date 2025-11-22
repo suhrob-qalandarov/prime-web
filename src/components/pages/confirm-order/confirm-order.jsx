@@ -30,7 +30,7 @@ const ConfirmOrder = () => {
             name: "Kurtka Ayiq",
             brand: "North Face",
             color: "Qora",
-            size: "XL (Bo'y 176-187)",
+            size: "XL",
             price: 336000,
             originalPrice: 420000,
             quantity: 1,
@@ -195,7 +195,6 @@ const ConfirmOrder = () => {
                                                     fontSize: "22px",
                                                     fontWeight: 700,
                                                     letterSpacing: 0.7,
-                                                    mb: 2,
                                                     color: "var(--burgundy-dark)",
                                                 }}
                                             >
@@ -586,7 +585,6 @@ const ConfirmOrder = () => {
                                 fontSize: "22px",
                                 fontWeight: 700,
                                 letterSpacing: 0.7,
-                                mb: 2,
                                 color: "var(--burgundy-dark)",
                             }}
                         >
@@ -634,48 +632,71 @@ const ConfirmOrder = () => {
                                         )}
                                     </Box>
                                     <Typography sx={{ fontFamily: "Noto Sans", fontSize: "15px",  color: "#1a1a1a", ml: 2 }}>
-                                        {item.color} {item.size}
+                                        {item.size} {item.color}
                                     </Typography>
                                     <Typography sx={{ fontSize: "15px", fontWeight: 600, ml: 2 }}>
                                         {item.quantity} x {formatPrice(item.price)}
                                     </Typography>
                                 </Box>
+                                {/* Border after product - same spacing as gap (gap: 2 = 16px) */}
+                                <Box
+                                    sx={{
+                                        height: "1px",
+                                        backgroundColor: "#e0e0e0",
+                                        mt: 2,
+                                        marginLeft: 2,
+                                    }}
+                                />
                             </Box>
                         ))}
 
                         {/* Order Summary */}
-                        <Box
-                            sx={{
-                                borderTop: "1px solid #e0e0e0",
-                                pt: 2,
-                                display: "flex",
-                                flexDirection: "column",
-                                gap: 1.5,
-                            }}
-                        >
-                            <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-                                <Typography sx={{ fontSize: "15px", color: "#666" }}>
+                        <Box sx={{ display: "flex", flexDirection: "column", gap: 2, mb: 3 }}>
+                            <Box sx={{ display: "flex", justifyContent: "space-between", pb: 1.5 }}>
+                                <Typography sx={{ fontFamily: "Noto Sans", fontSize: "15px", fontWeight: 600, letterSpacing: 0.7 }}>
                                     Summa
                                 </Typography>
-                                <Typography sx={{ fontSize: "15px", fontWeight: 600 }}>
+                                <Typography sx={{ fontFamily: "Noto Sans", fontSize: "15px", fontWeight: 600, letterSpacing: 0.7 }}>
                                     {formatPrice(subtotal)}
                                 </Typography>
                             </Box>
-                            {discount > 0 && (
-                                <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-                                    <Typography sx={{ fontSize: "15px", color: "#666" }}>
-                                        Chegirma
-                                    </Typography>
-                                    <Typography sx={{ fontSize: "15px", fontWeight: 600, color: "#d32f2f" }}>
-                                        -{formatPrice(discount)}
-                                    </Typography>
-                                </Box>
-                            )}
-                            <Box sx={{ display: "flex", justifyContent: "space-between", pt: 1 }}>
-                                <Typography sx={{ fontSize: "18px", fontWeight: 700 }}>
+
+                            <Box
+                                sx={{
+                                    display: "flex",
+                                    justifyContent: "space-between",
+                                    pt: 2,
+                                    borderTop: "1px solid #e0e0e0",
+                                    pb: 1,
+                                }}
+                            >
+                                <Typography sx={{ fontFamily: "Noto Sans", fontSize: "15px", fontWeight: 600, letterSpacing: 0.7 }}>
+                                    Chegirma
+                                </Typography>
+                                <Typography sx={{ fontFamily: "Noto Sans", fontSize: "15px", fontWeight: 600, letterSpacing: 0.7 }}>
+                                    -{formatPrice(discount)}
+                                </Typography>
+                            </Box>
+
+                            <Box
+                                sx={{
+                                    display: "flex",
+                                    justifyContent: "space-between",
+                                    pt: 1,
+                                    pb: 1,
+                                    borderTop: "1px solid #e0e0e0",
+                                }}
+                            >
+                                <Typography sx={{
+                                    fontFamily: "Noto Sans",
+                                    fontSize: "23px",
+                                    fontWeight: 700,
+                                    letterSpacing: 0.3,
+                                    color: "var(--burgundy-dark)",
+                                }}>
                                     Jami
                                 </Typography>
-                                <Typography sx={{ fontSize: "18px", fontWeight: 700 }}>
+                                <Typography sx={{ fontFamily: "Noto Sans", fontSize: "24px", fontWeight: 700, letterSpacing: 0.7, color: "var(--burgundy-dark)" }}>
                                     {formatPrice(total)}
                                 </Typography>
                             </Box>
