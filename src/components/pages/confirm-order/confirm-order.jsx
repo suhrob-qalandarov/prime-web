@@ -12,6 +12,7 @@ import {
     FormControl,
     Button,
     Divider,
+    Collapse,
 } from "@mui/material"
 import PageHeader from "../../common/PageHeader"
 import AuthService from "../../../service/auth"
@@ -537,14 +538,32 @@ const ConfirmOrder = () => {
                                             value={deliveryMethod}
                                             onChange={(e) => setDeliveryMethod(e.target.value)}
                                         >
-                                            <FormControlLabel
-                                                value="bts"
-                                                control={<Radio />}
-                                                label={
-                                                    <Box>
-                                                        <Typography sx={{ fontWeight: 600, mb: 1 }}>
+                                            <Box sx={{ mb: 2 }}>
+                                                <FormControlLabel
+                                                    value="bts"
+                                                    control={<Radio />}
+                                                    label={
+                                                        <Typography sx={{ fontWeight: 600 }}>
                                                             BTS Pochta
                                                         </Typography>
+                                                    }
+                                                    sx={{
+                                                        alignItems: "flex-start",
+                                                        "& .MuiFormControlLabel-label": {
+                                                            ml: 1,
+                                                        },
+                                                    }}
+                                                />
+                                                <Collapse in={deliveryMethod === "bts"}>
+                                                    <Box
+                                                        sx={{
+                                                            ml: "36px",
+                                                            mt: 1,
+                                                            p: 2,
+                                                            backgroundColor: "#f5f5f5",
+                                                            borderRadius: "8px",
+                                                        }}
+                                                    >
                                                         <Typography
                                                             sx={{
                                                                 fontSize: "14px",
@@ -567,23 +586,33 @@ const ConfirmOrder = () => {
                                                             </Typography>
                                                         </Box>
                                                     </Box>
-                                                }
-                                                sx={{
-                                                    mb: 2,
-                                                    alignItems: "flex-start",
-                                                    "& .MuiFormControlLabel-label": {
-                                                        ml: 1,
-                                                    },
-                                                }}
-                                            />
-                                            <FormControlLabel
-                                                value="yandex"
-                                                control={<Radio />}
-                                                label={
-                                                    <Box>
+                                                </Collapse>
+                                            </Box>
+                                            <Box sx={{ mb: 2 }}>
+                                                <FormControlLabel
+                                                    value="yandex"
+                                                    control={<Radio />}
+                                                    label={
                                                         <Typography sx={{ fontWeight: 600 }}>
                                                             Yandex Yetkazib berish
                                                         </Typography>
+                                                    }
+                                                    sx={{
+                                                        "& .MuiFormControlLabel-label": {
+                                                            ml: 1,
+                                                        },
+                                                    }}
+                                                />
+                                                <Collapse in={deliveryMethod === "yandex"}>
+                                                    <Box
+                                                        sx={{
+                                                            ml: "36px",
+                                                            mt: 1,
+                                                            p: 2,
+                                                            backgroundColor: "#f5f5f5",
+                                                            borderRadius: "8px",
+                                                        }}
+                                                    >
                                                         <Typography
                                                             sx={{
                                                                 fontSize: "14px",
@@ -592,25 +621,19 @@ const ConfirmOrder = () => {
                                                                 color: "#666",
                                                             }}
                                                         >
-                                                            Toshkent bo’yicha (Yandex):
+                                                            Toshkent bo'yicha (Yandex):
                                                         </Typography>
                                                         <Box sx={{ pl: 2, display: "flex", flexDirection: "column", gap: 0.5 }}>
                                                             <Typography sx={{ fontSize: "13px", color: "#666" }}>
                                                                 • Buyurtmangiz 1–2 kun ichida yetkaziladi.
                                                             </Typography>
                                                             <Typography sx={{ fontSize: "13px", color: "#666" }}>
-                                                                • Buyurtmani onlayn rasmiylashtirishda to‘lovni amalga oshiring, yetkazib berish uchun esa mahsulotni qabul qilganingizda to‘laysiz.
+                                                                • Buyurtmani onlayn rasmiylashtirishda to'lovni amalga oshiring, yetkazib berish uchun esa mahsulotni qabul qilganingizda to'laysiz.
                                                             </Typography>
                                                         </Box>
                                                     </Box>
-                                                }
-                                                sx={{
-                                                    mb: 2,
-                                                    "& .MuiFormControlLabel-label": {
-                                                        ml: 1,
-                                                    },
-                                                }}
-                                            />
+                                                </Collapse>
+                                            </Box>
                                         </RadioGroup>
                                     </FormControl>
                                 </Box>
