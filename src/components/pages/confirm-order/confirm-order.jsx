@@ -342,7 +342,7 @@ const ConfirmOrder = () => {
                                                             color: "#666",
                                                             mr: 1
                                                     }}>
-                                                        Telegram/Telefon:
+                                                        Telegram username/raqam:
                                                     </Typography>
                                                     <Typography
                                                         component="span"
@@ -375,8 +375,8 @@ const ConfirmOrder = () => {
                                         </Box>)}
 
                                         {/* Code Input and Verify Button */}
-                                        <Typography sx={{ fontSize: "14px", color: "#666", mb: 1 }}>
-                                            <a className="underline underline-offset-4 font-['Noto Sans']" href="https://t.me/prime77uzBot" target="_blank" rel="noopener noreferrer">
+                                        <Typography sx={{ fontSize: "15px", color: "#1a1a1a", mb: 1 }}>
+                                            <a className="text-[var(--burgundy-dark)] underline underline-offset-4 font-['Noto Sans']" href="https://t.me/prime77uzBot" target="_blank" rel="noopener noreferrer">
                                                 @prime77uzbot
                                             </a>
                                             <span>&nbsp;&nbsp;telegram botiga kiring va buyurtmani tasdiqlash uchun 2 daqiqalik kodingizni oling.</span>
@@ -393,7 +393,9 @@ const ConfirmOrder = () => {
                                                     inputMode: "numeric",
                                                     style: {
                                                         textAlign: "center",
+                                                        fontFamily: "Noto Sans",
                                                         fontSize: "16px",
+                                                        color: "var(--burgundy-dark)",
                                                         letterSpacing: "4px",
                                                         fontWeight: 600,
                                                     },
@@ -410,16 +412,21 @@ const ConfirmOrder = () => {
                                                 onClick={handleVerifyCode}
                                                 disabled={verifying || code.length !== 6}
                                                 sx={{
-                                                    backgroundColor: "#333",
+                                                    backgroundColor: "var(--burgundy-dark)",
                                                     color: "white",
-                                                    py: 1,
-                                                    px: 2,
-                                                    fontSize: "14px",
+                                                    py: 1.2,
+                                                    px: 4,
+                                                    fontFamily: "Noto Sans",
+                                                    fontSize: "12px",
                                                     fontWeight: 600,
                                                     textTransform: "uppercase",
                                                     borderRadius: "8px",
+                                                    boxShadow: "none",
+                                                    transition: "background-color 0.3s ease, color 0.4s ease",
                                                     "&:hover": {
-                                                        backgroundColor: "#555",
+                                                        backgroundColor: "rgba(189,236,118,0.87)",
+                                                        color: "var(--burgundy-dark)",
+                                                        boxShadow: "none",
                                                     },
                                                     "&:disabled": {
                                                         backgroundColor: "#999",
@@ -676,7 +683,7 @@ const ConfirmOrder = () => {
 
                         {/* Order Summary */}
                         <Box sx={{ display: "flex", flexDirection: "column", gap: 2, mb: 3 }}>
-                            <Box sx={{ display: "flex", justifyContent: "space-between", pb: 1.5 }}>
+                            <Box sx={{ display: "flex", justifyContent: "space-between", pb: 1 }}>
                                 <Typography sx={{ fontFamily: "Noto Sans", fontSize: "15px", fontWeight: 600, letterSpacing: 0.7 }}>
                                     Summa
                                 </Typography>
@@ -689,7 +696,7 @@ const ConfirmOrder = () => {
                                 sx={{
                                     display: "flex",
                                     justifyContent: "space-between",
-                                    pt: 2,
+                                    pt: 3,
                                     borderTop: "1px solid #e0e0e0",
                                     pb: 1,
                                 }}
@@ -706,7 +713,7 @@ const ConfirmOrder = () => {
                                 sx={{
                                     display: "flex",
                                     justifyContent: "space-between",
-                                    pt: 1,
+                                    pt: 2,
                                     pb: 1,
                                     borderTop: "1px solid #e0e0e0",
                                 }}
