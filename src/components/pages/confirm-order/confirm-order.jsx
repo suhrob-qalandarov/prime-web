@@ -301,10 +301,12 @@ const ConfirmOrder = () => {
                                         <Box>
                                             <Typography
                                                 sx={{
-                                                    fontSize: "18px",
+                                                    fontFamily: "Noto Sans",
+                                                    fontSize: "22px",
                                                     fontWeight: 700,
-                                                    mb: 2,
-                                                    color: "#1a1a1a",
+                                                    letterSpacing: 0.7,
+                                                    color: "var(--burgundy-dark)",
+                                                    mb: 2
                                                 }}
                                             >
                                                 Mijoz
@@ -313,22 +315,42 @@ const ConfirmOrder = () => {
                                                 <Box>
                                                     <Typography
                                                         component="span"
-                                                        sx={{ fontSize: "14px", color: "#666", mr: 1 }}
-                                                    >
+                                                        sx={{
+                                                            fontFamily: "Noto Sans",
+                                                            fontSize: "14px",
+                                                            color: "#666",
+                                                            mr: 1
+                                                    }}>
                                                         Ism:
                                                     </Typography>
-                                                    <Typography component="span" sx={{ fontSize: "16px", fontWeight: 700 }}>
+                                                    <Typography
+                                                        component="span"
+                                                        sx={{
+                                                            fontFamily: "Noto Sans",
+                                                            fontSize: "16px",
+                                                            fontWeight: 700
+                                                    }}>
                                                         {fullName || user?.firstName || "Noma'lum"}
                                                     </Typography>
                                                 </Box>
                                                 <Box>
                                                     <Typography
                                                         component="span"
-                                                        sx={{ fontSize: "14px", color: "#666", mr: 1 }}
-                                                    >
+                                                        sx={{
+                                                            fontFamily: "Noto Sans",
+                                                            fontSize: "14px",
+                                                            color: "#666",
+                                                            mr: 1
+                                                    }}>
                                                         Telegram/Telefon:
                                                     </Typography>
-                                                    <Typography component="span" sx={{ fontSize: "16px", fontWeight: 700 }}>
+                                                    <Typography
+                                                        component="span"
+                                                        sx={{
+                                                            fontFamily: "Noto Sans",
+                                                            fontSize: "16px",
+                                                            fontWeight: 700
+                                                    }}>
                                                         {telegram || "Noma'lum"}
                                                     </Typography>
                                                 </Box>
