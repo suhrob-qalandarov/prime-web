@@ -130,8 +130,8 @@ const Cart = () => {
             <Container
                 maxWidth={false}
                 sx={{
-                    px: { xs: 6, lg: "40px" },
-                    py: { xs: 3, md: 5 },
+                    px: { xs: 2, sm: 4, lg: "40px" },
+                    py: { xs: 2, md: 5 },
                     maxWidth: "1400px",
                     margin: "0 auto",
                 }}
@@ -159,7 +159,7 @@ const Cart = () => {
                     <Box
                         sx={{
                             display: "grid",
-                            gridTemplateColumns: { xs: "1fr", lg: "1.96fr 0.85fr" },
+                            gridTemplateColumns: { xs: "1fr", lg: "1.86fr 0.85fr" },
                             gap: { xs: 3, lg: 6 },
                         }}
                     >
@@ -170,9 +170,9 @@ const Cart = () => {
                                     <Box
                                         sx={{
                                             display: "grid",
-                                            gridTemplateColumns: "100px 1fr 1fr auto",
-                                            gap: 3,
-                                            p: 2,
+                                            gridTemplateColumns: { xs: "80px 1fr auto auto", lg: "100px 1fr 1fr auto auto" },
+                                            gap: { xs: 2, lg: 3 },
+                                            p: { xs: 1.5, lg: 2 },
                                             alignItems: "center",
                                         }}
                                     >
@@ -182,8 +182,8 @@ const Cart = () => {
                                         src={item.image || "/placeholder.svg"}
                                         alt={item.name}
                                         sx={{
-                                            width: "100px",
-                                            height: "135px",
+                                            width: { xs: "80px", lg: "100px" },
+                                            height: { xs: "110px", lg: "135px" },
                                             objectFit: "cover",
                                             borderRadius: "8px",
                                             flexShrink: 0,
@@ -191,10 +191,10 @@ const Cart = () => {
                                     />
 
                                     {/* Product Details - Middle */}
-                                    <Box sx={{ display: "flex", flexDirection: "column", gap: 0.5, justifyContent: "center" }}>
+                                    <Box sx={{ display: "flex", flexDirection: "column", gap: 0.5, justifyContent: "center", minWidth: 0 }}>
                                         <Typography
                                             sx={{
-                                                fontSize: "16px",
+                                                fontSize: { xs: "14px", lg: "16px" },
                                                 fontWeight: 600,
                                                 color: "var(--burgundy-dark)",
                                             }}
@@ -203,24 +203,31 @@ const Cart = () => {
                                         </Typography>
 
                                         {item.brand && (
-                                            <Typography sx={{ fontFamily: "Noto Sans", fontSize: "12px", fontWeight: 600, color: "#1a1a1a", textTransform: "uppercase" }}>
+                                            <Typography sx={{ fontFamily: "Noto Sans", fontSize: { xs: "11px", lg: "12px" }, fontWeight: 600, color: "#1a1a1a", textTransform: "uppercase" }}>
                                                 {item.brand}
                                             </Typography>
                                         )}
 
                                         {item.color && (
-                                            <Typography sx={{ fontFamily: "Noto Sans", fontSize: "15px", color: "#666" }}>
+                                            <Typography sx={{ fontFamily: "Noto Sans", fontSize: { xs: "13px", lg: "15px" }, color: "#666" }}>
                                                 {item.color}
                                             </Typography>
                                         )}
 
-                                        <Typography sx={{ fontFamily: "Noto Sans", fontSize: "15px", color: "#666" }}>
+                                        <Typography sx={{ fontFamily: "Noto Sans", fontSize: { xs: "13px", lg: "15px" }, color: "#666" }}>
                                             {item.size}
                                         </Typography>
                                     </Box>
 
-                                    {/* Price - Center between product details and quantity */}
-                                    <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 0.5, justifySelf: "center", width: "100%" }}>
+                                    {/* Price - Desktop da alohida column */}
+                                    <Box sx={{ 
+                                        display: { xs: "none", lg: "flex" }, 
+                                        flexDirection: "column", 
+                                        alignItems: "center", 
+                                        justifyContent: "center", 
+                                        gap: 0.5,
+                                        justifySelf: "center",
+                                    }}>
                                         {item.originalPrice && item.originalPrice > item.price ? (
                                             <>
                                                 <Typography
@@ -259,17 +266,56 @@ const Cart = () => {
                                         )}
                                     </Box>
 
-                                    {/* Right Side - Quantity, Total, Remove */}
-                                    <Box
-                                        sx={{
-                                            display: "flex",
-                                            alignItems: "center",
-                                            gap: 3,
-                                            flexShrink: 0,
-                                            justifySelf: "flex-end",
-                                        }}
-                                    >
-                                        {/* Quantity Selector - like quick-view */}
+                                    {/* Price and Quantity - Mobile da birga, Desktop da quantity */}
+                                    <Box sx={{ 
+                                        display: "flex", 
+                                        flexDirection: "column", 
+                                        alignItems: { xs: "flex-end", lg: "center" }, 
+                                        justifyContent: "center", 
+                                        gap: 1,
+                                        minWidth: 0,
+                                    }}>
+                                        {/* Price - Mobile da */}
+                                        <Box sx={{ display: { xs: "flex", lg: "none" }, flexDirection: "column", alignItems: "flex-end", gap: 0.5 }}>
+                                            {item.originalPrice && item.originalPrice > item.price ? (
+                                                <>
+                                                    <Typography
+                                                        sx={{
+                                                            fontFamily: "Noto Sans",
+                                                            fontSize: "13px",
+                                                            fontWeight: 600,
+                                                            color: "#1a1a1a",
+                                                        }}
+                                                    >
+                                                        {formatPrice(item.price)}
+                                                    </Typography>
+                                                    <Typography
+                                                        sx={{
+                                                            fontFamily: "Noto Sans",
+                                                            fontSize: "12px",
+                                                            fontWeight: 500,
+                                                            color: "#636262",
+                                                            textDecoration: "line-through",
+                                                        }}
+                                                    >
+                                                        {formatPrice(item.originalPrice)}
+                                                    </Typography>
+                                                </>
+                                            ) : (
+                                                <Typography
+                                                    sx={{
+                                                        fontFamily: "Noto Sans",
+                                                        fontSize: "13px",
+                                                        fontWeight: 600,
+                                                        color: "#1a1a1a",
+                                                    }}
+                                                >
+                                                    {formatPrice(item.price)}
+                                                </Typography>
+                                            )}
+                                        </Box>
+
+                                        {/* Quantity Selector */}
                                         <Box
                                             sx={{
                                                 display: "flex",
@@ -278,11 +324,10 @@ const Cart = () => {
                                                 borderRadius: "8px",
                                                 border: "1px solid #e0e0e0",
                                                 backgroundColor: "#f0f0f0",
-                                                width: "100px",
+                                                width: { xs: "75px", lg: "100px" },
                                                 flexShrink: 0,
-                                                py: 1.6,
+                                                py: { xs: 1, lg: 1.6 },
                                                 px: 1,
-                                                mr: 2,
                                             }}
                                         >
                                             <Box
@@ -299,7 +344,7 @@ const Cart = () => {
                                             <Typography
                                                 sx={{
                                                     fontFamily: "Noto Sans",
-                                                    fontSize: "16px",
+                                                    fontSize: { xs: "13px", lg: "16px" },
                                                     fontWeight: 600,
                                                     textAlign: "center",
                                                 }}
@@ -319,36 +364,51 @@ const Cart = () => {
                                             </Box>
                                         </Box>
 
-                                        {/* Total Price */}
+                                        {/* Total Price - Mobile da quantity tagida */}
                                         <Typography
                                             sx={{
+                                                display: { xs: "block", lg: "none" },
                                                 fontFamily: "Noto Sans",
-                                                fontSize: "16px",
+                                                fontSize: "13px",
                                                 fontWeight: 600,
                                                 color: "var(--burgundy-dark)",
                                                 whiteSpace: "nowrap",
-                                                ml: 2,
+                                                textAlign: "right",
                                             }}
                                         >
                                             {formatPrice(item.price * item.quantity)}
                                         </Typography>
-
-                                        {/* Remove Button */}
-                                        <IconButton
-                                            size="small"
-                                            onClick={() => handleRemoveItem(item.id)}
-                                            sx={{
-                                                color: "#ef4444",
-                                                padding: "4px",
-                                                flexShrink: 0,
-                                                "&:hover": {
-                                                    backgroundColor: "transparent",
-                                                },
-                                            }}
-                                        >
-                                            <CloseIcon2 size={20} />
-                                        </IconButton>
                                     </Box>
+
+                                    {/* Total Price - Desktop da */}
+                                    <Typography
+                                        sx={{
+                                            display: { xs: "none", lg: "block" },
+                                            fontFamily: "Noto Sans",
+                                            fontSize: "16px",
+                                            fontWeight: 600,
+                                            color: "var(--burgundy-dark)",
+                                            whiteSpace: "nowrap",
+                                        }}
+                                    >
+                                        {formatPrice(item.price * item.quantity)}
+                                    </Typography>
+
+                                    {/* Remove Button - Right (both mobile and desktop) */}
+                                    <IconButton
+                                        size="small"
+                                        onClick={() => handleRemoveItem(item.id)}
+                                        sx={{
+                                            color: "#ef4444",
+                                            padding: "4px",
+                                            flexShrink: 0,
+                                            "&:hover": {
+                                                backgroundColor: "transparent",
+                                            },
+                                        }}
+                                    >
+                                        <CloseIcon2 size={18} />
+                                    </IconButton>
                                     </Box>
                                     {/* Border after product - same spacing as gap (gap: 2 = 16px) */}
                                     <Box
@@ -371,16 +431,16 @@ const Cart = () => {
                                 height: { lg: "fit-content" },
                                 backgroundColor: "#f0f0f0",
                                 borderRadius: "18px",
-                                p: 3,
+                                p: { xs: 2, lg: 3 },
                             }}
                         >
                             <Typography
                                 sx={{
                                     fontFamily: "Noto Sans",
-                                    fontSize: "22px",
+                                    fontSize: { xs: "20px", lg: "22px" },
                                     fontWeight: 700,
                                     letterSpacing: 0.7,
-                                    mb: 3,
+                                    mb: { xs: 2, lg: 3 },
                                     color: "var(--burgundy-dark)",
                                 }}
                             >
@@ -388,12 +448,12 @@ const Cart = () => {
                             </Typography>
 
                             {/* Order Summary */}
-                            <Box sx={{ display: "flex", flexDirection: "column", gap: 2, mb: 3 }}>
+                            <Box sx={{ display: "flex", flexDirection: "column", gap: { xs: 1.5, lg: 2 }, mb: { xs: 2, lg: 3 } }}>
                                 <Box sx={{ display: "flex", justifyContent: "space-between", pb: 1.5 }}>
-                                    <Typography sx={{ fontFamily: "Noto Sans", fontSize: "15px", fontWeight: 600, letterSpacing: 0.7 }}>
+                                    <Typography sx={{ fontFamily: "Noto Sans", fontSize: { xs: "14px", lg: "15px" }, fontWeight: 600, letterSpacing: 0.7 }}>
                                         Summa
                                     </Typography>
-                                    <Typography sx={{ fontFamily: "Noto Sans", fontSize: "15px", fontWeight: 600, letterSpacing: 0.7 }}>
+                                    <Typography sx={{ fontFamily: "Noto Sans", fontSize: { xs: "14px", lg: "15px" }, fontWeight: 600, letterSpacing: 0.7 }}>
                                         {formatPrice(subtotal)}
                                     </Typography>
                                 </Box>
@@ -407,10 +467,10 @@ const Cart = () => {
                                         pb: 1,
                                     }}
                                 >
-                                    <Typography sx={{ fontFamily: "Noto Sans", fontSize: "15px", fontWeight: 600, letterSpacing: 0.7 }}>
+                                    <Typography sx={{ fontFamily: "Noto Sans", fontSize: { xs: "14px", lg: "15px" }, fontWeight: 600, letterSpacing: 0.7 }}>
                                         Chegirma
                                     </Typography>
-                                    <Typography sx={{ fontFamily: "Noto Sans", fontSize: "15px", fontWeight: 600, letterSpacing: 0.7 }}>
+                                    <Typography sx={{ fontFamily: "Noto Sans", fontSize: { xs: "14px", lg: "15px" }, fontWeight: 600, letterSpacing: 0.7 }}>
                                         -{formatPrice(discount)}
                                     </Typography>
                                 </Box>
@@ -426,14 +486,14 @@ const Cart = () => {
                                 >
                                     <Typography sx={{
                                         fontFamily: "Noto Sans",
-                                        fontSize: "23px",
+                                        fontSize: { xs: "20px", lg: "23px" },
                                         fontWeight: 700,
                                         letterSpacing: 0.3,
                                         color: "var(--burgundy-dark)",
                                     }}>
                                         Jami
                                     </Typography>
-                                    <Typography sx={{ fontFamily: "Noto Sans", fontSize: "24px", fontWeight: 700, letterSpacing: 0.7, color: "var(--burgundy-dark)" }}>
+                                    <Typography sx={{ fontFamily: "Noto Sans", fontSize: { xs: "20px", lg: "24px" }, fontWeight: 700, letterSpacing: 0.7, color: "var(--burgundy-dark)" }}>
                                         {formatPrice(total)}
                                     </Typography>
                                 </Box>
@@ -447,14 +507,14 @@ const Cart = () => {
                                 sx={{
                                     backgroundColor: "var(--burgundy-dark)",
                                     color: "white",
-                                    py: 1.5,
+                                    py: { xs: 1.2, lg: 1.5 },
                                     fontFamily: "Noto Sans",
                                     letterSpacing: 0.6,
-                                    fontSize: "14px",
+                                    fontSize: { xs: "13px", lg: "14px" },
                                     fontWeight: 700,
                                     textTransform: "uppercase",
                                     borderRadius: "12px",
-                                    mb: 2,
+                                    mb: { xs: 1.5, lg: 2 },
                                     boxShadow: "none",
                                     transition: "background-color 0.3s ease, color 0.4s ease",
                                     "&:hover": {
@@ -472,7 +532,7 @@ const Cart = () => {
                                 sx={{
                                     textAlign: "center",
                                     fontFamily: "Noto Sans",
-                                    fontSize: "15px",
+                                    fontSize: { xs: "13px", lg: "15px" },
                                     color: "var(--burgundy-dark)",
                                     cursor: "pointer"
                                 }}
