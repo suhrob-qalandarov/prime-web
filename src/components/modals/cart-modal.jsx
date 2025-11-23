@@ -199,19 +199,19 @@ const CartModal = ({ isOpen, onClose }) => {
 
                 {/* Footer */}
                 <div
-                    className="px-2 pb-16 lg:pb-3 pt-2 border-t border-[#e9ecef] rounded-b-[15px]"
+                    className={`px-2 ${screenSize === "mobile" ? "pb-20" : "pb-3"} pt-2 border-t border-[#e9ecef] rounded-b-[15px]`}
                     id="cartFooter"
                 >
-                    <div className="flex items-center justify-between mb-2 py-1.5 text-[16px] font-semibold text-[color:var(--text-color)] font-['Noto Sans']">
+                    <div className={`flex items-center justify-between mb-2 py-1.5 ${screenSize === "mobile" ? "text-[14px]" : "text-[16px]"} font-semibold text-[color:var(--text-color)] font-['Noto Sans']`}>
                         <span>Summa</span>
                         <span id="cartTotalPrice">
                             {totalPrice.toLocaleString("fr-FR")} So&apos;m
                         </span>
                     </div>
-                    <div className="flex h-[40px] gap-4 font-['Noto Sans'] font-semibold items-start mt-2">
+                    <div className={`flex ${screenSize === "mobile" ? "h-[48px] gap-2" : "h-[40px] gap-4"} font-['Noto Sans'] font-semibold items-start mt-2`}>
                         <Link
                             to="/order"
-                            className="flex-1 bg-[color:var(--burgundy-color)] text-white border-none px-5 py-[13px] rounded-lg text-[95%] tracking-[0.5px] no-underline flex items-center justify-center whitespace-nowrap"
+                            className={`flex-1 bg-[color:var(--burgundy-color)] text-white border-none ${screenSize === "mobile" ? "px-3 py-3 text-[14px]" : "px-5 py-[13px] text-[95%]"} rounded-lg tracking-[0.5px] no-underline flex items-center justify-center whitespace-nowrap`}
                             id="cartCheckoutBtn"
                             onClick={onClose}
                         >
@@ -219,14 +219,14 @@ const CartModal = ({ isOpen, onClose }) => {
                         </Link>
                         <Link
                             to="/cart"
-                            className="flex-1 bg-transparent text-[color:var(--burgundy-color)] border border-[color:var(--burgundy-dark)] px-5 py-[13px] rounded-lg text-[96%] tracking-[0.5px] no-underline flex items-center justify-center transition-all duration-300"
+                            className={`flex-1 bg-transparent text-[color:var(--burgundy-color)] border border-[color:var(--burgundy-dark)] ${screenSize === "mobile" ? "px-3 py-3 text-[14px]" : "px-5 py-[13px] text-[96%]"} rounded-lg tracking-[0.5px] no-underline flex items-center justify-center transition-all duration-300`}
                             id="cartViewBtn"
                             onClick={onClose}
                         >
                             Savat
                         </Link>
                     </div>
-                    <p className="text-center text-[15px] mb-[-5px] font-normal tracking-[0.8px] px-2 pt-2 text-[#6B7280] font-['Noto Sans'] cursor-pointer">
+                    <p className={`text-center ${screenSize === "mobile" ? "text-[13px]" : "text-[15px]"} mb-[-5px] font-normal tracking-[0.8px] px-2 pt-2 text-[#6B7280] font-['Noto Sans'] cursor-pointer`}>
                         <span onClick={onClose}>Yoki xaridlarni anti-to&apos;xtatish</span>
                     </p>
                 </div>
