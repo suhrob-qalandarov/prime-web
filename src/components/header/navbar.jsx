@@ -41,7 +41,16 @@ const Navbar = () => {
             setIsScrolled(currentScrollY > 0)
 
             if (isMobile) {
-                if (currentScrollY > lastScrollYRef.current && currentScrollY > 80) {
+                // Check if scrolled to bottom (with 100px threshold)
+                const windowHeight = window.innerHeight
+                const documentHeight = document.documentElement.scrollHeight
+                const isAtBottom = currentScrollY + windowHeight >= documentHeight - 100
+
+                if (isAtBottom) {
+                    // Show bottom navbar when at bottom
+                    setIsNavHidden(false)
+                } else if (currentScrollY > lastScrollYRef.current && currentScrollY > 80) {
+                    // Hide bottom navbar when scrolling down
                     setIsNavHidden(true)
                 } else {
                     setIsNavHidden(false)
