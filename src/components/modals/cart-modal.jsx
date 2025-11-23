@@ -69,7 +69,7 @@ const CartModal = ({ isOpen, onClose }) => {
                     right: "0",
                     bottom: "0",
                     width: "100%",
-                    height: "100vh",
+                    height: "100dvh", // Dynamic viewport height - Chrome tepasi holatiga qarab
                     margin: "0",
                     borderRadius: "0",
                     transform: "none",
@@ -208,22 +208,22 @@ const CartModal = ({ isOpen, onClose }) => {
                             {totalPrice.toLocaleString("fr-FR")} So&apos;m
                         </span>
                     </div>
-                    <div className={`flex ${screenSize === "mobile" ? "h-[48px] gap-2" : "h-[40px] gap-4"} font-['Noto Sans'] font-semibold items-start mt-2`}>
+                    <div className={`flex ${screenSize === "mobile" ? "h-[48px] gap-2" : "h-[40px] gap-4"} font-['Noto Sans'] font-semibold items-center mt-2 min-w-0`}>
                         <Link
                             to="/order"
-                            className={`flex-1 bg-[color:var(--burgundy-color)] text-white border-none ${screenSize === "mobile" ? "px-3 py-3 text-[14px]" : "px-5 py-[13px] text-[95%]"} rounded-lg tracking-[0.5px] no-underline flex items-center justify-center whitespace-nowrap`}
+                            className={`flex-1 min-w-0 bg-[color:var(--burgundy-color)] text-white border-none ${screenSize === "mobile" ? "px-2 py-3 text-[13px]" : "px-5 py-[13px] text-[95%]"} rounded-lg tracking-[0.5px] no-underline flex items-center justify-center overflow-hidden text-ellipsis whitespace-nowrap`}
                             id="cartCheckoutBtn"
                             onClick={onClose}
                         >
-                            Buyurtma qilish
+                            <span className="truncate">Buyurtma qilish</span>
                         </Link>
                         <Link
                             to="/cart"
-                            className={`flex-1 bg-transparent text-[color:var(--burgundy-color)] border border-[color:var(--burgundy-dark)] ${screenSize === "mobile" ? "px-3 py-3 text-[14px]" : "px-5 py-[13px] text-[96%]"} rounded-lg tracking-[0.5px] no-underline flex items-center justify-center transition-all duration-300`}
+                            className={`flex-1 min-w-0 bg-transparent text-[color:var(--burgundy-color)] border border-[color:var(--burgundy-dark)] ${screenSize === "mobile" ? "px-2 py-3 text-[13px]" : "px-5 py-[13px] text-[96%]"} rounded-lg tracking-[0.5px] no-underline flex items-center justify-center transition-all duration-300 overflow-hidden text-ellipsis whitespace-nowrap`}
                             id="cartViewBtn"
                             onClick={onClose}
                         >
-                            Savat
+                            <span className="truncate">Savat</span>
                         </Link>
                     </div>
                     <p className={`text-center ${screenSize === "mobile" ? "text-[13px]" : "text-[15px]"} mb-[-5px] font-normal tracking-[0.8px] px-2 pt-2 text-[#6B7280] font-['Noto Sans'] cursor-pointer`}>
