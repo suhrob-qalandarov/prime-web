@@ -155,7 +155,7 @@ const Cart = () => {
                     >
                         {/* Left Section - Cart Items */}
                         <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
-                            {cartItems.map((item, index) => (
+                            {cartItems.map((item) => (
                                 <Box key={item.id}>
                                     <Box
                                         sx={{
