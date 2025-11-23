@@ -108,9 +108,26 @@ export default function Footer() {
                             <p className="text-sm m-0 opacity-80" style={{ color: "rgba(160,27,71,0.8)" }}>
                                 &copy; 2025 PRIME77, Barcha huquqlar himoyalangan
                             </p>
+                            
+                            {/* Payment Methods - Mobile only, shown below copyright */}
+                            <div className="flex md:hidden items-center justify-center gap-2 mt-3">
+                                <span className="text-sm opacity-80" style={{ color: "rgba(160,27,71,0.8)" }}>
+                                    To'lov turlari:
+                                </span>
+                                <div className="flex gap-2">
+                                    {payments.map((payment) => (
+                                        <img
+                                            key={payment.name}
+                                            src={payment.image || "/placeholder.svg"}
+                                            alt={payment.name}
+                                            className="h-4 w-auto"
+                                        />
+                                    ))}
+                                </div>
+                            </div>
                         </div>
 
-                        {/* Payment Methods - hidden on mobile, shown on md and up */}
+                        {/* Payment Methods - Desktop, shown on md and up */}
                         <div className="hidden md:flex items-center justify-end gap-2">
                             <span className="text-sm opacity-80" style={{ color: "rgba(160,27,71,0.8)" }}>
                                 To'lov turlari:
