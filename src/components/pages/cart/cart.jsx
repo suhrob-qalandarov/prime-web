@@ -1,20 +1,12 @@
 import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
-import {
-    Container,
-    Box,
-    Stack,
-    Typography,
-    Button,
-    IconButton,
-} from "@mui/material"
+import { Container, Box, Stack, Typography, Button, IconButton } from "@mui/material"
 import PageHeader from "../../common/PageHeader"
-import urls from "../../../constants/urls"
 import { MinusIcon, PlusIcon, CloseIcon2 } from "../../../icons"
 
 const Cart = () => {
     const navigate = useNavigate()
-    
+
     // Mock cart data - replace with actual cart from localStorage or API
     const [cartItems, setCartItems] = useState([
         {
@@ -138,9 +130,7 @@ const Cart = () => {
             >
                 {cartItems.length === 0 ? (
                     <Box sx={{ textAlign: "center", py: 8 }}>
-                        <Typography sx={{ fontSize: "24px", fontWeight: 600, mb: 2 }}>
-                            Savat bo'sh
-                        </Typography>
+                        <Typography sx={{ fontSize: "24px", fontWeight: 600, mb: 2 }}>Savat bo'sh</Typography>
                         <Button
                             variant="contained"
                             onClick={() => navigate("/catalog")}
@@ -170,119 +160,84 @@ const Cart = () => {
                                     <Box
                                         sx={{
                                             display: "grid",
-                                            gridTemplateColumns: { xs: "80px 1fr auto auto", lg: "100px 1fr 1fr auto auto" },
+                                            gridTemplateColumns: { xs: "80px 1fr auto auto auto", lg: "100px 1fr 1fr auto auto auto" },
                                             gap: { xs: 2, lg: 3 },
                                             p: { xs: 1.5, lg: 2 },
                                             alignItems: "center",
                                         }}
                                     >
-                                    {/* Product Image - Left */}
-                                    <Box
-                                        component="img"
-                                        src={item.image || "/placeholder.svg"}
-                                        alt={item.name}
-                                        sx={{
-                                            width: { xs: "80px", lg: "100px" },
-                                            height: { xs: "110px", lg: "135px" },
-                                            objectFit: "cover",
-                                            borderRadius: "8px",
-                                            flexShrink: 0,
-                                        }}
-                                    />
-
-                                    {/* Product Details - Middle */}
-                                    <Box sx={{ display: "flex", flexDirection: "column", gap: 0.5, justifyContent: "center", minWidth: 0 }}>
-                                        <Typography
+                                        {/* Product Image - Left */}
+                                        <Box
+                                            component="img"
+                                            src={item.image || "/placeholder.svg"}
+                                            alt={item.name}
                                             sx={{
-                                                fontSize: { xs: "14px", lg: "16px" },
-                                                fontWeight: 600,
-                                                color: "var(--burgundy-dark)",
+                                                width: { xs: "80px", lg: "100px" },
+                                                height: { xs: "110px", lg: "135px" },
+                                                objectFit: "cover",
+                                                borderRadius: "8px",
+                                                flexShrink: 0,
                                             }}
+                                        />
+
+                                        {/* Product Details - Middle */}
+                                        <Box
+                                            sx={{ display: "flex", flexDirection: "column", gap: 0.5, justifyContent: "center", minWidth: 0 }}
                                         >
-                                            {item.name}
-                                        </Typography>
-
-                                        {item.brand && (
-                                            <Typography sx={{ fontFamily: "Noto Sans", fontSize: { xs: "11px", lg: "12px" }, fontWeight: 600, color: "#1a1a1a", textTransform: "uppercase" }}>
-                                                {item.brand}
-                                            </Typography>
-                                        )}
-
-                                        {item.color && (
-                                            <Typography sx={{ fontFamily: "Noto Sans", fontSize: { xs: "13px", lg: "15px" }, color: "#666" }}>
-                                                {item.color}
-                                            </Typography>
-                                        )}
-
-                                        <Typography sx={{ fontFamily: "Noto Sans", fontSize: { xs: "13px", lg: "15px" }, color: "#666" }}>
-                                            {item.size}
-                                        </Typography>
-                                    </Box>
-
-                                    {/* Price - Desktop da alohida column */}
-                                    <Box sx={{ 
-                                        display: { xs: "none", lg: "flex" }, 
-                                        flexDirection: "column", 
-                                        alignItems: "center", 
-                                        justifyContent: "center", 
-                                        gap: 0.5,
-                                        justifySelf: "center",
-                                    }}>
-                                        {item.originalPrice && item.originalPrice > item.price ? (
-                                            <>
-                                                <Typography
-                                                    sx={{
-                                                        fontFamily: "Noto Sans",
-                                                        fontSize: "16px",
-                                                        fontWeight: 600,
-                                                        color: "#1a1a1a",
-                                                    }}
-                                                >
-                                                    {formatPrice(item.price)}
-                                                </Typography>
-                                                <Typography
-                                                    sx={{
-                                                        fontFamily: "Noto Sans",
-                                                        fontSize: "16px",
-                                                        fontWeight: 500,
-                                                        color: "#636262",
-                                                        textDecoration: "line-through",
-                                                    }}
-                                                >
-                                                    {formatPrice(item.originalPrice)}
-                                                </Typography>
-                                            </>
-                                        ) : (
                                             <Typography
                                                 sx={{
-                                                    fontFamily: "Noto Sans",
-                                                    fontSize: "16px",
+                                                    fontSize: { xs: "14px", lg: "16px" },
                                                     fontWeight: 600,
-                                                    color: "#1a1a1a",
+                                                    color: "var(--burgundy-dark)",
                                                 }}
                                             >
-                                                {formatPrice(item.price)}
+                                                {item.name}
                                             </Typography>
-                                        )}
-                                    </Box>
 
-                                    {/* Price and Quantity - Mobile da birga, Desktop da quantity */}
-                                    <Box sx={{ 
-                                        display: "flex", 
-                                        flexDirection: "column", 
-                                        alignItems: { xs: "flex-end", lg: "center" }, 
-                                        justifyContent: "center", 
-                                        gap: 1,
-                                        minWidth: 0,
-                                    }}>
-                                        {/* Price - Mobile da */}
-                                        <Box sx={{ display: { xs: "flex", lg: "none" }, flexDirection: "column", alignItems: "flex-end", gap: 0.5 }}>
+                                            {item.brand && (
+                                                <Typography
+                                                    sx={{
+                                                        fontFamily: "Noto Sans",
+                                                        fontSize: { xs: "11px", lg: "12px" },
+                                                        fontWeight: 600,
+                                                        color: "#1a1a1a",
+                                                        textTransform: "uppercase",
+                                                    }}
+                                                >
+                                                    {item.brand}
+                                                </Typography>
+                                            )}
+
+                                            {item.color && (
+                                                <Typography
+                                                    sx={{ fontFamily: "Noto Sans", fontSize: { xs: "13px", lg: "15px" }, color: "#666" }}
+                                                >
+                                                    {item.color}
+                                                </Typography>
+                                            )}
+
+                                            <Typography sx={{ fontFamily: "Noto Sans", fontSize: { xs: "13px", lg: "15px" }, color: "#666" }}>
+                                                {item.size}
+                                            </Typography>
+                                        </Box>
+
+                                        {/* Price - Desktop da alohida column */}
+                                        <Box
+                                            sx={{
+                                                display: { xs: "none", lg: "flex" },
+                                                flexDirection: "column",
+                                                alignItems: "center",
+                                                justifyContent: "center",
+                                                gap: 0.5,
+                                                justifySelf: "center",
+                                            }}
+                                        >
                                             {item.originalPrice && item.originalPrice > item.price ? (
                                                 <>
                                                     <Typography
                                                         sx={{
                                                             fontFamily: "Noto Sans",
-                                                            fontSize: "13px",
+                                                            fontSize: "16px",
                                                             fontWeight: 600,
                                                             color: "#1a1a1a",
                                                         }}
@@ -292,7 +247,7 @@ const Cart = () => {
                                                     <Typography
                                                         sx={{
                                                             fontFamily: "Noto Sans",
-                                                            fontSize: "12px",
+                                                            fontSize: "16px",
                                                             fontWeight: 500,
                                                             color: "#636262",
                                                             textDecoration: "line-through",
@@ -305,7 +260,7 @@ const Cart = () => {
                                                 <Typography
                                                     sx={{
                                                         fontFamily: "Noto Sans",
-                                                        fontSize: "13px",
+                                                        fontSize: "16px",
                                                         fontWeight: 600,
                                                         color: "#1a1a1a",
                                                     }}
@@ -315,100 +270,158 @@ const Cart = () => {
                                             )}
                                         </Box>
 
-                                        {/* Quantity Selector */}
+                                        {/* Price and Quantity - Mobile da birga, Desktop da quantity */}
                                         <Box
                                             sx={{
                                                 display: "flex",
-                                                alignItems: "center",
-                                                justifyContent: "space-between",
-                                                borderRadius: "8px",
-                                                border: "1px solid #e0e0e0",
-                                                backgroundColor: "#f0f0f0",
-                                                width: { xs: "75px", lg: "100px" },
-                                                flexShrink: 0,
-                                                py: { xs: 1, lg: 1.6 },
-                                                px: 1,
+                                                flexDirection: "column",
+                                                alignItems: { xs: "flex-end", lg: "center" },
+                                                justifyContent: "center",
+                                                gap: 1,
+                                                minWidth: 0,
                                             }}
                                         >
+                                            {/* Price - Mobile da */}
                                             <Box
-                                                onClick={() => handleQuantityChange(item.id, -1)}
+                                                sx={{
+                                                    display: { xs: "flex", lg: "none" },
+                                                    flexDirection: "column",
+                                                    alignItems: "flex-end",
+                                                    gap: 0.5,
+                                                }}
+                                            >
+                                                {item.originalPrice && item.originalPrice > item.price ? (
+                                                    <>
+                                                        <Typography
+                                                            sx={{
+                                                                fontFamily: "Noto Sans",
+                                                                fontSize: "13px",
+                                                                fontWeight: 600,
+                                                                color: "#1a1a1a",
+                                                            }}
+                                                        >
+                                                            {formatPrice(item.price)}
+                                                        </Typography>
+                                                        <Typography
+                                                            sx={{
+                                                                fontFamily: "Noto Sans",
+                                                                fontSize: "12px",
+                                                                fontWeight: 500,
+                                                                color: "#636262",
+                                                                textDecoration: "line-through",
+                                                            }}
+                                                        >
+                                                            {formatPrice(item.originalPrice)}
+                                                        </Typography>
+                                                    </>
+                                                ) : (
+                                                    <Typography
+                                                        sx={{
+                                                            fontFamily: "Noto Sans",
+                                                            fontSize: "13px",
+                                                            fontWeight: 600,
+                                                            color: "#1a1a1a",
+                                                        }}
+                                                    >
+                                                        {formatPrice(item.price)}
+                                                    </Typography>
+                                                )}
+                                            </Box>
+
+                                            {/* Quantity Selector */}
+                                            <Box
                                                 sx={{
                                                     display: "flex",
                                                     alignItems: "center",
-                                                    justifyContent: "center",
-                                                    cursor: "pointer",
+                                                    justifyContent: "space-between",
+                                                    borderRadius: "8px",
+                                                    border: "1px solid #e0e0e0",
+                                                    backgroundColor: "#f0f0f0",
+                                                    width: { xs: "75px", lg: "100px" },
+                                                    flexShrink: 0,
+                                                    py: { xs: 1, lg: 1.6 },
+                                                    px: 1,
                                                 }}
                                             >
-                                                <MinusIcon />
+                                                <Box
+                                                    onClick={() => handleQuantityChange(item.id, -1)}
+                                                    sx={{
+                                                        display: "flex",
+                                                        alignItems: "center",
+                                                        justifyContent: "center",
+                                                        cursor: "pointer",
+                                                    }}
+                                                >
+                                                    <MinusIcon />
+                                                </Box>
+                                                <Typography
+                                                    sx={{
+                                                        fontFamily: "Noto Sans",
+                                                        fontSize: { xs: "13px", lg: "16px" },
+                                                        fontWeight: 600,
+                                                        textAlign: "center",
+                                                    }}
+                                                >
+                                                    {item.quantity}
+                                                </Typography>
+                                                <Box
+                                                    onClick={() => handleQuantityChange(item.id, 1)}
+                                                    sx={{
+                                                        display: "flex",
+                                                        alignItems: "center",
+                                                        justifyContent: "center",
+                                                        cursor: "pointer",
+                                                    }}
+                                                >
+                                                    <PlusIcon />
+                                                </Box>
                                             </Box>
+
+                                            {/* Total Price - Mobile da quantity tagida */}
                                             <Typography
                                                 sx={{
+                                                    display: { xs: "block", lg: "none" },
                                                     fontFamily: "Noto Sans",
-                                                    fontSize: { xs: "13px", lg: "16px" },
+                                                    fontSize: "13px",
                                                     fontWeight: 600,
-                                                    textAlign: "center",
+                                                    color: "var(--burgundy-dark)",
+                                                    whiteSpace: "nowrap",
+                                                    textAlign: "right",
                                                 }}
                                             >
-                                                {item.quantity}
+                                                {formatPrice(item.price * item.quantity)}
                                             </Typography>
-                                            <Box
-                                                onClick={() => handleQuantityChange(item.id, 1)}
-                                                sx={{
-                                                    display: "flex",
-                                                    alignItems: "center",
-                                                    justifyContent: "center",
-                                                    cursor: "pointer",
-                                                }}
-                                            >
-                                                <PlusIcon />
-                                            </Box>
                                         </Box>
 
-                                        {/* Total Price - Mobile da quantity tagida */}
+                                        {/* Total Price - Desktop da */}
                                         <Typography
                                             sx={{
-                                                display: { xs: "block", lg: "none" },
+                                                display: { xs: "none", lg: "block" },
                                                 fontFamily: "Noto Sans",
-                                                fontSize: "13px",
+                                                fontSize: "16px",
                                                 fontWeight: 600,
                                                 color: "var(--burgundy-dark)",
                                                 whiteSpace: "nowrap",
-                                                textAlign: "right",
                                             }}
                                         >
                                             {formatPrice(item.price * item.quantity)}
                                         </Typography>
-                                    </Box>
 
-                                    {/* Total Price - Desktop da */}
-                                    <Typography
-                                        sx={{
-                                            display: { xs: "none", lg: "block" },
-                                            fontFamily: "Noto Sans",
-                                            fontSize: "16px",
-                                            fontWeight: 600,
-                                            color: "var(--burgundy-dark)",
-                                            whiteSpace: "nowrap",
-                                        }}
-                                    >
-                                        {formatPrice(item.price * item.quantity)}
-                                    </Typography>
-
-                                    {/* Remove Button - Right (both mobile and desktop) */}
-                                    <IconButton
-                                        size="small"
-                                        onClick={() => handleRemoveItem(item.id)}
-                                        sx={{
-                                            color: "#ef4444",
-                                            padding: "4px",
-                                            flexShrink: 0,
-                                            "&:hover": {
-                                                backgroundColor: "transparent",
-                                            },
-                                        }}
-                                    >
-                                        <CloseIcon2 size={18} />
-                                    </IconButton>
+                                        {/* Remove Button - Right (both mobile and desktop) */}
+                                        <IconButton
+                                            size="small"
+                                            onClick={() => handleRemoveItem(item.id)}
+                                            sx={{
+                                                color: "#ef4444",
+                                                padding: "4px",
+                                                flexShrink: 0,
+                                                "&:hover": {
+                                                    backgroundColor: "transparent",
+                                                },
+                                            }}
+                                        >
+                                            <CloseIcon2 size={18} />
+                                        </IconButton>
                                     </Box>
                                     {/* Border after product - same spacing as gap (gap: 2 = 16px) */}
                                     <Box
@@ -450,10 +463,24 @@ const Cart = () => {
                             {/* Order Summary */}
                             <Box sx={{ display: "flex", flexDirection: "column", gap: { xs: 1.5, lg: 2 }, mb: { xs: 2, lg: 3 } }}>
                                 <Box sx={{ display: "flex", justifyContent: "space-between", pb: 1.5 }}>
-                                    <Typography sx={{ fontFamily: "Noto Sans", fontSize: { xs: "14px", lg: "15px" }, fontWeight: 600, letterSpacing: 0.7 }}>
+                                    <Typography
+                                        sx={{
+                                            fontFamily: "Noto Sans",
+                                            fontSize: { xs: "14px", lg: "15px" },
+                                            fontWeight: 600,
+                                            letterSpacing: 0.7,
+                                        }}
+                                    >
                                         Summa
                                     </Typography>
-                                    <Typography sx={{ fontFamily: "Noto Sans", fontSize: { xs: "14px", lg: "15px" }, fontWeight: 600, letterSpacing: 0.7 }}>
+                                    <Typography
+                                        sx={{
+                                            fontFamily: "Noto Sans",
+                                            fontSize: { xs: "14px", lg: "15px" },
+                                            fontWeight: 600,
+                                            letterSpacing: 0.7,
+                                        }}
+                                    >
                                         {formatPrice(subtotal)}
                                     </Typography>
                                 </Box>
@@ -467,10 +494,24 @@ const Cart = () => {
                                         pb: 1,
                                     }}
                                 >
-                                    <Typography sx={{ fontFamily: "Noto Sans", fontSize: { xs: "14px", lg: "15px" }, fontWeight: 600, letterSpacing: 0.7 }}>
+                                    <Typography
+                                        sx={{
+                                            fontFamily: "Noto Sans",
+                                            fontSize: { xs: "14px", lg: "15px" },
+                                            fontWeight: 600,
+                                            letterSpacing: 0.7,
+                                        }}
+                                    >
                                         Chegirma
                                     </Typography>
-                                    <Typography sx={{ fontFamily: "Noto Sans", fontSize: { xs: "14px", lg: "15px" }, fontWeight: 600, letterSpacing: 0.7 }}>
+                                    <Typography
+                                        sx={{
+                                            fontFamily: "Noto Sans",
+                                            fontSize: { xs: "14px", lg: "15px" },
+                                            fontWeight: 600,
+                                            letterSpacing: 0.7,
+                                        }}
+                                    >
                                         -{formatPrice(discount)}
                                     </Typography>
                                 </Box>
@@ -484,16 +525,26 @@ const Cart = () => {
                                         borderTop: "1px solid #e0e0e0",
                                     }}
                                 >
-                                    <Typography sx={{
-                                        fontFamily: "Noto Sans",
-                                        fontSize: { xs: "20px", lg: "23px" },
-                                        fontWeight: 700,
-                                        letterSpacing: 0.3,
-                                        color: "var(--burgundy-dark)",
-                                    }}>
+                                    <Typography
+                                        sx={{
+                                            fontFamily: "Noto Sans",
+                                            fontSize: { xs: "20px", lg: "23px" },
+                                            fontWeight: 700,
+                                            letterSpacing: 0.3,
+                                            color: "var(--burgundy-dark)",
+                                        }}
+                                    >
                                         Jami
                                     </Typography>
-                                    <Typography sx={{ fontFamily: "Noto Sans", fontSize: { xs: "20px", lg: "24px" }, fontWeight: 700, letterSpacing: 0.7, color: "var(--burgundy-dark)" }}>
+                                    <Typography
+                                        sx={{
+                                            fontFamily: "Noto Sans",
+                                            fontSize: { xs: "20px", lg: "24px" },
+                                            fontWeight: 700,
+                                            letterSpacing: 0.7,
+                                            color: "var(--burgundy-dark)",
+                                        }}
+                                    >
                                         {formatPrice(total)}
                                     </Typography>
                                 </Box>
@@ -534,7 +585,7 @@ const Cart = () => {
                                     fontFamily: "Noto Sans",
                                     fontSize: { xs: "13px", lg: "15px" },
                                     color: "var(--burgundy-dark)",
-                                    cursor: "pointer"
+                                    cursor: "pointer",
                                 }}
                                 onClick={() => navigate("/catalog")}
                             >
@@ -549,4 +600,3 @@ const Cart = () => {
 }
 
 export default Cart
-
