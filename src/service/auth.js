@@ -32,6 +32,7 @@ const AuthService = {
                     id: parsedUser.id || null,
                     firstName: parsedUser.firstName || "Unknown",
                     phone: parsedUser.phone || "Unknown",
+                    username: parsedUser.username || "Unknown",
                     roles: parsedUser.roles || [],
                     isAdmin: parsedUser.isAdmin || false
                 };
