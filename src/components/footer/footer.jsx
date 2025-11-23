@@ -5,14 +5,13 @@ export default function Footer() {
     return (
         <footer className="bg-[#f8f9fb] py-16 px-4 md:px-8 lg:px-12">
             <div className="max-w-7xl mx-auto">
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16">
+                <div className="flex flex-col md:grid md:grid-cols-4 gap-4 md:gap-8 mb-16">
                     {/* Logo Section */}
-                    <Link to="/" className="col-span-2 md:col-span-1 flex items-start no-underline">
+                    <Link to="/" className="flex items-start no-underline md:col-span-1">
                         <h1
-                            className="font-bold text-2xl tracking-wide m-0"
+                            className="font-bold text-lg md:text-2xl tracking-wide m-0"
                             style={{
                                 fontWeight: 700,
-                                fontSize: "24px",
                                 letterSpacing: "1px",
                             }}
                         >
@@ -21,82 +20,85 @@ export default function Footer() {
                         </h1>
                     </Link>
 
-                    {/* KOMPANIYA Section */}
-                    <div className="col-span-1">
-                        <h3 className="text-sm font-bold mb-3 pb-2" style={{ color: "var(--burgundy-dark)", fontFamily: "Noto Sans" }}>
-                            KOMPANIYA
-                        </h3>
-                        <ul className="space-y-1 list-none p-0 m-0">
-                            <li>
-                                <Link
-                                    to="/about-us"
-                                    className="text-sm opacity-80 hover:opacity-100 transition-all no-underline"
-                                    style={{ color: "var(--burgundy-dark)", fontFamily: "Noto Sans" }}
-                                >
-                                    Biz haqimizda
-                                </Link>
-                            </li>
-                            <li>
-                                <Link
-                                    to="/contact"
-                                    className="text-sm opacity-80 hover:opacity-100 transition-all no-underline"
-                                    style={{ color: "var(--burgundy-dark)", fontFamily: "Noto Sans" }}
-                                >
-                                    Biz bilan bog'lanish
-                                </Link>
-                            </li>
-                        </ul>
-                    </div>
+                    {/* Sections Row - Mobile da 3 ta bitta row da */}
+                    <div className="grid grid-cols-3 md:contents gap-4 md:gap-0">
+                        {/* KOMPANIYA Section */}
+                        <div className="col-span-1 md:col-span-1">
+                            <h3 className="text-xs md:text-sm font-bold mb-2 md:mb-3 pb-1 md:pb-2" style={{ color: "var(--burgundy-dark)", fontFamily: "Noto Sans" }}>
+                                KOMPANIYA
+                            </h3>
+                            <ul className="space-y-0.5 md:space-y-1 list-none p-0 m-0">
+                                <li>
+                                    <Link
+                                        to="/about-us"
+                                        className="text-xs md:text-sm opacity-80 hover:opacity-100 transition-all no-underline"
+                                        style={{ color: "var(--burgundy-dark)", fontFamily: "Noto Sans" }}
+                                    >
+                                        Biz haqimizda
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link
+                                        to="/contact"
+                                        className="text-xs md:text-sm opacity-80 hover:opacity-100 transition-all no-underline"
+                                        style={{ color: "var(--burgundy-dark)", fontFamily: "Noto Sans" }}
+                                    >
+                                        Biz bilan bog'lanish
+                                    </Link>
+                                </li>
+                            </ul>
+                        </div>
 
-                    {/* QO'LLAB-QUVVATLASH Section */}
-                    <div className="col-span-1">
-                        <h3 className="text-sm font-bold mb-3 pb-2" style={{ color: "var(--burgundy-dark)", fontFamily: "Noto Sans" }}>
-                            QO'LLAB-QUVVATLASH
-                        </h3>
-                        <ul className="space-y-1 list-none p-0 m-0">
-                            <li>
-                                <Link
-                                    to="/delivery"
-                                    className="text-sm opacity-80 hover:opacity-100 transition-all no-underline"
-                                    style={{ color: "var(--burgundy-dark)", fontFamily: "Noto Sans" }}
-                                >
-                                    Yetkazib berish
-                                </Link>
-                            </li>
-                            <li>
-                                <Link
-                                    to="/about-us"
-                                    className="text-sm opacity-80 hover:opacity-100 transition-all no-underline"
-                                    style={{ color: "var(--burgundy-dark)", fontFamily: "Noto Sans" }}
-                                >
-                                    FAQ
-                                </Link>
-                            </li>
-                        </ul>
-                    </div>
+                        {/* QO'LLAB-QUVVATLASH Section */}
+                        <div className="col-span-1 md:col-span-1">
+                            <h3 className="text-xs md:text-sm font-bold mb-2 md:mb-3 pb-1 md:pb-2" style={{ color: "var(--burgundy-dark)", fontFamily: "Noto Sans" }}>
+                                QO'LLAB-QUVVATLASH
+                            </h3>
+                            <ul className="space-y-0.5 md:space-y-1 list-none p-0 m-0">
+                                <li>
+                                    <Link
+                                        to="/delivery"
+                                        className="text-xs md:text-sm opacity-80 hover:opacity-100 transition-all no-underline"
+                                        style={{ color: "var(--burgundy-dark)", fontFamily: "Noto Sans" }}
+                                    >
+                                        Yetkazib berish
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link
+                                        to="/about-us"
+                                        className="text-xs md:text-sm opacity-80 hover:opacity-100 transition-all no-underline"
+                                        style={{ color: "var(--burgundy-dark)", fontFamily: "Noto Sans" }}
+                                    >
+                                        FAQ
+                                    </Link>
+                                </li>
+                            </ul>
+                        </div>
 
-                    {/* IJTIMOIY TARMOQLAR Section */}
-                    <div className="col-span-1">
-                        <h3 className="text-sm font-bold mb-3 pb-2" style={{ color: "var(--burgundy-dark)", fontFamily: "Noto Sans" }}>
-                            IJTIMOIY TARMOQLAR
-                        </h3>
-                        <div className="flex flex-col gap-4">
-                            <Link
-                                to="#"
-                                className="flex items-center gap-2 text-sm opacity-80 hover:opacity-100 transition-all no-underline"
-                                style={{ color: "var(--burgundy-dark)", fontFamily: "Noto Sans" }}
-                            >
-                                <i className="fab fa-telegram-plane text-sm w-5"></i>
-                                <span>Telegram</span>
-                            </Link>
-                            <Link
-                                to="#"
-                                className="flex items-center gap-2 text-sm opacity-80 hover:opacity-100 transition-all no-underline"
-                                style={{ color: "var(--burgundy-dark)", fontFamily: "Noto Sans" }}
-                            >
-                                <i className="fab fa-instagram text-sm w-5"></i>
-                                <span>Instagram</span>
-                            </Link>
+                        {/* IJTIMOIY TARMOQLAR Section */}
+                        <div className="col-span-1 md:col-span-1">
+                            <h3 className="text-xs md:text-sm font-bold mb-2 md:mb-3 pb-1 md:pb-2" style={{ color: "var(--burgundy-dark)", fontFamily: "Noto Sans" }}>
+                                IJTIMOIY TARMOQLAR
+                            </h3>
+                            <div className="flex flex-col gap-2 md:gap-4">
+                                <Link
+                                    to="#"
+                                    className="flex items-center gap-1 md:gap-2 text-xs md:text-sm opacity-80 hover:opacity-100 transition-all no-underline"
+                                    style={{ color: "var(--burgundy-dark)", fontFamily: "Noto Sans" }}
+                                >
+                                    <i className="fab fa-telegram-plane text-xs md:text-sm w-4 md:w-5"></i>
+                                    <span>Telegram</span>
+                                </Link>
+                                <Link
+                                    to="#"
+                                    className="flex items-center gap-1 md:gap-2 text-xs md:text-sm opacity-80 hover:opacity-100 transition-all no-underline"
+                                    style={{ color: "var(--burgundy-dark)", fontFamily: "Noto Sans" }}
+                                >
+                                    <i className="fab fa-instagram text-xs md:text-sm w-4 md:w-5"></i>
+                                    <span>Instagram</span>
+                                </Link>
+                            </div>
                         </div>
                     </div>
                 </div>
