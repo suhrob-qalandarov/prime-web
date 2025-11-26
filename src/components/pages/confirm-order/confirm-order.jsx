@@ -62,6 +62,7 @@ const ConfirmOrder = () => {
     const [verified, setVerified] = useState(false)
     const [telegram, setTelegram] = useState("")
     const [fullName, setFullName] = useState("")
+    const [phoneNumber, setPhoneNumber] = useState("")
 
     useEffect(() => {
         const fetchUser = async () => {
@@ -152,8 +153,8 @@ const ConfirmOrder = () => {
                 comment: comment,
                 deliveryMethod: deliveryMethod,
                 promoCode: promoCode || null,
-                telegram: telegram,
                 fullName: fullName,
+                phoneNumber: phoneNumber,
                 orderItems: cartItems.map((item) => ({
                     productId: item.id,
                     quantity: item.quantity,
@@ -245,7 +246,7 @@ const ConfirmOrder = () => {
                                             />
                                         </Box>
 
-                                        {/* Telegram username or phone number field */}
+                                        {/* Phone number field */}
                                         <Box>
                                             <Typography sx={{
                                                 fontFamily: "Noto Sans",
@@ -253,12 +254,12 @@ const ConfirmOrder = () => {
                                                 color: "var(--burgundy-color)",
                                                 mb: 1
                                             }}>
-                                                Iltimos, Telegram username yoki Telegramda ro'yxatdan o'tilgan raqamingizni kiriting
+                                                Iltimos, buyurtma rasmiylashtiriladigan telefon raqamni kiriting
                                             </Typography>
                                             <TextField
-                                                label="Telegram username/telefon raqam *"
-                                                value={telegram}
-                                                onChange={(e) => setTelegram(e.target.value)}
+                                                label="Telefon raqam (+998 siz)*"
+                                                value={phoneNumber}
+                                                onChange={(e) => setPhoneNumber(e.target.value)}
                                                 fullWidth
                                                 sx={{
                                                     "& .MuiOutlinedInput-root": {
@@ -289,7 +290,7 @@ const ConfirmOrder = () => {
                                         <Button
                                             variant="contained"
                                             onClick={handleSendCode}
-                                            disabled={sendingCode || !fullName.trim() || !telegram.trim()}
+                                            disabled={sendingCode || !fullName.trim() || !phoneNumber.trim()}
                                             sx={{
                                                 backgroundColor: "var(--burgundy-dark)",
                                                 color: "white",
@@ -331,8 +332,8 @@ const ConfirmOrder = () => {
                                                 Buyurtma ma'lumotlari
                                             </Typography>
                                         
-                                        {/* Qabul qiluvchi - faqat fullName va telegram to'ldirilganda ko'rinadi */}
-                                        {fullName && telegram && (
+                                        {/* Qabul qiluvchi - faqat fullName va telefon raqam to'ldirilganda ko'rinadi */}
+                                        {fullName && phoneNumber && (
                                             <Box sx={{ mb: 2 }}>
                                                 <Typography
                                                     sx={{
@@ -365,7 +366,7 @@ const ConfirmOrder = () => {
                                                                 fontSize: "16px",
                                                                 fontWeight: 700
                                                             }}>
-                                                        {fullName || user?.firstName || "Noma'lum"}
+                                                        {fullName || user?.firstName || "Noma'lum?"}
                                                     </Typography>
                                                 </Box>
                                                 <Box>
@@ -377,7 +378,7 @@ const ConfirmOrder = () => {
                                                                 color: "#666",
                                                                 mr: 1
                                                             }}>
-                                                            Telegram username/raqam:
+                                                            Telefon raqam:
                                                     </Typography>
                                                         <Typography
                                                             component="span"
@@ -386,7 +387,7 @@ const ConfirmOrder = () => {
                                                                 fontSize: "16px",
                                                                 fontWeight: 700
                                                             }}>
-                                                        {telegram || "Noma'lum"}
+                                                        {phoneNumber || "Noma'lum?"}
                                                     </Typography>
                                                 </Box>
                                             </Box>
@@ -578,8 +579,8 @@ const ConfirmOrder = () => {
                                         </Box>
                                     )}
 
-                                    {/* Qabul qiluvchi - faqat fullName va telegram to'ldirilganda ko'rinadi */}
-                                    {fullName && telegram && (
+                                    {/* Qabul qiluvchi - faqat fullName va telefon raqam to'ldirilganda ko'rinadi */}
+                                    {fullName && phoneNumber && (
                                         <Box sx={{ flex: 1 }}>
                                             <Typography
                                                 sx={{
@@ -611,7 +612,7 @@ const ConfirmOrder = () => {
                                                             fontSize: "16px",
                                                             fontWeight: 700
                                                     }}>
-                                                        {fullName || user?.firstName || "Noma'lum"}
+                                                        {fullName || user?.firstName || "Noma'lum?"}
                                                     </Typography>
                                                 </Box>
                                                 <Box>
@@ -623,19 +624,17 @@ const ConfirmOrder = () => {
                                                             color: "#666",
                                                             mr: 1
                                                     }}>
-                                                        Telegram username/raqam:
+                                                        Telefon raqam:
                                                     </Typography>
-                                                    <Box>
-                                                        <Typography
-                                                            component="span"
-                                                            sx={{
-                                                                fontFamily: "Noto Sans",
-                                                                fontSize: "16px",
-                                                                fontWeight: 700
-                                                            }}>
-                                                            {telegram || "Noma'lum"}
-                                                        </Typography>
-                                                    </Box>
+                                                    <Typography
+                                                        component="span"
+                                                        sx={{
+                                                            fontFamily: "Noto Sans",
+                                                            fontSize: "16px",
+                                                            fontWeight: 700
+                                                        }}>
+                                                        {phoneNumber || "Noma'lum?"}
+                                                    </Typography>
                                                 </Box>
                                             </Box>
                                         </Box>
