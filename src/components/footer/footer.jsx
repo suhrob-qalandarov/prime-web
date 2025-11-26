@@ -3,22 +3,51 @@ import { payments } from "../../constants"
 
 export default function Footer() {
     return (
-        <footer className="bg-[#f8f9fb] py-16 px-4 md:px-8 lg:px-12">
+        <footer className="bg-[#f8f9fb] py-16 px-4 md:px-8 lg:px-12 relative">
             <div className="max-w-7xl mx-auto">
+                {/* By Logo - Mobile da page o'ng tomonida */}
+                <a href="https://howdy.uz" target="_blank" rel="noopener noreferrer" className="absolute md:hidden top-16 right-4 flex items-start no-underline">
+                    <h1
+                        className="font-bold text-lg tracking-wide m-0"
+                        style={{
+                            fontWeight: 700,
+                            letterSpacing: "1px",
+                        }}
+                    >
+                        <span style={{ fontSize: "12px", color: "rgba(25,145,49,0.95)" }}>by </span>
+                        <span style={{ fontSize: "16px", color: "rgba(0,0,0,0.9)" }}>HOWDY.UZ</span>
+                    </h1>
+                </a>
+
                 <div className="flex flex-col md:grid md:grid-cols-4 gap-4 md:gap-8 mb-16">
                     {/* Logo Section */}
-                    <Link to="/" className="flex items-start no-underline md:col-span-1">
-                        <h1
-                            className="font-bold text-lg md:text-2xl tracking-wide m-0"
-                            style={{
-                                fontWeight: 700,
-                                letterSpacing: "1px",
-                            }}
-                        >
-                            <span style={{ color: "rgba(198,176,33,0.95)" }}>PRIME</span>
-                            <span style={{ color: "rgba(160,27,71,0.9)" }}>77</span>
-                        </h1>
-                    </Link>
+                    <div className="flex flex-col md:col-span-1">
+                        <Link to="/" className="flex items-start no-underline">
+                            <h1
+                                className="font-bold text-lg md:text-2xl tracking-wide m-0"
+                                style={{
+                                    fontWeight: 700,
+                                    letterSpacing: "1px",
+                                }}
+                            >
+                                <span style={{ color: "rgba(198,176,33,0.95)" }}>PRIME</span>
+                                <span style={{ color: "rgba(160,27,71,0.9)" }}>77</span>
+                            </h1>
+                        </Link>
+                        {/* By Logo - Desktop da PRIME77 logo tagidan */}
+                        <a href="https://howdy.uz" target="_blank" rel="noopener noreferrer" className="hidden md:flex items-start no-underline mt-2">
+                            <h1
+                                className="font-bold text-lg md:text-2xl tracking-wide m-0"
+                                style={{
+                                    fontWeight: 700,
+                                    letterSpacing: "1px",
+                                }}
+                            >
+                                <span style={{ fontSize: "12px", color: "rgba(25,145,49,0.95)" }}>by </span>
+                                <span style={{ fontSize: "16px", color: "rgba(0,0,0,0.9)" }}>HOWDY.UZ</span>
+                            </h1>
+                        </a>
+                    </div>
 
                     {/* Sections Row - Mobile da 3 ta bitta row da */}
                     <div className="grid grid-cols-3 md:contents gap-4 md:gap-0">
