@@ -859,7 +859,7 @@ const ConfirmOrder = () => {
                                     variant="contained"
                                     onClick={handlePayment}
                                     sx={{
-                                        backgroundColor: "#333",
+                                        backgroundColor: "var(--burgundy-dark)",
                                         color: "white",
                                         py: 1,
                                         px: 2,
@@ -867,8 +867,14 @@ const ConfirmOrder = () => {
                                         fontWeight: 600,
                                         textTransform: "uppercase",
                                         borderRadius: "8px",
+                                        transition: "background-color 0.3s ease, color 0.4s ease",
                                         "&:hover": {
-                                            backgroundColor: "#555",
+                                            backgroundColor: "rgba(189,236,118,0.87)",
+                                            color: "var(--burgundy-dark)",
+                                            boxShadow: "none",
+                                        },
+                                        "&:disabled": {
+                                            backgroundColor: "#999",
                                         },
                                     }}
                                 >
