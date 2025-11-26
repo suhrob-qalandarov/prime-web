@@ -625,15 +625,17 @@ const ConfirmOrder = () => {
                                                     }}>
                                                         Telegram username/raqam:
                                                     </Typography>
-                                                    <Typography
-                                                        component="span"
-                                                        sx={{
-                                                            fontFamily: "Noto Sans",
-                                                            fontSize: "16px",
-                                                            fontWeight: 700
-                                                    }}>
-                                                        {telegram || "Noma'lum"}
-                                                    </Typography>
+                                                    <Box>
+                                                        <Typography
+                                                            component="span"
+                                                            sx={{
+                                                                fontFamily: "Noto Sans",
+                                                                fontSize: "16px",
+                                                                fontWeight: 700
+                                                            }}>
+                                                            {telegram || "Noma'lum"}
+                                                        </Typography>
+                                                    </Box>
                                                 </Box>
                                             </Box>
                                         </Box>
